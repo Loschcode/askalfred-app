@@ -28,6 +28,8 @@
     "eslint-plugin-graphql": "^2.1.1",
     "eslint-plugin-vue": "^5.0.0",
     "graphql-tag": "^2.9.0",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
     "vue-cli-plugin-apollo": "^0.19.1",
     "vue-template-compiler": "^2.5.21"
   },

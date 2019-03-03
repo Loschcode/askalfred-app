@@ -13,4 +13,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+$color: red;
+.any {
+  background-color: $color;
+}
 </style>
