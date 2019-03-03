@@ -9,6 +9,7 @@ export default new Router({
     {
       path: "/",
       name: "index",
+      meta: { layout: "default" },
       component: Index
     }
   ]

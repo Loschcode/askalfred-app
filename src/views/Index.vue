@@ -1,17 +1,17 @@
 <template>
   <div class="index">
-    <Any />
+    <SignIn />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Any from '@/components/Any.vue'
+import SignIn from '@/components/connect/SignIn.vue'
 
 export default {
   name: 'index',
   components: {
-    Any
+    SignIn
   }
 }
 </script>

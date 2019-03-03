@@ -1,12 +1,14 @@
 <template>
-  <div class="any">
-    Any
+  <div class="default">
+    LAYOUT START
+    <slot />
+    LAYOUT END
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Any',
+  name: 'Default',
   props: {
   }
 }
