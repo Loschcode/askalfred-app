@@ -1,8 +1,17 @@
 <template>
-  <div class="default">
-    LAYOUT START
-    <slot />
-    LAYOUT END
+  <div class="wrapper default">
+    <div class="wrap container-fluid">
+      HEADER
+    </div>
+
+    <div class="wrap container">
+      INSIDE SLOT
+      <!-- <slot /> -->
+    </div>
+
+    <div class="wrap container-fluid">
+      FOOTER
+    </div>
   </div>
 </template>
 
@@ -15,4 +24,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.default {
+  background: $color-blue-purple-gradient;
+}
 </style>

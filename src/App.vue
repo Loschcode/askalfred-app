@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <component :is="layout">
+    <component :is="currentLayout">
       <router-view />
     </component>
   </div>
@@ -11,15 +11,18 @@ const defaultLayout = 'default';
 
 export default {
   computed: {
-    layout () {
-      return (this.$route.meta.layout || defaultLayout) + '-layout';
+    currentLayout () {
+      return (this.layoutFromRoute || defaultLayout) + '-layout';
+    },
+
+    layoutFromRoute () {
+      return this.$route.meta.layout;
     }
   }
 }
 </script>
 
 <style lang="scss">
-@import "src/assets/styles/helpers.scss";
 @import "src/assets/styles/app.scss";
 @import "src/assets/styles/components.scss";
 </style>

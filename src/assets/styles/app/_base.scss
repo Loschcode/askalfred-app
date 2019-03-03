@@ -17,6 +17,13 @@ body {
   font-size: sizing(2.5);
   overflow-x: hidden;
   -webkit-tap-highlight-color: transparent;
+
+  ::selection {
+    background: $text-selection-color; /* WebKit/Blink Browsers */
+  }
+  ::-moz-selection {
+    background: $text-selection-color; /* Gecko Browsers */
+  }
 }
 
 button:focus {
