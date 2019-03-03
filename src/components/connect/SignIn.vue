@@ -37,7 +37,7 @@
             </div>
           </div>
           <div class="connect__forgot">
-            Forgot your password?
+            <a href="#">Forgot your password?</a>
           </div>
         </div>
       </div>
@@ -165,6 +165,9 @@ export default {
 .connect__forgot {
   padding-top: 0.5em;
   font-size: sizing(2.3);
+  a {
+    color: $color-white;
+  }
 }
 
 .or {
