@@ -1,16 +1,8 @@
 <template>
   <div class="wrapper default">
-    <div class="wrap container-fluid">
-      HEADER
-    </div>
-
+    <!-- No header or footer in this layout -->
     <div class="wrap container">
-      INSIDE SLOT
-      <!-- <slot /> -->
-    </div>
-
-    <div class="wrap container-fluid">
-      FOOTER
+      <slot />
     </div>
   </div>
 </template>
