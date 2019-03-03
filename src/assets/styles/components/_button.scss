@@ -24,6 +24,16 @@
   }
 }
 
+.button__white-on-blue--soft {
+  a {
+    color: $color-soft-grey;
+  }
+}
+
 .button--squared {
   @include button-radius("small");
+}
+
+.button--half-squared {
+  @include button-radius("medium");
 }

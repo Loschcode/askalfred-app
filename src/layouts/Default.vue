@@ -1,9 +1,10 @@
 <template>
   <div class="wrapper default">
-    <!-- No header or footer in this layout -->
+    <!-- No header in this layout -->
     <div class="wrap container">
       <slot />
     </div>
+    <!-- No footer in this layout -->
   </div>
 </template>
 
