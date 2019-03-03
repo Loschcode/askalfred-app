@@ -11,7 +11,7 @@
 
     <!-- Connect -->
     <div class="row center-xs">
-      <div class="col-xs-10">
+      <div class="col-xs-10 col-md-5">
         <div class="connect">
           <div class="connect__email">
             <div class="connect__image connect__image--email">
@@ -45,7 +45,7 @@
 
     <!-- Or -->
     <div class="row center-xs">
-      <div class="col-xs-12">
+      <div class="col-xs-12 col-md-6">
         <div class="or">
           <div class="row center-xs">
             <div class="col-xs-5 +no-padding-right">
@@ -68,7 +68,7 @@
 
     <!-- Introduce yourself -->
     <div class="row center-xs">
-      <div class="col-xs-8">
+      <div class="col-xs-8 col-md-4">
         <div class="register">
           <div class="button button--half-squared button__white-on-blue button__white-on-blue--soft">
             <a href="#">Introduce yourself</a>
