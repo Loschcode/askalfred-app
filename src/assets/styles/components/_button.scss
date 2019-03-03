@@ -1,0 +1,29 @@
+.button {
+  text-transform: uppercase;
+  cursor: pointer;
+  @include button-radius("big");
+  padding: spacing(4, 12, 4, 12);
+  font-size: sizing(2);
+  a {
+    @include extend-clickable(1em, 1em);
+    font-weight: bold;
+  }
+}
+
+.button__blue-on-white {
+  background-color: $backgroud-blue-button-color;
+  a {
+    color: $text-blue-button-color;
+  }
+}
+
+.button__white-on-blue {
+  background-color: $background-white-button-color;
+  a {
+    color: $text-white-button-color;
+  }
+}
+
+.button--squared {
+  @include button-radius("small");
+}

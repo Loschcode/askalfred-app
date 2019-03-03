@@ -1,0 +1,41 @@
+.page {
+}
+
+.page__block {
+  margin-left: spacing(7);
+  margin-right: spacing(7);
+  padding: spacing(10);
+
+  color: $text-details-color;
+  text-align: justify;
+
+  a {
+    padding-bottom: spacing(1);
+    border-bottom: 1px solid $text-page-link-color;
+  }
+
+  h3 {
+    color: $text-subtitle-color;
+    font-weight: 600;
+    text-align: left;
+    padding-top: spacing(5);
+  }
+
+  p {
+    margin-top: spacing(4);
+    font-size: sizing(2.7);
+  }
+
+  ul {
+    @include default-list();
+    padding-top: spacing(3);
+    padding-bottom: spacing(3);
+    line-height: spacing(5);
+
+    li {
+      list-style-type: disc;
+      padding-left: spacing(2);
+      margin-top: spacing(1);
+    }
+  }
+}

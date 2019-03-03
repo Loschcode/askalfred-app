@@ -1,0 +1,48 @@
+.message {
+  position: relative;
+  padding: spacing(3);
+  display: flex;
+  margin-top: spacing(1);
+  margin-bottom: spacing(1);
+  max-width: 370px;
+  word-wrap: break-word;
+  border-radius: 2px;
+}
+
+.message__myself {
+  background-color: $background-message-myself-color;
+  border: 1px solid $border-message-myself-color;
+  text-align: right;
+  float: right;
+}
+
+.message__myself-arrow {
+  position: absolute;
+  right: -18px;
+  top: 32%;
+  @include triangle-right($border-message-myself-color, $background-message-myself-color);
+
+  &:after {
+    top: -10px;
+    right: 0px;
+  }
+}
+
+.message__yourself {
+  background-color: $background-message-yourself-color;
+  border: 1px solid $border-message-yourself-color;
+  text-align: left;
+  float: left;
+}
+
+.message__yourself-arrow {
+  position: absolute;
+  left: -18px;
+  top: 32%;
+  @include triangle-left($border-message-yourself-color, $background-message-yourself-color);
+
+  &:after {
+    top: -10px;
+    left: 0px;
+  }
+}

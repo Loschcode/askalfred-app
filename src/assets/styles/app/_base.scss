@@ -1,0 +1,79 @@
+*,
+*::before,
+*::after {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  // height: 100%; <-- this will crash the scrollToTop, so do not put it
+  font-family: $font-default;
+  font-size: sizing(2.5);
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus {
+  outline: 0;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+
+input:focus,
+input:active {
+  outline: 0;
+}
+
+strong {
+  font-weight: bold;
+}
+
+img {
+  max-width: 100%;
+}
+
+h1 {
+  font-size: sizing(12);
+  font-family: $font-title;
+}
+
+h2 {
+  font-size: sizing(4.5);
+  font-family: $font-subtitle;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: sizing(3.8);
+  font-family: $font-subtitle;
+  font-weight: 600;
+}
+
+p {
+  font-size: sizing(6);
+  font-family: $font-paragraph;
+  line-height: spacing(5);
+}
+
+a {
+  text-decoration: none;
+  color: $text-base-link-color;
+  font-family: $font-button;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+
+.wrapper {
+  position: relative;
+  min-height: 100vh;
+}

@@ -1,0 +1,29 @@
+@import "node_modules/flexboxgrid/css/flexboxgrid.min.css";
+
+.wrap {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1420px;
+}
+
+.undo-wrap {
+  max-width: none;
+}
+
+.start-sm {
+  @include breakpoint("sm") {
+    text-align: left;
+  }
+}
+
+.start-md {
+  @include breakpoint("md") {
+    text-align: left;
+  }
+}
+
+.start-lg {
+  @include breakpoint("lg") {
+    text-align: left;
+  }
+}
