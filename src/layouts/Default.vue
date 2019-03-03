@@ -26,5 +26,6 @@ export default {
 <style scoped lang="scss">
 .default {
   background: $color-blue-purple-gradient;
+  color: $color-white;
 }
 </style>
