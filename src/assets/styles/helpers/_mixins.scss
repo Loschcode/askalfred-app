@@ -145,3 +145,18 @@
     content: "";
   }
 }
+
+@mixin transparent-input($margin-left: 0) {
+  color: $color-white;
+  width: 80%;
+  margin-left: $margin-left;
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+  font-size: sizing(3);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid $color-white;
+  @include placeholder-color($color-white);
+}

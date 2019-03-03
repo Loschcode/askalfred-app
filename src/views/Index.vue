@@ -1,16 +1,16 @@
 <template>
   <div class="index">
-    <SignIn />
+    <Sitemap />
   </div>
 </template>
 
 <script>
-import SignIn from '@/components/connect/SignIn.vue'
+import Sitemap from '@/components/Sitemap.vue'
 
 export default {
-  name: 'index',
+  name: 'Index',
   components: {
-    SignIn
+    Sitemap
   }
 }
 </script>

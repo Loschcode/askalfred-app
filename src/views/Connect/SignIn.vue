@@ -49,7 +49,7 @@
         <div class="or">
           <div class="row center-xs">
             <div class="col-xs-5 +no-padding-right">
-              <div class="or__split">
+              <div class="or__divider">
               </div>
             </div>
             <div class="col-xs-1 +no-padding">
@@ -58,7 +58,7 @@
               </div>
             </div>
             <div class="col-xs-5 +no-padding-left">
-              <div class="or__split">
+              <div class="or__divider">
               </div>
             </div>
           </div>
@@ -78,7 +78,6 @@
     </div>
 
     <!-- Unique footer -->
-    <!-- TODO : maybe move this out to a general layout footer ? -->
     <div class="row center-xs">
       <div class="footer-placeholder">
       </div>
@@ -98,13 +97,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-// .sign-in {
-//   color: $color-white;
-//   a {
-//     color: $color-white;
-//   }
-// }
-
 .title {
   margin-top: 4em;
   margin-bottom: 4em;
@@ -112,18 +104,7 @@ export default {
 
 .connect {
   input {
-    color: $color-white;
-    width: 80%;
-    margin-left: 1em;
-    margin-top: 0.3em;
-    margin-bottom: 0.3em;
-    padding-top: 0.4em;
-    padding-bottom: 0.4em;
-    font-size: sizing(3);
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid $color-white;
-    @include placeholder-color($color-white);
+    @include transparent-input(1em);
   }
 }
 
@@ -175,7 +156,7 @@ export default {
   position: relative;
 }
 
-.or__split {
+.or__divider {
   border-bottom: 1px solid $color-white;
   width: 100%;
 }
