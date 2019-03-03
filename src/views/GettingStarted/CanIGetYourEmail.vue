@@ -4,28 +4,22 @@
     <div class="row center-xs">
       <div class="col-xs-10">
         <div class="title">
-          <h1>I'm Alfred</h1>
+          <h1>I'm delighted to meet you</h1>
         </div>
       </div>
     </div>
 
-    <!-- What's your name? -->
+    <!-- Can I get your email? -->
     <div class="row center-xs">
       <div class="col-xs-10 col-md-5">
         <div class="form">
           <div class="form__question">
-            <p>What's your name?</p>
+            <p>Can I get your email?</p>
           </div>
-          <div class="form__first-name">
+          <div class="form__email">
             <input
-              type="text"
-              placeholder="First name"
-            />
-          </div>
-          <div class="form__last-name">
-            <input
-              type="text"
-              placeholder="Last name"
+              type="email"
+              placeholder="Email"
             />
           </div>
         </div>
@@ -35,7 +29,7 @@
     <div class="row center-xs">
       <div class="col-xs-10 col-md-5">
         <div class="image">
-          <img src="/images/getting-started/what-is-your-name.svg" />
+          <img src="/images/getting-started/can-i-get-your-email.svg" />
         </div>
       </div>
     </div>
@@ -45,7 +39,7 @@
       <div class="col-xs-8 col-md-4">
         <div class="confirm">
           <div class="button button--half-squared button__white-on-blue button__white-on-blue--soft">
-            <a href="#">Nice to meet you</a>
+            <a href="#">Alright, here it is</a>
           </div>
           <div class="confirm__back">
             <a href="#">Already have an account?</a>
@@ -59,7 +53,7 @@
 
 <script>
 export default {
-  name: 'WhatIsYourName',
+  name: 'CanIGetYourEmail',
   props: {
   }
 }
@@ -85,10 +79,7 @@ export default {
   margin-bottom: 1em;
 }
 
-.form__first-name {
-}
-
-.form__last-name {
+.form__email {
 }
 
 .image {

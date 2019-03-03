@@ -4,29 +4,18 @@
     <div class="row center-xs">
       <div class="col-xs-10">
         <div class="title">
-          <h1>I'm Alfred</h1>
+          <h1>Thank you!</h1>
         </div>
       </div>
     </div>
 
-    <!-- What's your name? -->
+    <!-- Can I get your email? -->
     <div class="row center-xs">
-      <div class="col-xs-10 col-md-5">
+      <div class="col-xs-10 col-md-6">
         <div class="form">
           <div class="form__question">
-            <p>What's your name?</p>
-          </div>
-          <div class="form__first-name">
-            <input
-              type="text"
-              placeholder="First name"
-            />
-          </div>
-          <div class="form__last-name">
-            <input
-              type="text"
-              placeholder="Last name"
-            />
+            <p>I’m about to send you an important email [NAME].</p>
+            <p>There’s a surprise inside.</p>
           </div>
         </div>
       </div>
@@ -35,17 +24,17 @@
     <div class="row center-xs">
       <div class="col-xs-10 col-md-5">
         <div class="image">
-          <img src="/images/getting-started/what-is-your-name.svg" />
+          <img src="/images/getting-started/thank-you.svg" />
         </div>
       </div>
     </div>
 
     <!-- Nice to meet you -->
     <div class="row center-xs">
-      <div class="col-xs-8 col-md-4">
+      <div class="col-xs-9 col-md-4">
         <div class="confirm">
           <div class="button button--half-squared button__white-on-blue button__white-on-blue--soft">
-            <a href="#">Nice to meet you</a>
+            <a href="#">Nothing? Send it again</a>
           </div>
           <div class="confirm__back">
             <a href="#">Already have an account?</a>
@@ -59,7 +48,7 @@
 
 <script>
 export default {
-  name: 'WhatIsYourName',
+  name: 'ThankYou',
   props: {
   }
 }
@@ -80,19 +69,13 @@ export default {
 .form__question {
   p {
     font-weight: 300;
-    font-size: sizing(5);
+    font-size: sizing(4);
+    margin-bottom: 1em;
   }
-  margin-bottom: 1em;
-}
-
-.form__first-name {
-}
-
-.form__last-name {
 }
 
 .image {
-  padding-top: 3em;
+  padding-top: 2em;
   width: 20vh;
   text-align: center;
   margin: auto;

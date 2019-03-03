@@ -5,6 +5,10 @@
 
     <h3>Getting Started</h3>
     <router-link to="/getting-started/what-is-your-name">WhatIsYourName</router-link>
+    <br />
+    <router-link to="/getting-started/can-i-get-your-email">CanIGetYourEmail</router-link>
+    <br />
+    <router-link to="/getting-started/thank-you">ThankYou</router-link>
   </div>
 </template>
 
