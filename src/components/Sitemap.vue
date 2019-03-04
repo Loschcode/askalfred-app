@@ -2,6 +2,8 @@
   <div class="sitemap">
     <h3>Connect</h3>
     <router-link to="/connect/sign-in">SignIn</router-link>
+    <br />
+    <router-link to="/connect/forgot-your-password">ForgotYourPassword</router-link>
 
     <h3>Getting Started</h3>
     <router-link to="/getting-started/what-is-your-name">WhatIsYourName</router-link>
@@ -11,6 +13,8 @@
     <router-link to="/getting-started/thank-you">ThankYou</router-link>
     <br />
     <router-link to="/getting-started/surprise">Surprise</router-link>
+    <br />
+    <router-link to="/getting-started/do-not-forget">DoNotForget</router-link>
   </div>
 </template>
 
