@@ -15,6 +15,11 @@
     <router-link to="/getting-started/surprise">Surprise</router-link>
     <br />
     <router-link to="/getting-started/do-not-forget">DoNotForget</router-link>
+
+    <h3>Pages</h3>
+    <router-link to="/pages/legal-mentions">LegalMentions</router-link>
+    <br />
+
   </div>
 </template>
 

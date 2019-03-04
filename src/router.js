@@ -14,6 +14,9 @@ import ThankYou from "./views/GettingStarted/ThankYou.vue";
 import Surprise from "./views/GettingStarted/Surprise.vue";
 import DoNotForget from "./views/GettingStarted/DoNotForget.vue";
 
+// Pages
+import LegalMentions from "./views/Pages/LegalMentions.vue";
+
 Vue.use(Router);
 
 export default new Router({
@@ -63,6 +66,14 @@ export default new Router({
       path: "/getting-started/do-not-forget",
       meta: { layout: "default" },
       component: DoNotForget
+    },
+    /**
+     * Pages
+     */
+    {
+      path: "/pages/legal-mentions",
+      meta: { layout: "default" },
+      component: LegalMentions
     }
   ]
 });
