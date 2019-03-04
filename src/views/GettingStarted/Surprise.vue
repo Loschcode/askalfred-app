@@ -81,4 +81,9 @@ export default {
     margin-left: -2em;
   }
 }
+
+.confirm {
+  padding-top: 3em;
+}
+
 </style>

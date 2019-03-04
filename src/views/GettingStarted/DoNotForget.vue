@@ -85,4 +85,9 @@ export default {
   text-align: center;
   margin: auto;
 }
+
+.confirm {
+  padding-top: 3em;
+}
+
 </style>
