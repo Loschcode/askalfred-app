@@ -1,5 +1,5 @@
 <template>
-  <div class="sign-in">
+  <div class="surprise">
     <!-- Title -->
     <div class="row center-xs">
       <div class="col-xs-10">
