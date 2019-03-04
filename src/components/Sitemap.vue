@@ -9,6 +9,8 @@
     <router-link to="/getting-started/can-i-get-your-email">CanIGetYourEmail</router-link>
     <br />
     <router-link to="/getting-started/thank-you">ThankYou</router-link>
+    <br />
+    <router-link to="/getting-started/surprise">Surprise</router-link>
   </div>
 </template>
 

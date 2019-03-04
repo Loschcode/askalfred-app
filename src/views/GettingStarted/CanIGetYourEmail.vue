@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <!-- Nice to meet you -->
+    <!-- Call To Action -->
     <div class="row center-xs">
       <div class="col-xs-8 col-md-4">
         <div class="confirm">
@@ -74,9 +74,9 @@ export default {
 .form__question {
   p {
     font-weight: 300;
-    font-size: sizing(5);
+    font-size: sizing(4);
+    margin-bottom: 1em;
   }
-  margin-bottom: 1em;
 }
 
 .form__email {

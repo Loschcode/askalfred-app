@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <!-- Nice to meet you -->
+    <!-- Call To Action -->
     <div class="row center-xs">
       <div class="col-xs-9 col-md-4">
         <div class="confirm">

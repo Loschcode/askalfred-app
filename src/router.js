@@ -10,6 +10,7 @@ import SignIn from "./views/Connect/SignIn.vue";
 import WhatIsYourName from "./views/GettingStarted/WhatIsYourName.vue";
 import CanIGetYourEmail from "./views/GettingStarted/CanIGetYourEmail.vue";
 import ThankYou from "./views/GettingStarted/ThankYou.vue";
+import Surprise from "./views/GettingStarted/Surprise.vue";
 
 Vue.use(Router);
 
@@ -39,6 +40,11 @@ export default new Router({
       path: "/getting-started/thank-you",
       meta: { layout: "default" },
       component: ThankYou
+    },
+    {
+      path: "/getting-started/surprise",
+      meta: { layout: "default" },
+      component: Surprise
     }
   ]
 });
