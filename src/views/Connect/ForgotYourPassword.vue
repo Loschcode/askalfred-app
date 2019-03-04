@@ -29,7 +29,7 @@
     <div class="row center-xs">
       <div class="col-xs-10 col-md-5">
         <div class="image">
-          <img src="/images/getting-started/do-not-forget.svg" />
+          <img src="/images/getting-started/forgot-your-password.svg" />
         </div>
       </div>
     </div>
@@ -84,7 +84,7 @@ export default {
 
 .image {
   padding-top: 3em;
-  width: 20vh;
+  width: 19vh;
   text-align: center;
   margin: auto;
 }
