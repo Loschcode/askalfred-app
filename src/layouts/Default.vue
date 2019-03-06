@@ -20,5 +20,8 @@ export default {
 .default {
   background: $color-blue-purple-gradient;
   color: $color-white;
+  a {
+    color: $color-white;
+  }
 }
 </style>

@@ -6,6 +6,8 @@ import store from "./store";
 // Layouts
 import Default from "./layouts/Default";
 
+import { createProvider } from './vue-apollo'
+
 Vue.component("default-layout", Default);
 
 Vue.config.productionTip = false;
@@ -13,5 +15,6 @@ Vue.config.productionTip = false;
 new Vue({
   router,
   store,
+  apolloProvider: createProvider(),
   render: h => h(App)
 }).$mount("#app");
