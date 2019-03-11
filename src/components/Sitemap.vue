@@ -20,12 +20,58 @@
     <router-link to="/pages/legal-mentions">LegalMentions</router-link>
     <br />
 
+    <br />
+    <a
+      @click="getToken()"
+      href="#"
+    >{{ books }}</a>
+
+    {{ token }}
+
   </div>
 </template>
 
 <script>
+import gql from 'graphql-tag'
+
 export default {
   name: 'Sitemap',
+  data () {
+    return {
+      token: null
+    }
+  },
+  apollo: {
+    books: {
+      query: gql`query GetBook {
+        books {
+          title
+          author
+        }
+      }`
+    }
+  },
+  methods: {
+    async getToken() {
+      this.email = 'test@test.com'
+      this.password = 'password'
+      return await this.$apollo.mutate({
+        mutation: gql`mutation ($input: GetIdentityTokenInput!) {
+          getIdentityToken(input: $input) {
+            token
+          }
+        }`,
+        variables: {
+          input: {
+            email: this.email,
+            password: this.password
+          }
+        },
+      }).then((data) => {
+        this.token = data.data.getIdentityToken.token
+      })
+    },
+  },
   components: {
   }
 }
