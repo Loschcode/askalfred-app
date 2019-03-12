@@ -22,7 +22,7 @@
 
     <br />
     <a
-      @click="getToken()"
+      @click="makeToken()"
       href="#"
     >{{ books }}</a>
 
@@ -48,27 +48,27 @@ export default {
           title
           author
         }
-      }`
+      }
+      `
     }
   },
   methods: {
-    async getToken() {
-      this.email = 'test@test.com'
-      this.password = 'password'
+    async makeToken() {
       return await this.$apollo.mutate({
-        mutation: gql`mutation ($input: GetIdentityTokenInput!) {
-          getIdentityToken(input: $input) {
+        mutation: gql`mutation ($input: EnsureTokenInput!) {
+          ensureToken(input: $input) {
             token
           }
         }`,
         variables: {
           input: {
-            email: this.email,
-            password: this.password
+            token: this.token
           }
         },
-      }).then((data) => {
-        this.token = data.data.getIdentityToken.token
+      }).then(({ data }) => {
+        this.token = data.ensureToken.token
+      }).catch((error) => {
+        console.log(error)
       })
     },
   },
