@@ -1,0 +1,25 @@
+## Queries
+
+query ShowCurrentUser {
+  currentUser {
+    id
+    email
+    role
+    ...Timestamps
+  }
+}
+
+## Mutations
+
+mutation CreateAnonymousUser {
+  createAnonymousUser {
+    token
+  }
+}
+
+## Fragments
+
+fragment Timestamps on User {
+  updatedAt
+  createdAt
+}

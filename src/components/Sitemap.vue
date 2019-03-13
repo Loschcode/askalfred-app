@@ -32,7 +32,9 @@
 </template>
 
 <script>
-import gql from 'graphql-tag'
+// import gql from 'graphql-tag'
+// import { CreateAnonymousUser } from '@/graphql/users/schemas.gql'
+import { currentUser } from '@/graphql/users/models'
 
 export default {
   name: 'Sitemap',
@@ -42,35 +44,9 @@ export default {
     }
   },
   apollo: {
-    books: {
-      query: gql`query GetBook {
-        books {
-          title
-          author
-        }
-      }
-      `
-    }
+    currentUser
   },
   methods: {
-    async makeToken() {
-      return await this.$apollo.mutate({
-        mutation: gql`mutation ($input: EnsureTokenInput!) {
-          ensureToken(input: $input) {
-            token
-          }
-        }`,
-        variables: {
-          input: {
-            token: this.token
-          }
-        },
-      }).then(({ data }) => {
-        this.token = data.ensureToken.token
-      }).catch((error) => {
-        console.log(error)
-      })
-    },
   },
   components: {
   }
