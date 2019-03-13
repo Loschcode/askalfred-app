@@ -21,26 +21,18 @@
     <br />
 
     <br />
-    <a
-      @click="makeToken()"
-      href="#"
-    >{{ books }}</a>
-
-    {{ token }}
 
   </div>
 </template>
 
 <script>
-// import gql from 'graphql-tag'
-// import { CreateAnonymousUser } from '@/graphql/users/schemas.gql'
-import { currentUser } from '@/graphql/users/models'
+import { currentUser } from '@/graphql/models/User'
 
 export default {
   name: 'Sitemap',
   data () {
     return {
-      token: null
+      currentUser: null
     }
   },
   apollo: {

@@ -3,9 +3,11 @@
 query ShowCurrentUser {
   currentUser {
     id
-    email
     role
-    ...Timestamps
+    token
+    email
+    firstName
+    lastName
   }
 }
 
@@ -19,7 +21,7 @@ mutation CreateAnonymousUser {
 
 ## Fragments
 
-fragment Timestamps on User {
-  updatedAt
-  createdAt
-}
+# fragment Timestamps on User {
+#   updatedAt
+#   createdAt
+# }

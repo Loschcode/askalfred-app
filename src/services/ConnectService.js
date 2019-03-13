@@ -1,6 +1,5 @@
-import Cable from '@/misc/Cable'
 import _ from 'lodash'
-import { createAnonymousUser } from '@/graphql/users/models'
+import { createAnonymousUser } from '@/graphql/models/User'
 import EventsService from './EventsService'
 
 class ConnectService {
@@ -20,9 +19,7 @@ class ConnectService {
     } else {
       this._connectAnonymous()
     }
-
     console.log('userToken : ' + this.userToken)
-    this._connectCable()
   }
 
   /**
@@ -34,30 +31,20 @@ class ConnectService {
     try {
       console.log('connect anonymous ...')
       const response = await createAnonymousUser(this.vm)
+      console.log(response)
       localStorage.setItem('userToken', response.token)
     } catch (error) {
       this.events.crash('We were unable to create an anonymous user')
     }
   }
 
-  /**
-   * ensure connection on action cable
-   * and the classic AJAX
-   */
   _connectAll() {
     try {
+      // TODO : ensure connection by recovering the user ? if we can't we crash it ?
       console.log('connectAll with : ' + this.userToken)
-      this._connectCable()
     } catch (error) {
       this.events.crash('We were unable to connect to our socket service')
     }
-  }
-
-  /**
-   * connect to the action cable system
-   */
-  _connectCable() {
-    Cable.connect(this.userToken)
   }
 }
 

@@ -1,16 +1,19 @@
-import { CreateAnonymousUser, ShowCurrentUser } from '../users/schemas.gql'
+import { CreateAnonymousUser, ShowCurrentUser } from '../schemas/User.gql'
 import EventsService from '../../services/EventsService'
 
 export const currentUser = {
   query: ShowCurrentUser,
-  result({ data }) {},
-  error() {
+  result({ data }) {
+    console.log(data)
+    return currentUser
+  },
+  error(error) {
     new EventsService(this).crash('We were unable to retrieve the current user')
   }
 }
 
 export const createAnonymousUser = async vm => {
-  await vm.$apollo
+  return await vm.$apollo
     .mutate({
       mutation: CreateAnonymousUser,
       variables: {},
@@ -18,7 +21,7 @@ export const createAnonymousUser = async vm => {
         vm.createAnonymousUser = createAnonymousUser
       }
     })
-    .then(data => {
-      return data
+    .then(({ data: { createAnonymousUser } }) => {
+      return createAnonymousUser
     })
 }
