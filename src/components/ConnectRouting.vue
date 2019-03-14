@@ -31,7 +31,7 @@ import ConnectService from '@/services/ConnectService'
 import EventsService from '@/services/EventsService'
 import PageHelper from '@/helpers/PageHelper'
 
-import { currentIdentity } from '@/graphql/models/Identity'
+import { currentIdentity } from '@/graphql/queries/currentIdentity'
 
 export default {
   data () {

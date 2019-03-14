@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { currentIdentity } from '@/graphql/models/Identity'
+import { currentIdentity } from '@/graphql/queries/currentIdentity'
 
 export default {
   name: 'Sitemap',

@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { createGuest } from '@/graphql/models/Identity'
+import createGuest from '@/graphql/mutations/createGuest'
 import EventsService from './EventsService'
 
 class ConnectService {
@@ -40,8 +40,9 @@ class ConnectService {
 
   _connectAll() {
     try {
-      // TODO : ensure connection by recovering the user ? if we can't we crash it ?
-      console.log('connectAll with : ' + this.identityToken)
+      console.log(
+        'TODO: maybe use this in the connection module ? ' + this.identityToken
+      )
     } catch (error) {
       this.events.crash('We were unable to connect to our socket service')
     }
