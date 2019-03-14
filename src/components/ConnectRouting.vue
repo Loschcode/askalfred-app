@@ -31,12 +31,12 @@ import ConnectService from '@/services/ConnectService'
 import EventsService from '@/services/EventsService'
 import PageHelper from '@/helpers/PageHelper'
 
-import { currentUser } from '@/graphql/models/User'
+import { currentIdentity } from '@/graphql/models/Identity'
 
 export default {
   data () {
     return {
-      currentUser: null,
+      currentIdentity: null,
       error: ''
     }
   },
@@ -44,7 +44,7 @@ export default {
   created () {
     Object.assign(this, {
       eventsService:  new EventsService(this),
-      connectService: new ConnectService(this, this.userToken)
+      connectService: new ConnectService(this, this.identityToken)
     })
 
     this.eventsService.setup()
@@ -52,14 +52,14 @@ export default {
   },
 
   watch: {
-    userToken (newValue, oldValue) {
+    identityToken (newValue, oldValue) {
       // new ConnectService(this, newValue).perform()
     }
   },
 
   computed: {
-    userToken () {
-      return localStorage.getItem('userToken')
+    identityToken () {
+      return localStorage.getItem('identityToken')
     }
   },
 
@@ -69,7 +69,7 @@ export default {
     },
 
     appReady () {
-      return this.userToken && this.currentUser
+      return this.identityToken && this.currentIdentity
     }
   },
 
@@ -77,7 +77,7 @@ export default {
   },
 
   apollo: {
-    currentUser
+    currentIdentity
   }
 
 }

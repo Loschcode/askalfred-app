@@ -26,17 +26,17 @@
 </template>
 
 <script>
-import { currentUser } from '@/graphql/models/User'
+import { currentIdentity } from '@/graphql/models/Identity'
 
 export default {
   name: 'Sitemap',
   data () {
     return {
-      currentUser: null
+      currentIdentity: null
     }
   },
   apollo: {
-    currentUser
+    currentIdentity
   },
   methods: {
   },

@@ -1,11 +1,11 @@
 import _ from 'lodash'
-import { createAnonymousUser } from '@/graphql/models/User'
+import { createGuest } from '@/graphql/models/Identity'
 import EventsService from './EventsService'
 
 class ConnectService {
-  constructor(vm, userToken) {
+  constructor(vm, identityToken) {
     this.vm = vm
-    this.userToken = userToken
+    this.identityToken = identityToken
 
     this.events = new EventsService(vm)
   }
@@ -14,12 +14,12 @@ class ConnectService {
    * We take care of the connection
    */
   perform() {
-    if (!_.isNil(this.userToken)) {
-      this._connectAll(this.userToken)
+    if (!_.isNil(this.identityToken)) {
+      this._connectAll(this.identityToken)
     } else {
       this._connectAnonymous()
     }
-    console.log('userToken : ' + this.userToken)
+    console.log('identityToken : ' + this.identityToken)
   }
 
   /**
@@ -30,9 +30,9 @@ class ConnectService {
   async _connectAnonymous() {
     try {
       console.log('connect anonymous ...')
-      const response = await createAnonymousUser(this.vm)
+      const response = await createGuest(this.vm)
       console.log(response)
-      localStorage.setItem('userToken', response.token)
+      localStorage.setItem('identityToken', response.token)
     } catch (error) {
       this.events.crash('We were unable to create an anonymous user')
     }
@@ -41,7 +41,7 @@ class ConnectService {
   _connectAll() {
     try {
       // TODO : ensure connection by recovering the user ? if we can't we crash it ?
-      console.log('connectAll with : ' + this.userToken)
+      console.log('connectAll with : ' + this.identityToken)
     } catch (error) {
       this.events.crash('We were unable to connect to our socket service')
     }

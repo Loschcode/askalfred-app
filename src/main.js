@@ -24,7 +24,7 @@ const httpLink = new HttpLink({
 const authMiddleware = new ApolloLink((operation, forward) => {
   operation.setContext({
     headers: {
-      token: localStorage.getItem('userToken') || null
+      token: localStorage.getItem('identityToken') || null
     }
   })
   return forward(operation)

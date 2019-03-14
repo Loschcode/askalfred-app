@@ -1,7 +1,7 @@
 ## Queries
 
-query ShowCurrentUser {
-  currentUser {
+query CurrentIdentity {
+  currentIdentity {
     id
     role
     token
@@ -13,15 +13,15 @@ query ShowCurrentUser {
 
 ## Mutations
 
-mutation CreateAnonymousUser {
-  createAnonymousUser {
+mutation CreateGuest {
+  createGuest {
     token
   }
 }
 
 ## Fragments
 
-# fragment Timestamps on User {
+# fragment Timestamps on Identity {
 #   updatedAt
 #   createdAt
 # }
