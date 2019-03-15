@@ -1,6 +1,5 @@
 <template>
   <div class="connect-routing">
-    <!-- TODO : make the whole fucking error page to start with -->
     <!-- Crash error -->
     <div
       v-if="error"
@@ -8,7 +7,8 @@
       class="+pointer"
     >
       <div class="error">
-        {{ error.message }}
+        Error page<br />
+        {{ error.message }}<br />
         {{ error.raw }}
       </div>
     </div>
@@ -20,14 +20,14 @@
         <router-view />
       </div>
       <div v-else>
-        THIS IS LOADING IT NEEDS SOME STYLING OBVIOUSLY
+        Loading page
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import ConnectService from '@/services/ConnectService'
+import getTokenOperation from '@/operations/getTokenOperation'
 import EventsService from '@/services/EventsService'
 import PageHelper from '@/helpers/PageHelper'
 
@@ -42,20 +42,15 @@ export default {
   },
 
   created () {
-    Object.assign(this, {
-      eventsService:  new EventsService(this),
-      connectService: new ConnectService(this, this.identityToken)
-    })
-
-    this.eventsService.setup()
-    this.connectService.perform()
+    getTokenOperation(this)
+    new EventsService(this).setup()
   },
 
-  watch: {
-    identityToken (newValue, oldValue) {
-      // new ConnectService(this, newValue).perform()
-    }
-  },
+  // watch: {
+  //   identityToken (newValue, oldValue) {
+  //     // new ConnectService(this, newValue).perform()
+  //   }
+  // },
 
   computed: {
     identityToken () {
