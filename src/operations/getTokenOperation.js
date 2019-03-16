@@ -3,26 +3,30 @@ import createGuest from '@/graphql/mutations/createGuest'
 import EventsService from '@/services/EventsService'
 
 export default vm => {
-  const identityToken = vm.identityToken
   const events = new EventsService(vm)
 
-  return {
-    perform() {
-      if (_.isNil(vm.identityToken)) {
-        connectGuest()
-      }
-      console.log('identityToken : ' + vm.identityToken)
-    },
-    //TODO : put that outside of the this scope along with perform() too?
-    async connectGuest() {
-      try {
-        console.log('connect anonymous ...')
-        const response = await createGuest(vm)
-        console.log(response)
-        localStorage.setItem('identityToken', response.token)
-      } catch (error) {
-        events.crash('We were unable to create an anonymous user')
-      }
+  const perform = async () => {
+    if (getToken() == null) await connectGuest()
+    return getToken()
+  }
+
+  const connectGuest = async () => {
+    try {
+      console.log('connect guest ...')
+      const response = await createGuest(vm)
+      setTokenAs(response.token)
+    } catch (error) {
+      events.crash('We were unable to create a guest user')
     }
   }
+
+  const setTokenAs = token => {
+    localStorage.setItem('identityToken', token)
+  }
+
+  const getToken = () => {
+    return localStorage.getItem('identityToken')
+  }
+
+  return perform()
 }

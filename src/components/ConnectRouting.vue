@@ -37,24 +37,19 @@ export default {
   data () {
     return {
       currentIdentity: null,
+      identityToken: null,
       error: ''
     }
   },
 
-  created () {
-    getTokenOperation(this)
-    new EventsService(this).setup()
+  async created () {
+    this.identityToken = await getTokenOperation(this)
+    new EventsService(this).watch()
   },
 
-  // watch: {
-  //   identityToken (newValue, oldValue) {
-  //     // new ConnectService(this, newValue).perform()
-  //   }
-  // },
-
-  computed: {
-    identityToken () {
-      return localStorage.getItem('identityToken')
+  watch: {
+    identityToken(oldValue, newValue) {
+      console.log('identity token change')
     }
   },
 
@@ -65,7 +60,7 @@ export default {
 
     appReady () {
       return this.identityToken && this.currentIdentity
-    }
+    },
   },
 
   components: {

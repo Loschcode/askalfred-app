@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
-import EventsService from '../../services/EventsService'
+import EventsService from '@/services/EventsService'
+import _ from 'lodash'
 
 const CurrentIdentity = gql`
   query CurrentIdentity {
@@ -16,11 +17,15 @@ const CurrentIdentity = gql`
 
 export const currentIdentity = {
   query: CurrentIdentity,
-  result({ data }) {
-    console.log(data)
+  result({ data: { currentIdentity } }) {
     return currentIdentity
   },
   error(error) {
-    new EventsService(this).crash('We were unable to retrieve the current user')
+    new EventsService(this).crash(
+      'We were unable to retrieve the current identity'
+    )
+  },
+  skip() {
+    return this.identityToken == null
   }
 }
