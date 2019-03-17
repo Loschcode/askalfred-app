@@ -47,12 +47,6 @@ export default {
     new EventsService(this).watch()
   },
 
-  watch: {
-    identityToken(oldValue, newValue) {
-      console.log('identity token change')
-    }
-  },
-
   methods: {
     refreshPage () {
       PageHelper.refreshPage()

@@ -1,79 +1,90 @@
-import Vue from "vue";
-import Router from "vue-router";
+import Vue from 'vue'
+import Router from 'vue-router'
 
-import Index from "./views/Index.vue";
+// Root
+import Index from './views/Index.vue'
+import Sitemap from './views/Sitemap'
 
 // Connect
-import SignIn from "./views/Connect/SignIn.vue";
-import ForgotYourPassword from "./views/Connect/ForgotYourPassword.vue";
+import SignIn from './views/Connect/SignIn.vue'
+import ForgotYourPassword from './views/Connect/ForgotYourPassword.vue'
 
 // GettingStarted
-import WhatIsYourName from "./views/GettingStarted/WhatIsYourName.vue";
-import CanIGetYourEmail from "./views/GettingStarted/CanIGetYourEmail.vue";
-import ThankYou from "./views/GettingStarted/ThankYou.vue";
-import Surprise from "./views/GettingStarted/Surprise.vue";
-import DoNotForget from "./views/GettingStarted/DoNotForget.vue";
+import WhatIsYourName from './views/GettingStarted/WhatIsYourName.vue'
+import CanIGetYourEmail from './views/GettingStarted/CanIGetYourEmail.vue'
+import ThankYou from './views/GettingStarted/ThankYou.vue'
+import Surprise from './views/GettingStarted/Surprise.vue'
+import DoNotForget from './views/GettingStarted/DoNotForget.vue'
 
 // Pages
-import LegalMentions from "./views/Pages/LegalMentions.vue";
+import LegalMentions from './views/Pages/LegalMentions.vue'
 
-Vue.use(Router);
+Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
+    /**
+     * Root
+     */
     {
-      path: "/",
-      meta: { layout: "default" },
+      path: '/',
+      meta: { layout: 'default' },
       component: Index
+    },
+    {
+      path: '/sitemap',
+      meta: { layout: 'default' },
+      component: Sitemap
     },
     /**
      * Connect
      */
     {
-      path: "/connect/sign-in",
-      meta: { layout: "default" },
+      path: '/connect/sign-in',
+      meta: { layout: 'default' },
       component: SignIn
     },
     {
-      path: "/connect/forgot-your-password",
-      meta: { layout: "default" },
+      path: '/connect/forgot-your-password',
+      meta: { layout: 'default' },
       component: ForgotYourPassword
     },
     /**
      * GettingStarted
      */
     {
-      path: "/getting-started/what-is-your-name",
-      meta: { layout: "default" },
+      path: '/getting-started/what-is-your-name',
+      meta: { layout: 'default' },
       component: WhatIsYourName
     },
     {
-      path: "/getting-started/can-i-get-your-email",
-      meta: { layout: "default" },
+      path: '/getting-started/can-i-get-your-email',
+      meta: { layout: 'default' },
       component: CanIGetYourEmail
     },
     {
-      path: "/getting-started/thank-you",
-      meta: { layout: "default" },
+      path: '/getting-started/thank-you',
+      meta: { layout: 'default' },
       component: ThankYou
     },
     {
-      path: "/getting-started/surprise",
-      meta: { layout: "default" },
+      path: '/getting-started/surprise',
+      meta: { layout: 'default' },
       component: Surprise
     },
     {
-      path: "/getting-started/do-not-forget",
-      meta: { layout: "default" },
+      path: '/getting-started/do-not-forget',
+      meta: { layout: 'default' },
       component: DoNotForget
     },
     /**
      * Pages
      */
     {
-      path: "/pages/legal-mentions",
-      meta: { layout: "default" },
+      path: '/pages/legal-mentions',
+      meta: { layout: 'default' },
       component: LegalMentions
     }
   ]
-});
+})
