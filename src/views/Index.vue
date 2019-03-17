@@ -6,16 +6,10 @@
 <script>
 import gql from 'graphql-tag'
 import router from '@/router'
-import { currentIdentity } from '@/graphql/queries/currentIdentity'
+import currentIdentityMixin from '@/mixins/currentIdentityMixin'
 
 export default {
   name: 'Index',
-
-  data () {
-    return {
-      currentIdentity: null
-    }
-  },
 
   created () {
     if (this.isGuest()) {
@@ -26,12 +20,6 @@ export default {
 
     // and from there route it if logged-in
     router.push({ path: 'connect/sign-in' })
-  },
-
-  computed: {
-    identityToken () {
-      return localStorage.getItem('identityToken')
-    }
   },
 
   methods: {
@@ -45,9 +33,9 @@ export default {
     }
   },
 
-  apollo: {
-    currentIdentity
-  },
+  mixins: [
+    currentIdentityMixin
+  ],
 
   components: {
   }
