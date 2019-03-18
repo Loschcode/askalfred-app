@@ -20,7 +20,7 @@ export const currentIdentity = {
   subscribeToMore: {
     document: gql`
       subscription SubscribeToBullshit {
-        subscribeToBullshit {
+        subscribeToCurrentIdentity {
           firstName
           lastName
         }
@@ -31,12 +31,12 @@ export const currentIdentity = {
       previousResult,
       {
         subscriptionData: {
-          data: { subscribeToBullshit }
+          data: { subscribeToCurrentIdentity }
         }
       }
     ) {
-      this.firstNameInput = subscribeToBullshit.firstName
-      this.lastNameInput = subscribeToBullshit.lastName
+      this.firstNameInput = subscribeToCurrentIdentity.firstName
+      this.lastNameInput = subscribeToCurrentIdentity.lastName
     }
   },
   result({ data: { currentIdentity } }) {
