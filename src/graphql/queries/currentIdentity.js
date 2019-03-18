@@ -15,8 +15,26 @@ const CurrentIdentity = gql`
   }
 `
 
+const subscribeToMore = {
+  document: gql`
+    subscription SubscribeToBullshit {
+      subscribeToBullshit {
+        firstName
+        lastName
+      }
+    }
+  `,
+  // Mutate the previous result
+  updateQuery: (previousResult, { subscriptionData }) => {
+    console.log('subscription hitting')
+    console.log(previousResult)
+    console.log(subscriptionData)
+  }
+}
+
 export const currentIdentity = {
   query: CurrentIdentity,
+  subscribeToMore,
   result({ data: { currentIdentity } }) {
     return currentIdentity
   },

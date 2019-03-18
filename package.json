@@ -8,6 +8,12 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "actioncable": "^5.2.2-1",
+    "apollo-boost": "^0.1.20",
+    "apollo-cache-inmemory": "^1.2.10",
+    "apollo-client": "^2.4.2",
+    "apollo-link": "^1.2.3",
+    "apollo-link-http": "^1.5.5",
     "flexboxgrid": "^6.3.1",
     "graphql-ruby-client": "^1.6.3",
     "lowdb": "^1.0.0",
@@ -15,11 +21,6 @@
     "shortid": "^2.2.8",
     "tingle.js": "^0.14.0",
     "vue": "^2.6.6",
-    "apollo-boost": "^0.1.20",
-    "apollo-cache-inmemory": "^1.2.10",
-    "apollo-client": "^2.4.2",
-    "apollo-link": "^1.2.3",
-    "apollo-link-http": "^1.5.5",
     "vue-apollo": "^3.0.0-beta.11",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"

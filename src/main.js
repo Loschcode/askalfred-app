@@ -5,10 +5,13 @@ import store from './store'
 
 import { ApolloClient } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
-import { ApolloLink } from 'apollo-link'
+import { ApolloLink, concat, split } from 'apollo-link'
 import { InMemoryCache } from 'apollo-cache-inmemory'
-
 import VueApollo from 'vue-apollo'
+import { setContext } from 'apollo-link-context'
+
+import ActionCable from 'actioncable'
+import ActionCableLink from 'graphql-ruby-client/subscriptions/ActionCableLink'
 
 // Layouts
 import Default from './layouts/Default'
@@ -17,24 +20,43 @@ Vue.component('default-layout', Default)
 
 Vue.config.productionTip = false
 
+// HTTP link
 const httpLink = new HttpLink({
   uri: process.env.VUE_APP_GRAPHQL_HTTP
 })
 
-const authMiddleware = new ApolloLink((operation, forward) => {
-  operation.setContext({
-    headers: {
-      token: localStorage.getItem('identityToken') || null
-    }
-  })
-  return forward(operation)
-})
+const token = localStorage.getItem('identityToken') || null
+
+// Cable link
+const authCableUrl = `${process.env.VUE_APP_CABLE}?token=${token}`
+const cable = ActionCable.createConsumer(authCableUrl)
+const cableLink = new ActionCableLink({ cable })
+
+const hasSubscriptionOperation = ({ query: { definitions } }) => {
+  return definitions.some(
+    ({ kind, operation }) =>
+      kind === 'OperationDefinition' && operation === 'subscription'
+  )
+}
+
+const endLink = split(hasSubscriptionOperation, cableLink, httpLink)
+
+// Authentication headers
+const authMiddleware = setContext((_, { headers }) => ({
+  headers: {
+    ...headers,
+    token
+  }
+}))
+
+// Concat links (cable / http) with authentication
+const link = concat(authMiddleware, endLink)
 
 const cache = new InMemoryCache()
 
 const apolloClient = new ApolloClient({
   cache,
-  link: ApolloLink.from([authMiddleware, httpLink]),
+  link,
   connectToDevTools: true
 })
 
