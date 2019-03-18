@@ -23,7 +23,7 @@
             <input
               type="text"
               placeholder="First name"
-              v-model="firstName"
+              v-model="firstNameInput"
               ref="firstName"
             />
           </div>
@@ -31,7 +31,7 @@
             <input
               type="text"
               placeholder="Last name"
-              v-model="lastName"
+              v-model="lastNameInput"
               ref="lastName"
             />
           </div>
@@ -76,14 +76,14 @@ export default {
 
   data () {
     return {
-      firstName: null,
-      lastName: null
+      firstNameInput: null,
+      lastNameInput: null
     }
   },
 
   mounted () {
-    this.firstName = this.currentIdentity.firstName
-    this.lastName =  this.currentIdentity.lastName
+    this.firstNameInput = this.currentIdentity.firstName
+    this.lastNameInput =  this.currentIdentity.lastName
 
     if (this.firstName == null) {
       this.$refs.firstName.focus()

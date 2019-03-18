@@ -21,8 +21,8 @@ export default async vm => {
       mutation,
       variables: {
         input: {
-          firstName: vm.firstName,
-          lastName: vm.lastName
+          firstName: vm.firstNameInput,
+          lastName: vm.lastNameInput
         }
       },
       update: (store, { data: { storeIdentityName } }) => {
