@@ -21,13 +21,14 @@ export const currentIdentity = {
     document: gql`
       subscription SubscribeToBullshit {
         subscribeToCurrentIdentity {
-          firstName
-          lastName
+          currentIdentity {
+            firstName
+            lastName
+          }
         }
       }
     `,
-    // Mutate the previous result
-    updateQuery(
+    updateQuery (
       previousResult,
       {
         subscriptionData: {
@@ -35,20 +36,19 @@ export const currentIdentity = {
         }
       }
     ) {
-      this.firstNameInput = subscribeToCurrentIdentity.firstName
-      this.lastNameInput = subscribeToCurrentIdentity.lastName
+      this.currentIdentityInput = subscribeToCurrentIdentity.currentIdentity
     }
   },
-  result({ data: { currentIdentity } }) {
+  result ({ data: { currentIdentity } }) {
     this.currentIdentity = currentIdentity
     return currentIdentity
   },
-  error(error) {
+  error (error) {
     new EventsService(this).crash(
       'We were unable to retrieve the current identity'
     )
   },
-  skip() {
+  skip () {
     return this.identityToken == null
   }
 }

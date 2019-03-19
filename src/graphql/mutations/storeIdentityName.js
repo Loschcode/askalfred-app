@@ -8,22 +8,18 @@ const mutation = gql`
 
   mutation StoreIdentityName($input: StoreIdentityNameInput!) {
     storeIdentityName(input: $input) {
-      id
       firstName
       lastName
     }
   }
 `
 
-export default async vm => {
+export default async (vm, input) => {
   return await vm.$apollo
     .mutate({
       mutation,
       variables: {
-        input: {
-          firstName: vm.firstNameInput,
-          lastName: vm.lastNameInput
-        }
+        input
       },
       update: (store, { data: { storeIdentityName } }) => {
         vm.storeIdentityName = storeIdentityName

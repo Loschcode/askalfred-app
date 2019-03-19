@@ -23,7 +23,7 @@
             <input
               type="text"
               placeholder="First name"
-              v-model="firstNameInput"
+              v-model="currentIdentityInput.firstName"
               ref="firstName"
             />
           </div>
@@ -31,7 +31,7 @@
             <input
               type="text"
               placeholder="Last name"
-              v-model="lastNameInput"
+              v-model="currentIdentityInput.lastName"
               ref="lastName"
             />
           </div>
@@ -70,31 +70,33 @@
 <script>
 import currentIdentityMixin from '@/mixins/currentIdentityMixin'
 import storeIdentityName from '@/graphql/mutations/storeIdentityName'
+import _ from 'lodash'
 
 export default {
   name: 'WhatIsYourName',
 
   data () {
     return {
-      firstNameInput: null,
-      lastNameInput: null
+      currentIdentityInput: {
+        firstName: null,
+        lastName: null
+      }
     }
   },
 
   mounted () {
-    this.firstNameInput = this.currentIdentity.firstName
-    this.lastNameInput =  this.currentIdentity.lastName
+    this.currentIdentityInput = _.pick(this.currentIdentity, ['firstName', 'lastName'])
 
-    if (this.firstName == null) {
+    if (this.firstNameInput  == null) {
       this.$refs.firstName.focus()
-    } else if (this.lastName == null) {
+    } else if (this.lastNameInput == null) {
       this.$refs.lastName.focus()
     }
   },
 
   methods: {
     async storeName() {
-      const response = await storeIdentityName(this)
+      const response = await storeIdentityName(this, this.currentIdentityInput)
       console.log(response)
     }
   },
