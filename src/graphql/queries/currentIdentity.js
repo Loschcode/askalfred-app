@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import EventsService from '@/services/EventsService'
 import _ from 'lodash'
 
-const CurrentIdentity = gql`
+const query = gql`
   query CurrentIdentity {
     currentIdentity {
       id
@@ -15,6 +15,22 @@ const CurrentIdentity = gql`
   }
 `
 
+const result = function ({ data: { currentIdentity } }) {
+  this.currentIdentity = currentIdentity
+  return currentIdentity
+}
+
+const error = function (error) {
+  new EventsService(this).crash(
+    'We were unable to retrieve the current identity'
+  )
+}
+
+const skip = function () {
+  return this.identityToken == null
+}
+
+// Subscription handling
 const updateQuery = function (
   previousResult,
   {
@@ -27,10 +43,8 @@ const updateQuery = function (
   this.currentIdentityInput = currentIdentity
 }
 
-export const currentIdentity = {
-  query: CurrentIdentity,
-  subscribeToMore: {
-    document: gql`
+const subscribeToMore = {
+  document: gql`
       subscription SubscribeToBullshit {
         subscribeToCurrentIdentity {
           currentIdentity {
@@ -40,18 +54,13 @@ export const currentIdentity = {
         }
       }
     `,
-    updateQuery,
-  },
-  result ({ data: { currentIdentity } }) {
-    this.currentIdentity = currentIdentity
-    return currentIdentity
-  },
-  error (error) {
-    new EventsService(this).crash(
-      'We were unable to retrieve the current identity'
-    )
-  },
-  skip () {
-    return this.identityToken == null
-  }
+  updateQuery,
+}
+
+export const currentIdentity = {
+  query,
+  result,
+  error,
+  skip,
+  subscribeToMore,
 }
