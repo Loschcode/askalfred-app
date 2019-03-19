@@ -96,6 +96,7 @@ export default {
 
   methods: {
     async storeName() {
+      console.log(this.currentIdentityInput)
       const response = await storeIdentityName(this, this.currentIdentityInput)
       console.log(response)
     }

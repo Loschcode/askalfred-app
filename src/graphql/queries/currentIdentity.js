@@ -15,6 +15,18 @@ const CurrentIdentity = gql`
   }
 `
 
+const updateQuery = function (
+  previousResult,
+  {
+    subscriptionData: {
+      data: { subscribeToCurrentIdentity: { currentIdentity } }
+    }
+  }
+) {
+  delete currentIdentity['__typename']
+  this.currentIdentityInput = currentIdentity
+}
+
 export const currentIdentity = {
   query: CurrentIdentity,
   subscribeToMore: {
@@ -28,16 +40,7 @@ export const currentIdentity = {
         }
       }
     `,
-    updateQuery (
-      previousResult,
-      {
-        subscriptionData: {
-          data: { subscribeToCurrentIdentity }
-        }
-      }
-    ) {
-      this.currentIdentityInput = subscribeToCurrentIdentity.currentIdentity
-    }
+    updateQuery,
   },
   result ({ data: { currentIdentity } }) {
     this.currentIdentity = currentIdentity
