@@ -14,6 +14,7 @@
 <script>
 const defaultLayout = 'default';
 import ConnectRouting from '@/components/ConnectRouting'
+import layoutMixin from '@/mixins/layoutMixin'
 
 export default {
   props: [
@@ -32,15 +33,9 @@ export default {
     }
   },
 
-  computed: {
-    currentLayout () {
-      return (this.layoutFromRoute || defaultLayout) + '-layout';
-    },
-
-    layoutFromRoute () {
-      return this.$route.meta.layout;
-    }
-  },
+  mixins: [
+    layoutMixin
+  ],
 
   components: {
     ConnectRouting

@@ -14,9 +14,11 @@ import ActionCable from 'actioncable'
 import ActionCableLink from 'graphql-ruby-client/subscriptions/ActionCableLink'
 
 // Layouts
-import Default from './layouts/Default'
+import LayoutDefault from './layouts/Default'
+import ErrorDefault from './errors/Default'
 
-Vue.component('default-layout', Default)
+Vue.component('default-layout', LayoutDefault)
+Vue.component('error-default', ErrorDefault)
 
 Vue.config.productionTip = false
 

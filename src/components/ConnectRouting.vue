@@ -1,16 +1,12 @@
 <template>
   <div class="connect-routing">
     <!-- Crash error -->
-    <div
-      v-if="error"
-      @click="refreshPage()"
-      class="+pointer"
-    >
-      <div class="error">
-        Error page<br />
-        {{ error.message }}<br />
-        {{ error.raw }}
-      </div>
+    <div v-if="error">
+      <component
+        :is="errorComponent"
+        :error="error"
+      >
+      </component>
     </div>
 
     <div v-else>
@@ -29,7 +25,7 @@
 <script>
 import getTokenOperation from '@/operations/getTokenOperation'
 import EventsService from '@/services/EventsService'
-import PageHelper from '@/helpers/PageHelper'
+import layoutMixin from '@/mixins/layoutMixin'
 
 import { currentIdentity } from '@/graphql/queries/currentIdentity'
 
@@ -47,15 +43,21 @@ export default {
     new EventsService(this).watch()
   },
 
-  methods: {
-    refreshPage () {
-      PageHelper.refreshPage()
-    },
+  computed: {
+    errorComponent() {
+      return `error-${this.rawLayout}`
+    }
+  },
 
+  methods: {
     appReady () {
       return this.identityToken && this.currentIdentity
     },
   },
+
+  mixins: [
+    layoutMixin
+  ],
 
   components: {
   },
