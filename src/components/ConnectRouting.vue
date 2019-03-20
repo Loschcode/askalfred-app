@@ -16,7 +16,9 @@
         <router-view />
       </div>
       <div v-else>
-        Loading page
+        <div class="connect__loading">
+          <loading />
+        </div>
       </div>
     </div>
   </div>
@@ -26,6 +28,7 @@
 import getTokenOperation from '@/operations/getTokenOperation'
 import EventsService from '@/services/EventsService'
 import layoutMixin from '@/mixins/layoutMixin'
+import Loading from '@/components/Loading'
 
 import currentIdentity from '@/graphql/queries/currentIdentity'
 
@@ -60,6 +63,7 @@ export default {
   ],
 
   components: {
+    Loading
   },
 
   apollo: {
@@ -68,3 +72,9 @@ export default {
 
 }
 </script>
+
+<style scoped lang="scss">
+.connect__loading {
+  padding-top: 45vh;
+}
+</style>

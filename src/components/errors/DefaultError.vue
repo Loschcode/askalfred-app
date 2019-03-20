@@ -92,6 +92,6 @@ export default {
 }
 
 .call-to-action {
-  margin-top: 3em;
+  margin-top: 2em;
 }
 </style>
