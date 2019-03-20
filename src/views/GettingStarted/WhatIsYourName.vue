@@ -80,6 +80,7 @@ import _ from 'lodash'
 import currentIdentityMixin from '@/mixins/currentIdentityMixin'
 import storeIdentityName from '@/graphql/mutations/storeIdentityName'
 import { required, minLength, between } from 'vuelidate/lib/validators'
+import EventsService from '@/services/EventsService'
 
 export default {
   name: 'WhatIsYourName',
@@ -115,22 +116,11 @@ export default {
       this.$v.currentIdentityInput.$touch();
       if (this.$v.currentIdentityInput.$error) return
 
-      this.$notify({
-        group: 'default',
-        text: 'Lets have a long error just to see what will happen to the template',
-        type: 'error',
-      })
-
-      return
-
       try {
         const response = await storeIdentityName(this, this.currentIdentityInput)
       } catch (error) {
-        this.$notify({
-          text: 'there is an error yo'
-        })
+        new EventsService(this).error('It was impossible to save your name.')
       }
-      console.log(response)
     }
   },
 

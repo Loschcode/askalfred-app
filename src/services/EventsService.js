@@ -16,10 +16,7 @@ class EventsService {
   }
 
   success(message) {
-    this.vm.$notify({
-      text: message
-    })
-    // this.vm.$noty.info(message)
+    // NOTE : this part is not doneyet
   }
 
   reboot() {
@@ -45,6 +42,7 @@ class EventsService {
   }
 
   watchErrorEvent() {
+    console.log('watchit')
     EventBus.$on('errorEvent', this.onErrorEvent.bind(this))
   }
 
@@ -81,9 +79,10 @@ class EventsService {
    */
   onErrorEvent(error) {
     this.vm.$notify({
-      text: error
+      group: 'default',
+      text: error,
+      type: 'error'
     })
-    // this.vm.$noty.error(error)
   }
 
   addNetworkCrash(rawError) {
