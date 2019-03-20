@@ -70,9 +70,10 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import currentIdentityMixin from '@/mixins/currentIdentityMixin'
 import storeIdentityName from '@/graphql/mutations/storeIdentityName'
-import _ from 'lodash'
+import { required, minLength, between } from 'vuelidate/lib/validators'
 
 export default {
   name: 'WhatIsYourName',
@@ -83,6 +84,12 @@ export default {
         firstName: null,
         lastName: null
       }
+    }
+  },
+
+  validations: {
+    currentIdentityInput: {
+      firstName: { required }
     }
   },
 
@@ -98,7 +105,9 @@ export default {
 
   methods: {
     async storeName() {
-      console.log(this.currentIdentityInput)
+      this.$v.currentIdentityInput.$touch();
+      if (this.$v.currentIdentityInput.$error) return
+
       const response = await storeIdentityName(this, this.currentIdentityInput)
       console.log(response)
     }

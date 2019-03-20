@@ -3,6 +3,10 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+// Validation
+import Vuelidate from 'vuelidate'
+
+// Apollo
 import { ApolloClient } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
 import { ApolloLink, concat, split } from 'apollo-link'
@@ -70,6 +74,8 @@ const apolloProvider = new VueApollo({
     $loadingKey: 'loading'
   }
 })
+
+Vue.use(Vuelidate)
 
 new Vue({
   router,
