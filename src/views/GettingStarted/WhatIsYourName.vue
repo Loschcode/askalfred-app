@@ -19,7 +19,10 @@
           <div class="form__question">
             <p>What's your name?</p>
           </div>
-          <div class="form__first-name">
+          <div
+            class="form__first-name"
+            :class="{ 'transparent-input__error': $v.currentIdentityInput.firstName.$error }"
+          >
             <input
               type="text"
               placeholder="First name"
@@ -28,7 +31,10 @@
               ref="firstName"
             />
           </div>
-          <div class="form__last-name">
+          <div
+            class="form__last-name"
+            :class="{ 'transparent-input__error': $v.currentIdentityInput.lastName.$error }"
+          >
             <input
               type="text"
               placeholder="Last name"
@@ -89,7 +95,8 @@ export default {
 
   validations: {
     currentIdentityInput: {
-      firstName: { required }
+      firstName: { required },
+      lastName: { required }
     }
   },
 
