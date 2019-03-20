@@ -15,52 +15,57 @@ const query = gql`
   }
 `
 
-const result = function ({ data: { currentIdentity } }) {
+const result = function({ data: { currentIdentity } }) {
   this.currentIdentity = currentIdentity
   return currentIdentity
 }
 
-const error = function (error) {
+const error = function(error) {
   new EventsService(this).crash(
     'We were unable to retrieve the current identity'
   )
 }
 
-const skip = function () {
-  return this.identityToken == null
+const skip = function() {
+  return this.identityToken === null
 }
 
 // Subscription handling
-const updateQuery = function (
+const document = gql`
+  subscription SubscribeToIdentity {
+    subscribeToCurrentIdentity {
+      currentIdentity {
+        firstName
+        lastName
+      }
+    }
+  }
+`
+
+const updateQuery = function(
   previousResult,
   {
     subscriptionData: {
-      data: { subscribeToCurrentIdentity: { currentIdentity } }
+      data: {
+        subscribeToCurrentIdentity: { currentIdentity }
+      }
     }
   }
 ) {
   delete currentIdentity['__typename']
+  // TODO : maybe instead of the input, just merge the this.currentIdentity with those new data?
   this.currentIdentityInput = currentIdentity
 }
 
 const subscribeToMore = {
-  document: gql`
-      subscription SubscribeToBullshit {
-        subscribeToCurrentIdentity {
-          currentIdentity {
-            firstName
-            lastName
-          }
-        }
-      }
-    `,
-  updateQuery,
+  document,
+  updateQuery
 }
 
-export const currentIdentity = {
+export default {
   query,
   result,
   error,
   skip,
-  subscribeToMore,
+  subscribeToMore
 }

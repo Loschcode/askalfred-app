@@ -27,7 +27,7 @@ import getTokenOperation from '@/operations/getTokenOperation'
 import EventsService from '@/services/EventsService'
 import layoutMixin from '@/mixins/layoutMixin'
 
-import { currentIdentity } from '@/graphql/queries/currentIdentity'
+import currentIdentity from '@/graphql/queries/currentIdentity'
 
 export default {
   data () {

@@ -1,5 +1,5 @@
 <script>
-import { currentIdentity } from '@/graphql/queries/currentIdentity'
+import currentIdentity from '@/graphql/queries/currentIdentity'
 
 export default {
   data () {
