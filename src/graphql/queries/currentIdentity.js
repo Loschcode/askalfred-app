@@ -53,7 +53,6 @@ const updateQuery = function(
   }
 ) {
   delete currentIdentity['__typename']
-  // TODO : maybe instead of the input, just merge the this.currentIdentity with those new data?
   this.currentIdentityInput = currentIdentity
 }
 

@@ -82,14 +82,15 @@ class EventsService {
 
   addNetworkCrash(rawError) {
     this.vm.error = {
-      message: 'Oh snap ! There is a network error, please refresh the page.',
+      message: 'There is a network error, please refresh the page.',
       raw: rawError
     }
   }
 
   addDefaultCrash(rawError) {
     this.vm.error = {
-      message: 'Oh snap ! Something went wrong, please refresh the page.',
+      message:
+        "We can't communicate with the server right now, please refresh the page.",
       raw: rawError
     }
   }
