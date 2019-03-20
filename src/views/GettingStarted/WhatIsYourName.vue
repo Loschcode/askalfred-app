@@ -115,7 +115,21 @@ export default {
       this.$v.currentIdentityInput.$touch();
       if (this.$v.currentIdentityInput.$error) return
 
-      const response = await storeIdentityName(this, this.currentIdentityInput)
+      this.$notify({
+        group: 'default',
+        text: 'Lets have a long error just to see what will happen to the template',
+        type: 'error',
+      })
+
+      return
+
+      try {
+        const response = await storeIdentityName(this, this.currentIdentityInput)
+      } catch (error) {
+        this.$notify({
+          text: 'there is an error yo'
+        })
+      }
       console.log(response)
     }
   },

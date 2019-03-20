@@ -16,7 +16,10 @@ class EventsService {
   }
 
   success(message) {
-    this.vm.$noty.info(message)
+    this.vm.$notify({
+      text: message
+    })
+    // this.vm.$noty.info(message)
   }
 
   reboot() {
@@ -77,7 +80,10 @@ class EventsService {
    * This kind of errors is minor and dispatch an error message
    */
   onErrorEvent(error) {
-    this.vm.$noty.error(error)
+    this.vm.$notify({
+      text: error
+    })
+    // this.vm.$noty.error(error)
   }
 
   addNetworkCrash(rawError) {

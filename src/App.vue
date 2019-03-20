@@ -1,5 +1,9 @@
 <template>
   <div id="app">
+
+    <!-- Notify -->
+    <custom-notifications />
+
     <component :is="currentLayout">
       <div v-if="isRawRoute()">
         <router-view />
@@ -15,6 +19,7 @@
 const defaultLayout = 'default';
 import ConnectRouting from '@/components/ConnectRouting'
 import layoutMixin from '@/mixins/layoutMixin'
+import CustomNotifications from '@/components/CustomNotifications'
 
 export default {
   props: [
@@ -38,7 +43,8 @@ export default {
   ],
 
   components: {
-    ConnectRouting
+    ConnectRouting,
+    CustomNotifications
   }
 }
 </script>

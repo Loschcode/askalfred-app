@@ -6,6 +6,9 @@ import store from './store'
 // Validation
 import Vuelidate from 'vuelidate'
 
+// Notification
+import Notifications from 'vue-notification'
+
 // Apollo
 import { ApolloClient } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
@@ -71,11 +74,12 @@ Vue.use(VueApollo)
 const apolloProvider = new VueApollo({
   defaultClient: apolloClient,
   defaultOptions: {
-    $loadingKey: 'loading'
+    $loadingKey: ''
   }
 })
 
 Vue.use(Vuelidate)
+Vue.use(Notifications)
 
 new Vue({
   router,

@@ -1,0 +1,21 @@
+// hack
+.notifications {
+  @include absolute-center();
+  width: unset !important;
+}
+
+.custom-notifications {
+  padding: 1em;
+  margin: 1em;
+  background-color: $color-white;
+  @include button-radius("medium");
+}
+
+.custom-notifications__title {
+}
+
+.custom-notifications__content {
+}
+
+.custom-notifications--error {
+}
