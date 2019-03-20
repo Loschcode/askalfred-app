@@ -24,6 +24,7 @@
               type="text"
               placeholder="First name"
               v-model="currentIdentityInput.firstName"
+              v-on:keyup.enter="storeName()"
               ref="firstName"
             />
           </div>
@@ -32,6 +33,7 @@
               type="text"
               placeholder="Last name"
               v-model="currentIdentityInput.lastName"
+              v-on:keyup.enter="storeName()"
               ref="lastName"
             />
           </div>
