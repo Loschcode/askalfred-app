@@ -45,7 +45,7 @@ export default {
 
   computed: {
     errorComponent() {
-      return `error-${this.rawLayout}`
+      return `${this.rawLayout}-error`
     }
   },
 

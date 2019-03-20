@@ -16,8 +16,11 @@
           <div class="content__message">
             {{ error.message }}
           </div>
-          <div class="content__raw">
-            <!-- error.raw -->
+          <div
+            class="content__raw"
+            v-show="devEnv"
+          >
+            Development: {{ error.raw }}
           </div>
         </div>
       </div>
@@ -44,6 +47,12 @@ export default {
   props: [
     'error'
   ],
+
+  data () {
+   return {
+      devEnv: (process.env.NODE_ENV == 'development')
+   }
+  },
 
   methods: {
     refreshPage () {
@@ -72,6 +81,14 @@ export default {
 
 .content__message {
   margin-top: 1em;
+}
+
+.content__raw {
+  margin: 1em;
+  padding: 1em;
+  color: $color-black;
+  background-color: $color-grey-blueish;
+  @include button-radius("big");
 }
 
 .call-to-action {
