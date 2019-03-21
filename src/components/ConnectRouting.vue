@@ -5,8 +5,7 @@
       <component
         :is="errorComponent"
         :error="error"
-      >
-      </component>
+      />
     </div>
 
     <div v-else>
@@ -33,6 +32,14 @@ import Loading from '@/components/Loading'
 import currentIdentity from '@/graphql/queries/currentIdentity'
 
 export default {
+  components: {
+    Loading
+  },
+
+  mixins: [
+    LayoutMixin
+  ],
+
   data () {
     return {
       currentIdentity: null,
@@ -41,29 +48,21 @@ export default {
     }
   },
 
-  async created () {
-    this.identityToken = await GetTokenOperation(this)
-    new EventsService(this).watch()
-  },
-
   computed: {
     errorComponent () {
       return `${this.rawLayout}-error`
     }
   },
 
+  async created () {
+    this.identityToken = await GetTokenOperation(this)
+    new EventsService(this).watch()
+  },
+
   methods: {
     appReady () {
       return this.identityToken && this.currentIdentity
-    },
-  },
-
-  mixins: [
-    LayoutMixin
-  ],
-
-  components: {
-    Loading
+    }
   },
 
   apollo: {

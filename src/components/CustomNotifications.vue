@@ -4,7 +4,6 @@
       slot="body"
       slot-scope="props"
     >
-
       <!-- Notification area -->
 
       <div class="row center-xs">
@@ -15,16 +14,15 @@
           >
             <div class="row middle-xs">
               <div class="col-xs-3 col-md-3 +no-padding">
-                <img src="/images/notifications/error.svg" />
+                <img src="/images/notifications/error.svg">
               </div>
               <div class="col-xs-9 col-sm-9 +no-padding-left">
-                <a class="title">{{props.item.title}}</a>
-                <div v-html="props.item.text"></div>
+                <a class="title">{{ props.item.title }}</a>
+                <div v-html="props.item.text" />
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </template>
   </notifications>
@@ -35,6 +33,6 @@ export default {
   data () {
     return {
     }
-  },
+  }
 }
 </script>
