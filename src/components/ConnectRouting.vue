@@ -25,9 +25,9 @@
 </template>
 
 <script>
-import getTokenOperation from '@/operations/getTokenOperation'
+import GetTokenOperation from '@/operations/GetTokenOperation'
 import EventsService from '@/services/EventsService'
-import layoutMixin from '@/mixins/layoutMixin'
+import LayoutMixin from '@/mixins/LayoutMixin'
 import Loading from '@/components/Loading'
 
 import currentIdentity from '@/graphql/queries/currentIdentity'
@@ -42,7 +42,7 @@ export default {
   },
 
   async created () {
-    this.identityToken = await getTokenOperation(this)
+    this.identityToken = await GetTokenOperation(this)
     new EventsService(this).watch()
   },
 
@@ -59,7 +59,7 @@ export default {
   },
 
   mixins: [
-    layoutMixin
+    LayoutMixin
   ],
 
   components: {

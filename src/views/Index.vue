@@ -6,7 +6,7 @@
 <script>
 import gql from 'graphql-tag'
 import router from '@/router'
-import currentIdentityMixin from '@/mixins/currentIdentityMixin'
+import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 
 export default {
   name: 'Index',
@@ -23,18 +23,18 @@ export default {
   },
 
   methods: {
-    currentStep() {
+    currentStep () {
       if (this.currentIdentity.firstName == null && this.currentIdentity.lastName == null) {
         return 'what-is-your-name'
       }
     },
-    isGuest() {
+    isGuest () {
       return this.currentIdentity.role == 'guest'
     }
   },
 
   mixins: [
-    currentIdentityMixin
+    CurrentIdentityMixin
   ],
 
   components: {

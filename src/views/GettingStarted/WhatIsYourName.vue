@@ -77,7 +77,7 @@
 
 <script>
 import _ from 'lodash'
-import currentIdentityMixin from '@/mixins/currentIdentityMixin'
+import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import storeIdentityName from '@/graphql/mutations/storeIdentityName'
 import { required, minLength, between } from 'vuelidate/lib/validators'
 import EventsService from '@/services/EventsService'
@@ -104,7 +104,7 @@ export default {
   mounted () {
     this.currentIdentityInput = _.pick(this.currentIdentity, ['firstName', 'lastName'])
 
-    if (this.firstNameInput  == null) {
+    if (this.firstNameInput == null) {
       this.$refs.firstName.focus()
     } else if (this.lastNameInput == null) {
       this.$refs.lastName.focus()
@@ -112,7 +112,7 @@ export default {
   },
 
   methods: {
-    async storeName() {
+    async storeName () {
       this.$v.currentIdentityInput.$touch();
       if (this.$v.currentIdentityInput.$error) return
 
@@ -125,7 +125,7 @@ export default {
   },
 
   mixins: [
-    currentIdentityMixin
+    CurrentIdentityMixin
   ]
 }
 </script>

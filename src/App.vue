@@ -18,7 +18,7 @@
 <script>
 const defaultLayout = 'default';
 import ConnectRouting from '@/components/ConnectRouting'
-import layoutMixin from '@/mixins/layoutMixin'
+import LayoutMixin from '@/mixins/LayoutMixin'
 import CustomNotifications from '@/components/CustomNotifications'
 
 export default {
@@ -39,7 +39,7 @@ export default {
   },
 
   mixins: [
-    layoutMixin
+    LayoutMixin
   ],
 
   components: {
