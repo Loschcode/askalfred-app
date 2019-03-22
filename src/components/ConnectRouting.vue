@@ -35,11 +35,7 @@ export default {
   components: {
     Loading
   },
-
-  mixins: [
-    LayoutMixin
-  ],
-
+  mixins: [LayoutMixin],
   data () {
     return {
       currentIdentity: null,
@@ -68,7 +64,6 @@ export default {
   apollo: {
     currentIdentity
   }
-
 }
 </script>
 

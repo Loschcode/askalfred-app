@@ -25,7 +25,7 @@
     <div class="row center-xs">
       <div class="col-xs-10 col-md-5">
         <div class="image">
-          <img src="/images/getting-started/surprise.svg" />
+          <img src="/images/getting-started/surprise.svg" >
         </div>
       </div>
     </div>
@@ -40,8 +40,7 @@
         </div>
       </div>
     </div>
-
-  </div>
+</div>
 </template>
 
 <script>
@@ -85,5 +84,4 @@ export default {
 .confirm {
   padding-top: 3em;
 }
-
 </style>

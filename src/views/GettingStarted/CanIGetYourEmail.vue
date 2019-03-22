@@ -20,7 +20,7 @@
             <input
               type="email"
               placeholder="Email"
-            />
+            >
           </div>
         </div>
       </div>
@@ -29,7 +29,7 @@
     <div class="row center-xs">
       <div class="col-xs-10 col-md-5">
         <div class="image">
-          <img src="/images/getting-started/can-i-get-your-email.svg" />
+          <img src="/images/getting-started/can-i-get-your-email.svg" >
         </div>
       </div>
     </div>
@@ -47,8 +47,7 @@
         </div>
       </div>
     </div>
-
-  </div>
+</div>
 </template>
 
 <script>

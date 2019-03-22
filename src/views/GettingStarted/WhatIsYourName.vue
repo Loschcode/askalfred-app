@@ -1,7 +1,7 @@
 <template>
   <div
-    class="what-is-your-name"
     v-if="currentIdentity"
+    class="what-is-your-name"
   >
     <!-- Title -->
     <div class="row center-xs">
@@ -24,24 +24,24 @@
             :class="{ 'transparent-input__error': $v.currentIdentityInput.firstName.$error }"
           >
             <input
+              ref="firstName"
+              v-model="currentIdentityInput.firstName"
               type="text"
               placeholder="First name"
-              v-model="currentIdentityInput.firstName"
-              v-on:keyup.enter="storeName()"
-              ref="firstName"
-            />
+              @keyup.enter="storeName()"
+            >
           </div>
           <div
             class="form__last-name"
             :class="{ 'transparent-input__error': $v.currentIdentityInput.lastName.$error }"
           >
             <input
+              ref="lastName"
+              v-model="currentIdentityInput.lastName"
               type="text"
               placeholder="Last name"
-              v-model="currentIdentityInput.lastName"
-              v-on:keyup.enter="storeName()"
-              ref="lastName"
-            />
+              @keyup.enter="storeName()"
+            >
           </div>
         </div>
       </div>
@@ -50,7 +50,7 @@
     <div class="row center-xs">
       <div class="col-xs-10 col-md-5">
         <div class="image">
-          <img src="/images/getting-started/what-is-your-name.svg" />
+          <img src="/images/getting-started/what-is-your-name.svg">
         </div>
       </div>
     </div>
@@ -61,8 +61,8 @@
         <div class="confirm">
           <div class="button button--half-squared button__white-on-blue button__white-on-blue--soft">
             <a
-              @click="storeName()"
               class="+pointer"
+              @click="storeName()"
             >Nice to meet you</a>
           </div>
           <div class="confirm__back">
@@ -71,7 +71,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -84,6 +83,10 @@ import EventsService from '@/services/EventsService'
 
 export default {
   name: 'WhatIsYourName',
+
+  mixins: [
+    CurrentIdentityMixin
+  ],
 
   data () {
     return {
@@ -113,20 +116,17 @@ export default {
 
   methods: {
     async storeName () {
-      this.$v.currentIdentityInput.$touch();
+      this.$v.currentIdentityInput.$touch()
       if (this.$v.currentIdentityInput.$error) return
 
       try {
         const response = await storeIdentityName(this, this.currentIdentityInput)
       } catch (error) {
+        console.log(error)
         new EventsService(this).error('It was impossible to save your name.')
       }
     }
-  },
-
-  mixins: [
-    CurrentIdentityMixin
-  ]
+  }
 }
 </script>
 
