@@ -37,7 +37,9 @@
             <a href="#">Nothing? Send it again</a>
           </div>
           <div class="confirm__back">
-            <a href="#">Already have an account?</a>
+            <router-link :to="{ path: '/connect/sign-in'}">
+              Already have an account?
+            </router-link>
           </div>
         </div>
       </div>

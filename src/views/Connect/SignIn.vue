@@ -15,21 +15,21 @@
         <div class="connect">
           <div class="connect__email">
             <div class="connect__image connect__image--email">
-              <img src="/images/icons/email.svg" />
+              <img src="/images/icons/email.svg">
             </div>
             <input
               type="email"
               placeholder="email@gmail.com"
-            />
+            >
           </div>
           <div class="connect__password">
             <div class="connect__image connect__image--password">
-              <img src="/images/icons/password.svg" />
+              <img src="/images/icons/password.svg">
             </div>
             <input
               type="password"
               placeholder="password"
-            />
+            >
           </div>
           <div class="connect__confirm">
             <div class="button button--half-squared button__white-on-blue button__white-on-blue--soft">
@@ -49,8 +49,7 @@
         <div class="or">
           <div class="row center-xs">
             <div class="col-xs-5 +no-padding-right">
-              <div class="or__divider">
-              </div>
+              <div class="or__divider" />
             </div>
             <div class="col-xs-1 +no-padding">
               <div class="or__text">
@@ -58,8 +57,7 @@
               </div>
             </div>
             <div class="col-xs-5 +no-padding-left">
-              <div class="or__divider">
-              </div>
+              <div class="or__divider" />
             </div>
           </div>
         </div>
@@ -71,7 +69,9 @@
       <div class="col-xs-8 col-md-4">
         <div class="register">
           <div class="button button--half-squared button__white-on-blue button__white-on-blue--soft">
-            <a href="#">Introduce yourself</a>
+            <router-link :to="{ path: '/getting-started'}">
+              Introduce yourself
+            </router-link>
           </div>
         </div>
       </div>
@@ -79,8 +79,7 @@
 
     <!-- Unique footer -->
     <div class="row center-xs">
-      <div class="footer-placeholder">
-      </div>
+      <div class="footer-placeholder" />
       <div class="footer">
         <a href="#">Legal mentions</a> | <a href="#">Privacy policy</a>
       </div>
