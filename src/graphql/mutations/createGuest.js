@@ -9,7 +9,7 @@ const mutation = gql`
 `
 
 export default async vm => {
-  return await vm.$apollo
+  const response = await vm.$apollo
     .mutate({
       mutation,
       variables: {},
@@ -20,4 +20,5 @@ export default async vm => {
     .then(({ data: { createGuest } }) => {
       return createGuest
     })
+  return response
 }

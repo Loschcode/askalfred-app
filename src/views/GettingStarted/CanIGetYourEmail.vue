@@ -18,8 +18,11 @@
           </div>
           <div class="form__email">
             <input
+              ref="email"
+              v-model="currentIdentityInput.email"
               type="email"
               placeholder="Email"
+              @keyup.enter="storeEmail()"
             >
           </div>
         </div>
@@ -29,7 +32,7 @@
     <div class="row center-xs">
       <div class="col-xs-10 col-md-5">
         <div class="image">
-          <img src="/images/getting-started/can-i-get-your-email.svg" >
+          <img src="/images/getting-started/can-i-get-your-email.svg">
         </div>
       </div>
     </div>
@@ -39,7 +42,10 @@
       <div class="col-xs-8 col-md-4">
         <div class="confirm">
           <div class="button button--half-squared button__white-on-blue button__white-on-blue--soft">
-            <a href="#">Alright, here it is</a>
+            <a
+              class="+pointer"
+              @click="storeEmail()"
+            >Alright, here it is</a>
           </div>
           <div class="confirm__back">
             <a href="#">Already have an account?</a>
@@ -47,13 +53,58 @@
         </div>
       </div>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
+import _ from 'lodash'
+import router from '@/router'
+import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
+import storeIdentityEmail from '@/graphql/mutations/storeIdentityEmail'
+import { required } from 'vuelidate/lib/validators'
+import EventsService from '@/services/EventsService'
+
 export default {
   name: 'CanIGetYourEmail',
-  props: {
+
+  mixins: [
+    CurrentIdentityMixin
+  ],
+
+  data () {
+    return {
+      currentIdentityInput: {
+        email: null
+      }
+    }
+  },
+
+  validations: {
+    currentIdentityInput: {
+      email: { required }
+    }
+  },
+
+  mounted () {
+    this.currentIdentityInput = _.pick(this.currentIdentity, ['email'])
+
+    if (this.emailInput == null) {
+      this.$refs.email.focus()
+    }
+  },
+
+  methods: {
+    async storeEmail () {
+      this.$v.currentIdentityInput.$touch()
+      if (this.$v.currentIdentityInput.$error) return
+
+      try {
+        await storeIdentityEmail(this, this.currentIdentityInput)
+        router.push({ path: '/getting-started/thank-you' })
+      } catch (error) {
+        new EventsService(this).error('It was impossible to save your email.')
+      }
+    }
   }
 }
 </script>

@@ -14,7 +14,7 @@
       <div class="col-xs-10 col-md-6">
         <div class="form">
           <div class="form__question">
-            <p>I’m about to send you an important email [NAME].</p>
+            <p>I’m about to send you an important email {{ currentIdentity.firstName }}.</p>
             <p>There’s a surprise inside.</p>
           </div>
         </div>
@@ -24,7 +24,7 @@
     <div class="row center-xs">
       <div class="col-xs-10 col-md-5">
         <div class="image">
-          <img src="/images/getting-started/thank-you.svg" >
+          <img src="/images/getting-started/thank-you.svg">
         </div>
       </div>
     </div>
@@ -42,12 +42,17 @@
         </div>
       </div>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
+import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
+
 export default {
   name: 'ThankYou',
+  mixins: [
+    CurrentIdentityMixin
+  ],
   props: {
   }
 }

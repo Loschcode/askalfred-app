@@ -1,6 +1,5 @@
 <template>
-  <div class="index">
-  </div>
+  <div class="index" />
 </template>
 
 <script>
@@ -11,14 +10,21 @@ import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 export default {
   name: 'Index',
 
+  components: {
+  },
+
+  mixins: [
+    CurrentIdentityMixin
+  ],
+
   created () {
     if (this.isGuest()) {
-      if (this.currentStep() == 'what-is-your-name') {
-        return router.push({ path: 'getting-started/what-is-your-name' })
+      if (this.currentStep() != null) {
+        return router.push({ path: `getting-started/${this.currentStep()}` })
       }
     }
 
-    // and from there route it if logged-in
+    // fallback routing
     router.push({ path: 'connect/sign-in' })
   },
 
@@ -27,17 +33,16 @@ export default {
       if (this.currentIdentity.firstName == null && this.currentIdentity.lastName == null) {
         return 'what-is-your-name'
       }
+      if (this.currentIdentity.email == null) {
+        return 'can-i-get-your-email'
+      }
+      if (this.currentIdentity.confirmedAt == null) {
+        return 'thank-you'
+      }
     },
     isGuest () {
       return this.currentIdentity.role == 'guest'
     }
-  },
-
-  mixins: [
-    CurrentIdentityMixin
-  ],
-
-  components: {
   }
 }
 </script>

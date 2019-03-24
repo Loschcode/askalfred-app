@@ -76,9 +76,10 @@
 
 <script>
 import _ from 'lodash'
+import router from '@/router'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import storeIdentityName from '@/graphql/mutations/storeIdentityName'
-import { required, minLength, between } from 'vuelidate/lib/validators'
+import { required } from 'vuelidate/lib/validators'
 import EventsService from '@/services/EventsService'
 
 export default {
@@ -120,9 +121,9 @@ export default {
       if (this.$v.currentIdentityInput.$error) return
 
       try {
-        const response = await storeIdentityName(this, this.currentIdentityInput)
+        await storeIdentityName(this, this.currentIdentityInput)
+        router.push({ path: '/getting-started/can-i-get-your-email' })
       } catch (error) {
-        console.log(error)
         new EventsService(this).error('It was impossible to save your name.')
       }
     }

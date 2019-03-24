@@ -2,15 +2,15 @@
 export default {
   computed: {
     currentLayout () {
-      return (this.rawLayout || defaultLayout) + '-layout';
+      return (this.rawLayout || 'default') + '-layout'
     },
 
-    rawLayout ()  {
+    rawLayout () {
       return this.layoutFromRoute
     },
 
     layoutFromRoute () {
-      return this.$route.meta.layout;
+      return this.$route.meta.layout
     }
   }
 }

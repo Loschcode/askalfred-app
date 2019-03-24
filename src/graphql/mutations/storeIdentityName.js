@@ -1,11 +1,6 @@
 import gql from 'graphql-tag'
 
 const mutation = gql`
-  # input StoreIdentityNameInput {
-  #   firstName: String!
-  #   lastName: String!
-  # }
-
   mutation StoreIdentityName($input: StoreIdentityNameInput!) {
     storeIdentityName(input: $input) {
       firstName
@@ -15,7 +10,7 @@ const mutation = gql`
 `
 
 export default async (vm, input) => {
-  return await vm.$apollo
+  const response = await vm.$apollo
     .mutate({
       mutation,
       variables: {
@@ -28,4 +23,5 @@ export default async (vm, input) => {
     .then(({ data: { storeIdentityName } }) => {
       return storeIdentityName
     })
+  return response
 }
