@@ -27,19 +27,22 @@
 import GetTokenOperation from '@/operations/GetTokenOperation'
 import EventsService from '@/services/EventsService'
 import LayoutMixin from '@/mixins/LayoutMixin'
-import Loading from '@/components/Loading'
+import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 
-import currentIdentity from '@/graphql/queries/currentIdentity'
+import Loading from '@/components/Loading'
 
 export default {
   components: {
     Loading
   },
-  mixins: [LayoutMixin],
+
+  mixins: [
+    LayoutMixin,
+    CurrentIdentityMixin
+  ],
+
   data () {
     return {
-      currentIdentity: null,
-      identityToken: null,
       error: ''
     }
   },
@@ -51,18 +54,14 @@ export default {
   },
 
   async created () {
-    this.identityToken = await GetTokenOperation(this)
     new EventsService(this).watch()
+    await GetTokenOperation(this)
   },
 
   methods: {
     appReady () {
       return this.identityToken && this.currentIdentity
     }
-  },
-
-  apollo: {
-    currentIdentity
   }
 }
 </script>

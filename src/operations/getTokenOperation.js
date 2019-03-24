@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import createGuest from '@/graphql/mutations/createGuest'
 import EventsService from '@/services/EventsService'
 
@@ -6,7 +5,13 @@ export default vm => {
   const events = new EventsService(vm)
 
   const perform = async () => {
-    if (getToken() == null) await connectGuest()
+    if (getToken() === null) {
+      await connectGuest()
+      // we have to refresh the page
+      // to reload everything with tokens
+      new EventsService(vm).reboot()
+    }
+
     return getToken()
   }
 

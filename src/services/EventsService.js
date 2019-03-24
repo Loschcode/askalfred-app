@@ -2,47 +2,46 @@ import EventBus from '@/misc/EventBus'
 import PageHelper from '@/helpers/PageHelper'
 
 class EventsService {
-  constructor(vm) {
+  constructor (vm) {
     this.vm = vm
   }
 
   /**
    * All the event bus related things
    */
-  watch() {
+  watch () {
     this.watchRebootEvent()
     this.watchCrashEvent()
     this.watchErrorEvent()
   }
 
-  success(message) {
+  success (message) {
     // NOTE : this part is not doneyet
   }
 
-  reboot() {
-    EventBus.$emit('rebootEvent')
+  reboot (error) {
+    EventBus.$emit('rebootEvent', error)
   }
 
-  error(error) {
+  error (error) {
     EventBus.$emit('errorEvent', error)
   }
 
-  crash(error) {
+  crash (error) {
     EventBus.$emit('crashEvent', error)
   }
 
   // private
 
-  watchRebootEvent() {
+  watchRebootEvent () {
     EventBus.$on('rebootEvent', this.onRebootEvent.bind(this))
   }
 
-  watchCrashEvent() {
+  watchCrashEvent () {
     EventBus.$on('crashEvent', this.onCrashEvent.bind(this))
   }
 
-  watchErrorEvent() {
-    console.log('watchit')
+  watchErrorEvent () {
     EventBus.$on('errorEvent', this.onErrorEvent.bind(this))
   }
 
@@ -51,7 +50,7 @@ class EventsService {
    * when a crash needs a reboot and clear cache / session
    * we use this command
    */
-  onRebootEvent(error) {
+  onRebootEvent (error) {
     if (error) {
       console.log(error)
       localStorage.clear()
@@ -64,7 +63,7 @@ class EventsService {
    * This kind of error is major and lock the application itself
    * until the person refreshes the page entirely
    */
-  onCrashEvent(error) {
+  onCrashEvent (error) {
     if (error.message === 'Network Error') {
       this.addNetworkCrash(error)
       return
@@ -77,7 +76,7 @@ class EventsService {
    * We put a listener to the errorEvent
    * This kind of errors is minor and dispatch an error message
    */
-  onErrorEvent(error) {
+  onErrorEvent (error) {
     this.vm.$notify({
       group: 'default',
       text: error,
@@ -85,14 +84,14 @@ class EventsService {
     })
   }
 
-  addNetworkCrash(rawError) {
+  addNetworkCrash (rawError) {
     this.vm.error = {
       message: 'There is a network error, please refresh the page.',
       raw: rawError
     }
   }
 
-  addDefaultCrash(rawError) {
+  addDefaultCrash (rawError) {
     this.vm.error = {
       message:
         "We can't communicate with the server right now, please refresh the page.",

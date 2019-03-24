@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import EventsService from '@/services/EventsService'
-import _ from 'lodash'
 
 const query = gql`
   query CurrentIdentity {
@@ -11,22 +10,28 @@ const query = gql`
       email
       firstName
       lastName
+      confirmedAt
     }
   }
 `
 
-const result = function({ data: { currentIdentity } }) {
+const result = function ({ data: { currentIdentity } }) {
   this.currentIdentity = currentIdentity
+
+  if (this.currentIdentity === null && this.identityToken !== null) {
+    new EventsService(this).reboot('identity and token mismatch')
+  }
+
   return currentIdentity
 }
 
-const error = function(error) {
+const error = function () {
   new EventsService(this).crash(
     'We were unable to retrieve the current identity'
   )
 }
 
-const skip = function() {
+const skip = function () {
   return this.identityToken === null
 }
 
@@ -37,12 +42,13 @@ const document = gql`
       currentIdentity {
         firstName
         lastName
+        email
       }
     }
   }
 `
 
-const updateQuery = function(
+const updateQuery = function (
   previousResult,
   {
     subscriptionData: {

@@ -10,6 +10,7 @@ import SignIn from './views/Connect/SignIn.vue'
 import ForgotYourPassword from './views/Connect/ForgotYourPassword.vue'
 
 // GettingStarted
+import GettingStartedIndex from './views/GettingStarted/Index.vue'
 import WhatIsYourName from './views/GettingStarted/WhatIsYourName.vue'
 import CanIGetYourEmail from './views/GettingStarted/CanIGetYourEmail.vue'
 import ThankYou from './views/GettingStarted/ThankYou.vue'
@@ -53,6 +54,11 @@ export default new Router({
     /**
      * GettingStarted
      */
+    {
+      path: '/getting-started',
+      meta: { layout: 'default' },
+      component: GettingStartedIndex
+    },
     {
       path: '/getting-started/what-is-your-name',
       meta: { layout: 'default' },

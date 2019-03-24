@@ -4,17 +4,14 @@ import currentIdentity from '@/graphql/queries/currentIdentity'
 export default {
   data () {
     return {
-      currentIdentity: null
+      currentIdentity: null,
+      identityToken: localStorage.getItem('identityToken')
     }
   },
 
-  created () {
-  },
-
-  computed: {
-    // NOTE : this is needed for fetch the currentIdentity
-    identityToken () {
-      return localStorage.getItem('identityToken')
+  methods: {
+    isGuest () {
+      return this.currentIdentity.role === 'guest'
     }
   },
 

@@ -34,7 +34,7 @@ const httpLink = new HttpLink({
   uri: process.env.VUE_APP_GRAPHQL_HTTP
 })
 
-const token = localStorage.getItem('identityToken') || null
+const token = localStorage.getItem('identityToken')
 
 // Cable link
 const authCableUrl = `${process.env.VUE_APP_CABLE}?token=${token}`
