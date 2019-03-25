@@ -34,7 +34,10 @@
       <div class="col-xs-9 col-md-4">
         <div class="confirm">
           <div class="button button--half-squared button__white-on-blue button__white-on-blue--soft">
-            <a href="#">Nothing? Send it again</a>
+            <a
+              class="+pointer"
+              @click="sendSurpriseEmail()"
+            >Nothing? Send it again</a>
           </div>
           <div class="confirm__back">
             <router-link :to="{ path: '/connect/sign-in'}">
@@ -49,13 +52,30 @@
 
 <script>
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
+import EventsService from '@/services/EventsService'
+import sendSurpriseEmail from '@/graphql/mutations/sendSurpriseEmail'
 
 export default {
   name: 'ThankYou',
   mixins: [
     CurrentIdentityMixin
   ],
+
   props: {
+  },
+
+  created () {
+    this.sendSurpriseEmail()
+  },
+
+  methods: {
+    async sendSurpriseEmail () {
+      try {
+        await sendSurpriseEmail(this)
+      } catch (error) {
+        new EventsService(this).error('It was impossible to send you an email.')
+      }
+    }
   }
 }
 </script>
