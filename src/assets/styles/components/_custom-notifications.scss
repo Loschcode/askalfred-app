@@ -9,13 +9,12 @@
   margin: 1em;
   background-color: $color-white;
   @include button-radius("medium");
-}
 
-.custom-notifications__title {
+  img {
+    max-width: 50px;
+  }
 }
 
 .custom-notifications__content {
-}
-
-.custom-notifications--error {
+  margin-left: 1em;
 }

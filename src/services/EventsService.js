@@ -2,7 +2,7 @@ import EventBus from '@/misc/EventBus'
 import PageHelper from '@/helpers/PageHelper'
 
 class EventsService {
-  constructor (vm) {
+  constructor(vm) {
     this.vm = vm
   }
 
@@ -13,10 +13,11 @@ class EventsService {
     this.watchRebootEvent()
     this.watchCrashEvent()
     this.watchErrorEvent()
+    this.watchSuccessEvent()
   }
 
   success (message) {
-    // NOTE : this part is not doneyet
+    EventBus.$emit('successEvent', message)
   }
 
   reboot (error) {
@@ -45,6 +46,9 @@ class EventsService {
     EventBus.$on('errorEvent', this.onErrorEvent.bind(this))
   }
 
+  watchSuccessEvent () {
+    EventBus.$on('successEvent', this.onSuccessEvent.bind(this))
+  }
   /**
    * We put a listener to the rebootEvent
    * when a crash needs a reboot and clear cache / session
@@ -81,6 +85,14 @@ class EventsService {
       group: 'default',
       text: error,
       type: 'error'
+    })
+  }
+
+  onSuccessEvent (message) {
+    this.vm.$notify({
+      group: 'default',
+      text: message,
+      type: 'success'
     })
   }
 

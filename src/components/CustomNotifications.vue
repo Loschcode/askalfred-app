@@ -13,9 +13,20 @@
             @click="props.close"
           >
             <div class="row middle-xs">
-              <div class="col-xs-3 col-md-3 +no-padding">
+              <div
+                v-if="props.item.type === 'error'"
+                class="col-xs-3 col-md-3 +no-padding"
+              >
                 <img src="/images/notifications/error.svg">
               </div>
+
+              <div
+                v-if="props.item.type === 'success'"
+                class="col-xs-3 col-md-3 +no-padding"
+              >
+                <img src="/images/notifications/success.svg">
+              </div>
+
               <div class="col-xs-9 col-sm-9 +no-padding-left">
                 <a class="title">{{ props.item.title }}</a>
                 <div v-html="props.item.text" />
@@ -36,3 +47,6 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+</style>
