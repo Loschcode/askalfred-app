@@ -69,7 +69,7 @@
       <div class="col-xs-8 col-md-4">
         <div class="register">
           <div class="button button--half-squared button__white-on-blue button__white-on-blue--soft">
-            <router-link :to="{ path: '/getting-started'}">
+            <router-link :to="{ path: '/getting-started/what-is-your-name'}">
               Introduce yourself
             </router-link>
           </div>

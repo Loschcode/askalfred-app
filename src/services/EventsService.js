@@ -2,7 +2,7 @@ import EventBus from '@/misc/EventBus'
 import PageHelper from '@/helpers/PageHelper'
 
 class EventsService {
-  constructor(vm) {
+  constructor (vm) {
     this.vm = vm
   }
 

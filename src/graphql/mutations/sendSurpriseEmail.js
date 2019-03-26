@@ -18,6 +18,7 @@ export default async vm => {
       variables: {},
       update: (store, { data: { currentIdentity } }) => {
         // TODO : here we can manage the update of
+        // or not because we use subscriptions ...
         // the currentIdentity with updated sent email
       }
     })
