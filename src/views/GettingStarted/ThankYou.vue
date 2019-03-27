@@ -65,8 +65,9 @@ export default {
   },
 
   created () {
-    // TODO : when already sent, don't send if already on this step
-    this.sendSurpriseEmail()
+    if (this.currentIdentity.confirmationSentAt === null) {
+      this.sendSurpriseEmail()
+    }
   },
 
   methods: {
