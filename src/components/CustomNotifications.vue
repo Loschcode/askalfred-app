@@ -1,5 +1,8 @@
 <template>
-  <notifications group="default">
+  <notifications
+    group="default"
+    :max="2"
+  >
     <template
       slot="body"
       slot-scope="props"

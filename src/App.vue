@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-
     <!-- Notify -->
     <custom-notifications />
 
@@ -16,12 +15,21 @@
 </template>
 
 <script>
-const defaultLayout = 'default';
 import ConnectRouting from '@/components/ConnectRouting'
 import LayoutMixin from '@/mixins/LayoutMixin'
 import CustomNotifications from '@/components/CustomNotifications'
+const defaultLayout = 'default'
 
 export default {
+
+  components: {
+    ConnectRouting,
+    CustomNotifications
+  },
+
+  mixins: [
+    LayoutMixin
+  ],
   props: [
     'rawRoute'
   ],
@@ -36,15 +44,6 @@ export default {
     isRawRoute () {
       return this.$router.currentRoute.query.raw_route
     }
-  },
-
-  mixins: [
-    LayoutMixin
-  ],
-
-  components: {
-    ConnectRouting,
-    CustomNotifications
   }
 }
 </script>

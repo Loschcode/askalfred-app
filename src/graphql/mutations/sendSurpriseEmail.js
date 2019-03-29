@@ -11,7 +11,7 @@ const mutation = gql`
   }
 `
 
-export default async vm => {
+export default async (vm, events) => {
   const response = await vm.$apollo
     .mutate({
       mutation,
@@ -23,7 +23,7 @@ export default async vm => {
       }
     })
     .then(({ data: { currentIdentity } }) => {
-      new EventsService(vm).success(`An email with a surprise has been sent to ${vm.currentIdentity.email}`)
+      events.success(`An email with a surprise has been sent to ${vm.currentIdentity.email}`)
       return currentIdentity
     })
   return response

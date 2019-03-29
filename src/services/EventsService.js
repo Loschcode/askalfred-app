@@ -4,6 +4,7 @@ import PageHelper from '@/helpers/PageHelper'
 class EventsService {
   constructor (vm) {
     this.vm = vm
+    this.current = null
   }
 
   /**

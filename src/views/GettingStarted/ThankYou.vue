@@ -65,6 +65,8 @@ export default {
   },
 
   created () {
+    this.events = new EventsService(this)
+
     if (this.currentIdentity.confirmationSentAt === null) {
       this.sendSurpriseEmail()
     }
@@ -73,9 +75,9 @@ export default {
   methods: {
     async sendSurpriseEmail () {
       try {
-        await sendSurpriseEmail(this)
+        await sendSurpriseEmail(this, this.events)
       } catch (error) {
-        new EventsService(this).error('It was impossible to send you an email.')
+        this.events.error('It was impossible to send you an email.')
       }
     }
   }
