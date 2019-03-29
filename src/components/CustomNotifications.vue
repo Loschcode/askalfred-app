@@ -32,6 +32,7 @@
 
               <div class="col-xs-9 col-sm-9 +no-padding-left">
                 <a class="title">{{ props.item.title }}</a>
+                <!-- eslint-disable-next-line -->
                 <div v-html="props.item.text" />
               </div>
             </div>

@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import EventsService from '@/services/EventsService'
 
 const mutation = gql`
   mutation SendSurpriseEmail {

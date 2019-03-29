@@ -18,7 +18,6 @@
 import ConnectRouting from '@/components/ConnectRouting'
 import LayoutMixin from '@/mixins/LayoutMixin'
 import CustomNotifications from '@/components/CustomNotifications'
-const defaultLayout = 'default'
 
 export default {
 
@@ -30,9 +29,12 @@ export default {
   mixins: [
     LayoutMixin
   ],
-  props: [
-    'rawRoute'
-  ],
+  props: {
+    rawRoute: {
+      type: String,
+      default: ''
+    }
+  },
 
   data () {
     return {
