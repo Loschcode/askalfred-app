@@ -1,6 +1,10 @@
 import createGuest from '@/graphql/mutations/createGuest'
 import EventsService from '@/services/EventsService'
 
+export const setTokenAs = token => {
+  localStorage.setItem('identityToken', token)
+}
+
 export default vm => {
   const events = new EventsService(vm)
 
@@ -23,10 +27,6 @@ export default vm => {
     } catch (error) {
       events.crash('We were unable to create a guest user')
     }
-  }
-
-  const setTokenAs = token => {
-    localStorage.setItem('identityToken', token)
   }
 
   const getToken = () => {

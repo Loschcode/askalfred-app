@@ -29,14 +29,23 @@ export default {
 
   methods: {
     currentStep () {
-      if (this.currentIdentity.firstName == null && this.currentIdentity.lastName == null) {
+      if (this.currentIdentity.firstName === null && this.currentIdentity.lastName === null) {
         return 'what-is-your-name'
       }
-      if (this.currentIdentity.email == null) {
+      if (this.currentIdentity.email === null) {
         return 'can-i-get-your-email'
       }
-      if (this.currentIdentity.confirmedAt == null) {
+
+      if (this.currentIdentity.confirmedAt === null) {
         return 'thank-you'
+      }
+
+      if (this.currentIdentity.credits.length === 0) {
+        return 'surprise'
+      }
+
+      if (this.currentIdentity.encrypted_password === null) {
+        return 'do-not-forget'
       }
     }
   }

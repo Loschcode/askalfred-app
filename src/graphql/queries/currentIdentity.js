@@ -11,6 +11,10 @@ const query = gql`
       firstName
       lastName
       confirmedAt
+      confirmationSentAt
+      credits {
+        time
+      }
     }
   }
 `

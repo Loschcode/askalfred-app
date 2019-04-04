@@ -4,6 +4,7 @@ const mutation = gql`
   mutation SendSurpriseEmail {
     sendSurpriseEmail {
       currentIdentity {
+        email
         confirmedAt
       }
     }
@@ -15,14 +16,11 @@ export default async (vm, events) => {
     .mutate({
       mutation,
       variables: {},
-      update: (store, { data: { currentIdentity } }) => {
-        // TODO : here we can manage the update of
-        // or not because we use subscriptions ...
-        // the currentIdentity with updated sent email
+      update: (store, { data }) => {
       }
     })
-    .then(({ data: { currentIdentity } }) => {
-      events.success(`An email with a surprise has been sent to ${vm.currentIdentity.email}`)
+    .then(({ data: { sendSurpriseEmail: { currentIdentity } } }) => {
+      events.success(`An email with a surprise has been sent to ${currentIdentity.email}`)
       return currentIdentity
     })
   return response

@@ -5,13 +5,7 @@ const mutation = gql`
   mutation ConfirmEmail($input: ConfirmEmailInput!) {
     confirmEmail(input: $input) {
       currentIdentity {
-        id
-        role
         token
-        email
-        firstName
-        lastName
-        confirmedAt
       }
     }
   }
@@ -28,8 +22,8 @@ export default async (vm, input) => {
         vm.confirmEmail = confirmEmail
       }
     })
-    .then(({ data: { confirmEmail: { currentIdentity } } }) => {
-      return currentIdentity
+    .then(({ data: { confirmEmail: { currentIdentity: { token } } } }) => {
+      return token
     })
   return response
 }

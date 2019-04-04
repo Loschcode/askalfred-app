@@ -36,7 +36,7 @@
         <div class="col-xs-9 col-md-4">
           <div class="confirm">
             <div class="button button--half-squared button__white-on-blue button__white-on-blue--soft">
-              <a href="#">Get 20 minutes for free</a>
+              <a @click="getForFree()">Get 20 minutes for free</a>
             </div>
           </div>
         </div>
@@ -52,7 +52,13 @@
 
 <script>
 import confirmEmail from '@/graphql/mutations/confirmEmail'
+import router from '@/router'
+import getForFree from '@/graphql/mutations/getForFree'
 import Loading from '@/components/Loading'
+import EventsService from '@/services/EventsService'
+import { setTokenAs } from '@/operations/GetTokenOperation'
+import currentIdentity from '@/graphql/queries/currentIdentity'
+
 export default {
   name: 'Surprise',
   components: {
@@ -64,16 +70,40 @@ export default {
 
   data () {
     return {
-      currentIdentity: null
+      currentIdentity: null,
+      identityToken: null
     }
   },
 
-  async  created () {
+  async created () {
+    this.events = new EventsService(this)
+
     const confirmationToken = this.$route.query.confirmation_token
-    this.currentIdentity = await confirmEmail(this, { confirmationToken })
+
+    try {
+      const token = await confirmEmail(this, { confirmationToken })
+      setTokenAs(token)
+      this.identityToken = token
+    } catch (error) {
+      router.push({ path: '/connect/sign-in' })
+      this.events.error('You already confirmed your email')
+    }
+  },
+
+  apollo: {
+    currentIdentity
   },
 
   methods: {
+    async getForFree () {
+      try {
+        await getForFree(this)
+        router.push({ path: '/getting-started/do-not-forget' })
+        this.events.success('Your credit has been added to your account. Enjoy your 20 minutes!')
+      } catch (error) {
+        this.events.error('We couldn\'t unwrap your surprise')
+      }
+    },
     pageReady () {
       return this.currentIdentity
     }

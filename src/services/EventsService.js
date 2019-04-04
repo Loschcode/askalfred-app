@@ -93,7 +93,8 @@ class EventsService {
     this.vm.$notify({
       group: 'default',
       text: message,
-      type: 'success'
+      type: 'success',
+      duration: 700
     })
   }
 
