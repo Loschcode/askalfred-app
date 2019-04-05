@@ -18,8 +18,12 @@
           </div>
           <div class="form__password">
             <input
+              ref="password"
+              v-model="currentIdentityInput.password"
               type="password"
               placeholder="Password"
+              :class="{ 'transparent-input__error': $v.currentIdentityInput.password.$error }"
+              @keyup.enter="storePassword()"
             >
           </div>
         </div>
@@ -39,7 +43,10 @@
       <div class="col-xs-8 col-md-4">
         <div class="confirm">
           <div class="button button--half-squared button__white-on-blue button__white-on-blue--soft">
-            <a href="#">I'm all set</a>
+            <a
+              class="+pointer"
+              @click="storePassword()"
+            >I'm all set</a>
           </div>
         </div>
       </div>
@@ -48,9 +55,58 @@
 </template>
 
 <script>
+import _ from 'lodash'
+import router from '@/router'
+import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
+import storeIdentityPassword from '@/graphql/mutations/storeIdentityPassword'
+import { required } from 'vuelidate/lib/validators'
+import EventsService from '@/services/EventsService'
+
 export default {
   name: 'DoNotForget',
+
+  mixins: [
+    CurrentIdentityMixin
+  ],
+
   props: {
+  },
+
+  data () {
+    return {
+      currentIdentityInput: {
+        password: null
+      }
+    }
+  },
+
+  validations: {
+    currentIdentityInput: {
+      password: { required }
+    }
+  },
+
+  mounted () {
+    this.currentIdentityInput = _.pick(this.currentIdentity, ['password'])
+
+    if (this.currentIdentityInput.password === null) {
+      this.$refs.password.focus()
+    }
+  },
+
+  methods: {
+    async storePassword () {
+      this.$v.currentIdentityInput.$touch()
+      if (this.$v.currentIdentityInput.$error) return
+
+      try {
+        await storeIdentityPassword(this, this.currentIdentityInput)
+        new EventsService(this).success(`Welcome to your dashboard ${this.currentIdentity.firstName}`)
+        router.push({ path: '/connect/sign-in' })
+      } catch (error) {
+        new EventsService(this).error('It was impossible to save your password.')
+      }
+    }
   }
 }
 </script>

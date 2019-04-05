@@ -110,9 +110,9 @@ export default {
   mounted () {
     this.currentIdentityInput = _.pick(this.currentIdentity, ['firstName', 'lastName'])
 
-    if (this.firstNameInput == null) {
+    if (this.currentIdentityInput.firstName === null) {
       this.$refs.firstName.focus()
-    } else if (this.lastNameInput == null) {
+    } else if (this.currentIdentityInput.lastName === null) {
       this.$refs.lastName.focus()
     }
   },
