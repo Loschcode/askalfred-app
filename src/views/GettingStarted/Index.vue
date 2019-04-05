@@ -22,9 +22,12 @@ export default {
       return
     }
 
-    if (this.currentStep() != null) {
-      return router.push({ path: `/getting-started/${this.currentStep()}` })
+    if (this.currentStep() !== null) {
+      router.push({ path: `/getting-started/${this.currentStep()}` })
+      return
     }
+
+    router.push({ path: '/connect/sign-in' })
   },
 
   methods: {
@@ -47,6 +50,8 @@ export default {
       if (this.currentIdentity.encrypted_password === null) {
         return 'do-not-forget'
       }
+
+      return null
     }
   }
 }
