@@ -37,7 +37,9 @@
             </div>
           </div>
           <div class="connect__forgot">
-            <a href="#">Forgot your password?</a>
+            <router-link :to="{ path: '/connect/forgot-your-password'}">
+              Forgot your password?
+            </router-link>
           </div>
         </div>
       </div>

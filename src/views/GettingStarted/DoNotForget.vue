@@ -91,6 +91,9 @@ export default {
 
     if (this.currentIdentityInput.password === null) {
       this.$refs.password.focus()
+    } else {
+      router.push({ path: '/connect/sign-in' })
+      new EventsService(this).error('You have already set your password.')
     }
   },
 
@@ -104,7 +107,7 @@ export default {
         new EventsService(this).success(`Welcome to your dashboard ${this.currentIdentity.firstName}`)
         router.push({ path: '/connect/sign-in' })
       } catch (error) {
-        new EventsService(this).error('It was impossible to save your password.')
+        new EventsService(this).graphError(error)
       }
     }
   }
