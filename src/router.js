@@ -19,6 +19,7 @@ import DoNotForget from './views/GettingStarted/DoNotForget.vue'
 
 // Pages
 import LegalMentions from './views/Pages/LegalMentions.vue'
+import PrivacyPolicy from './views/Pages/PrivacyPolicy.vue'
 
 Vue.use(Router)
 
@@ -91,6 +92,11 @@ export default new Router({
       path: '/pages/legal-mentions',
       meta: { layout: 'default' },
       component: LegalMentions
+    },
+    {
+      path: '/pages/privacy-policy',
+      meta: { layout: 'default' },
+      component: PrivacyPolicy
     }
   ]
 })

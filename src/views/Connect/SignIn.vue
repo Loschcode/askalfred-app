@@ -81,7 +81,12 @@
     <div class="row center-xs">
       <div class="footer-placeholder" />
       <div class="footer">
-        <a href="#">Legal mentions</a> | <a href="#">Privacy policy</a>
+        <router-link :to="{ path: '/pages/legal-mentions'}">
+          Legal mentions
+        </router-link> |
+        <router-link :to="{ path: '/pages/privacy-policy'}">
+          Privacy policy
+        </router-link>
       </div>
     </div>
   </div>

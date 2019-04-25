@@ -29,6 +29,11 @@ class EventsService {
     EventBus.$emit('errorEvent', error)
   }
 
+  graphError (error) {
+    const serialized = error.graphQLErrors.map(error => error.message).join(', ')
+    this.error(serialized)
+  }
+
   crash (error) {
     EventBus.$emit('crashEvent', error)
   }

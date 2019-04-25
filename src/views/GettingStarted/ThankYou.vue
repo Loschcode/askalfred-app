@@ -77,7 +77,7 @@ export default {
       try {
         await sendSurpriseEmail(this, this.events)
       } catch (error) {
-        this.events.error('It was impossible to send you an email.')
+        this.events.graphError(error)
       }
     }
   }

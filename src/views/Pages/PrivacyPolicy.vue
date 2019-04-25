@@ -1,10 +1,10 @@
 <template>
-  <div class="legal-mentions">
+  <div class="privacy-policy">
     <!-- Title -->
     <div class="row center-xs">
       <div class="col-xs-10">
         <div class="title">
-          <h1>Legal mentions</h1>
+          <h1>Privacy policy</h1>
         </div>
       </div>
     </div>
@@ -35,7 +35,7 @@
 import router from '@/router'
 
 export default {
-  name: 'LegalMentions',
+  name: 'PrivacyPolicy',
   props: {
   },
 
