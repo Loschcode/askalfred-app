@@ -16,13 +16,15 @@
           <div class="form__question">
             <p>Now that you got some time with me, you need a password to secure your account</p>
           </div>
-          <div class="form__password">
+          <div
+            class="form__password"
+            :class="{ 'transparent-input__error': $v.currentIdentityInput.password.$error }"
+          >
             <input
               ref="password"
               v-model="currentIdentityInput.password"
               type="password"
               placeholder="Password"
-              :class="{ 'transparent-input__error': $v.currentIdentityInput.password.$error }"
               @keyup.enter="storePassword()"
             >
           </div>

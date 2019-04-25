@@ -16,10 +16,16 @@
           <div class="form__question">
             <p>Please write down your email so I can send you a reset</p>
           </div>
-          <div class="form__email">
+          <div
+            class="form__email"
+            :class="{ 'transparent-input__error': $v.email.$error }"
+          >
             <input
+              ref="email"
+              v-model="email"
               type="email"
               placeholder="Email"
+              @keyup.enter="resetPassword()"
             >
           </div>
         </div>
@@ -29,7 +35,7 @@
     <div class="row center-xs">
       <div class="col-xs-10 col-md-5">
         <div class="image">
-          <img src="/images/connect/forgot-your-password.svg" >
+          <img src="/images/connect/forgot-your-password.svg">
         </div>
       </div>
     </div>
@@ -39,21 +45,59 @@
       <div class="col-xs-8 col-md-4">
         <div class="confirm">
           <div class="button button--half-squared button__white-on-blue button__white-on-blue--soft">
-            <a href="#">Confirm email</a>
+            <a
+              class="+pointer"
+              @click="resetPassword()"
+            >Confirm email</a>
           </div>
           <div class="confirm__back">
-            <a href="#">Back</a>
+            <a @click="goBack()">Back</a>
           </div>
         </div>
       </div>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
+import { required } from 'vuelidate/lib/validators'
+import EventsService from '@/services/EventsService'
+import sendRecoveryEmail from '@/graphql/mutations/sendRecoveryEmail'
+import router from '@/router'
+
 export default {
   name: 'ForgotYourPassword',
   props: {
+  },
+
+  data () {
+    return {
+      email: null
+    }
+  },
+
+  validations: {
+    email: { required }
+  },
+
+  methods: {
+    goBack () {
+      router.go(-1) || router.push({ path: 'connect/sign-in' })
+    },
+
+    async resetPassword () {
+      this.$v.email.$touch()
+      if (this.$v.email.$error) return
+
+      try {
+        const email = this.email
+        const responseEmail = await sendRecoveryEmail(this, { email })
+        new EventsService(this).success(`An email has been sent to ${responseEmail}`)
+        router.push({ path: '/connect/sign-in' })
+      } catch (error) {
+        new EventsService(this).graphError(error)
+      }
+    }
   }
 }
 </script>

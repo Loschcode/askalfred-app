@@ -86,7 +86,7 @@ export default {
       this.identityToken = token
     } catch (error) {
       router.push({ path: '/connect/sign-in' })
-      this.events.error('You already confirmed your email')
+      this.events.graphError(error)
     }
   },
 
