@@ -91,7 +91,7 @@ export default {
   mounted () {
     this.currentIdentityInput = _.pick(this.currentIdentity, ['password'])
 
-    if (this.currentIdentityInput.password === null) {
+    if (_.isEmpty(this.currentIdentityInput.password)) {
       this.$refs.password.focus()
     } else {
       router.push({ path: '/connect/sign-in' })
