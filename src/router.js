@@ -8,6 +8,7 @@ import Sitemap from './views/Sitemap'
 // Connect
 import SignIn from './views/Connect/SignIn.vue'
 import ForgotYourPassword from './views/Connect/ForgotYourPassword.vue'
+import ResetYourPassword from './views/Connect/ResetYourPassword.vue'
 
 // GettingStarted
 import GettingStartedIndex from './views/GettingStarted/Index.vue'
@@ -51,6 +52,11 @@ export default new Router({
       path: '/connect/forgot-your-password',
       meta: { layout: 'default' },
       component: ForgotYourPassword
+    },
+    {
+      path: '/connect/reset-your-password',
+      meta: { layout: 'default' },
+      component: ResetYourPassword
     },
     /**
      * GettingStarted
