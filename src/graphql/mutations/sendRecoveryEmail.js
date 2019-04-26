@@ -21,8 +21,8 @@ export default async (vm, input) => {
         vm.sendRecoveryEmail = sendRecoveryEmail
       }
     })
-    .then(({ data: { sendRecoveryEmail: { currentIdentity: { token } } } }) => {
-      return token
+    .then(({ data: { sendRecoveryEmail: { currentIdentity: { email } } } }) => {
+      return email
     })
   return response
 }
