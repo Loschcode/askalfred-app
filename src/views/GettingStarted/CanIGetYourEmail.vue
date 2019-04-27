@@ -104,7 +104,7 @@ export default {
         await storeIdentityEmail(this, this.currentIdentityInput)
         router.push({ path: '/getting-started/thank-you' })
       } catch (error) {
-        new EventsService(this).error('It was impossible to save your email.')
+        new EventsService(this).graphError(error)
       }
     }
   }
