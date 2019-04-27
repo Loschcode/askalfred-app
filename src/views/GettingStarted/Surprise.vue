@@ -101,7 +101,7 @@ export default {
         router.push({ path: '/getting-started/do-not-forget' })
         this.events.success('Your credit has been added to your account. Enjoy your 20 minutes!')
       } catch (error) {
-        this.events.error('We couldn\'t unwrap your surprise')
+        this.events.graphError(error)
       }
     },
     pageReady () {
