@@ -75,7 +75,8 @@ export default {
   methods: {
     async sendSurpriseEmail () {
       try {
-        await sendSurpriseEmail(this, this.events)
+        const identity = await sendSurpriseEmail(this, this.events)
+        this.events.success(`An email with a surprise has been sent to ${identity.email}`)
       } catch (error) {
         this.events.graphError(error)
       }

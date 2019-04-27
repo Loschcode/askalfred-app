@@ -1,11 +1,10 @@
 import gql from 'graphql-tag'
 
 const mutation = gql`
-  mutation SendSurpriseEmail {
-    sendSurpriseEmail {
+  mutation ConvertGuestToCustomer {
+    convertGuestToCustomer {
       currentIdentity {
-        email
-        confirmedAt
+        role
       }
     }
   }
@@ -19,7 +18,7 @@ export default async (vm, events) => {
       update: (store, { data }) => {
       }
     })
-    .then(({ data: { sendSurpriseEmail: { currentIdentity } } }) => {
+    .then(({ data: { convertGuestToCustomer: { currentIdentity } } }) => {
       return currentIdentity
     })
   return response

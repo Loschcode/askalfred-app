@@ -61,6 +61,7 @@ import _ from 'lodash'
 import router from '@/router'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import storeIdentityPassword from '@/graphql/mutations/storeIdentityPassword'
+import convertGuestToCustomer from '@/graphql/mutations/convertGuestToCustomer'
 import { required } from 'vuelidate/lib/validators'
 import EventsService from '@/services/EventsService'
 
@@ -88,6 +89,10 @@ export default {
     }
   },
 
+  created () {
+    this.events = new EventsService(this)
+  },
+
   mounted () {
     this.currentIdentityInput = _.pick(this.currentIdentity, ['password'])
 
@@ -95,7 +100,7 @@ export default {
       this.$refs.password.focus()
     } else {
       router.push({ path: '/connect/sign-in' })
-      new EventsService(this).error('You have already set your password.')
+      this.events.error('You have already set your password.')
     }
   },
 
@@ -106,10 +111,12 @@ export default {
 
       try {
         await storeIdentityPassword(this, this.currentIdentityInput)
-        new EventsService(this).success(`Welcome to your dashboard ${this.currentIdentity.firstName}`)
+        await convertGuestToCustomer(this)
+        // TODO : redirect to dashboard when it exists
         router.push({ path: '/connect/sign-in' })
+        this.events.success(`Welcome to your dashboard ${this.currentIdentity.firstName}`)
       } catch (error) {
-        new EventsService(this).graphError(error)
+        this.events.graphError(error)
       }
     }
   }
