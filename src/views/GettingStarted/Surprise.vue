@@ -36,7 +36,7 @@
         <div class="col-xs-9 col-md-4">
           <div class="confirm">
             <div class="button button--half-squared button__white-on-blue button__white-on-blue--soft">
-              <a @click="getForFree()">Get 20 minutes for free</a>
+              <a @click="getCreditForFree()">Get 20 minutes for free</a>
             </div>
           </div>
         </div>
@@ -53,7 +53,7 @@
 <script>
 import confirmEmail from '@/graphql/mutations/confirmEmail'
 import router from '@/router'
-import getForFree from '@/graphql/mutations/getForFree'
+import getCreditForFree from '@/graphql/mutations/getCreditForFree'
 import Loading from '@/components/Loading'
 import EventsService from '@/services/EventsService'
 import { setTokenAs } from '@/operations/GetTokenOperation'
@@ -95,9 +95,9 @@ export default {
   },
 
   methods: {
-    async getForFree () {
+    async getCreditForFree () {
       try {
-        await getForFree(this)
+        await getCreditForFree(this)
         router.push({ path: '/getting-started/do-not-forget' })
         this.events.success('Your credit has been added to your account. Enjoy your 20 minutes!')
       } catch (error) {

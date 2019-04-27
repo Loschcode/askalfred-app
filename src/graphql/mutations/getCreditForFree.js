@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
 const mutation = gql`
-  mutation GetForFree {
-    getForFree {
+  mutation GetCreditForFree {
+    getCreditForFree {
       credit {
         time
       }
@@ -15,11 +15,11 @@ export default async (vm) => {
     .mutate({
       mutation,
       variables: {},
-      update: (store, { data: { getForFree } }) => {
+      update: (store, { data: { getCreditForFree } }) => {
       }
     })
-    .then(({ data: { getForFree } }) => {
-      return getForFree
+    .then(({ data: { getCreditForFree } }) => {
+      return getCreditForFree
     })
   return response
 }
