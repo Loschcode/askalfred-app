@@ -1,65 +1,59 @@
 <template>
   <div class="do-not-forget">
-    <div v-if="pageReady()">
-      <!-- Title -->
-      <div class="row center-xs">
-        <div class="col-xs-10">
-          <div class="title">
-            <h1>Set a new password</h1>
-          </div>
+    <!-- Title -->
+    <div class="row center-xs">
+      <div class="col-xs-10">
+        <div class="title">
+          <h1>Set a new password</h1>
         </div>
       </div>
+    </div>
 
-      <!-- Can I get your email? -->
-      <div class="row center-xs">
-        <div class="col-xs-10 col-md-5">
-          <div class="form">
-            <div class="form__question">
-              <p>You can now set a fresh password to your account {{ currentIdentity.firstName }}</p>
-            </div>
-            <div
-              class="form__password"
-              :class="{ 'transparent-input__error': $v.currentIdentityInput.password.$error }"
+    <!-- Can I get your email? -->
+    <div class="row center-xs">
+      <div class="col-xs-10 col-md-5">
+        <div class="form">
+          <div class="form__question">
+            <p>You can now set a fresh password to your account {{ currentIdentity.firstName }}</p>
+          </div>
+          <div
+            class="form__password"
+            :class="{ 'transparent-input__error': $v.currentIdentityInput.password.$error }"
+          >
+            <input
+              ref="password"
+              v-model="currentIdentityInput.password"
+              type="password"
+              placeholder="Password"
+              @keyup.enter="resetPassword()"
             >
-              <input
-                ref="password"
-                v-model="currentIdentityInput.password"
-                type="password"
-                placeholder="Password"
-                @keyup.enter="resetPassword()"
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row center-xs">
-        <div class="col-xs-10 col-md-5">
-          <div class="image">
-            <img src="/images/getting-started/do-not-forget.svg">
-          </div>
-        </div>
-      </div>
-
-      <!-- Call To Action -->
-      <div class="row center-xs">
-        <div class="col-xs-8 col-md-4">
-          <div class="confirm">
-            <div class="button button--half-squared button__white-on-blue button__white-on-blue--soft">
-              <a
-                class="+pointer"
-                @click="resetPassword()"
-              >I'm all set</a>
-            </div>
           </div>
         </div>
       </div>
     </div>
-    <div v-else>
-      <div class="connect__loading">
-        <loading />
+
+    <div class="row center-xs">
+      <div class="col-xs-10 col-md-5">
+        <div class="image">
+          <img src="/images/getting-started/do-not-forget.svg">
+        </div>
       </div>
     </div>
+
+    <!-- Call To Action -->
+    <div class="row center-xs">
+      <div class="col-xs-8 col-md-4">
+        <div class="confirm">
+          <div class="button button--half-squared button__white-on-blue button__white-on-blue--soft">
+            <a
+              class="+pointer"
+              @click="resetPassword()"
+            >I'm all set</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 </template>
 
@@ -115,9 +109,6 @@ export default {
       } catch (error) {
         new EventsService(this).graphError(error)
       }
-    },
-    pageReady () {
-      return this.currentIdentity
     }
   }
 }
