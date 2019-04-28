@@ -1,0 +1,50 @@
+.header-submenu {
+  background: $color-white;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  color: $color-mid-dark-grey;
+  font-family: $font-text;
+  a {
+    color: $color-mid-dark-grey;
+    font-family: $font-text;
+  }
+  @include inner-top-shadow();
+}
+
+.header-submenu__more {
+  padding-right: 0.4em;
+  text-align: right;
+  img {
+    height: 1.2em;
+  }
+}
+
+.header-submenu__text-button {
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+.header-menu {
+  background: $color-blue-purple-gradient;
+  color: $color-white;
+  a {
+    color: $color-white;
+  }
+  padding-top: 1.3em;
+  padding-bottom: 1.3em;
+  z-index: 100;
+}
+
+.header-menu__title {
+  h1 {
+    @include breakpoint("md") {
+      font-size: 5rem;
+    }
+    @include breakpoint("sm") {
+      font-size: 10vw;
+    }
+    @include breakpoint("xs") {
+      font-size: 12vw;
+    }
+  }
+}

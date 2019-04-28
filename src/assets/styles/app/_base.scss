@@ -24,6 +24,12 @@ body {
   ::-moz-selection {
     background: $text-selection-color; /* Gecko Browsers */
   }
+
+  background: $color-very-light-grey;
+  color: $color-light-grey-blueish;
+  a {
+    color: $color-light-grey-blueish;
+  }
 }
 
 button:focus {
