@@ -108,6 +108,7 @@ export default {
   },
 
   mounted () {
+    this.events = new EventsService(this)
     this.currentIdentityInput = _.pick(this.currentIdentity, ['firstName', 'lastName'])
 
     if (this.currentIdentityInput.firstName === null) {
@@ -126,7 +127,7 @@ export default {
         await storeIdentityName(this, this.currentIdentityInput)
         router.push({ path: '/getting-started/can-i-get-your-email' })
       } catch (error) {
-        new EventsService(this).error('It was impossible to save your name.')
+        this.events.error('It was impossible to save your name.')
       }
     }
   }

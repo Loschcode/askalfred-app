@@ -113,7 +113,7 @@ export default {
         await storeIdentityPassword(this, this.currentIdentityInput)
         await convertGuestToCustomer(this)
         this.events.success(`Welcome to your dashboard ${this.currentIdentity.firstName}`)
-        router.push({ path: '/' })
+        router.push({ path: '/connect/sign-in' })
       } catch (error) {
         this.events.graphError(error)
       }
