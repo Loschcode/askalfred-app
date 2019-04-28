@@ -24,6 +24,10 @@ import DoNotForget from './views/GettingStarted/DoNotForget.vue'
 import LegalMentions from './views/Pages/LegalMentions.vue'
 import PrivacyPolicy from './views/Pages/PrivacyPolicy.vue'
 
+// Tickets
+import TicketsIndex from './views/Tickets/Index.vue'
+import TicketsList from './views/Tickets/List.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -115,6 +119,19 @@ export default new Router({
       path: '/pages/privacy-policy',
       meta: { layout: 'default' },
       component: PrivacyPolicy
+    },
+    /**
+     * Tickets
+     */
+    {
+      path: '/tickets',
+      meta: { layout: 'default' },
+      component: TicketsIndex
+    },
+    {
+      path: '/tickets/list',
+      meta: { layout: 'main-list' },
+      component: TicketsList
     }
   ]
 })
