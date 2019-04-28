@@ -18,12 +18,12 @@ export default {
 
   async created () {
     this.events = new EventsService(this)
-    await DeleteCurrentGuestOperation(this)
 
     const recoveryToken = this.$route.query.recovery_token
 
     try {
       const token = await unsetPassword(this, { recoveryToken })
+      await DeleteCurrentGuestOperation(this, token)
       IdentityHelper.setIdentityWith(token, { path: '/connect/reset-your-password' })
     } catch (error) {
       router.push({ path: '/' })

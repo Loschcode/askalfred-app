@@ -20,11 +20,11 @@ export default {
 
   async created () {
     this.events = new EventsService(this)
-    await DeleteCurrentGuestOperation(this)
 
     const confirmationToken = this.$route.query.confirmation_token
     try {
       const token = await confirmEmail(this, { confirmationToken })
+      await DeleteCurrentGuestOperation(this, token)
       IdentityHelper.setIdentityWith(token, { path: '/getting-started/surprise' })
     } catch (error) {
       router.push({ path: '/' })
