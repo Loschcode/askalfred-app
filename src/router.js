@@ -8,6 +8,7 @@ import Sitemap from './views/Sitemap'
 // Connect
 import SignIn from './views/Connect/SignIn.vue'
 import ForgotYourPassword from './views/Connect/ForgotYourPassword.vue'
+import RecoveryEmail from './views/Connect/RecoveryEmail.vue'
 import ResetYourPassword from './views/Connect/ResetYourPassword.vue'
 
 // GettingStarted
@@ -53,6 +54,11 @@ export default new Router({
       path: '/connect/forgot-your-password',
       meta: { layout: 'default' },
       component: ForgotYourPassword
+    },
+    {
+      path: '/connect/recovery-email',
+      meta: { layout: 'default' },
+      component: RecoveryEmail
     },
     {
       path: '/connect/reset-your-password',

@@ -80,6 +80,10 @@ export default {
     email: { required }
   },
 
+  created () {
+    this.events = new EventsService(this)
+  },
+
   methods: {
     goBack () {
       router.go(-1) || router.push({ path: 'connect/sign-in' })
@@ -92,10 +96,10 @@ export default {
       try {
         const email = this.email
         const responseEmail = await sendRecoveryEmail(this, { email })
-        new EventsService(this).success(`An email has been sent to ${responseEmail}`)
+        this.events.success(`An email has been sent to ${responseEmail}`)
         router.push({ path: '/connect/sign-in' })
       } catch (error) {
-        new EventsService(this).graphError(error)
+        this.events.graphError(error)
       }
     }
   }
