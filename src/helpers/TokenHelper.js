@@ -3,7 +3,7 @@ class TokenHelper {
     localStorage.setItem('identityToken', token)
   }
 
-  getToken () {
+  getCurrentToken () {
     return localStorage.getItem('identityToken')
   }
 }

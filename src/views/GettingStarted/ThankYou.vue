@@ -54,6 +54,7 @@
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import EventsService from '@/services/EventsService'
 import sendConfirmEmail from '@/graphql/mutations/sendConfirmEmail'
+import router from '@/router'
 
 export default {
   name: 'ThankYou',
@@ -78,6 +79,7 @@ export default {
         const identity = await sendConfirmEmail(this, this.events)
         this.events.success(`An email with a surprise has been sent to ${identity.email}`)
       } catch (error) {
+        router.push({ path: '/' })
         this.events.graphError(error)
       }
     }

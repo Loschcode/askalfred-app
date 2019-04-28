@@ -1,9 +1,9 @@
 import gql from 'graphql-tag'
 
 const mutation = gql`
-  mutation ConfirmEmail($input: ConfirmEmailInput!) {
-    confirmEmail(input: $input) {
-      currentIdentity {
+  mutation DeleteGuest($input: DeleteGuestInput!) {
+    deleteGuest(input: $input) {
+      identity {
         token
       }
     }
@@ -17,11 +17,11 @@ export default async (vm, input) => {
       variables: {
         input
       },
-      update: (store, { data: { confirmEmail } }) => {
-        vm.confirmEmail = confirmEmail
+      update: (store, { data: { deleteGuest } }) => {
+        vm.deleteGuest = deleteGuest
       }
     })
-    .then(({ data: { confirmEmail: { currentIdentity: { token } } } }) => {
+    .then(({ data: { deleteGuest: { identity: { token } } } }) => {
       return token
     })
   return response

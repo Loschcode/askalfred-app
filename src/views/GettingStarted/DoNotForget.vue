@@ -99,7 +99,7 @@ export default {
     if (_.isEmpty(this.currentIdentityInput.password)) {
       this.$refs.password.focus()
     } else {
-      router.push({ path: '/connect/sign-in' })
+      router.push({ path: '/' })
       this.events.error('You have already set your password.')
     }
   },
@@ -113,8 +113,7 @@ export default {
         await storeIdentityPassword(this, this.currentIdentityInput)
         await convertGuestToCustomer(this)
         this.events.success(`Welcome to your dashboard ${this.currentIdentity.firstName}`)
-        // TODO : redirect directly to dashboard when it exists
-        router.push({ path: '/connect/sign-in' })
+        router.push({ path: '/' })
       } catch (error) {
         this.events.graphError(error)
       }

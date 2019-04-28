@@ -54,23 +54,17 @@
       </div>
     </div>
   </div>
-  </div>
 </template>
 
 <script>
-import _ from 'lodash'
 import router from '@/router'
 import storeIdentityPassword from '@/graphql/mutations/storeIdentityPassword'
 import { required } from 'vuelidate/lib/validators'
 import EventsService from '@/services/EventsService'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
-import Loading from '@/components/Loading'
 
 export default {
   name: 'ResetYourPassword',
-  components: {
-    Loading
-  },
 
   mixins: [
     CurrentIdentityMixin

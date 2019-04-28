@@ -7,8 +7,8 @@ export default vm => {
   const events = new EventsService(vm)
 
   const perform = async () => {
-    if (TokenHelper.getToken() === null) await connectGuest()
-    return TokenHelper.getToken()
+    if (TokenHelper.getCurrentToken() === null) await connectGuest()
+    return TokenHelper.getCurrentToken()
   }
 
   const connectGuest = async () => {

@@ -12,7 +12,7 @@ import Notifications from 'vue-notification'
 // Apollo
 import { ApolloClient } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
-import { ApolloLink, concat, split } from 'apollo-link'
+import { concat, split } from 'apollo-link'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import VueApollo from 'vue-apollo'
 import { setContext } from 'apollo-link-context'
@@ -37,7 +37,7 @@ const httpLink = new HttpLink({
   uri: process.env.VUE_APP_GRAPHQL_HTTP
 })
 
-const token = TokenHelper.getToken()
+const token = TokenHelper.getCurrentToken()
 
 // Cable link
 const authCableUrl = `${process.env.VUE_APP_CABLE}?token=${token}`

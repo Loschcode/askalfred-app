@@ -7,28 +7,26 @@
 </template>
 
 <script>
-import _ from 'lodash'
 import router from '@/router'
+import DeleteCurrentGuestOperation from '@/operations/DeleteCurrentGuestOperation'
 import EventsService from '@/services/EventsService'
 import unsetPassword from '@/graphql/mutations/unsetPassword'
 import IdentityHelper from '@/helpers/IdentityHelper'
-import Loading from '@/components/Loading'
 
 export default {
   name: 'RecoveryEmail',
-  components: {
-    Loading
-  },
 
   async created () {
     this.events = new EventsService(this)
+    await DeleteCurrentGuestOperation(this)
+
     const recoveryToken = this.$route.query.recovery_token
 
     try {
       const token = await unsetPassword(this, { recoveryToken })
       IdentityHelper.setIdentityWith(token, { path: '/connect/reset-your-password' })
     } catch (error) {
-      router.push({ path: '/connect/sign-in' })
+      router.push({ path: '/' })
       this.events.graphError(error)
     }
   }

@@ -41,21 +41,16 @@
       </div>
     </div>
   </div>
-  </div>
 </template>
 
 <script>
 import router from '@/router'
 import getCreditForFree from '@/graphql/mutations/getCreditForFree'
-import Loading from '@/components/Loading'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import EventsService from '@/services/EventsService'
 
 export default {
   name: 'Surprise',
-  components: {
-    Loading
-  },
 
   mixins: [
     CurrentIdentityMixin
