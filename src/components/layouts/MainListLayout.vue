@@ -79,8 +79,6 @@ export default {
 }
 
 .submenu {
-  margin-left: 0.1em;
-  margin-right: 0.1em;
   background: $color-white;
   padding-top: 1em;
   padding-bottom: 1em;
@@ -90,6 +88,7 @@ export default {
     color: $color-mid-dark-grey;
     font-family: $font-text;
   }
+  @include inner-top-shadow();
 }
 
 .submenu__more {
@@ -113,6 +112,7 @@ export default {
   }
   padding-top: 1.3em;
   padding-bottom: 1.3em;
+  z-index: 100;
 }
 
 .menu__title {

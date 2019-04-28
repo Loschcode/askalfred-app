@@ -73,6 +73,12 @@
   margin: auto;
 }
 
+@mixin inner-top-shadow() {
+  -webkit-box-shadow: inset 0px 5px 5px -5px rgba(0,0,0,0.50);
+  -moz-box-shadow: inset 0px 5px 5px -5px rgba(0,0,0,0.50);
+  box-shadow: inset 0px 5px 5px -5px rgba(0,0,0,0.50);
+}
+
 @mixin extend-clickable($width: 2em, $height: 2em) {
   padding-top: $height;
   padding-bottom: $height;
