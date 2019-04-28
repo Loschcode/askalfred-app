@@ -112,9 +112,9 @@ export default {
       try {
         await storeIdentityPassword(this, this.currentIdentityInput)
         await convertGuestToCustomer(this)
-        // TODO : redirect to dashboard when it exists
-        router.push({ path: '/connect/sign-in' })
         this.events.success(`Welcome to your dashboard ${this.currentIdentity.firstName}`)
+        // TODO : redirect directly to dashboard when it exists
+        router.push({ path: '/connect/sign-in' })
       } catch (error) {
         this.events.graphError(error)
       }

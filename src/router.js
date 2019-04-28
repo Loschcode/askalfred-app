@@ -15,6 +15,7 @@ import GettingStartedIndex from './views/GettingStarted/Index.vue'
 import WhatIsYourName from './views/GettingStarted/WhatIsYourName.vue'
 import CanIGetYourEmail from './views/GettingStarted/CanIGetYourEmail.vue'
 import ThankYou from './views/GettingStarted/ThankYou.vue'
+import ConfirmEmail from './views/GettingStarted/ConfirmEmail.vue'
 import Surprise from './views/GettingStarted/Surprise.vue'
 import DoNotForget from './views/GettingStarted/DoNotForget.vue'
 
@@ -80,6 +81,11 @@ export default new Router({
       path: '/getting-started/thank-you',
       meta: { layout: 'default' },
       component: ThankYou
+    },
+    {
+      path: '/getting-started/confirm-email',
+      meta: { layout: 'default' },
+      component: ConfirmEmail
     },
     {
       path: '/getting-started/surprise',

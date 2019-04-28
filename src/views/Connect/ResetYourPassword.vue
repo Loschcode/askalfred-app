@@ -62,9 +62,9 @@ import router from '@/router'
 import storeIdentityPassword from '@/graphql/mutations/storeIdentityPassword'
 import { required } from 'vuelidate/lib/validators'
 import EventsService from '@/services/EventsService'
-import { setTokenAs } from '@/operations/GetTokenOperation'
 import currentIdentity from '@/graphql/queries/currentIdentity'
 import unsetPassword from '@/graphql/mutations/unsetPassword'
+import IdentityHelper from '@/helpers/IdentityHelper'
 
 export default {
   name: 'ResetYourPassword',
@@ -98,7 +98,7 @@ export default {
 
     try {
       const token = await unsetPassword(this, { recoveryToken })
-      setTokenAs(token)
+      IdentityHelper.setIdentityWith(token)
       this.identityToken = token
     } catch (error) {
       router.push({ path: '/connect/sign-in' })

@@ -1,36 +1,24 @@
 import createGuest from '@/graphql/mutations/createGuest'
 import EventsService from '@/services/EventsService'
-
-export const setTokenAs = token => {
-  localStorage.setItem('identityToken', token)
-}
+import TokenHelper from '@/helpers/TokenHelper'
+import IdentityHelper from '@/helpers/IdentityHelper'
 
 export default vm => {
   const events = new EventsService(vm)
 
   const perform = async () => {
-    if (getToken() === null) {
-      await connectGuest()
-      // we have to refresh the page
-      // to reload everything with tokens
-      new EventsService(vm).reboot()
-    }
-
-    return getToken()
+    if (TokenHelper.getToken() === null) await connectGuest()
+    return TokenHelper.getToken()
   }
 
   const connectGuest = async () => {
     try {
       console.log('connect guest ...')
       const response = await createGuest(vm)
-      setTokenAs(response.token)
+      IdentityHelper.setIdentityWith(response.token)
     } catch (error) {
       events.crash('We were unable to create a guest user')
     }
-  }
-
-  const getToken = () => {
-    return localStorage.getItem('identityToken')
   }
 
   return perform()

@@ -36,7 +36,7 @@
           <div class="button button--half-squared button__white-on-blue button__white-on-blue--soft">
             <a
               class="+pointer"
-              @click="sendSurpriseEmail()"
+              @click="sendConfirmEmail()"
             >Nothing? Send it again</a>
           </div>
           <div class="confirm__back">
@@ -53,7 +53,7 @@
 <script>
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import EventsService from '@/services/EventsService'
-import sendSurpriseEmail from '@/graphql/mutations/sendSurpriseEmail'
+import sendConfirmEmail from '@/graphql/mutations/sendConfirmEmail'
 
 export default {
   name: 'ThankYou',
@@ -68,14 +68,14 @@ export default {
     this.events = new EventsService(this)
 
     if (this.currentIdentity.confirmationSentAt === null) {
-      this.sendSurpriseEmail()
+      this.sendConfirmEmail()
     }
   },
 
   methods: {
-    async sendSurpriseEmail () {
+    async sendConfirmEmail () {
       try {
-        const identity = await sendSurpriseEmail(this, this.events)
+        const identity = await sendConfirmEmail(this, this.events)
         this.events.success(`An email with a surprise has been sent to ${identity.email}`)
       } catch (error) {
         this.events.graphError(error)

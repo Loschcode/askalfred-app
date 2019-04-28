@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import GetTokenOperation from '@/operations/GetTokenOperation'
+import EnsureIdentityOperation from '@/operations/EnsureIdentityOperation'
 import EventsService from '@/services/EventsService'
 import LayoutMixin from '@/mixins/LayoutMixin'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
@@ -55,7 +55,7 @@ export default {
 
   async created () {
     new EventsService(this).watch()
-    await GetTokenOperation(this)
+    await EnsureIdentityOperation(this)
   },
 
   methods: {

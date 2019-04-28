@@ -24,6 +24,9 @@ import ActionCableLink from 'graphql-ruby-client/subscriptions/ActionCableLink'
 import DefaultLayout from './components/layouts/DefaultLayout'
 import DefaultError from './components/errors/DefaultError'
 
+// Used in startup
+import TokenHelper from './helpers/TokenHelper'
+
 Vue.component('default-layout', DefaultLayout)
 Vue.component('default-error', DefaultError)
 
@@ -34,7 +37,7 @@ const httpLink = new HttpLink({
   uri: process.env.VUE_APP_GRAPHQL_HTTP
 })
 
-const token = localStorage.getItem('identityToken')
+const token = TokenHelper.getToken()
 
 // Cable link
 const authCableUrl = `${process.env.VUE_APP_CABLE}?token=${token}`

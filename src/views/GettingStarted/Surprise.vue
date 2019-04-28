@@ -51,13 +51,11 @@
 </template>
 
 <script>
-import confirmEmail from '@/graphql/mutations/confirmEmail'
 import router from '@/router'
 import getCreditForFree from '@/graphql/mutations/getCreditForFree'
 import Loading from '@/components/Loading'
+import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import EventsService from '@/services/EventsService'
-import { setTokenAs } from '@/operations/GetTokenOperation'
-import currentIdentity from '@/graphql/queries/currentIdentity'
 
 export default {
   name: 'Surprise',
@@ -65,41 +63,23 @@ export default {
     Loading
   },
 
+  mixins: [
+    CurrentIdentityMixin
+  ],
+
   props: {
   },
 
-  data () {
-    return {
-      currentIdentity: null,
-      identityToken: null
-    }
-  },
-
-  async created () {
+  created () {
     this.events = new EventsService(this)
-
-    const confirmationToken = this.$route.query.confirmation_token
-
-    try {
-      const token = await confirmEmail(this, { confirmationToken })
-      setTokenAs(token)
-      this.identityToken = token
-    } catch (error) {
-      router.push({ path: '/connect/sign-in' })
-      this.events.graphError(error)
-    }
-  },
-
-  apollo: {
-    currentIdentity
   },
 
   methods: {
     async getCreditForFree () {
       try {
         await getCreditForFree(this)
-        router.push({ path: '/getting-started/do-not-forget' })
         this.events.success('Your credit has been added to your account. Enjoy your 20 minutes!')
+        router.push({ path: '/getting-started/do-not-forget' })
       } catch (error) {
         this.events.graphError(error)
       }

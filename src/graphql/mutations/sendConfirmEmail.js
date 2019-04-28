@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
 const mutation = gql`
-  mutation SendSurpriseEmail {
-    sendSurpriseEmail {
+  mutation SendConfirmEmail {
+    sendConfirmEmail {
       currentIdentity {
         email
         confirmedAt
@@ -19,7 +19,7 @@ export default async (vm, events) => {
       update: (store, { data }) => {
       }
     })
-    .then(({ data: { sendSurpriseEmail: { currentIdentity } } }) => {
+    .then(({ data: { sendConfirmEmail: { currentIdentity } } }) => {
       return currentIdentity
     })
   return response
