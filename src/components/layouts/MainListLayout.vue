@@ -3,13 +3,13 @@
     <div class="wrap-without-limit container-fluid menu">
       <div class="row">
         <div class="col-xs-12 +no-padding">
-          <div class="row center-xs middle-xs">
-            <div class="col-xs-6">
+          <div class="row middle-xs">
+            <div class="col-xs-6 col-md-4 col-md-offset-2">
               <div class="menu__title">
                 <h1>AskAlfred</h1>
               </div>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-6 col-md-4">
               <div class="credit +pointer">
                 <div class="row">
                   <div class="col-xs-12">
