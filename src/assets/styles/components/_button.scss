@@ -13,6 +13,7 @@
 
 .button__blue-on-white {
   background-color: $backgroud-blue-button-color;
+  color: $text-blue-button-color;
   a {
     color: $text-blue-button-color;
   }
@@ -20,6 +21,7 @@
 
 .button__white-on-blue {
   background-color: $background-white-button-color;
+  color: $text-white-button-color;
   a {
     color: $text-white-button-color;
   }
