@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 const mutation = gql`
   mutation ConfirmEmail($input: ConfirmEmailInput!) {
     confirmEmail(input: $input) {
-      currentIdentity {
+      identity {
         token
       }
     }
@@ -21,7 +21,7 @@ export default async (vm, input) => {
         vm.confirmEmail = confirmEmail
       }
     })
-    .then(({ data: { confirmEmail: { currentIdentity: { token } } } }) => {
+    .then(({ data: { confirmEmail: { identity: { token } } } }) => {
       return token
     })
   return response
