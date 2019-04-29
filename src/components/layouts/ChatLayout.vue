@@ -20,8 +20,8 @@
       </div>
     </div>
     <div class="wrap-without-limit container-fluid header-submenu">
-      <div class="row between-xs">
-        <div class="col-xs-4 +no-padding">
+      <div class="row between-xs around-md">
+        <div class="col-xs-4 col-md-4 +no-padding">
           <div class="header-submenu__text-button">
             <a href="#">
               Back
@@ -29,7 +29,7 @@
           </div>
         </div>
 
-        <div class="col-xs-8">
+        <div class="col-xs-8 col-md-4">
           <div class="row end-xs middle-xs">
             <div class="col-xs-10">
               <div class="header-submenu__title">
