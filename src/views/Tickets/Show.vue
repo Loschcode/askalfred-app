@@ -66,17 +66,15 @@ export default {
 }
 
 .ticket-subject {
-
 }
 
 .ticket-subject__content {
-  // padding: 2em;
-  // text-align: left;
 }
 
-// TAKEN FROM ELSEWHERE
+// TODO : do not forget to abstract it after
 
 .message {
+  line-height: 1.2em;
   position: relative;
   padding: spacing(3);
   display: flex;
@@ -145,5 +143,4 @@ export default {
     left: 0px;
   }
 }
-
 </style>

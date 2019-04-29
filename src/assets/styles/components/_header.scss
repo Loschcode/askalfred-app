@@ -41,6 +41,15 @@
   font-weight: 300;
 }
 
+.header-menu__text {
+  opacity: 0.8;
+}
+
+.header-menu__time {
+  padding-top: 0.5em;
+  font-size: 22px;
+}
+
 .header-menu {
   background: $color-blue-purple-gradient;
   color: $color-white;
