@@ -21,14 +21,16 @@ import ActionCable from 'actioncable'
 import ActionCableLink from 'graphql-ruby-client/subscriptions/ActionCableLink'
 
 // Layouts
-import MainListLayout from './components/layouts/MainListLayout'
+import ChatLayout from './components/layouts/ChatLayout'
+import DashboardLayout from './components/layouts/DashboardLayout'
 import DefaultLayout from './components/layouts/DefaultLayout'
 import DefaultError from './components/errors/DefaultError'
 
 // Used in startup
 import TokenHelper from './helpers/TokenHelper'
 
-Vue.component('main-list-layout', MainListLayout)
+Vue.component('chat-layout', ChatLayout)
+Vue.component('dashboard-layout', DashboardLayout)
 Vue.component('default-layout', DefaultLayout)
 Vue.component('default-error', DefaultError)
 

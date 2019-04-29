@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper main-list">
+  <div class="wrapper dashboard-layout">
     <div class="wrap-without-limit container-fluid header-menu">
       <div class="row">
         <div class="col-xs-12 +no-padding">
@@ -45,7 +45,7 @@
 import CreditLeft from '@/components/header/CreditLeft'
 
 export default {
-  name: 'MainList',
+  name: 'DashboardLayout',
   components: {
     CreditLeft
   },
@@ -55,6 +55,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.main-list {
+.dashboard-layout {
 }
 </style>

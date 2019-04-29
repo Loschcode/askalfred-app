@@ -11,8 +11,24 @@
   @include inner-top-shadow();
 }
 
+.header-submenu__title {
+  color: $color-soft-grey;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: right;
+}
+
+.header-submenu__subtitle {
+  font-weight: 400;
+  color: $color-grey;
+  font-size: 12px;
+  text-align: right;
+
+}
+
 .header-submenu__more {
   padding-right: 0.4em;
+  padding-top: 0.2em;
   text-align: right;
   img {
     height: 1.2em;
@@ -20,6 +36,7 @@
 }
 
 .header-submenu__text-button {
+  padding-top: 0.2em;
   text-transform: uppercase;
   font-weight: 300;
 }

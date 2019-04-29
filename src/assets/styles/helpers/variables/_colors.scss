@@ -25,7 +25,6 @@ $color-grey: #90a4ae;
 $color-soft-grey: #465c66;
 $color-mid-dark-grey: #AEAEAE;
 $color-dark-grey: #808988;
-
 // Blacks
 $color-black: black;
 
@@ -46,9 +45,11 @@ $text-selection-color: $color-blue;
 // Backgrounds
 $background-white-button-color: $color-white;
 $background-message-myself-color: $color-flashy-blue;
+$background-message-general-color: $color-flashy-blue;
 $background-message-yourself-color: $color-white;
 $backgroud-blue-button-color: $color-blue;
 
 // Borders
+$border-message-general-color: $color-grey-blueish;
 $border-message-myself-color: $color-grey-blueish;
 $border-message-yourself-color: $color-light-grey;

@@ -27,6 +27,7 @@ import PrivacyPolicy from './views/Pages/PrivacyPolicy.vue'
 // Tickets
 import TicketsIndex from './views/Tickets/Index.vue'
 import TicketsList from './views/Tickets/List.vue'
+import TicketsShow from './views/Tickets/Show.vue'
 
 Vue.use(Router)
 
@@ -130,8 +131,13 @@ export default new Router({
     },
     {
       path: '/tickets/list',
-      meta: { layout: 'main-list' },
+      meta: { layout: 'dashboard' },
       component: TicketsList
+    },
+    {
+      path: '/tickets/show',
+      meta: { layout: 'chat' },
+      component: TicketsShow
     }
   ]
 })
