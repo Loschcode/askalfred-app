@@ -17,15 +17,15 @@
       </div>
     </div>
     <div class="wrap-without-limit container-fluid header-submenu">
-      <div class="row between-xs">
-        <div class="col-xs-6 +no-padding">
+      <div class="row between-xs around-md">
+        <div class="col-xs-6 col-md-6 +no-padding">
           <div class="header-submenu__text-button">
             <a href="#">
               Support
             </a>
           </div>
         </div>
-        <div class="col-xs-2 +no-padding">
+        <div class="col-xs-2 col-md-2 +no-padding">
           <div class="header-submenu__more +pointer">
             <img src="/images/header/submenu-more-button.svg">
           </div>
