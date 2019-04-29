@@ -55,7 +55,6 @@
       <!-- No footer -->
     </div>
   </div>
-  </div>
 </template>
 
 <script>
