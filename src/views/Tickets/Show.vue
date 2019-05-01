@@ -26,7 +26,7 @@
           </div>
           <div class="ticket-notice__symbol">
             <span class="ticket-notice__symbol-border" />
-            <span class="ticket-notice__symbol-image"><img src="/images/tickets/will-get-back-to-you.svg"></span>
+            <span class="ticket-notice__symbol-image"><img src="/images/tickets/icons/waiting.svg"></span>
             <span class="ticket-notice__symbol-border" />
           </div>
         </div>
@@ -76,6 +76,19 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--  Notice -->
+    <div class="row center-xs">
+      <div class="col-xs-8">
+        <div class="ticket-notice">
+          <div class="ticket-notice__symbol">
+            <span class="ticket-notice__symbol-border" />
+            <span class="ticket-notice__symbol-image"><img src="/images/tickets/icons/add.svg"></span>
+            <span class="ticket-notice__symbol-border" />
           </div>
         </div>
       </div>
