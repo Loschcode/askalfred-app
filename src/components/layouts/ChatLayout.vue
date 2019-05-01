@@ -115,7 +115,7 @@ export default {
 }
 
 .footer {
-  margin-top: -5em;
+  margin-top: 0;
 }
 
 .message-input {
