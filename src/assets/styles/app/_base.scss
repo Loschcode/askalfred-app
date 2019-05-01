@@ -42,6 +42,15 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
 
+textarea {
+  resize: none;
+}
+
+textarea:focus,
+textarea:active {
+  outline: 0;
+}
+
 input:focus,
 input:active {
   outline: 0;

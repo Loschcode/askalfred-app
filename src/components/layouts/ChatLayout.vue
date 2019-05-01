@@ -57,12 +57,11 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="footer message-input">
-            <input
+            <textarea
               v-model="currentMessage"
-              type="text"
               name="message"
               placeholder="Write a reply..."
-            >
+            />
 
             <div class="message-input__button">
               <div v-if="currentMessage">
@@ -90,6 +89,7 @@
 
 <script>
 import CreditLeft from '@/components/header/CreditLeft'
+import autosize from 'autosize'
 
 export default {
   name: 'ChatLayout',
@@ -102,6 +102,10 @@ export default {
     return {
       currentMessage: ''
     }
+  },
+
+  mounted () {
+    autosize(document.querySelectorAll('textarea'))
   }
 }
 </script>
@@ -117,7 +121,9 @@ export default {
 .message-input {
   position: relative;
   padding: 1em;
-  input {
+
+  textarea {
+    height: 3em;
     border-radius: 2px;
     font-size: 16px;
     padding: 0.8em;
