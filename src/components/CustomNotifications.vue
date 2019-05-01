@@ -49,8 +49,12 @@ export default {
     return {
     }
   }
+
 }
 </script>
 
 <style lang="scss" scoped>
+.custom-notifications {
+  color: $color-soft-grey;
+}
 </style>
