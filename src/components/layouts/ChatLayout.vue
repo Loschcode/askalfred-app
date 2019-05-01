@@ -139,7 +139,7 @@ export default {
 .message-input__button-send {
   position: absolute;
   width: 1.5em;
-  top: 1.9em;
+  top: 2em;
   right: 2.8em;
   text-transform: uppercase;
 }
@@ -147,7 +147,7 @@ export default {
 .message-input__button-join-file {
   position: absolute;
   width: 1.5em;
-  top: 1.7em;
+  top: 1.8em;
   right: 2em;
 }
 </style>
