@@ -1,18 +1,26 @@
 <template>
   <div class="more-options">
     <modal ref="current-modal" />
-
     <div v-if="isOpen">
-      <div ref="coming-soon">
-        <div class="content content-coming-soon">
+      <!-- First modal -->
+      <div ref="more-options-window">
+        <div class="content more-options-window">
           <div class="row center-xs">
             <div class="col-md-12">
-              PUT STUFF IN HERE
+              <div class="more-options__title">
+                More options ...
+              </div>
+              <div class="more-options__buttons">
+                <div class="button button__white-on-red button--squared button--bold">
+                  Cancel request
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- Success -->
       <div ref="thank-you">
         <div class="content">
           <modals-common-success
@@ -58,14 +66,22 @@ export default {
       this.isOpen = true
       this.$nextTick(() => {
         this.currentModal().open()
+        this.currentModal().setWithContentOf(this, 'more-options-window')
       })
-      // this.currentModal().setWithContentOf(this, 'thank-you')
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
+.more-options__title {
+  font-family: $font-alternative;
+}
+
+.more-options__buttons {
+  margin-top: 1em;
+}
+
 .content {
   @include breakpoint("lg") {
     width: 30vw;

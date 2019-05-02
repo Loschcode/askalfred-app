@@ -27,10 +27,22 @@
   }
 }
 
+.button__white-on-red {
+  background-color: $background-red;
+  color: $color-white;
+  a {
+    color: $color-white;
+  }
+}
+
 .button__white-on-blue--soft {
   a {
     color: $color-soft-grey;
   }
+}
+
+.button--bold {
+  font-weight: bold;
 }
 
 .button--squared {

@@ -33,11 +33,12 @@ $color-black: black;
 /**
  * Elements colors
  */
+
 // Input
 $color-disabled-input: #F6F6F6;
 
 // Texts
-$text-modal-color: $color-grey;
+$text-modal-color: #4A4A4A;
 $text-blue-button-color: $color-white;
 $text-white-button-color: $color-black;
 $text-details-color: $color-dark-grey;
@@ -53,6 +54,7 @@ $background-message-myself-color: $color-flashy-blue;
 $background-message-general-color: $color-flashy-blue;
 $background-message-yourself-color: $color-white;
 $backgroud-blue-button-color: $color-blue;
+$background-red: $color-red;
 
 // Borders
 $border-error-color: $color-red;

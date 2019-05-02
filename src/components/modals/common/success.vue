@@ -5,7 +5,7 @@
       <div class="row center-xs">
         <div class="col-md-12">
           <div class="modal-success__icon">
-            <img src="/modals/check.svg" />
+            <img src="/modals/check.svg">
           </div>
           <h2>{{ title }}</h2>
           <p>
@@ -13,8 +13,8 @@
           </p>
           <div class="modal-success__call-to-action">
             <span
-              @click="action()"
               class="button button__white-on-blue"
+              @click="action()"
             >
               Continue
             </span>
@@ -29,8 +29,8 @@
 export default {
   name: 'ModalsCommonSuccess',
   props: {
-    title: '',
-    content: '',
+    title: null,
+    content: null,
     action: { type: Function }
   }
 }
@@ -45,7 +45,7 @@ export default {
   }
   p {
     margin: spacing(2);
-    color: $text-modal-color;
+    color: red; // TODO : rework that
     font-weight: 400;
     font-size: sizing(3);
   }

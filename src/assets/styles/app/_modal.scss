@@ -10,6 +10,7 @@
 $tingle-breakpoint: 541px !default;
 
 .tingle-modal {
+  background-color: rgba(0, 0, 0, 0.65);
   user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
@@ -38,8 +39,12 @@ $tingle-breakpoint: 541px !default;
 .tingle-modal-box__content {
   padding: spacing(3);
   overflow-y: visible;
+  background-color: $color-white;
+  color: $text-modal-color;
+  @include button-radius('small');
 }
 
 .tingle-modal-box {
   width: auto;
+  @include button-radius('small');
 }
