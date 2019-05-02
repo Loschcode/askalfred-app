@@ -1,5 +1,5 @@
 <template>
-  <div class="before-footer">
+  <div>
     <div class="wrapper chat-layout">
       <div class="wrap-without-limit container-fluid header-menu">
         <div class="row">
@@ -83,7 +83,6 @@
         </div>
       </div>
     </div>
-  </div>
   </div>
 </template>
 

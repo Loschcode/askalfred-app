@@ -6,7 +6,7 @@
         <!-- <first-ticket /> -->
 
         <div class="row center-xs">
-          <div class="col-xs-11">
+          <div class="col-xs-11 col-md-10 col-lg-9">
             <div class="ticket">
               <div class="row start-xs">
                 <div class="col-xs-3 +no-padding">
@@ -56,6 +56,7 @@ export default {
 <style scoped lang="scss">
 .tickets-list {
   padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 .ticket__icon {
