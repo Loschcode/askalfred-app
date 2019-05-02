@@ -1,7 +1,12 @@
 <template>
   <div class="more-options">
     <modal ref="current-modal" />
-    <div v-if="isOpen">
+
+    <!-- modal contents -->
+    <div
+      v-if="isOpen"
+      class="+hidden"
+    >
       <!-- First modal -->
       <div ref="more-options-window">
         <div class="content more-options-window">
