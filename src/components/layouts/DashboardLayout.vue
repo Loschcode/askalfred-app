@@ -27,7 +27,10 @@
             </div>
           </div>
           <div class="col-xs-2 col-md-2 +no-padding">
-            <div class="header-submenu__more +pointer">
+            <div
+              class="header-submenu__more +pointer"
+              @click="moreOptions()"
+            >
               <img src="/images/header/submenu-more-button.svg">
             </div>
           </div>
@@ -49,18 +52,33 @@
         </div>
       </div>
     </div>
+
+    <!-- Modals -->
+    <modals-more-options ref="modals-more-options" />
   </div>
 </template>
 
 <script>
 import CreditLeft from '@/components/Header/CreditLeft'
+import ModalsMixin from '@/mixins/ModalsMixin'
+import ModalsMoreOptions from '@/components/Layouts/DashboardLayout/Modals/MoreOptions'
 
 export default {
   name: 'DashboardLayout',
   components: {
-    CreditLeft
+    CreditLeft,
+    ModalsMoreOptions
   },
+
+  mixins: [ModalsMixin],
+
   props: {
+  },
+
+  methods: {
+    moreOptions () {
+      this.openModal('modals-more-options')
+    }
   }
 }
 </script>

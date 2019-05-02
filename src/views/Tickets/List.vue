@@ -7,7 +7,7 @@
 
         <div class="row center-xs">
           <div class="col-xs-11 col-md-10 col-lg-9">
-            <div class="ticket">
+            <div class="ticket +pointer">
               <div class="row start-xs">
                 <div class="col-xs-3 +no-padding">
                   <div class="row middle-xs">

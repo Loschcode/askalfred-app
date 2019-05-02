@@ -9,9 +9,6 @@ import Vuelidate from 'vuelidate'
 // Notification
 import Notifications from 'vue-notification'
 
-// Textarea
-import VueTextareaAutosize from 'vue-textarea-autosize'
-
 // Apollo
 import { ApolloClient } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
@@ -90,7 +87,6 @@ const apolloProvider = new VueApollo({
 
 Vue.use(Vuelidate)
 Vue.use(Notifications)
-Vue.use(VueTextareaAutosize)
 
 new Vue({
   router,
