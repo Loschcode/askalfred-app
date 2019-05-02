@@ -9,6 +9,10 @@
     @include extend-clickable(1em, 1em);
     font-weight: bold;
   }
+
+  max-width: 30em;
+  text-align: center;
+  margin: auto;
 }
 
 .button__blue-on-white {
