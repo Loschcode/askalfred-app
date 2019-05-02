@@ -26,7 +26,7 @@
           </div>
           <div class="ticket-notice__symbol">
             <span class="ticket-notice__symbol-border" />
-            <span class="ticket-notice__symbol-image"><img src="/images/tickets/icons/waiting.svg"></span>
+            <span class="ticket-notice__symbol-image"><img src="/images/tickets/show/icons/wait.svg"></span>
             <span class="ticket-notice__symbol-border" />
           </div>
         </div>
@@ -83,7 +83,7 @@
         <div class="ticket-notice">
           <div class="ticket-notice__symbol">
             <span class="ticket-notice__symbol-border" />
-            <span class="ticket-notice__symbol-image"><img src="/images/tickets/icons/add.svg"></span>
+            <span class="ticket-notice__symbol-image"><img src="/images/tickets/show/icons/add.svg"></span>
             <span class="ticket-notice__symbol-border" />
           </div>
         </div>
@@ -109,7 +109,7 @@
           </div>
           <div class="ticket-notice__symbol">
             <span class="ticket-notice__symbol-border" />
-            <span class="ticket-notice__symbol-image"><img src="/images/tickets/icons/up.svg"></span>
+            <span class="ticket-notice__symbol-image"><img src="/images/tickets/show/icons/up.svg"></span>
             <span class="ticket-notice__symbol-border" />
           </div>
         </div>

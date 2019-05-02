@@ -74,7 +74,7 @@
               <div v-else>
                 <div class="message-input__button-join-file">
                   <div class="+pointer">
-                    <img src="/images/tickets/join-file.svg">
+                    <img src="/images/tickets/show/join-file.svg">
                   </div>
                 </div>
               </div>

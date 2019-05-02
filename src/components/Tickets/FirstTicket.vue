@@ -3,7 +3,7 @@
     <div class="row center-xs">
       <div class="col-xs-6">
         <div class="first-ticket__image">
-          <img src="/images/tickets/rocket-first-ticket.svg">
+          <img src="/images/tickets/show/rocket-first-ticket.svg">
         </div>
       </div>
     </div>
