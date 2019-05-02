@@ -41,7 +41,7 @@
 
 <script>
 import Modal from '@/components/Modal'
-import ModalsCommonSuccess from '@/components/modals/common/success'
+import ModalsCommonSuccess from '@/components/Modals/Success'
 
 export default {
   name: 'ModalsMoreOptions',

@@ -1,27 +1,42 @@
 <template>
   <div class="sitemap">
     <h3>Connect</h3>
-    <router-link to="/connect/sign-in">SignIn</router-link>
-    <br />
-    <router-link to="/connect/forgot-your-password">ForgotYourPassword</router-link>
+    <router-link to="/connect/sign-in">
+      SignIn
+    </router-link>
+    <br>
+    <router-link to="/connect/forgot-your-password">
+      ForgotYourPassword
+    </router-link>
 
     <h3>Getting Started</h3>
-    <router-link to="/getting-started/what-is-your-name">WhatIsYourName</router-link>
-    <br />
-    <router-link to="/getting-started/can-i-get-your-email">CanIGetYourEmail</router-link>
-    <br />
-    <router-link to="/getting-started/thank-you">ThankYou</router-link>
-    <br />
-    <router-link to="/getting-started/surprise">Surprise</router-link>
-    <br />
-    <router-link to="/getting-started/do-not-forget">DoNotForget</router-link>
+    <router-link to="/getting-started/what-is-your-name">
+      WhatIsYourName
+    </router-link>
+    <br>
+    <router-link to="/getting-started/can-i-get-your-email">
+      CanIGetYourEmail
+    </router-link>
+    <br>
+    <router-link to="/getting-started/thank-you">
+      ThankYou
+    </router-link>
+    <br>
+    <router-link to="/getting-started/surprise">
+      Surprise
+    </router-link>
+    <br>
+    <router-link to="/getting-started/do-not-forget">
+      DoNotForget
+    </router-link>
 
     <h3>Pages</h3>
-    <router-link to="/pages/legal-mentions">LegalMentions</router-link>
-    <br />
+    <router-link to="/pages/legal-mentions">
+      LegalMentions
+    </router-link>
+    <br>
 
-    <br />
-
+    <br>
   </div>
 </template>
 
@@ -30,6 +45,8 @@ import currentIdentity from '@/graphql/queries/currentIdentity'
 
 export default {
   name: 'Sitemap',
+  components: {
+  },
   data () {
     return {
       currentIdentity: null
@@ -39,8 +56,6 @@ export default {
     currentIdentity
   },
   methods: {
-  },
-  components: {
   }
 }
 </script>

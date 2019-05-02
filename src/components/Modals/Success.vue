@@ -29,9 +29,9 @@
 export default {
   name: 'ModalsCommonSuccess',
   props: {
-    title: null,
-    content: null,
-    action: { type: Function }
+    title: { type: String, default: '' },
+    content: { type: String, default: '' },
+    action: { type: Function, default: () => {} }
   }
 }
 </script>

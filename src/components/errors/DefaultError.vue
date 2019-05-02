@@ -3,7 +3,7 @@
     <div class="row center-xs">
       <div class="col-xs-8">
         <div class="image">
-          <img src="/images/errors/warning-for-blue.svg" />
+          <img src="/images/errors/warning-for-blue.svg">
         </div>
       </div>
     </div>
@@ -17,8 +17,8 @@
             {{ error.message }}
           </div>
           <div
-            class="content__raw"
             v-show="devEnv"
+            class="content__raw"
           >
             Development: {{ error.raw }}
           </div>
@@ -49,16 +49,16 @@ export default {
   ],
 
   data () {
-   return {
-      devEnv: (process.env.NODE_ENV == 'development')
-   }
+    return {
+      devEnv: (process.env.NODE_ENV === 'development')
+    }
   },
 
   methods: {
     refreshPage () {
       PageHelper.refreshPage()
-    },
-  },
+    }
+  }
 }
 </script>
 
