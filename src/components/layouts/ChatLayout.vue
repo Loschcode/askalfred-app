@@ -133,6 +133,9 @@ export default {
     &::placeholder {
       color: $color-light-grey-blueish;
     }
+    &:disabled {
+      background-color: $color-disabled-input;
+    }
   }
 }
 
@@ -146,8 +149,8 @@ export default {
 
 .message-input__button-join-file {
   position: absolute;
-  width: 1.5em;
-  top: 1.8em;
+  width: 1.3em;
+  top: 1.9em;
   right: 2em;
 }
 </style>
