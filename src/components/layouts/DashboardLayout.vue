@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import CreditLeft from '@/components/header/CreditLeft'
+import CreditLeft from '@/components/Header/CreditLeft'
 
 export default {
   name: 'DashboardLayout',

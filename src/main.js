@@ -24,10 +24,10 @@ import ActionCable from 'actioncable'
 import ActionCableLink from 'graphql-ruby-client/subscriptions/ActionCableLink'
 
 // Layouts
-import ChatLayout from './components/layouts/ChatLayout'
-import DashboardLayout from './components/layouts/DashboardLayout'
-import DefaultLayout from './components/layouts/DefaultLayout'
-import DefaultError from './components/errors/DefaultError'
+import ChatLayout from './components/Layouts/ChatLayout'
+import DashboardLayout from './components/Layouts/DashboardLayout'
+import DefaultLayout from './components/Layouts/DefaultLayout'
+import DefaultError from './components/Errors/DefaultError'
 
 // Used in startup
 import TokenHelper from './helpers/TokenHelper'

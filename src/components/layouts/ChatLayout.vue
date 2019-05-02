@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import CreditLeft from '@/components/header/CreditLeft'
+import CreditLeft from '@/components/Header/CreditLeft'
 import autosize from 'autosize'
 
 export default {
