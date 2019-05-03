@@ -40,11 +40,12 @@
         <slot />
       </div>
     </div>
-    <div class="wrap container">
+
+    <div class="footer wrap container-fluid">
       <!-- New request -->
       <div class="row center-xs">
         <div class="col-xs-8 col-md-6">
-          <div class="footer new-request">
+          <div class="new-request">
             <div class="button button__blue-on-white button--large">
               New request
             </div>
@@ -88,6 +89,9 @@ export default {
 }
 
 .footer {
-  margin-top: -4em;
+  position: absolute;
+  bottom: 0;
+  padding: 1em;
+  padding-bottom: 1.5em;
 }
 </style>
