@@ -45,7 +45,7 @@
       <div class="row center-xs">
         <div class="col-xs-8 col-md-6">
           <div class="footer new-request">
-            <div class="button button__blue-on-white">
+            <div class="button button__blue-on-white button--large">
               New request
             </div>
           </div>

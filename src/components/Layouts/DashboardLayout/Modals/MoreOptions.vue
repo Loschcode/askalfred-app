@@ -9,15 +9,15 @@
     >
       <!-- First modal -->
       <div ref="more-options-window">
-        <div class="content more-options-window">
+        <div class="container content more-options-window">
           <div class="row center-xs">
-            <div class="col-md-12">
+            <div class="col-xs-12">
               <div class="more-options__title">
                 More options ...
               </div>
               <div class="more-options__buttons">
                 <div class="button button__white-on-red button--squared button--bold">
-                  Cancel request
+                  Sign out
                 </div>
               </div>
             </div>

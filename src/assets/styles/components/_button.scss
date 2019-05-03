@@ -49,6 +49,11 @@
   font-weight: bold;
 }
 
+.button--large {
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+}
+
 .button--squared {
   @include button-radius("small");
 }
