@@ -47,8 +47,14 @@ export default {
       var vm = this
       this.modal = new tingle.modal({
         closeMethods: ['overlay', 'button', 'escape'],
+        closeLabel: '',
         onOpen () {
           vm.isOpened = true
+
+          // var close = document.querySelector('.tingle-modal__close')
+          // close.innerHTML = ' '
+          // var modalContent = document.querySelector('.tingle-modal-box__content')
+          // modalContent.appendChild(close)
         },
         onClose () {
           vm.isOpened = false

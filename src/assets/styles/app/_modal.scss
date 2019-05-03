@@ -1,13 +1,35 @@
+$tingle-breakpoint: 541px !default;
+
 .tingle-modal__close {
   text-align: center;
   background-color: transparent;
 }
 
 .tingle-modal__closeIcon {
+  font-size: 0px;
+	visibility: visible;
+	position: absolute;
+	top: 20px;
+  left: 0;
+  background-position: center;
+
   margin-right: 0;
+  background-image: url("/images/modals/close.svg");
+  background-repeat: no-repeat;
+  background-size: 40px 40px;
+  width: 40px;
+  height: 40px;
+  @media (max-width: $tingle-breakpoint) {
+    left: unset;
+    top: 30px;
+    right: 20px;
+  }
+
 }
 
-$tingle-breakpoint: 541px !default;
+.tingle-modal__closeLabel {
+  display: none;
+}
 
 .tingle-modal {
   background-color: rgba(0, 0, 0, 0.65);
@@ -31,9 +53,6 @@ $tingle-breakpoint: 541px !default;
     align-items: center;
     overflow: hidden;
   }
-}
-.tingle-modal__closeLabel {
-  display: none;
 }
 
 .tingle-modal-box__content {
