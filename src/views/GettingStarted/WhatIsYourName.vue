@@ -82,12 +82,14 @@ import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import storeIdentityName from '@/graphql/mutations/storeIdentityName'
 import { required } from 'vuelidate/lib/validators'
 import EventsService from '@/services/EventsService'
+import GuestOnlyMixin from '@/mixins/GuestOnlyMixin'
 
 export default {
   name: 'WhatIsYourName',
 
   mixins: [
-    CurrentIdentityMixin
+    CurrentIdentityMixin,
+    GuestOnlyMixin
   ],
 
   data () {
@@ -108,7 +110,10 @@ export default {
 
   mounted () {
     this.events = new EventsService(this)
-    this.currentIdentityInput = this.currentIdentity.slice('firstName', 'lastName')
+    this.currentIdentityInput = {
+      firstName: this.currentIdentity.firstName,
+      lastName: this.currentIdentity.lastName
+    }
 
     if (this.currentIdentityInput.firstName === null) {
       this.$refs.firstName.focus()

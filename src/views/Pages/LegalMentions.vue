@@ -41,7 +41,7 @@ export default {
 
   methods: {
     goBack () {
-      router.go(-1) || router.push({ path: 'connect/sign-in' })
+      router.go(-1) || router.push({ path: '/connect/sign-in' })
     }
   }
 }

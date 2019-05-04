@@ -55,11 +55,13 @@ import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import EventsService from '@/services/EventsService'
 import sendConfirmEmail from '@/graphql/mutations/sendConfirmEmail'
 import router from '@/router'
+import GuestOnlyMixin from '@/mixins/GuestOnlyMixin'
 
 export default {
   name: 'ThankYou',
   mixins: [
-    CurrentIdentityMixin
+    CurrentIdentityMixin,
+    GuestOnlyMixin
   ],
 
   props: {

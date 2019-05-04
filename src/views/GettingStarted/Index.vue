@@ -18,7 +18,7 @@ export default {
 
   created () {
     if (!this.isGuest()) {
-      router.push({ path: 'connect/sign-in' })
+      router.push({ path: '/connect/sign-in' })
       return
     }
 

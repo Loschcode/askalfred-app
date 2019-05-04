@@ -63,12 +63,14 @@ import storeIdentityPassword from '@/graphql/mutations/storeIdentityPassword'
 import convertGuestToCustomer from '@/graphql/mutations/convertGuestToCustomer'
 import { required } from 'vuelidate/lib/validators'
 import EventsService from '@/services/EventsService'
+import GuestOnlyMixin from '@/mixins/GuestOnlyMixin'
 
 export default {
   name: 'DoNotForget',
 
   mixins: [
-    CurrentIdentityMixin
+    CurrentIdentityMixin,
+    GuestOnlyMixin
   ],
 
   props: {
