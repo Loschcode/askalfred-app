@@ -10,8 +10,12 @@ const query = gql`
       email
       firstName
       lastName
+      encryptedPassword
       confirmedAt
       confirmationSentAt
+      confirmationToken
+      recoverySentAt
+      recoveryToken
       credits {
         time
       }

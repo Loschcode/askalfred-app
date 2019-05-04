@@ -143,13 +143,6 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.access === 'guest_only') {
-    // check if use already logged
-    // if true then go to home
-    return next({ path: '/' }) // '/' is home page for example
-    // else then continue to next()
-  }
-
   return next()
 })
 
