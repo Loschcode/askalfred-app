@@ -89,7 +89,9 @@ export default {
   mounted () {
     if (this.wrongStep()) return router.push({ path: '/getting-started/' })
 
-    this.currentIdentityInput = _.pick(this.currentIdentity, ['email'])
+    this.currentIdentityInput = {
+      email: this.currentIdentity.email
+    }
 
     if (this.emailInput == null) {
       this.$refs.email.focus()

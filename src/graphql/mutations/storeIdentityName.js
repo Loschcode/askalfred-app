@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import _ from 'lodash'
 
 const mutation = gql`
   mutation StoreIdentityName($input: StoreIdentityNameInput!) {

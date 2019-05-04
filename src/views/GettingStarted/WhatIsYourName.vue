@@ -77,7 +77,6 @@
 </template>
 
 <script>
-import _ from 'lodash'
 import router from '@/router'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import storeIdentityName from '@/graphql/mutations/storeIdentityName'
@@ -109,7 +108,7 @@ export default {
 
   mounted () {
     this.events = new EventsService(this)
-    this.currentIdentityInput = _.pick(this.currentIdentity, ['firstName', 'lastName'])
+    this.currentIdentityInput = this.currentIdentity.slice('firstName', 'lastName')
 
     if (this.currentIdentityInput.firstName === null) {
       this.$refs.firstName.focus()

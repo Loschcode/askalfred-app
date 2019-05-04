@@ -57,7 +57,6 @@
 </template>
 
 <script>
-import _ from 'lodash'
 import router from '@/router'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import storeIdentityPassword from '@/graphql/mutations/storeIdentityPassword'
@@ -94,9 +93,11 @@ export default {
   },
 
   mounted () {
-    this.currentIdentityInput = _.pick(this.currentIdentity, ['password'])
+    this.currentIdentityInput = {
+      password: this.currentIdentity.password
+    }
 
-    if (_.isEmpty(this.currentIdentityInput.password)) {
+    if (!this.currentIdentityInput.password) {
       this.$refs.password.focus()
     } else {
       router.push({ path: '/' })
