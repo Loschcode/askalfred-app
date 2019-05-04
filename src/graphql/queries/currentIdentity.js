@@ -26,7 +26,9 @@ const result = function ({ data: { currentIdentity } }) {
     new EventsService(this).reboot('identity and token mismatch')
   }
 
-  return currentIdentity
+  return {
+    currentIdentity
+  }
 }
 
 const error = function () {
@@ -44,9 +46,17 @@ const document = gql`
   subscription SubscribeToIdentity {
     subscribeToCurrentIdentity {
       currentIdentity {
+        id
+        role
+        token
+        email
         firstName
         lastName
-        email
+        confirmedAt
+        confirmationSentAt
+        credits {
+          time
+        }
       }
     }
   }
@@ -62,8 +72,13 @@ const updateQuery = function (
     }
   }
 ) {
-  delete currentIdentity['__typename']
-  this.currentIdentityInput = currentIdentity
+  let vmCurrentIdentity = Object.assign({}, currentIdentity)
+  delete vmCurrentIdentity['__typename']
+  this.currentIdentity = vmCurrentIdentity
+
+  return {
+    currentIdentity
+  }
 }
 
 const subscribeToMore = {

@@ -44,9 +44,13 @@ import PageHelper from '@/helpers/PageHelper'
 
 export default {
   name: 'ErrorDefault',
-  props: [
-    'error'
-  ],
+  props: {
+    error: {
+      value: '',
+      type: String,
+      required: true
+    }
+  },
 
   data () {
     return {

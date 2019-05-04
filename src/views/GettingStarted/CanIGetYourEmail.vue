@@ -59,7 +59,6 @@
 </template>
 
 <script>
-import _ from 'lodash'
 import router from '@/router'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import storeIdentityEmail from '@/graphql/mutations/storeIdentityEmail'
@@ -88,6 +87,8 @@ export default {
   },
 
   mounted () {
+    if (this.wrongStep()) return router.push({ path: '/getting-started/' })
+
     this.currentIdentityInput = _.pick(this.currentIdentity, ['email'])
 
     if (this.emailInput == null) {
@@ -96,6 +97,13 @@ export default {
   },
 
   methods: {
+    wrongStep () {
+      if (!this.currentIdentity.firstName) return true
+      if (!this.currentIdentity.lastName) return true
+
+      return false
+    },
+
     async storeEmail () {
       this.$v.currentIdentityInput.$touch()
       if (this.$v.currentIdentityInput.$error) return

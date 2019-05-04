@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import _ from 'lodash'
 
 const mutation = gql`
   mutation StoreIdentityName($input: StoreIdentityNameInput!) {
@@ -18,6 +19,7 @@ export default async (vm, input) => {
       },
       update: (store, { data: { storeIdentityName } }) => {
         vm.storeIdentityName = storeIdentityName
+        Object.assign(vm.currentIdentity, storeIdentityName)
       }
     })
     .then(({ data: { storeIdentityName } }) => {

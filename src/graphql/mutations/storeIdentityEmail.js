@@ -17,6 +17,7 @@ export default async (vm, input) => {
       },
       update: (store, { data: { storeIdentityEmail } }) => {
         vm.storeIdentityEmail = storeIdentityEmail
+        Object.assign(vm.currentIdentity, storeIdentityEmail)
       }
     })
     .then(({ data: { storeIdentityEmail } }) => {

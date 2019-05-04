@@ -61,9 +61,17 @@ export default {
 
   created () {
     this.events = new EventsService(this)
+
+    if (this.wrongStep()) return router.push({ path: '/getting-started/' })
   },
 
   methods: {
+    wrongStep () {
+      if (!this.currentIdentity.confirmedAt) return true
+
+      return false
+    },
+
     async getCreditForFree () {
       try {
         await getCreditForFree(this)
