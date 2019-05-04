@@ -100,15 +100,17 @@
 export default {
   name: 'SignIn',
   props: {
+    // eslint-disable-next-line vue/require-default-prop
     email: {
-      type: String,
       value: '',
-      required: true
+      type: String,
+      required: false
     },
+    // eslint-disable-next-line vue/require-default-prop
     password: {
-      type: String,
       value: '',
-      required: true
+      type: String,
+      required: false
     }
   },
 

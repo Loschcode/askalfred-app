@@ -46,8 +46,8 @@ export default {
   name: 'ErrorDefault',
   props: {
     error: {
-      value: '',
-      type: String,
+      value: {},
+      type: Object,
       required: true
     }
   },
