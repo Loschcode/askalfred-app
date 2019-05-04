@@ -82,14 +82,14 @@ import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import storeIdentityName from '@/graphql/mutations/storeIdentityName'
 import { required } from 'vuelidate/lib/validators'
 import EventsService from '@/services/EventsService'
-import GuestOnlyMixin from '@/mixins/GuestOnlyMixin'
+import GuestOnlyGuardMixin from '@/mixins/GuestOnlyGuardMixin'
 
 export default {
   name: 'WhatIsYourName',
 
   mixins: [
     CurrentIdentityMixin,
-    GuestOnlyMixin
+    GuestOnlyGuardMixin
   ],
 
   data () {

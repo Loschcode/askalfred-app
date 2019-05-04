@@ -48,14 +48,14 @@ import router from '@/router'
 import getCreditForFree from '@/graphql/mutations/getCreditForFree'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import EventsService from '@/services/EventsService'
-import GuestOnlyMixin from '@/mixins/GuestOnlyMixin'
+import GuestOnlyGuardMixin from '@/mixins/GuestOnlyGuardMixin'
 
 export default {
   name: 'Surprise',
 
   mixins: [
     CurrentIdentityMixin,
-    GuestOnlyMixin
+    GuestOnlyGuardMixin
   ],
 
   props: {
