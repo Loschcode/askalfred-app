@@ -51,6 +51,11 @@
             >I'm all set</a>
           </div>
         </div>
+        <div class="confirm__back">
+          <router-link :to="{ path: '/connect/sign-in'}">
+            I've already done it
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -157,5 +162,12 @@ export default {
 
 .confirm {
   padding-top: 3em;
+}
+
+.confirm__back {
+  margin-top: 0.7em;
+  a {
+    color: $color-white;
+  }
 }
 </style>
