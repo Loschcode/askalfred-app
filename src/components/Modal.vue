@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import tingle from 'tingle.js'
+import Tingle from 'tingle.js'
 
 export default {
   name: 'Modal',
@@ -45,7 +45,8 @@ export default {
 
     setupModal () {
       var vm = this
-      this.modal = new tingle.modal({
+      // eslint-disable-next-line new-cap
+      this.modal = new Tingle.modal({
         closeMethods: ['overlay', 'button', 'escape'],
         closeLabel: '',
         onOpen () {

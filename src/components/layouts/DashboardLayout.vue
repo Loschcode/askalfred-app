@@ -46,7 +46,7 @@
       <div class="row center-xs">
         <div class="col-xs-8 col-md-6">
           <div class="new-request">
-            <div class="button button__blue-on-white button--large">
+            <div class="button button__blue-on-white button--large button--bold">
               New request
             </div>
           </div>

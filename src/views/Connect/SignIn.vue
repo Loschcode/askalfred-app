@@ -18,6 +18,7 @@
               <img src="/images/icons/email.svg">
             </div>
             <input
+              v-model="email"
               type="email"
               placeholder="email@gmail.com"
             >
@@ -27,13 +28,14 @@
               <img src="/images/icons/password.svg">
             </div>
             <input
+              v-model="password"
               type="password"
               placeholder="password"
             >
           </div>
           <div class="connect__confirm">
             <div class="button button--half-squared button__white-on-blue button__white-on-blue--soft">
-              <a href="#">Sign in</a>
+              <a @click="connectNow()">Sign in</a>
             </div>
           </div>
           <div class="connect__forgot">
@@ -98,6 +100,26 @@
 export default {
   name: 'SignIn',
   props: {
+    email: {
+      type: String,
+      value: '',
+      required: true
+    },
+    password: {
+      type: String,
+      value: '',
+      required: true
+    }
+  },
+
+  created () {
+
+  },
+
+  methods: {
+    connectNow () {
+
+    }
   }
 }
 </script>

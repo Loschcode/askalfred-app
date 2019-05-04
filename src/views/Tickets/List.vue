@@ -3,7 +3,10 @@
     <div class="row center-xs">
       <div class="col-xs-12">
         <!-- Make first ticket -->
-        <!-- <first-ticket /> -->
+        <div class="+hidden">
+          <!-- TODO : temporary for linter -->
+          <first-ticket />
+        </div>
 
         <div class="row center-xs">
           <div class="col-xs-11 col-md-10 col-lg-9">
