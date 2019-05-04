@@ -26,7 +26,6 @@ export default {
       router.push({ path: `/getting-started/${this.currentStep()}` })
       return
     }
-
     router.push({ path: '/connect/sign-in' })
   },
 
@@ -47,7 +46,7 @@ export default {
         return 'surprise'
       }
 
-      if (this.currentIdentity.encrypted_password === null) {
+      if (this.currentIdentity.encryptedPassword === null) {
         return 'do-not-forget'
       }
 

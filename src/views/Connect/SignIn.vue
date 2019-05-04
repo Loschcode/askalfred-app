@@ -73,7 +73,7 @@
       <div class="col-xs-8 col-md-4">
         <div class="register">
           <div class="button button--half-squared button__white-on-blue button__white-on-blue--soft">
-            <router-link :to="{ path: '/getting-started/what-is-your-name'}">
+            <router-link :to="{ path: '/getting-started/'}">
               Introduce yourself
             </router-link>
           </div>
@@ -97,8 +97,14 @@
 </template>
 
 <script>
+import router from '@/router'
+import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
+
 export default {
   name: 'SignIn',
+  mixins: [
+    CurrentIdentityMixin
+  ],
   props: {
     // eslint-disable-next-line vue/require-default-prop
     email: {
@@ -115,7 +121,8 @@ export default {
   },
 
   created () {
-
+    console.log('ROLE: ' + this.currentIdentity.role)
+    if (!this.isGuest()) return router.push({ path: '/tickets' })
   },
 
   methods: {
