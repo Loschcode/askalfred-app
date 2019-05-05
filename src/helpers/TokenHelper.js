@@ -8,7 +8,7 @@ class TokenHelper {
   }
 
   eraseToken () {
-    localStorage.setItem('identityToken', null)
+    localStorage.removeItem('identityToken')
   }
 }
 

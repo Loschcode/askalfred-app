@@ -131,7 +131,7 @@ export default {
         await storeIdentityName(this, this.currentIdentityInput)
         router.push({ path: '/getting-started/can-i-get-your-email' })
       } catch (error) {
-        this.events.error('It was impossible to save your name.')
+        this.events.graphError(error)
       }
     }
   }

@@ -18,9 +18,10 @@
               <img src="/images/icons/email.svg">
             </div>
             <input
-              v-model="email"
+              v-model="currentIdentityInput.email"
               type="email"
               placeholder="email@gmail.com"
+              @keyup.enter="connectNow()"
             >
           </div>
           <div class="connect__password">
@@ -28,9 +29,10 @@
               <img src="/images/icons/password.svg">
             </div>
             <input
-              v-model="password"
+              v-model="currentIdentityInput.password"
               type="password"
               placeholder="password"
+              @keyup.enter="connectNow()"
             >
           </div>
           <div class="connect__confirm">
@@ -99,6 +101,10 @@
 <script>
 import router from '@/router'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
+import signIn from '@/graphql/mutations/signIn'
+import { required } from 'vuelidate/lib/validators'
+import EventsService from '@/services/EventsService'
+import IdentityHelper from '@/helpers/IdentityHelper'
 
 export default {
   name: 'SignIn',
@@ -120,14 +126,42 @@ export default {
     }
   },
 
+  data () {
+    return {
+      currentIdentityInput: {
+        email: null,
+        password: null
+      }
+    }
+  },
+
+  validations: {
+    currentIdentityInput: {
+      email: { required },
+      password: { required }
+    }
+  },
+
   created () {
+    this.events = new EventsService(this)
+
     if (!this.isGuest()) return router.push({ path: '/tickets' })
     localStorage.setItem('sign-in-is-known', true)
   },
 
   methods: {
-    connectNow () {
+    async connectNow () {
+      this.$v.currentIdentityInput.$touch()
+      if (this.$v.currentIdentityInput.$error) return
 
+      try {
+        const token = await signIn(this, this.currentIdentityInput)
+        // this will then redirect
+        // to the correct section if successful
+        IdentityHelper.setIdentityWith(token, { path: '/connect/sign-in' })
+      } catch (error) {
+        this.events.graphError(error)
+      }
     }
   }
 }
