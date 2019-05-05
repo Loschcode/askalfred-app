@@ -47,12 +47,19 @@
 
 <script>
 import FirstTicket from '@/components/Tickets/FirstTicket'
+import CustomerOnlyGuardMixin from '@/mixins/CustomerOnlyGuardMixin'
+import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 
 export default {
   name: 'TicketsIndex',
   components: {
     FirstTicket
-  }
+  },
+
+  mixins: [
+    CurrentIdentityMixin,
+    CustomerOnlyGuardMixin
+  ]
 }
 </script>
 
