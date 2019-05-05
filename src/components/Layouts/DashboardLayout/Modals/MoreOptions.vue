@@ -16,7 +16,10 @@
                 More options ...
               </div>
               <div class="more-options__buttons">
-                <div class="button button__white-on-red button--squared button--bold">
+                <div
+                  class="button button__white-on-red button--squared button--bold"
+                  @click="signOut()"
+                >
                   Sign out
                 </div>
               </div>
@@ -42,6 +45,8 @@
 <script>
 import Modal from '@/components/Modal'
 import ModalsCommonSuccess from '@/components/Modals/Success'
+import TokenHelper from '@/helpers/TokenHelper'
+import PageHelper from '@/helpers/PageHelper'
 
 export default {
   name: 'ModalsMoreOptions',
@@ -59,6 +64,11 @@ export default {
   },
 
   methods: {
+    signOut () {
+      TokenHelper.eraseToken()
+      PageHelper.hardRedirectTo({ path: '/' })
+    },
+
     currentModal () {
       return this.$refs['current-modal']
     },
