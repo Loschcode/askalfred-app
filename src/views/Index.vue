@@ -17,7 +17,7 @@ export default {
   ],
 
   created () {
-    if (this.isGuest()) {
+    if (this.isGuest() && !this.signInIsKnown()) {
       router.push({ path: '/getting-started' })
     } else {
       router.push({ path: '/connect/sign-in' })
@@ -25,6 +25,9 @@ export default {
   },
 
   methods: {
+    signInIsKnown () {
+      return localStorage.getItem('sign-in-is-known')
+    }
   }
 }
 </script>

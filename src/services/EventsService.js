@@ -1,5 +1,6 @@
 import EventBus from '@/misc/EventBus'
 import PageHelper from '@/helpers/PageHelper'
+import TokenHelper from '@/helpers/TokenHelper'
 
 class EventsService {
   constructor (vm) {
@@ -63,7 +64,7 @@ class EventsService {
   onRebootEvent (error) {
     if (error) {
       console.log(error)
-      localStorage.clear()
+      TokenHelper.eraseToken()
     }
     PageHelper.refreshPage()
   }

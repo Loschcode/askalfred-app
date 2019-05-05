@@ -121,8 +121,8 @@ export default {
   },
 
   created () {
-    console.log('ROLE: ' + this.currentIdentity.role)
     if (!this.isGuest()) return router.push({ path: '/tickets' })
+    localStorage.setItem('sign-in-is-known', true)
   },
 
   methods: {

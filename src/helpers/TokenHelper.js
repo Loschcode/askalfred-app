@@ -6,6 +6,10 @@ class TokenHelper {
   getCurrentToken () {
     return localStorage.getItem('identityToken')
   }
+
+  eraseToken () {
+    localStorage.setItem('identityToken', null)
+  }
 }
 
 export default new TokenHelper()
