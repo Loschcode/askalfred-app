@@ -1,16 +1,18 @@
 <template>
   <div id="app">
-    <!-- Notify -->
-    <custom-notifications />
+    <div class="tingle-content-wrapper">
+      <!-- Notify -->
+      <custom-notifications />
 
-    <component :is="currentLayout">
-      <div v-if="isRawRoute()">
-        <router-view />
-      </div>
-      <div v-else>
-        <connect-routing />
-      </div>
-    </component>
+      <component :is="currentLayout">
+        <div v-if="isRawRoute()">
+          <router-view />
+        </div>
+        <div v-else>
+          <connect-routing />
+        </div>
+      </component>
+    </div>
   </div>
 </template>
 
