@@ -95,7 +95,7 @@ export default {
       email: this.currentIdentity.email
     }
 
-    if (this.emailInput == null) {
+    if (this.currentIdentityInput.email === null) {
       this.$refs.email.focus()
     }
   },

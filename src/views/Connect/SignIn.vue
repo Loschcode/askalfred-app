@@ -18,6 +18,7 @@
               <img src="/images/icons/email.svg">
             </div>
             <input
+              ref="email"
               v-model="currentIdentityInput.email"
               type="email"
               placeholder="email@gmail.com"
@@ -29,6 +30,7 @@
               <img src="/images/icons/password.svg">
             </div>
             <input
+              ref="password"
               v-model="currentIdentityInput.password"
               type="password"
               placeholder="password"
@@ -147,6 +149,12 @@ export default {
 
     if (!this.isGuest()) return router.push({ path: '/tickets' })
     localStorage.setItem('sign-in-is-known', true)
+  },
+
+  mounted () {
+    if (this.currentIdentityInput.email === null) {
+      this.$refs.email.focus()
+    }
   },
 
   methods: {
