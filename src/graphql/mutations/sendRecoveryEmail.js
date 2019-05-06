@@ -4,6 +4,7 @@ const mutation = gql`
   mutation SendRecoveryEmail($input: SendRecoveryEmailInput!) {
     sendRecoveryEmail(input: $input) {
       currentIdentity {
+        id
         email
       }
     }

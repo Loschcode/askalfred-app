@@ -3,8 +3,11 @@ import gql from 'graphql-tag'
 const mutation = gql`
   mutation StoreIdentityName($input: StoreIdentityNameInput!) {
     storeIdentityName(input: $input) {
-      firstName
-      lastName
+      currentIdentity {
+        id
+        firstName
+        lastName
+      }
     }
   }
 `
@@ -17,8 +20,8 @@ export default async (vm, input) => {
         input
       },
       update: (store, { data: { storeIdentityName } }) => {
-        vm.storeIdentityName = storeIdentityName
-        Object.assign(vm.currentIdentity, storeIdentityName)
+        // vm.storeIdentityName = storeIdentityName
+        // Object.assign(vm.currentIdentity, storeIdentityName)
       }
     })
     .then(({ data: { storeIdentityName } }) => {

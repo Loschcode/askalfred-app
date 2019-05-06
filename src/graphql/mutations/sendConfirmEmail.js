@@ -4,6 +4,7 @@ const mutation = gql`
   mutation SendConfirmEmail {
     sendConfirmEmail {
       currentIdentity {
+        id
         email
         confirmedAt
       }
