@@ -6,6 +6,7 @@ const query = gql`
     ticketsList {
       id
       status
+      title
       messages(input: $eventMessageInput) {
         id
         body
@@ -29,7 +30,7 @@ const result = function ({ data: { tickets } }) {
 }
 
 const error = function () {
-  new EventsService(this).crash(
+  new EventsService(this).error(
     'We were unable to retrieve the tickets list'
   )
 }
