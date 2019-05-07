@@ -12,13 +12,26 @@
       </div>
       <div class="col-xs-7 +no-padding">
         <div class="ticket__title">
-          <div class="ticket__title-head ticket__title-head--wait">
+          <div :class="`ticket__title-head ticket__title-head--${ticket.status}`">
             <span v-if="ticket.title">
               {{ ticket.title }}
             </span>
             <span v-else>
               New request
-            </span> <span class="ticket__title-tag ticket__title-tag--wait">Waiting list</span>
+            </span> <span :class="`ticket__title-tag ticket__title-tag--${ticket.status}`">
+              <span v-if="ticket.status === 'opened'">
+                Waiting list
+              </span>
+              <span v-else-if="ticket.status === 'processing'">
+                I'm on it!
+              </span>
+              <span v-else-if="ticket.status === 'completed'">
+                Thanks
+              </span>
+              <span v-else-if="ticket.status === 'canceled'">
+                Closed
+              </span>
+            </span>
           </div>
           <div class="ticket__title-excerpt">
             {{ ticket.messages[0].body }}
@@ -66,10 +79,10 @@ export default {
 }
 
 .ticket__title-head {
+  color: $color-dark-grey;
 }
 
-.ticket__title-head--wait {
-  color: $color-dark-grey;
+.ticket__title-head--opened {
 }
 
 .ticket__title-tag {
@@ -77,8 +90,17 @@ export default {
   font-size: 11px;
 }
 
-.ticket__title-tag--wait {
+.ticket__title-tag--opened {
   color: $color-mid-dark-grey;
+}
+.ticket__title-tag--processing {
+  color: $color-blue;
+}
+.ticket__title-tag--completed {
+  color: $color-green;
+}
+.ticket__title-tag--canceled {
+  color: $color-red;
 }
 
 .ticket__title-excerpt {
