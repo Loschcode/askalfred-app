@@ -21,7 +21,7 @@
         <div class="row between-xs around-md">
           <div class="col-xs-6 col-md-6 +no-padding">
             <div class="header-submenu__text-button">
-              <a href="#">
+              <a href="mailto:support@askalfred.app">
                 Support
               </a>
             </div>
