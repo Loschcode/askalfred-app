@@ -15,7 +15,7 @@ const query = gql`
 `
 
 const variables = {
-  EventMessageInput: {
+  eventMessageInput: {
     limit: 1
   }
 }

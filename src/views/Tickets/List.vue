@@ -8,10 +8,11 @@
           <first-ticket />
         </div>
 
-        TICKETS: {{ ticketsList }}
-
         <!-- Ticket -->
-        <div class="row center-xs">
+        <div
+          v-for="ticket in ticketsList"
+          class="row center-xs"
+        >
           <div class="col-xs-11 col-md-10 col-lg-9">
             <div class="ticket +pointer">
               <div class="row start-xs">
@@ -30,6 +31,7 @@
                       New request <span class="ticket__title-tag ticket__title-tag--wait">Waiting list</span>
                     </div>
                     <div class="ticket__title-excerpt">
+                      {{ ticket.messages.length }}
                       Hi, there, Welcome to Talentoda…
                     </div>
                   </div>
