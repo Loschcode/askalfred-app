@@ -8,6 +8,9 @@
           <first-ticket />
         </div>
 
+        TICKETS: {{ ticketsList }}
+
+        <!-- Ticket -->
         <div class="row center-xs">
           <div class="col-xs-11 col-md-10 col-lg-9">
             <div class="ticket +pointer">
@@ -49,9 +52,10 @@
 import FirstTicket from '@/components/Tickets/FirstTicket'
 import CustomerOnlyGuardMixin from '@/mixins/CustomerOnlyGuardMixin'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
+import ticketsList from '@/graphql/queries/ticketsList'
 
 export default {
-  name: 'TicketsIndex',
+  name: 'TicketsList',
   components: {
     FirstTicket
   },
@@ -59,7 +63,11 @@ export default {
   mixins: [
     CurrentIdentityMixin,
     CustomerOnlyGuardMixin
-  ]
+  ],
+
+  apollo: {
+    ticketsList
+  }
 }
 </script>
 
