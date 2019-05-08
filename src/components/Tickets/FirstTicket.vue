@@ -17,18 +17,40 @@
     <div class="row center-xs">
       <div class="col-xs-10">
         <div class="first-ticket__button">
-          <div class="button button__blue-on-white button--large button--bold">
-            <a href="#">Make your first request</a>
+          <div
+            class="button button__blue-on-white button--large button--bold"
+            @click="askAlfred()"
+          >
+            Make your first request
           </div>
         </div>
       </div>
     </div>
+    <!-- Modals -->
+    <modals-ask-alfred ref="modals-ask-alfred" />
   </div>
 </template>
 
 <script>
+import ModalsAskAlfred from '@/components/Tickets/Modals/AskAlfred'
+import ModalsMixin from '@/mixins/ModalsMixin'
+
 export default {
-  name: 'FirstTicket'
+  name: 'FirstTicket',
+
+  components: {
+    ModalsAskAlfred
+  },
+
+  mixins: [
+    ModalsMixin
+  ],
+
+  methods: {
+    askAlfred () {
+      this.openModal('modals-ask-alfred')
+    }
+  }
 }
 </script>
 

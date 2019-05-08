@@ -27,32 +27,19 @@
           </div>
         </div>
       </div>
-
-      <!-- Success -->
-      <div ref="thank-you">
-        <div class="content">
-          <modals-common-success
-            :title="`Thank you!`"
-            :content="`We will get back to you shortly to give your early access.`"
-            :action="close"
-          />
-        </div>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Modal from '@/components/Modal'
-import ModalsCommonSuccess from '@/components/Modals/Success'
 import TokenHelper from '@/helpers/TokenHelper'
 import PageHelper from '@/helpers/PageHelper'
 
 export default {
   name: 'ModalsMoreOptions',
   components: {
-    Modal,
-    ModalsCommonSuccess
+    Modal
   },
   props: {
   },
