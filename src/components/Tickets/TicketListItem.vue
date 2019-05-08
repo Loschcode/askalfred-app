@@ -23,10 +23,10 @@
                 Waiting list
               </span>
               <span v-else-if="ticket.status === 'processing'">
-                I'm on it!
+                Working
               </span>
               <span v-else-if="ticket.status === 'completed'">
-                Thanks
+                Thanks!
               </span>
               <span v-else-if="ticket.status === 'canceled'">
                 Closed
@@ -58,9 +58,12 @@ export default {
   mixins: [
     CurrentIdentityMixin
   ],
-  props: [
-    'ticket'
-  ]
+  props: {
+    ticket: {
+      default: function () {},
+      type: Object
+    }
+  }
 }
 </script>
 

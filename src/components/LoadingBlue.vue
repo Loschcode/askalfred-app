@@ -1,6 +1,6 @@
 <template>
   <svg
-    class="loading loading__white progress"
+    class="loading loading__blue progress"
     width="40"
     height="40"
     version="1.1"

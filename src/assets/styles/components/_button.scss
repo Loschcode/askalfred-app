@@ -39,6 +39,14 @@
   }
 }
 
+.button__black-on-white  {
+  background-color: $color-white;
+  color: $color-soft-grey;
+  a {
+    color: $color-soft-grey;
+  }
+}
+
 .button__white-on-blue--soft {
   a {
     color: $color-soft-grey;

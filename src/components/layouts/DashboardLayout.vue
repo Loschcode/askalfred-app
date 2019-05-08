@@ -39,15 +39,15 @@
       <div class="wrap container">
         <slot />
       </div>
-    </div>
 
-    <div class="footer wrap container-fluid">
-      <!-- New request -->
-      <div class="row center-xs">
-        <div class="col-xs-8 col-md-6">
-          <div class="new-request">
-            <div class="button button__blue-on-white button--large button--bold">
-              New request
+      <div class="footer wrap container-fluid">
+        <!-- New request -->
+        <div class="row center-xs">
+          <div class="col-xs-8 col-md-6">
+            <div class="new-request">
+              <div class="button button__blue-on-white button--large button--bold">
+                New request
+              </div>
             </div>
           </div>
         </div>
@@ -89,8 +89,6 @@ export default {
 }
 
 .footer {
-  position: absolute;
-  bottom: 0;
   padding: 1em;
   padding-bottom: 1.5em;
 }

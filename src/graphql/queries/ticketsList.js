@@ -2,30 +2,38 @@ import gql from 'graphql-tag'
 import EventsService from '@/services/EventsService'
 
 const query = gql`
-  query TicketsList($eventMessageInput: EventMessageInput) {
-    ticketsList {
-      id
-      status
-      title
-      messages(input: $eventMessageInput) {
+  query TicketsList($ticketsListInput: TicketsListInput, $eventMessageInput: EventMessageInput) {
+    ticketsList(input: $ticketsListInput) {
+      items {
         id
-        body
+        status
+        title
+        messages(input: $eventMessageInput) {
+          id
+          body
+        }
+      }
+      pageInfo {
+        totalCount
+        hasNextPage
+        hasPreviousPage
       }
     }
   }
 `
 
-const variables = {
-  eventMessageInput: {
-    limit: 1
+const variables = function () {
+  return {
+    eventMessageInput: {
+      limit: 1
+    },
+    ticketsListInput: this.ticketsListInput
   }
 }
 
-const result = function ({ data: { tickets } }) {
-  this.tickets = tickets
-
+const result = function ({ data }) {
   return {
-    tickets
+    data
   }
 }
 

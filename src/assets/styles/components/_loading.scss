@@ -1,9 +1,16 @@
 .loading {
   margin-left: 48%;
   fill: transparent;
-  stroke: $color-white;
   stroke-width: 3;
   animation: dash 1.8s ease infinite, rotate 1.8s linear infinite;
+}
+
+.loading__white {
+  stroke: $color-white;
+}
+
+.loading__blue {
+  stroke: $color-blue;
 }
 
 @keyframes dash {
