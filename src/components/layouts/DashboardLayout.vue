@@ -39,19 +39,6 @@
       <div class="wrap container">
         <slot />
       </div>
-
-      <div class="footer wrap container-fluid">
-        <!-- New request -->
-        <div class="row center-xs">
-          <div class="col-xs-8 col-md-6">
-            <div class="new-request">
-              <div class="button button__blue-on-white button--large button--bold">
-                New request
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 
     <!-- Modals -->
@@ -86,10 +73,5 @@ export default {
 
 <style scoped lang="scss">
 .dashboard-layout {
-}
-
-.footer {
-  padding: 1em;
-  padding-bottom: 1.5em;
 }
 </style>

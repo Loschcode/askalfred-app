@@ -4,7 +4,7 @@
       <div class="row center-xs">
         <div class="col-xs-12">
           <!-- Make first ticket -->
-          <div v-if="ticketsList.items.size === 0">
+          <div v-if="ticketsList.items.length === 0">
             <first-ticket />
           </div>
           <div v-else>
@@ -29,6 +29,17 @@
                     class="button button__black-on-white button--half-squared"
                   >
                     See more requests
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- New request -->
+            <div class="row center-xs">
+              <div class="col-xs-8 col-md-6">
+                <div class="new-request">
+                  <div class="button button__blue-on-white button--large button--bold">
+                    New request
                   </div>
                 </div>
               </div>

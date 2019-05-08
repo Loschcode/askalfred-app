@@ -17,7 +17,7 @@
     <div class="row center-xs">
       <div class="col-xs-10">
         <div class="first-ticket__button">
-          <div class="button button__blue-on-white">
+          <div class="button button__blue-on-white button--large button--bold">
             <a href="#">Make your first request</a>
           </div>
         </div>
