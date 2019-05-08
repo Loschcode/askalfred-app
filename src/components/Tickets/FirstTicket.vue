@@ -33,7 +33,7 @@
 
 <script>
 import ModalsAskAlfred from '@/components/Tickets/Modals/AskAlfred'
-import ModalsMixin from '@/mixins/ModalsMixin'
+import OpenModalMixin from '@/mixins/OpenModalMixin'
 
 export default {
   name: 'FirstTicket',
@@ -43,7 +43,7 @@ export default {
   },
 
   mixins: [
-    ModalsMixin
+    OpenModalMixin
   ],
 
   methods: {

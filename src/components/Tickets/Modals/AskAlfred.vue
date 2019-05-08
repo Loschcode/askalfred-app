@@ -51,6 +51,7 @@
 
 <script>
 import Modal from '@/components/Modal'
+import InnerModalMixin from '@/mixins/InnerModalMixin'
 import ModalsCommonSuccess from '@/components/Modals/Success'
 import autosize from 'autosize'
 
@@ -60,36 +61,28 @@ export default {
     Modal,
     ModalsCommonSuccess
   },
+  mixins: [
+    InnerModalMixin
+  ],
+
   props: {
   },
 
   data () {
     return {
-      isOpen: false,
       firstMessage: '',
       placeholder: 'Write your request here\r\n\r\nAdd as much details as possible.\r\n\r\nNo worry though, If I need more informations, I’ll come back to you before to start.'
     }
   },
 
   methods: {
-    currentModal () {
-      return this.$refs['current-modal']
+    onOpen () {
+      this.currentModal().setWithContentOf(this, 'ask-alfred-window')
+      autosize(document.querySelectorAll('textarea'))
     },
 
-    close () {
-      this.currentModal().close()
-    },
-
-    open () {
-      this.isOpen = true
-      this.$nextTick(() => {
-        this.currentModal().open()
-        this.currentModal().setWithContentOf(this, 'ask-alfred-window')
-        autosize(document.querySelectorAll('textarea'))
-        this.$nextTick(() => {
-          this.$refs.request.focus()
-        })
-      })
+    afterOpen () {
+      this.$refs.request.focus()
     }
   }
 }

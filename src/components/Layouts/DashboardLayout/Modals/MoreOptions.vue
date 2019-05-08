@@ -35,20 +35,17 @@
 import Modal from '@/components/Modal'
 import TokenHelper from '@/helpers/TokenHelper'
 import PageHelper from '@/helpers/PageHelper'
+import InnerModalMixin from '@/mixins/InnerModalMixin'
 
 export default {
   name: 'ModalsMoreOptions',
   components: {
     Modal
   },
-  props: {
-  },
 
-  data () {
-    return {
-      isOpen: false
-    }
-  },
+  mixins: [
+    InnerModalMixin
+  ],
 
   methods: {
     signOut () {
@@ -56,20 +53,8 @@ export default {
       PageHelper.hardRedirectTo({ path: '/' })
     },
 
-    currentModal () {
-      return this.$refs['current-modal']
-    },
-
-    close () {
-      this.currentModal().close()
-    },
-
-    open () {
-      this.isOpen = true
-      this.$nextTick(() => {
-        this.currentModal().open()
-        this.currentModal().setWithContentOf(this, 'more-options-window')
-      })
+    onOpen () {
+      this.currentModal().setWithContentOf(this, 'more-options-window')
     }
   }
 }

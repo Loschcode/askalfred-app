@@ -48,7 +48,7 @@
 
 <script>
 import CreditLeft from '@/components/Header/CreditLeft'
-import ModalsMixin from '@/mixins/ModalsMixin'
+import OpenModalMixin from '@/mixins/OpenModalMixin'
 import ModalsMoreOptions from '@/components/Layouts/DashboardLayout/Modals/MoreOptions'
 
 export default {
@@ -58,7 +58,7 @@ export default {
     ModalsMoreOptions
   },
 
-  mixins: [ModalsMixin],
+  mixins: [OpenModalMixin],
 
   props: {
   },
