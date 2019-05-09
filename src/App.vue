@@ -1,9 +1,8 @@
 <template>
   <div id="app">
+    <!-- Notify -->
+    <custom-notifications />
     <div class="tingle-content-wrapper">
-      <!-- Notify -->
-      <custom-notifications />
-
       <component :is="currentLayout">
         <div v-if="isRawRoute()">
           <router-view />

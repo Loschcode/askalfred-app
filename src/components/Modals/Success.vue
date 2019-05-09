@@ -1,7 +1,7 @@
 
 <template>
   <div class="modal-success">
-    <div class="wrap container">
+    <div class="container content ask-alfred-window">
       <div class="row center-xs">
         <div class="col-md-12">
           <div class="modal-success__icon">

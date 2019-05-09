@@ -1,6 +1,6 @@
 <template>
   <div class="more-options">
-    <modal ref="current-modal" />
+    <modal-body ref="current-modal" />
 
     <!-- modal contents -->
     <div
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import Modal from '@/components/Modal'
+import ModalBody from '@/components/ModalBody'
 import TokenHelper from '@/helpers/TokenHelper'
 import PageHelper from '@/helpers/PageHelper'
 import InnerModalMixin from '@/mixins/InnerModalMixin'
@@ -40,7 +40,7 @@ import InnerModalMixin from '@/mixins/InnerModalMixin'
 export default {
   name: 'ModalsMoreOptions',
   components: {
-    Modal
+    ModalBody
   },
 
   mixins: [

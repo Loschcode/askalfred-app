@@ -1,6 +1,6 @@
 <template>
   <div class="ask-alfred">
-    <modal ref="current-modal" />
+    <modal-body ref="current-modal" />
 
     <!-- modal contents -->
     <div
@@ -15,7 +15,7 @@
               <div class="request">
                 <textarea
                   ref="request"
-                  v-model="firstMessage"
+                  v-model="createTicketInput.message"
                   name="message"
                   :placeholder="placeholder"
                 />
@@ -23,7 +23,10 @@
                 <div class="request__button">
                   <div class="row center-xs">
                     <div class="col-xs-12">
-                      <div class="button button__blue-on-white button--large button--bold">
+                      <div
+                        class="button button__blue-on-white button--large button--bold"
+                        @click="askNow()"
+                      >
                         Ask alfred
                       </div>
                     </div>
@@ -40,7 +43,7 @@
         <div class="content">
           <modals-common-success
             :title="`No worry!`"
-            :content="`Alfred will take care of this.isOpen`"
+            :content="`Alfred will take care of this`"
             :action="close"
           />
         </div>
@@ -50,15 +53,18 @@
 </template>
 
 <script>
-import Modal from '@/components/Modal'
+import ModalBody from '@/components/ModalBody'
 import InnerModalMixin from '@/mixins/InnerModalMixin'
 import ModalsCommonSuccess from '@/components/Modals/Success'
 import autosize from 'autosize'
+import createTicket from '@/graphql/mutations/createTicket'
+import EventsService from '@/services/EventsService'
+import { required } from 'vuelidate/lib/validators'
 
 export default {
   name: 'ModalsAskAlfred',
   components: {
-    Modal,
+    ModalBody,
     ModalsCommonSuccess
   },
   mixins: [
@@ -68,11 +74,23 @@ export default {
   props: {
   },
 
+  validations: {
+    createTicketInput: {
+      message: { required }
+    }
+  },
+
   data () {
     return {
-      firstMessage: '',
+      createTicketInput: {
+        message: ''
+      },
       placeholder: 'Write your request here\r\n\r\nAdd as much details as possible.\r\n\r\nNo worry though, If I need more informations, I’ll come back to you before to start.'
     }
+  },
+
+  created () {
+    this.events = new EventsService(this)
   },
 
   methods: {
@@ -83,6 +101,18 @@ export default {
 
     afterOpen () {
       this.$refs.request.focus()
+    },
+
+    async askNow () {
+      this.$v.createTicketInput.$touch()
+      if (this.$v.createTicketInput.$error) return
+
+      try {
+        await createTicket(this, this.createTicketInput)
+        this.currentModal().setWithContentOf(this, 'no-worry')
+      } catch (error) {
+        this.events.graphError(error)
+      }
     }
   }
 }
