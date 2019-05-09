@@ -1,11 +1,11 @@
 
 <template>
   <div class="modal-success">
-    <div class="container content ask-alfred-window">
+    <div class="container-fluid content">
       <div class="row center-xs">
-        <div class="col-md-12">
+        <div class="col-xs-12">
           <div class="modal-success__icon">
-            <img src="/modals/check.svg">
+            <img src="/images/modals/success.svg">
           </div>
           <h2>{{ title }}</h2>
           <p>
@@ -41,12 +41,13 @@ export default {
   position: relative;
   margin-top: spacing(7);
 
-  h1 {
+  h2 {
+    color: $color-green;
+    font-weight: 400;
   }
   p {
     margin: spacing(2);
-    color: red; // TODO : rework that
-    font-weight: 400;
+    font-weight: 200;
     font-size: sizing(3);
   }
 }
