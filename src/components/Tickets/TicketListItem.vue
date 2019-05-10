@@ -34,7 +34,7 @@
             </span>
           </div>
           <div class="ticket__title-excerpt">
-            {{ ticket.messages[0].body }}
+            {{ ticket.messagesConnection.edges[0].node.body }}
           </div>
         </div>
       </div>

@@ -2,32 +2,40 @@ import gql from 'graphql-tag'
 import EventsService from '@/services/EventsService'
 
 const query = gql`
-  query TicketsList($ticketsListInput: TicketsListInput, $eventMessageInput: EventMessageInput) {
-    ticketsList(input: $ticketsListInput) {
-      items {
+query TicketsConnection(
+  $ticketsFirst: Int,
+  $messagesFirst: Int
+) {
+  ticketsConnection(first: $ticketsFirst) {
+    totalCount
+    pageInfo {
+      endCursor
+      startCursor
+      hasPreviousPage
+      hasNextPage
+    }
+    edges {
+      cursor
+      node {
         id
         status
-        title
-        messages(input: $eventMessageInput) {
-          id
-          body
+        messagesConnection(first: $messagesFirst) {
+          edges {
+            node {
+              id
+              body
+            }
+          }
         }
-      }
-      pageInfo {
-        totalCount
-        hasNextPage
-        hasPreviousPage
       }
     }
   }
+}
 `
-
 const variables = function () {
   return {
-    eventMessageInput: {
-      limit: 1
-    },
-    ticketsListInput: this.ticketsListInput
+    ticketsFirst: this.ticketsFirst,
+    messagesFirst: 1
   }
 }
 
@@ -37,10 +45,8 @@ const result = function ({ data }) {
   }
 }
 
-const error = function () {
-  new EventsService(this).error(
-    'We were unable to retrieve the tickets list'
-  )
+const error = function (error) {
+  new EventsService(this).graphError(error)
 }
 
 const skip = function () {

@@ -1,21 +1,21 @@
 <template>
   <div class="tickets-list">
-    <div v-if="ticketsList">
+    <div v-if="ticketsConnection">
       <div class="row center-xs">
         <div class="col-xs-12">
           <!-- Make first ticket -->
-          <div v-if="ticketsList.items.length === 0">
+          <div v-if="ticketsConnection.edges.length === 0">
             <first-ticket />
           </div>
           <div v-else>
             <!-- Ticket -->
             <div
-              v-for="ticket in ticketsList.items"
-              :key="ticket.id"
+              v-for="ticket in ticketsConnection.edges"
+              :key="ticket.node.id"
               class="row center-xs"
             >
               <div class="col-xs-11 col-md-10 col-lg-9">
-                <ticket-list-item :ticket="ticket" />
+                <ticket-list-item :ticket="ticket.node" />
               </div>
             </div>
             <div class="row center-xs">
@@ -25,7 +25,7 @@
                   @click="seeMore()"
                 >
                   <div
-                    v-if="ticketsList.pageInfo.hasNextPage"
+                    v-if="ticketsConnection.pageInfo.hasNextPage"
                     class="button button__black-on-white button--half-squared"
                   >
                     See more requests
@@ -61,7 +61,7 @@ import FirstTicket from '@/components/Tickets/FirstTicket'
 import TicketListItem from '@/components/Tickets/TicketListItem'
 import CustomerOnlyGuardMixin from '@/mixins/CustomerOnlyGuardMixin'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
-import ticketsList from '@/graphql/queries/ticketsList'
+import ticketsConnection from '@/graphql/queries/ticketsConnection'
 import LoadingBlue from '@/components/LoadingBlue'
 
 export default {
@@ -80,22 +80,18 @@ export default {
 
   data () {
     return {
-      ticketsListInput: {
-        limit: 5
-      }
+      ticketsFirst: 5
     }
   },
 
   methods: {
     seeMore () {
-      this.ticketsListInput = {
-        limit: this.ticketsListInput.limit + 5
-      }
+      this.ticketsFirst += 5
     }
   },
 
   apollo: {
-    ticketsList
+    ticketsConnection
   }
 }
 </script>

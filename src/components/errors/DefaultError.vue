@@ -90,9 +90,8 @@ export default {
 .content__raw {
   margin: 1em;
   padding: 1em;
-  color: $color-black;
-  background-color: $color-grey-blueish;
-  @include button-radius("big");
+  color: $color-white;
+  background-color: $color-black;
 }
 
 .call-to-action {
