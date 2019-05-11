@@ -14,18 +14,13 @@ query TicketsConnection(
       hasPreviousPage
       hasNextPage
     }
-    edges {
-      cursor
-      node {
-        id
-        status
-        messagesConnection(first: $messagesFirst) {
-          edges {
-            node {
-              id
-              body
-            }
-          }
+    nodes {
+      id
+      status
+      messagesConnection(first: $messagesFirst) {
+        nodes {
+          id
+          body
         }
       }
     }

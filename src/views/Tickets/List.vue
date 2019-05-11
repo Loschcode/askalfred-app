@@ -4,18 +4,18 @@
       <div class="row center-xs">
         <div class="col-xs-12">
           <!-- Make first ticket -->
-          <div v-if="ticketsConnection.edges.length === 0">
+          <div v-if="ticketsConnection.nodes.length === 0">
             <first-ticket />
           </div>
           <div v-else>
             <!-- Ticket -->
             <div
-              v-for="ticket in ticketsConnection.edges"
-              :key="ticket.node.id"
+              v-for="ticket in ticketsConnection.nodes"
+              :key="ticket.id"
               class="row center-xs"
             >
               <div class="col-xs-11 col-md-10 col-lg-9">
-                <ticket-list-item :ticket="ticket.node" />
+                <ticket-list-item :ticket="ticket" />
               </div>
             </div>
             <div class="row center-xs">
