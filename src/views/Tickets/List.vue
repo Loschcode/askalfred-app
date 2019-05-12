@@ -50,7 +50,7 @@
     </div>
     <div v-else>
       <div class="connect__loading">
-        <loading-blue />
+        <loading :color="`blue`" />
       </div>
     </div>
   </div>
@@ -62,7 +62,7 @@ import TicketListItem from '@/components/Tickets/TicketListItem'
 import CustomerOnlyGuardMixin from '@/mixins/CustomerOnlyGuardMixin'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import ticketsConnection from '@/graphql/queries/ticketsConnection'
-import LoadingBlue from '@/components/LoadingBlue'
+import Loading from '@/components/Loading'
 
 export default {
   name: 'TicketsList',
@@ -70,7 +70,7 @@ export default {
   components: {
     FirstTicket,
     TicketListItem,
-    LoadingBlue
+    Loading
   },
 
   mixins: [

@@ -1,6 +1,6 @@
 <template>
   <svg
-    class="loading loading__white progress"
+    :class="`loading loading__${color} progress`"
     width="40"
     height="40"
     version="1.1"
@@ -16,7 +16,14 @@
 
 <script>
 export default {
-  name: 'Loading'
+  name: 'Loading',
+  props: {
+    color: {
+      default: 'white',
+      type: String,
+      required: false,
+    }
+  }
 }
 </script>
 

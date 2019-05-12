@@ -16,7 +16,7 @@
       </div>
       <div v-else>
         <div class="connect__loading">
-          <loading />
+          <loading :color="loadingColor" />
         </div>
       </div>
     </div>
@@ -43,7 +43,8 @@ export default {
 
   data () {
     return {
-      error: ''
+      error: '',
+      ready: false
     }
   },
 
@@ -51,6 +52,15 @@ export default {
     errorComponent () {
       return 'default-error'
       // return `${this.rawLayout}-error`
+    },
+
+    loadingColor () {
+      console.log(this.rawLayout)
+      if (this.rawLayout === 'default') {
+        return 'white'
+      } else {
+        return 'blue'
+      }
     }
   },
 
@@ -59,9 +69,15 @@ export default {
     await EnsureIdentityOperation(this)
   },
 
+  mounted () {
+    window.addEventListener('load', () => {
+      this.ready = true
+    })
+  },
+
   methods: {
     appReady () {
-      return this.identityToken && this.currentIdentity
+      return this.ready && this.identityToken && this.currentIdentity
     }
   }
 }
@@ -69,6 +85,6 @@ export default {
 
 <style scoped lang="scss">
 .connect__loading {
-  padding-top: 45vh;
+  padding-top: 35vh;
 }
 </style>

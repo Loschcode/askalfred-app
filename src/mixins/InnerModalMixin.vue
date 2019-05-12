@@ -12,6 +12,7 @@ export default {
     },
 
     close () {
+      console.log('CLOSING YO')
       this.currentModal().close()
       this.onClose()
     },
@@ -31,6 +32,9 @@ export default {
     },
 
     onClose () {
+    },
+
+    afterOpen () {
     }
   }
 }
