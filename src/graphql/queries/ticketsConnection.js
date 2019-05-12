@@ -16,6 +16,7 @@ query TicketsConnection(
     }
     nodes {
       id
+      title
       status
       messagesConnection(first: $messagesFirst) {
         nodes {
@@ -49,50 +50,62 @@ const skip = function () {
 }
 
 // Subscription handling
-// const document = gql`
-//   subscription SubscribeToIdentity {
-//     subscribeToTickets {
-//       tickets {
-//         id
-//         title
-//         status
-//         messages {
-//           body
-//         }
-//       }
-//     }
-//   }
-// `
+const document = gql`
+  subscription SubscribeToTickets {
+    subscribeToTickets {
+      ticketsConnection {
+        totalCount
+        pageInfo {
+          endCursor
+          startCursor
+          hasPreviousPage
+          hasNextPage
+        }
+        nodes {
+          id
+          title
+          status
+          messagesConnection {
+            nodes {
+              id
+              body
+            }
+          }
+        }
+      }
+    }
+  }
+`
 
-// const updateQuery = function (
-//   previousResult,
-//   {
-//     subscriptionData: {
-//       data: {
-//         subscribeToTickets: { tickets }
-//       }
-//     }
-//   }
-// ) {
-//   let vmTickets = Object.assign({}, tickets)
-//   delete vmTickets['__typename']
-//   this.tickets = vmTickets
+const updateQuery = function (
+  previousResult,
+  {
+    subscriptionData: {
+      data: {
+        subscribeToTickets: { ticketsConnection }
+      }
+    }
+  }
+) {
+  let vmTickets = Object.assign({}, ticketsConnection)
+  delete vmTickets['__typename']
+  this.ticketsConnection = vmTickets
 
-//   return {
-//     tickets
-//   }
-// }
+  return {
+    ticketsConnection
+  }
+}
 
-// const subscribeToMore = {
-//   document,
-//   updateQuery
-// }
+const subscribeToMore = {
+  document,
+  updateQuery
+}
 
 export default {
   query,
   variables,
   result,
   error,
-  skip
-  // subscribeToMore
+  skip,
+  subscribeToMore
 }

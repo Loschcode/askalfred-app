@@ -135,7 +135,7 @@ export default {
     width: 100%;
     border: 0px;
     &::placeholder {
-      color: $color-grey; // $color-light-grey-blueish;
+      color: $color-grey;
     }
     &:disabled {
       background-color: $color-disabled-input;

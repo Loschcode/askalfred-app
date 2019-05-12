@@ -3,13 +3,24 @@ import gql from 'graphql-tag'
 const mutation = gql`
   mutation CreateTicket($input: CreateTicketInput!) {
     createTicket(input: $input) {
-      ticket {
-        id
-        status
-        title
-        messages {
+      ticketsConnection {
+        totalCount
+        pageInfo {
+          endCursor
+          startCursor
+          hasPreviousPage
+          hasNextPage
+        }
+        nodes {
           id
-          body
+          title
+          status
+          messagesConnection {
+            nodes {
+              id
+              body
+            }
+          }
         }
       }
     }
@@ -24,6 +35,7 @@ export default async (vm, input) => {
         input
       },
       update: (store, { data: { createTicket } }) => {
+        // store.ticketsConnection = store.ticketsConnection.concat(createTicket.ticketsConnection.nodes)
       }
     })
     .then(({ data: { createTicket } }) => {
