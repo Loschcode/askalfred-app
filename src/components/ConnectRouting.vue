@@ -51,11 +51,9 @@ export default {
   computed: {
     errorComponent () {
       return 'default-error'
-      // return `${this.rawLayout}-error`
     },
 
     loadingColor () {
-      console.log(this.rawLayout)
       if (this.rawLayout === 'default') {
         return 'white'
       } else {
@@ -70,9 +68,7 @@ export default {
   },
 
   mounted () {
-    window.addEventListener('load', () => {
-      this.ready = true
-    })
+    this.ready = true
   },
 
   methods: {

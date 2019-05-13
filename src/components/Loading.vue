@@ -21,7 +21,7 @@ export default {
     color: {
       default: 'white',
       type: String,
-      required: false,
+      required: false
     }
   }
 }
