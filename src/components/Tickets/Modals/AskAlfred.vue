@@ -110,6 +110,7 @@ export default {
       try {
         await createTicket(this, this.createTicketInput)
         this.currentModal().setWithContentOf(this, 'no-worry')
+        this.createTicketInput.message = ''
       } catch (error) {
         this.events.graphError(error)
       }

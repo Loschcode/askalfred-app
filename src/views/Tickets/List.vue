@@ -38,7 +38,10 @@
             <div class="row center-xs">
               <div class="col-xs-8 col-md-6">
                 <div class="new-request">
-                  <div class="button button__blue-on-white button--large button--bold">
+                  <div
+                    class="button button__blue-on-white button--large button--bold"
+                    @click="askAlfred()"
+                  >
                     New request
                   </div>
                 </div>
@@ -47,6 +50,8 @@
           </div>
         </div>
       </div>
+      <!-- Modals -->
+      <modals-ask-alfred ref="modals-ask-alfred" />
     </div>
     <div v-else>
       <div class="connect__loading">
@@ -57,6 +62,8 @@
 </template>
 
 <script>
+import ModalsAskAlfred from '@/components/Tickets/Modals/AskAlfred'
+import OpenModalMixin from '@/mixins/OpenModalMixin'
 import FirstTicket from '@/components/Tickets/FirstTicket'
 import TicketListItem from '@/components/Tickets/TicketListItem'
 import CustomerOnlyGuardMixin from '@/mixins/CustomerOnlyGuardMixin'
@@ -70,12 +77,14 @@ export default {
   components: {
     FirstTicket,
     TicketListItem,
-    Loading
+    Loading,
+    ModalsAskAlfred
   },
 
   mixins: [
     CurrentIdentityMixin,
-    CustomerOnlyGuardMixin
+    CustomerOnlyGuardMixin,
+    OpenModalMixin
   ],
 
   data () {
@@ -85,6 +94,10 @@ export default {
   },
 
   methods: {
+    askAlfred () {
+      this.openModal('modals-ask-alfred')
+    },
+
     seeMore () {
       this.ticketsFirst += 5
     }
@@ -104,6 +117,7 @@ export default {
 
 .tickets-list__see-more {
   padding-top: 1em;
+  padding-bottom: 2em;
 }
 
 .connect__loading {

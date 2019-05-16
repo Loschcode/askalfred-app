@@ -67,13 +67,6 @@ const updateQuery = function (
   }
 ) {
   this.$apollo.queries.ticketsConnection.refetch()
-  // let vmTickets = Object.assign({}, ticketsConnection)
-  // delete vmTickets['__typename']
-  // this.ticketsConnection = vmTickets
-
-  // return {
-  //   ticketsConnection
-  // }
 }
 
 const subscribeToMore = {
