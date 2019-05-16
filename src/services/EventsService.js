@@ -31,7 +31,7 @@ class EventsService {
   }
 
   graphError (error) {
-    const serialized = error.graphQLErrors.map(error => error.message).join(', ')
+    const serialized = error.graphQLErrors.map(error => error.message).join(', ') || 'An error occurred. Please try again.'
     this.error(serialized)
   }
 

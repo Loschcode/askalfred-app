@@ -4,7 +4,7 @@
       <div class="row center-xs">
         <div class="col-xs-12">
           <!-- Make first ticket -->
-          <div v-if="ticketsConnection.nodes.length === 0">
+          <div v-if="ticketsConnection.totalCount === 0">
             <first-ticket />
           </div>
           <div v-else>

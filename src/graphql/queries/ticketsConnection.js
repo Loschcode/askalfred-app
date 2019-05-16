@@ -66,6 +66,7 @@ const updateQuery = function (
     }
   }
 ) {
+  console.log('RECEIVED SUBSCRIPTION')
   this.$apollo.queries.ticketsConnection.refetch()
 }
 
