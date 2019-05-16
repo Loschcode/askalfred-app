@@ -51,7 +51,7 @@
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 
 export default {
-  name: 'TicketsList',
+  name: 'TicketsConnection',
   components: {
   },
 

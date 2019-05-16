@@ -51,28 +51,9 @@ const skip = function () {
 
 // Subscription handling
 const document = gql`
-  subscription SubscribeToTickets {
-    subscribeToTickets {
-      ticketsConnection {
-        totalCount
-        pageInfo {
-          endCursor
-          startCursor
-          hasPreviousPage
-          hasNextPage
-        }
-        nodes {
-          id
-          title
-          status
-          messagesConnection {
-            nodes {
-              id
-              body
-            }
-          }
-        }
-      }
+  subscription RefreshTicketsConnection {
+    refreshTicketsConnection {
+      success
     }
   }
 `
@@ -81,19 +62,18 @@ const updateQuery = function (
   previousResult,
   {
     subscriptionData: {
-      data: {
-        subscribeToTickets: { ticketsConnection }
-      }
+      data: { refreshTicketsConnection }
     }
   }
 ) {
-  let vmTickets = Object.assign({}, ticketsConnection)
-  delete vmTickets['__typename']
-  this.ticketsConnection = vmTickets
+  this.$apollo.queries.ticketsConnection.refetch()
+  // let vmTickets = Object.assign({}, ticketsConnection)
+  // delete vmTickets['__typename']
+  // this.ticketsConnection = vmTickets
 
-  return {
-    ticketsConnection
-  }
+  // return {
+  //   ticketsConnection
+  // }
 }
 
 const subscribeToMore = {

@@ -26,7 +26,7 @@ import PrivacyPolicy from './views/Pages/PrivacyPolicy.vue'
 
 // Tickets
 import TicketsIndex from './views/Tickets/Index.vue'
-import TicketsList from './views/Tickets/List.vue'
+import TicketsConnection from './views/Tickets/List.vue'
 import TicketsShow from './views/Tickets/Show.vue'
 
 Vue.use(Router)
@@ -132,7 +132,7 @@ const router = new Router({
     {
       path: '/tickets/list',
       meta: { layout: 'dashboard' },
-      component: TicketsList
+      component: TicketsConnection
     },
     {
       path: '/tickets/show',
