@@ -36,12 +36,9 @@
 
             <!-- New request -->
             <div class="row center-xs">
-              <div class="col-xs-8 col-md-6">
+              <div class="col-xs-8 col-md-6 +extend-clickable +pointer" @click="askAlfred()">
                 <div class="new-request">
-                  <div
-                    class="button button__blue-on-white button--large button--bold"
-                    @click="askAlfred()"
-                  >
+                  <div class="button button__blue-on-white button--large button--bold">
                     New request
                   </div>
                 </div>

@@ -22,11 +22,8 @@
 
                 <div class="request__button">
                   <div class="row center-xs">
-                    <div class="col-xs-12">
-                      <div
-                        class="button button__blue-on-white button--large button--bold"
-                        @click="askNow()"
-                      >
+                    <div class="col-xs-12 +extend-clickable +pointer" @click="askNow()">
+                      <div class="button button__blue-on-white button--large button--bold">
                         Ask alfred
                       </div>
                     </div>

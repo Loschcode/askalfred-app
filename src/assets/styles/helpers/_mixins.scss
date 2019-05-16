@@ -79,7 +79,7 @@
   box-shadow: inset 0px 5px 5px -5px rgba(0,0,0,0.50);
 }
 
-@mixin extend-clickable($width: 2em, $height: 2em) {
+@mixin extend-clickable($width: 1em, $height: 1em) {
   padding-top: $height;
   padding-bottom: $height;
   padding-left: $width;

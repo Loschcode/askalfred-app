@@ -69,3 +69,7 @@
 .\+hidden {
   display: none;
 }
+
+.\+extend-clickable {
+  @include extend-clickable()
+}
