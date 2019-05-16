@@ -2,17 +2,20 @@
 export default {
   data () {
     return {
+      memoModal: null,
       isOpen: false
     }
   },
 
   methods: {
+    // memoization is needed in case the page changes in-between
+    // to keep the reference of the current modal
     currentModal () {
-      return this.$refs['current-modal']
+      if (!this.memoModal) this.memoModal = this.$refs['current-modal']
+      return this.memoModal
     },
 
     close () {
-      console.log('CLOSING YO')
       this.currentModal().close()
       this.onClose()
     },
