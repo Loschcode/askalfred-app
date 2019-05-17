@@ -2,27 +2,15 @@ import gql from 'graphql-tag'
 import EventsService from '@/services/EventsService'
 
 const query = gql`
-query TicketsConnection(
-  $ticketsFirst: Int,
-  $messagesFirst: Int
-) {
-  ticketsConnection(first: $ticketsFirst) {
-    totalCount
-    pageInfo {
-      endCursor
-      startCursor
-      hasPreviousPage
-      hasNextPage
-    }
-    nodes {
-      id
-      title
-      status
-      messagesConnection(first: $messagesFirst) {
-        nodes {
-          id
-          body
-        }
+query GetTicket($input: GetTicketInput!) {
+  getTicket(input: $input) {
+    id
+    title
+    status
+    messagesConnection {
+      nodes {
+        id
+        body
       }
     }
   }
@@ -30,8 +18,9 @@ query TicketsConnection(
 `
 const variables = function () {
   return {
-    ticketsFirst: this.ticketsFirst,
-    messagesFirst: 1
+    input: {
+      id: this.ticketId
+    }
   }
 }
 
@@ -46,13 +35,13 @@ const error = function (error) {
 }
 
 const skip = function () {
-  return false
+  return this.ticketId === null
 }
 
 // Subscription handling
 const document = gql`
-  subscription RefreshTicketsConnection {
-    refreshTicketsConnection {
+  subscription RefreshGetTicket {
+    refreshGetTicket {
       success
     }
   }
@@ -62,11 +51,11 @@ const updateQuery = function (
   previousResult,
   {
     subscriptionData: {
-      data: { refreshTicketsConnection }
+      data: { refreshGetTicket }
     }
   }
 ) {
-  this.$apollo.queries.ticketsConnection.refetch()
+  this.$apollo.queries.getTicket.refetch()
 }
 
 const subscribeToMore = {

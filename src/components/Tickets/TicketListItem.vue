@@ -1,5 +1,8 @@
 <template>
-  <div class="ticket +pointer">
+  <div
+    class="ticket +pointer"
+    @click="goToItem(ticket.id)"
+  >
     <div class="row start-xs">
       <div class="col-xs-3 +no-padding">
         <div class="row middle-xs">
@@ -48,6 +51,7 @@
 </template>
 
 <script>
+import router from '@/router'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 
 export default {
@@ -62,6 +66,12 @@ export default {
     ticket: {
       default: function () {},
       type: Object
+    }
+  },
+
+  methods: {
+    goToItem (ticketId) {
+      router.push({ path: `/tickets/show/${ticketId}` })
     }
   }
 }

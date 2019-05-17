@@ -119,8 +119,21 @@
 </template>
 
 <script>
+// import router from '@/router'
+import getTicket from '@/graphql/queries/getTicket'
+
 export default {
-  name: 'TicketsShow'
+  name: 'TicketsShow',
+
+  computed: {
+    ticketId () {
+      return this.$route.params.id
+    }
+  },
+
+  apollo: {
+    getTicket
+  }
 }
 </script>
 

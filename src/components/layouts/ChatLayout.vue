@@ -23,10 +23,11 @@
       <div class="wrap-without-limit container-fluid header-submenu">
         <div class="row between-xs around-md">
           <div class="col-xs-4 col-md-4 +no-padding">
-            <div class="header-submenu__text-button">
-              <a href="#">
-                Back
-              </a>
+            <div
+              class="header-submenu__text-button +pointer"
+              @click="goBack()"
+            >
+              Back
             </div>
           </div>
 
@@ -89,6 +90,7 @@
 <script>
 import CreditLeft from '@/components/Header/CreditLeft'
 import autosize from 'autosize'
+import router from '@/router'
 
 export default {
   name: 'ChatLayout',
@@ -105,6 +107,12 @@ export default {
 
   mounted () {
     autosize(document.querySelectorAll('textarea'))
+  },
+
+  methods: {
+    goBack () {
+      router.go(-1) || router.push({ path: '/tickets/list' })
+    }
   }
 }
 </script>
