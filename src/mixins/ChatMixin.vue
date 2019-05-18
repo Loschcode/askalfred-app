@@ -29,6 +29,10 @@ export default {
       return this.events.filter(
         event => event.type === 'EventMessage'
       )
+    },
+
+    messagesWithoutSubject () {
+      return this.messages.slice(1)
     }
   },
 
