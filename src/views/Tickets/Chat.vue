@@ -13,14 +13,14 @@
     </div>
 
     <!-- Yourself -->
-    <chat-yourself>
+    <chat-message :from="`yourself`">
       Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
-    </chat-yourself>
+    </chat-message>
 
     <!-- Myself -->
-    <chat-myself>
+    <chat-message :from="`myself`">
       Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
-    </chat-myself>
+    </chat-message>
 
     <!--  Notice action done -->
     <chat-notice :status="`up`">
@@ -34,8 +34,7 @@ import ChatMixin from '@/mixins/ChatMixin'
 import getTicket from '@/graphql/queries/getTicket'
 import ChatNotice from '@/components/Tickets/Chat/Notice'
 import ChatSubject from '@/components/Tickets/Chat/Subject'
-import ChatMyself from '@/components/Tickets/Chat/Myself'
-import ChatYourself from '@/components/Tickets/Chat/Yourself'
+import ChatMessage from '@/components/Tickets/Chat/Message'
 
 export default {
   name: 'TicketChat',
@@ -43,8 +42,7 @@ export default {
   components: {
     ChatNotice,
     ChatSubject,
-    ChatMyself,
-    ChatYourself
+    ChatMessage
   },
 
   mixins: [

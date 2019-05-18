@@ -1,6 +1,6 @@
 <template>
   <div class="row center-xs">
-    <div class="col-xs-12">
+    <div class="col-xs-12 col-md-10">
       <div class="ticket-subject">
         <div class="message message__subject">
           <div class="message__subject-arrow" />
