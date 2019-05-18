@@ -63,6 +63,11 @@
       <div class="wrap container">
         <slot />
       </div>
+      <!--
+        This is a  computed footer placeholder linked to the autosize system
+        It allows us to make space in between the textarea and the real bottom
+        of the Chat
+      -->
       <div
         :style="{ 'margin-top': computedFooterPlaceholder }"
       />
@@ -151,7 +156,7 @@ export default {
           const select = document.querySelector('textarea')
           autosize(select)
           select.addEventListener('autosize:resized', () => {
-            const baseMargin = 60
+            const baseMargin = 70
             this.footerPlaceholder = document.querySelector('textarea').clientHeight + baseMargin
             window.scrollTo(0, document.body.scrollHeight)
           })
@@ -193,6 +198,8 @@ export default {
 
   textarea {
     height: 3em;
+    // to limit the autosize feature
+    max-height: 500px;
     border-radius: 2px;
     font-size: 16px;
     padding: 0.8em;
