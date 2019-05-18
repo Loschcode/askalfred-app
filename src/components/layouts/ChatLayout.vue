@@ -63,29 +63,33 @@
       <div class="wrap container">
         <slot />
       </div>
+      <div class="footer-placeholder" />
     </div>
-    <div class="wrap container">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="footer message-input">
-            <textarea
-              v-model="currentMessage"
-              name="message"
-              placeholder="Write a reply..."
-            />
 
-            <div class="message-input__button">
-              <div v-if="currentMessage">
-                <div class="message-input__button-send">
-                  <a href="#">
-                    Send
-                  </a>
+    <div class="footer">
+      <div class="wrap container">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="message-input">
+              <textarea
+                v-model="currentMessage"
+                name="message"
+                placeholder="Write a reply..."
+              />
+
+              <div class="message-input__button">
+                <div v-if="currentMessage">
+                  <div class="message-input__button-send">
+                    <a href="#">
+                      Send
+                    </a>
+                  </div>
                 </div>
-              </div>
-              <div v-else>
-                <div class="message-input__button-join-file">
-                  <div class="+pointer">
-                    <img src="/images/tickets/chat/join-file.svg">
+                <div v-else>
+                  <div class="message-input__button-join-file">
+                    <div class="+pointer">
+                      <img src="/images/tickets/chat/join-file.svg">
+                    </div>
                   </div>
                 </div>
               </div>
@@ -149,8 +153,16 @@ export default {
 .chat-layout {
 }
 
+.footer-placeholder {
+  margin-top: 6em;
+}
+
 .footer {
+  background-color: $color-very-light-grey;
   margin-top: 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 .message-input {
