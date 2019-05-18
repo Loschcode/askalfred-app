@@ -122,8 +122,19 @@ export default {
     }
   },
 
+  watch: {
+    // when we load the ticket we can
+    // load manual selectors as well
+    ticket (newValue, oldValue) {
+      if (newValue) {
+        this.$nextTick(() => {
+          autosize(document.querySelectorAll('textarea'))
+        })
+      }
+    }
+  },
+
   mounted () {
-    autosize(document.querySelectorAll('textarea'))
   },
 
   methods: {
