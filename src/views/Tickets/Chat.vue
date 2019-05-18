@@ -2,7 +2,7 @@
   <div class="tickets-show">
     <!-- Subject -->
     <chat-subject>
-      {{ ticket.eventsConnection.nodes[0].eventable.body }}
+      {{ messages[0].eventable.body }}
     </chat-subject>
 
     <!--  Notice -->

@@ -10,6 +10,7 @@ query GetTicket($input: GetTicketInput!) {
     eventsConnection {
       nodes {
         id
+        type
         identity {
           id
         }

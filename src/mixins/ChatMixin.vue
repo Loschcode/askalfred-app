@@ -19,6 +19,16 @@ export default {
   computed: {
     ticketId () {
       return this.$route.params.id
+    },
+
+    events () {
+      return this.ticket.eventsConnection.nodes
+    },
+
+    messages () {
+      return this.events.filter(
+        event => event.type === 'EventMessage'
+      )
     }
   },
 
@@ -28,11 +38,13 @@ export default {
 
   methods: {
     wasAnswered () {
-      return this.eventsFromAlfred().length >= 1
+      return this.FromAlfred(this.messages).length >= 1
     },
 
-    eventsFromAlfred () {
-      return this.ticket.eventsConnection.nodes.filter(event => event.identity.id !== this.currentIdentity.id)
+    FromAlfred (events) {
+      return events.filter(
+        event => event.identity.id !== this.currentIdentity.id
+      )
     }
   }
 }
