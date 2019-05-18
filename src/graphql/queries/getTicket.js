@@ -6,6 +6,7 @@ query GetTicket($input: GetTicketInput!) {
   getTicket(input: $input) {
     id
     title
+    subject
     status
     eventsConnection {
       nodes {

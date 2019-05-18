@@ -4,7 +4,6 @@ import NoticesService from '@/services/NoticesService'
 const query = gql`
 query TicketsConnection(
   $ticketsFirst: Int,
-  $messagesFirst: Int
 ) {
   ticketsConnection(first: $ticketsFirst) {
     totalCount
@@ -17,21 +16,15 @@ query TicketsConnection(
     nodes {
       id
       title
+      subject
       status
-      messagesConnection(first: $messagesFirst) {
-        nodes {
-          id
-          body
-        }
-      }
     }
   }
 }
 `
 const variables = function () {
   return {
-    ticketsFirst: this.ticketsFirst,
-    messagesFirst: 1
+    ticketsFirst: this.ticketsFirst
   }
 }
 

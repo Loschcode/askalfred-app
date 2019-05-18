@@ -5,7 +5,7 @@
         <div class="col-xs-11 col-md-8 ticket-message">
           <div class="message message__myself">
             <div class="message__myself-arrow" />
-            <slot />
+            {{ message.body }}
           </div>
         </div>
       </div>
@@ -15,7 +15,7 @@
         <div class="col-xs-11 col-md-8 ticket-message">
           <div class="message message__yourself">
             <div class="message__yourself-arrow" />
-            <slot />
+            {{ message.body }}
           </div>
         </div>
       </div>
@@ -24,14 +24,33 @@
 </template>
 
 <script>
+import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 
 export default {
   name: 'ChatMessage',
+
+  mixins: [
+    CurrentIdentityMixin
+  ],
+
   props: {
-    // can be `yourself `or `myself`
-    from: {
+    message: {
       required: true,
-      type: String
+      type: Object
+    },
+    event: {
+      required: true,
+      type: Object
+    }
+  },
+
+  computed: {
+    from () {
+      if (this.event.identity.id === this.currentIdentity.id) {
+        return 'myself'
+      } else {
+        return 'yourself'
+      }
     }
   },
 

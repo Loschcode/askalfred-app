@@ -37,7 +37,7 @@
             </span>
           </div>
           <div class="ticket__title-excerpt">
-            {{ ticket.messagesConnection.nodes[0].body }}
+            {{ ticket.subject }}
           </div>
         </div>
       </div>

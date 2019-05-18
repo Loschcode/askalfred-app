@@ -14,6 +14,7 @@ const mutation = gql`
         nodes {
           id
           title
+          subject
           status
           messagesConnection {
             nodes {

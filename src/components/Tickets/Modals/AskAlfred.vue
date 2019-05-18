@@ -15,7 +15,7 @@
               <div class="request">
                 <textarea
                   ref="request"
-                  v-model="createTicketInput.message"
+                  v-model="createTicketInput.subject"
                   name="message"
                   :placeholder="placeholder"
                 />
@@ -76,14 +76,14 @@ export default {
 
   validations: {
     createTicketInput: {
-      message: { required }
+      subject: { required }
     }
   },
 
   data () {
     return {
       createTicketInput: {
-        message: ''
+        subject: ''
       },
       placeholder: 'Write your request here\r\n\r\nAdd as much details as possible.\r\n\r\nNo worry though, If I need more informations, I’ll come back to you before to start.'
     }

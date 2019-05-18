@@ -2,7 +2,7 @@
   <div class="tickets-show">
     <!-- Subject -->
     <chat-subject>
-      {{ messages[0].eventable.body }}
+      {{ ticket.subject }}
     </chat-subject>
 
     <!--  Notice -->
@@ -13,20 +13,14 @@
     </div>
 
     <div
-      v-for="message in messagesWithoutSubject"
-      :key="message.id"
+      v-for="event in events"
+      :key="event.id"
     >
-      <div v-if="message.identity.id === currentIdentity.id">
-        <!-- Myself -->
-        <chat-message :from="`myself`">
-          {{ message.eventable.body }}
-        </chat-message>
-      </div>
-      <div v-else>
-        <!-- Yourself -->
-        <chat-message :from="`yourself`">
-          {{ message.eventable.body }}
-        </chat-message>
+      <div v-if="event.type === 'EventMessage'">
+        <chat-events-message
+          :message="event.eventable"
+          :event="event"
+        />
       </div>
     </div>
 
@@ -35,6 +29,7 @@
       Your identity card has been sent successfully
     </chat-notice> -->
   </div>
+  </div>
 </template>
 
 <script>
@@ -42,7 +37,7 @@ import ChatMixin from '@/mixins/ChatMixin'
 import getTicket from '@/graphql/queries/getTicket'
 import ChatNotice from '@/components/Tickets/Chat/Notice'
 import ChatSubject from '@/components/Tickets/Chat/Subject'
-import ChatMessage from '@/components/Tickets/Chat/Message'
+import ChatEventsMessage from '@/components/Tickets/Chat/Events/Message'
 
 export default {
   name: 'TicketChat',
@@ -50,7 +45,7 @@ export default {
   components: {
     ChatNotice,
     ChatSubject,
-    ChatMessage
+    ChatEventsMessage
   },
 
   mixins: [
