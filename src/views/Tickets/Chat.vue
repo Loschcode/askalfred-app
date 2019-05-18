@@ -23,6 +23,12 @@
       </chat-notice>
     </div>
 
+    <div v-if="ticket.status === 'processing' && !wasAnswered()">
+      <chat-notice :status="`processing`">
+        I'm currently processing your request. I will get back to you very soon.
+      </chat-notice>
+    </div>
+
     <div v-if="ticket.status === 'canceled'">
       <chat-notice :status="`canceled`">
         Your request has been canceled. If you encountered a problem, let me know.
