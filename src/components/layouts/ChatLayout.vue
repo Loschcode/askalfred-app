@@ -63,7 +63,9 @@
       <div class="wrap container">
         <slot />
       </div>
-      <div class="footer-placeholder" />
+      <div
+        :style="{ 'margin-top': computedFooterPlaceholder }"
+      />
     </div>
 
     <div class="footer">
@@ -122,7 +124,14 @@ export default {
 
   data () {
     return {
-      currentMessage: ''
+      currentMessage: '',
+      footerPlaceholder: 100
+    }
+  },
+
+  computed: {
+    computedFooterPlaceholder () {
+      return `${this.footerPlaceholder}px`
     }
   },
 
@@ -131,8 +140,21 @@ export default {
     // load manual selectors as well
     ticket (newValue, oldValue) {
       if (newValue) {
+        /**
+         * This is a very complicated system which should be refactored and abstracted
+         * It checks when the autosize works and will adapt the style of
+         * footerPlaceholder which will be sent to computedFooterPlaceholder
+         * Which will change the computed vue styling automatically
+         * Then it also goes to the bottom by scrolling to make it clean.
+         */
         this.$nextTick(() => {
-          autosize(document.querySelectorAll('textarea'))
+          const select = document.querySelector('textarea')
+          autosize(select)
+          select.addEventListener('autosize:resized', () => {
+            const baseMargin = 60
+            this.footerPlaceholder = document.querySelector('textarea').clientHeight + baseMargin
+            window.scrollTo(0, document.body.scrollHeight)
+          })
         })
       }
     }
@@ -153,9 +175,9 @@ export default {
 .chat-layout {
 }
 
-.footer-placeholder {
-  margin-top: 6em;
-}
+// .footer-placeholder {
+//   margin-top: 6em;
+// }
 
 .footer {
   background-color: $color-very-light-grey;
