@@ -21,7 +21,7 @@ export default {
 <style scoped lang="scss">
 .ticket-subject {
   margin: 1em;
-  margin-top: 2em;
+  margin-top: 1.5em;
 }
 
 .ticket-subject__content {
