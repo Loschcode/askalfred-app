@@ -71,7 +71,7 @@ export default {
 
   methods: {
     goToItem (ticketId) {
-      router.push({ path: `/tickets/show/${ticketId}` })
+      router.push({ path: `/tickets/chat/${ticketId}` })
     }
   }
 }

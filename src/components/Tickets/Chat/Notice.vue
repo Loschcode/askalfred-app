@@ -8,7 +8,7 @@
         </div>
         <div class="ticket-notice__symbol">
           <span class="ticket-notice__symbol-border" />
-          <span class="ticket-notice__symbol-image"><img :src="`/images/tickets/show/icons/${status}.svg`"></span>
+          <span class="ticket-notice__symbol-image"><img :src="`/images/tickets/chat/icons/${status}.svg`"></span>
           <span class="ticket-notice__symbol-border" />
         </div>
       </div>

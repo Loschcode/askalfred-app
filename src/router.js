@@ -135,7 +135,7 @@ const router = new Router({
       component: TicketsConnection
     },
     {
-      path: '/tickets/show/:id',
+      path: '/tickets/chat/:id',
       meta: { layout: 'chat' },
       component: TicketChat
     }
