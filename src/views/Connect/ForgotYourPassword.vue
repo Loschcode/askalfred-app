@@ -61,7 +61,7 @@
 
 <script>
 import { required } from 'vuelidate/lib/validators'
-import EventsService from '@/services/EventsService'
+import NoticesService from '@/services/NoticesService'
 import sendRecoveryEmail from '@/graphql/mutations/sendRecoveryEmail'
 import router from '@/router'
 
@@ -81,7 +81,7 @@ export default {
   },
 
   created () {
-    this.events = new EventsService(this)
+    this.notices = new NoticesService(this)
   },
 
   methods: {
@@ -96,10 +96,10 @@ export default {
       try {
         const email = this.email
         const responseEmail = await sendRecoveryEmail(this, { email })
-        this.events.success(`An email has been sent to ${responseEmail}`)
+        this.notices.success(`An email has been sent to ${responseEmail}`)
         router.push({ path: '/connect/sign-in' })
       } catch (error) {
-        this.events.graphError(error)
+        this.notices.graphError(error)
       }
     }
   }

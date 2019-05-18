@@ -52,7 +52,7 @@
 
 <script>
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
-import EventsService from '@/services/EventsService'
+import NoticesService from '@/services/NoticesService'
 import sendConfirmEmail from '@/graphql/mutations/sendConfirmEmail'
 import router from '@/router'
 import GuestOnlyGuardMixin from '@/mixins/GuestOnlyGuardMixin'
@@ -68,7 +68,7 @@ export default {
   },
 
   created () {
-    this.events = new EventsService(this)
+    this.notices = new NoticesService(this)
 
     if (this.currentIdentity.confirmationSentAt === null) {
       this.sendConfirmEmail()
@@ -78,11 +78,11 @@ export default {
   methods: {
     async sendConfirmEmail () {
       try {
-        const identity = await sendConfirmEmail(this, this.events)
-        this.events.success(`An email with a surprise has been sent to ${identity.email}`)
+        const identity = await sendConfirmEmail(this, this.notices)
+        this.notices.success(`An email with a surprise has been sent to ${identity.email}`)
       } catch (error) {
         router.push({ path: '/' })
-        this.events.graphError(error)
+        this.notices.graphError(error)
       }
     }
   }

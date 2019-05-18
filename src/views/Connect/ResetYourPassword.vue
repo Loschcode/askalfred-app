@@ -60,7 +60,7 @@
 import router from '@/router'
 import storeIdentityPassword from '@/graphql/mutations/storeIdentityPassword'
 import { required } from 'vuelidate/lib/validators'
-import EventsService from '@/services/EventsService'
+import NoticesService from '@/services/NoticesService'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 
 export default {
@@ -88,7 +88,7 @@ export default {
   },
 
   async created () {
-    this.events = new EventsService(this)
+    this.notices = new NoticesService(this)
   },
 
   methods: {
@@ -98,10 +98,10 @@ export default {
 
       try {
         await storeIdentityPassword(this, this.currentIdentityInput)
-        new EventsService(this).success(`Welcome back to your dashboard ${this.currentIdentity.firstName}`)
+        new NoticesService(this).success(`Welcome back to your dashboard ${this.currentIdentity.firstName}`)
         router.push({ path: '/connect/sign-in' })
       } catch (error) {
-        new EventsService(this).graphError(error)
+        new NoticesService(this).graphError(error)
       }
     }
   }

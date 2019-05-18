@@ -1,10 +1,10 @@
 import createGuest from '@/graphql/mutations/createGuest'
-import EventsService from '@/services/EventsService'
+import NoticesService from '@/services/NoticesService'
 import TokenHelper from '@/helpers/TokenHelper'
 import IdentityHelper from '@/helpers/IdentityHelper'
 
 export default vm => {
-  const events = new EventsService(vm)
+  const events = new NoticesService(vm)
 
   const perform = async () => {
     if (TokenHelper.getCurrentToken() === null) await connectGuest()

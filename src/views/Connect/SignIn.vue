@@ -105,7 +105,7 @@ import router from '@/router'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import signIn from '@/graphql/mutations/signIn'
 import { required } from 'vuelidate/lib/validators'
-import EventsService from '@/services/EventsService'
+import NoticesService from '@/services/NoticesService'
 import IdentityHelper from '@/helpers/IdentityHelper'
 
 export default {
@@ -145,7 +145,7 @@ export default {
   },
 
   created () {
-    this.events = new EventsService(this)
+    this.notices = new NoticesService(this)
 
     if (!this.isGuest()) return router.push({ path: '/tickets' })
     localStorage.setItem('sign-in-is-known', true)
@@ -168,7 +168,7 @@ export default {
         // to the correct section if successful
         IdentityHelper.setIdentityWith(token, { path: '/connect/sign-in' })
       } catch (error) {
-        this.events.graphError(error)
+        this.notices.graphError(error)
       }
     }
   }

@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import EventsService from '@/services/EventsService'
+import NoticesService from '@/services/NoticesService'
 
 const query = gql`
   query CurrentIdentity {
@@ -27,7 +27,7 @@ const result = function ({ data: { currentIdentity } }) {
   this.currentIdentity = currentIdentity
 
   if (this.currentIdentity === null && this.identityToken !== null) {
-    new EventsService(this).reboot('identity and token mismatch')
+    new NoticesService(this).reboot('identity and token mismatch')
   }
 
   return {
@@ -36,7 +36,7 @@ const result = function ({ data: { currentIdentity } }) {
 }
 
 const error = function () {
-  new EventsService(this).crash(
+  new NoticesService(this).crash(
     'We were unable to retrieve the current identity'
   )
 }

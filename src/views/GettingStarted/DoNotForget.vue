@@ -67,7 +67,7 @@ import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import storeIdentityPassword from '@/graphql/mutations/storeIdentityPassword'
 import convertGuestToCustomer from '@/graphql/mutations/convertGuestToCustomer'
 import { required } from 'vuelidate/lib/validators'
-import EventsService from '@/services/EventsService'
+import NoticesService from '@/services/NoticesService'
 import GuestOnlyGuardMixin from '@/mixins/GuestOnlyGuardMixin'
 
 export default {
@@ -96,7 +96,7 @@ export default {
   },
 
   created () {
-    this.events = new EventsService(this)
+    this.notices = new NoticesService(this)
   },
 
   mounted () {
@@ -108,7 +108,7 @@ export default {
       this.$refs.password.focus()
     } else {
       router.push({ path: '/' })
-      this.events.error('You have already set your password.')
+      this.notices.error('You have already set your password.')
     }
   },
 
@@ -120,10 +120,10 @@ export default {
       try {
         await storeIdentityPassword(this, this.currentIdentityInput)
         await convertGuestToCustomer(this)
-        this.events.success(`Welcome to your dashboard ${this.currentIdentity.firstName}`)
+        this.notices.success(`Welcome to your dashboard ${this.currentIdentity.firstName}`)
         router.push({ path: '/connect/sign-in' })
       } catch (error) {
-        this.events.graphError(error)
+        this.notices.graphError(error)
       }
     }
   }

@@ -58,7 +58,7 @@ import InnerModalMixin from '@/mixins/InnerModalMixin'
 import ModalsCommonSuccess from '@/components/Modals/Success'
 import autosize from 'autosize'
 import createTicket from '@/graphql/mutations/createTicket'
-import EventsService from '@/services/EventsService'
+import NoticesService from '@/services/NoticesService'
 import { required } from 'vuelidate/lib/validators'
 
 export default {
@@ -90,7 +90,7 @@ export default {
   },
 
   created () {
-    this.events = new EventsService(this)
+    this.notices = new NoticesService(this)
   },
 
   methods: {
@@ -112,7 +112,7 @@ export default {
         this.currentModal().setWithContentOf(this, 'no-worry')
         this.createTicketInput.message = ''
       } catch (error) {
-        this.events.graphError(error)
+        this.notices.graphError(error)
       }
     }
   }

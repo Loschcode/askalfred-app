@@ -12,14 +12,14 @@
 import confirmEmail from '@/graphql/mutations/confirmEmail'
 import DeleteCurrentGuestOperation from '@/operations/DeleteCurrentGuestOperation'
 import router from '@/router'
-import EventsService from '@/services/EventsService'
+import NoticesService from '@/services/NoticesService'
 import IdentityHelper from '@/helpers/IdentityHelper'
 
 export default {
   name: 'ConfirmEmail',
 
   async created () {
-    this.events = new EventsService(this)
+    this.notices = new NoticesService(this)
 
     const confirmationToken = this.$route.query.confirmation_token
     try {
@@ -28,7 +28,7 @@ export default {
       IdentityHelper.setIdentityWith(token, { path: '/getting-started/surprise' })
     } catch (error) {
       router.push({ path: '/' })
-      this.events.graphError(error)
+      this.notices.graphError(error)
     }
   }
 }

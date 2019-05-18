@@ -47,7 +47,7 @@
 import router from '@/router'
 import getCreditForFree from '@/graphql/mutations/getCreditForFree'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
-import EventsService from '@/services/EventsService'
+import NoticesService from '@/services/NoticesService'
 import GuestOnlyGuardMixin from '@/mixins/GuestOnlyGuardMixin'
 
 export default {
@@ -62,7 +62,7 @@ export default {
   },
 
   created () {
-    this.events = new EventsService(this)
+    this.notices = new NoticesService(this)
 
     if (this.wrongStep()) return router.push({ path: '/getting-started/' })
   },
@@ -77,10 +77,10 @@ export default {
     async getCreditForFree () {
       try {
         await getCreditForFree(this)
-        this.events.success('Your credit has been added to your account. Enjoy your 20 minutes!')
+        this.notices.success('Your credit has been added to your account. Enjoy your 20 minutes!')
         router.push({ path: '/getting-started/do-not-forget' })
       } catch (error) {
-        this.events.graphError(error)
+        this.notices.graphError(error)
       }
     }
   }

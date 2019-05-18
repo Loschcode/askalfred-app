@@ -1,9 +1,9 @@
 import deleteGuest from '@/graphql/mutations/deleteGuest'
-import EventsService from '@/services/EventsService'
+import NoticesService from '@/services/NoticesService'
 import TokenHelper from '@/helpers/TokenHelper'
 
 export default (vm, newToken) => {
-  const events = new EventsService(vm)
+  const events = new NoticesService(vm)
 
   const perform = async () => {
     const token = TokenHelper.getCurrentToken()

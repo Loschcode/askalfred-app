@@ -63,7 +63,7 @@ import router from '@/router'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import storeIdentityEmail from '@/graphql/mutations/storeIdentityEmail'
 import { required } from 'vuelidate/lib/validators'
-import EventsService from '@/services/EventsService'
+import NoticesService from '@/services/NoticesService'
 import GuestOnlyGuardMixin from '@/mixins/GuestOnlyGuardMixin'
 
 export default {
@@ -116,7 +116,7 @@ export default {
         await storeIdentityEmail(this, this.currentIdentityInput)
         router.push({ path: '/getting-started/thank-you' })
       } catch (error) {
-        new EventsService(this).graphError(error)
+        new NoticesService(this).graphError(error)
       }
     }
   }

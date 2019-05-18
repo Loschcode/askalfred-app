@@ -2,7 +2,7 @@ import EventBus from '@/misc/EventBus'
 import PageHelper from '@/helpers/PageHelper'
 import TokenHelper from '@/helpers/TokenHelper'
 
-class EventsService {
+class NoticesService {
   constructor (vm) {
     this.vm = vm
     this.current = null
@@ -120,4 +120,4 @@ class EventsService {
   }
 }
 
-export default EventsService
+export default NoticesService

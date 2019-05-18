@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import EventsService from '@/services/EventsService'
+import NoticesService from '@/services/NoticesService'
 
 const query = gql`
 query GetTicket($input: GetTicketInput!) {
@@ -40,7 +40,7 @@ const result = function ({ data }) {
 }
 
 const error = function (error) {
-  new EventsService(this).graphError(error)
+  new NoticesService(this).graphError(error)
 }
 
 const skip = function () {

@@ -9,7 +9,7 @@
 <script>
 import router from '@/router'
 import DeleteCurrentGuestOperation from '@/operations/DeleteCurrentGuestOperation'
-import EventsService from '@/services/EventsService'
+import NoticesService from '@/services/NoticesService'
 import unsetPassword from '@/graphql/mutations/unsetPassword'
 import IdentityHelper from '@/helpers/IdentityHelper'
 
@@ -17,7 +17,7 @@ export default {
   name: 'RecoveryEmail',
 
   async created () {
-    this.events = new EventsService(this)
+    this.notices = new NoticesService(this)
 
     const recoveryToken = this.$route.query.recovery_token
 
@@ -27,7 +27,7 @@ export default {
       IdentityHelper.setIdentityWith(token, { path: '/connect/reset-your-password' })
     } catch (error) {
       router.push({ path: '/' })
-      this.events.graphError(error)
+      this.notices.graphError(error)
     }
   }
 }
