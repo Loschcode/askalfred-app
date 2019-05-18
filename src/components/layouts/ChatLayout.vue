@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="ticket">
     <div class="wrapper chat-layout">
       <div class="wrap-without-limit container-fluid header-menu">
         <div class="row">
@@ -44,10 +44,10 @@
                 </div>
                 <div class="header-submenu__subtitle">
                   <div v-if="wasAnswered()">
-                    No answer yet
+                    Last answer 1 day ago
                   </div>
                   <div v-else>
-                    Last answer 1 day ago
+                    No answer yet
                   </div>
                 </div>
               </div>
@@ -102,12 +102,17 @@ import CreditLeft from '@/components/Header/CreditLeft'
 import autosize from 'autosize'
 import router from '@/router'
 import getTicket from '@/graphql/queries/getTicket'
+import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 
 export default {
   name: 'ChatLayout',
   components: {
     CreditLeft
   },
+
+  mixins: [
+    CurrentIdentityMixin
+  ],
 
   props: {
   },
@@ -135,9 +140,13 @@ export default {
 
   methods: {
     wasAnswered () {
-      // TODO : improve this with messages only from Alfred
-      return this.ticket.messagesConnection.totalCount <= 1
+      return this.eventsFromAlfred().length >= 1
     },
+
+    eventsFromAlfred () {
+      return this.ticket.eventsConnection.nodes.filter(event => event.identity.id !== this.currentIdentity.id)
+    },
+
     goBack () {
       router.go(-1) || router.push({ path: '/tickets/list' })
     }
