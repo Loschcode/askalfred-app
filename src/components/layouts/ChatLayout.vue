@@ -98,11 +98,10 @@
 </template>
 
 <script>
+import ChatMixin from '@/mixins/ChatMixin'
 import CreditLeft from '@/components/Header/CreditLeft'
 import autosize from 'autosize'
 import router from '@/router'
-import getTicket from '@/graphql/queries/getTicket'
-import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 
 export default {
   name: 'ChatLayout',
@@ -111,7 +110,7 @@ export default {
   },
 
   mixins: [
-    CurrentIdentityMixin
+    ChatMixin
   ],
 
   props: {
@@ -119,19 +118,8 @@ export default {
 
   data () {
     return {
-      currentMessage: '',
-      ticket: null
+      currentMessage: ''
     }
-  },
-
-  computed: {
-    ticketId () {
-      return this.$route.params.id
-    }
-  },
-
-  apollo: {
-    getTicket
   },
 
   mounted () {
@@ -139,14 +127,6 @@ export default {
   },
 
   methods: {
-    wasAnswered () {
-      return this.eventsFromAlfred().length >= 1
-    },
-
-    eventsFromAlfred () {
-      return this.ticket.eventsConnection.nodes.filter(event => event.identity.id !== this.currentIdentity.id)
-    },
-
     goBack () {
       router.go(-1) || router.push({ path: '/tickets/list' })
     }

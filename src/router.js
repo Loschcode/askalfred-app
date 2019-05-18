@@ -27,7 +27,7 @@ import PrivacyPolicy from './views/Pages/PrivacyPolicy.vue'
 // Tickets
 import TicketsIndex from './views/Tickets/Index.vue'
 import TicketsConnection from './views/Tickets/List.vue'
-import TicketsShow from './views/Tickets/Show.vue'
+import TicketChat from './views/Tickets/Chat.vue'
 
 Vue.use(Router)
 
@@ -137,7 +137,7 @@ const router = new Router({
     {
       path: '/tickets/show/:id',
       meta: { layout: 'chat' },
-      component: TicketsShow
+      component: TicketChat
     }
   ]
 })

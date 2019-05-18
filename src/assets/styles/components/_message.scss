@@ -1,0 +1,72 @@
+.message {
+  line-height: 1.2em;
+  position: relative;
+  padding: spacing(3);
+  display: flex;
+  margin-top: spacing(1);
+  margin-bottom: spacing(1);
+  word-wrap: break-word;
+  border-radius: 2px;
+}
+
+.message__subject {
+  color: $color-soft-grey;
+  background-color: $background-message-general-color;
+  border: 1px solid $border-message-myself-color;
+  text-align: left;
+  // margin: 1em;
+}
+
+.message__subject-arrow {
+  position: absolute;
+  top: -15px;
+  right: 20px;
+  @include triangle-top($border-message-general-color, $background-message-general-color);
+
+  &:after {
+    top: 2px;
+    right: -10px;
+  }
+}
+
+.message__myself {
+  color: $color-soft-grey;
+  background-color: $background-message-myself-color;
+  border: 1px solid $border-message-myself-color;
+  text-align: right;
+  float: right;
+  // margin: 1em;
+}
+
+.message__myself-arrow {
+  position: absolute;
+  right: -18px;
+  top: 32%;
+  @include triangle-right($border-message-myself-color, $background-message-myself-color);
+
+  &:after {
+    top: -10px;
+    right: 0px;
+  }
+}
+
+.message__yourself {
+  color: $color-soft-grey;
+  background-color: $background-message-yourself-color;
+  border: 1px solid $border-message-yourself-color;
+  text-align: left;
+  float: left;
+  // margin: 1em;
+}
+
+.message__yourself-arrow {
+  position: absolute;
+  left: -18px;
+  top: 32%;
+  @include triangle-left($border-message-yourself-color, $background-message-yourself-color);
+
+  &:after {
+    top: -10px;
+    left: 0px;
+  }
+}
