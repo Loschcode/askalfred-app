@@ -30,7 +30,8 @@ export default {
   props: {
     // can be `yourself `or `myself`
     from: {
-      required: true
+      required: true,
+      type: String
     }
   },
 

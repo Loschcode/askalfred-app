@@ -35,7 +35,6 @@
       Your identity card has been sent successfully
     </chat-notice> -->
   </div>
-  </div>
 </template>
 
 <script>
