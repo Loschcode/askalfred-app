@@ -4,14 +4,6 @@
     <chat-subject>
       {{ ticket.subject }}
     </chat-subject>
-
-    <!--  Notice -->
-    <div v-if="!wasAnswered()">
-      <chat-notice :status="`wait`">
-        Thanks Laurent, I will get back to you as soon as possible.
-      </chat-notice>
-    </div>
-
     <div
       v-for="event in events"
       :key="event.id"
@@ -24,11 +16,17 @@
       </div>
     </div>
 
+    <!--  Notice -->
+    <div v-if="ticketStatusOpened()">
+      <chat-notice :status="`wait`">
+        Thanks Laurent, I will get back to you as soon as possible.
+      </chat-notice>
+    </div>
+
     <!--  Notice action done -->
     <!-- <chat-notice :status="`up`">
       Your identity card has been sent successfully
     </chat-notice> -->
-  </div>
   </div>
 </template>
 

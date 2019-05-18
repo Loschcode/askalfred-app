@@ -37,6 +37,10 @@ export default {
   },
 
   methods: {
+    ticketStatusOpened () {
+      return this.ticket.status === 'opened'
+    },
+
     wasAnswered () {
       return this.FromAlfred(this.messages).length >= 1
     },
