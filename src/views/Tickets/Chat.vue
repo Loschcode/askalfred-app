@@ -17,9 +17,21 @@
     </div>
 
     <!--  Notice -->
-    <div v-if="ticketStatusOpened()">
-      <chat-notice :status="`wait`">
+    <div v-if="ticket.status === 'opened'">
+      <chat-notice :status="`opened`">
         Thanks Laurent, I will get back to you as soon as possible.
+      </chat-notice>
+    </div>
+
+    <div v-if="ticket.status === 'canceled'">
+      <chat-notice :status="`canceled`">
+        Your request has been canceled. If you encountered a problem, let me know.
+      </chat-notice>
+    </div>
+
+    <div v-if="ticket.status === 'completed'">
+      <chat-notice :status="`completed`">
+        Your request has been solved. Thanks for choosing me to help you out.
       </chat-notice>
     </div>
 
