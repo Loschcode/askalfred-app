@@ -7,10 +7,13 @@ query GetTicket($input: GetTicketInput!) {
     id
     title
     status
-    messagesConnection {
+    eventsConnection {
       nodes {
         id
-        body
+        eventable {
+          id
+          ... on EventMessage { body }
+        }
       }
     }
   }
@@ -25,6 +28,8 @@ const variables = function () {
 }
 
 const result = function ({ data }) {
+  this.ticket = data.getTicket
+
   return {
     data
   }

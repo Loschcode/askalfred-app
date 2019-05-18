@@ -125,6 +125,12 @@ import getTicket from '@/graphql/queries/getTicket'
 export default {
   name: 'TicketsShow',
 
+  data () {
+    return {
+      ticket: null
+    }
+  },
+
   computed: {
     ticketId () {
       return this.$route.params.id

@@ -35,10 +35,20 @@
             <div class="row end-xs middle-xs">
               <div class="col-xs-10">
                 <div class="header-submenu__title">
-                  I need a chauffeur
+                  <div v-if="ticket.title">
+                    {{ ticket.title }}
+                  </div>
+                  <div v-else>
+                    New request
+                  </div>
                 </div>
                 <div class="header-submenu__subtitle">
-                  No answer yet
+                  <div v-if="wasAnswered()">
+                    No answer yet
+                  </div>
+                  <div v-else>
+                    Last answer 1 day ago
+                  </div>
                 </div>
               </div>
               <div class="col-xs-1 +no-padding">
@@ -91,18 +101,32 @@
 import CreditLeft from '@/components/Header/CreditLeft'
 import autosize from 'autosize'
 import router from '@/router'
+import getTicket from '@/graphql/queries/getTicket'
 
 export default {
   name: 'ChatLayout',
   components: {
     CreditLeft
   },
+
   props: {
   },
+
   data () {
     return {
-      currentMessage: ''
+      currentMessage: '',
+      ticket: null
     }
+  },
+
+  computed: {
+    ticketId () {
+      return this.$route.params.id
+    }
+  },
+
+  apollo: {
+    getTicket
   },
 
   mounted () {
@@ -110,6 +134,10 @@ export default {
   },
 
   methods: {
+    wasAnswered () {
+      // TODO : improve this with messages only from Alfred
+      return this.ticket.messagesConnection.totalCount <= 1
+    },
     goBack () {
       router.go(-1) || router.push({ path: '/tickets/list' })
     }
