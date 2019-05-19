@@ -15,8 +15,10 @@
               <div class="ticket-options__title">
                 More options ...
               </div>
+
               <div class="ticket-options__buttons">
                 <div
+                  v-if="ticket.status !== 'canceled' && ticket.status !== 'completed'"
                   class="button button__white-on-red button--squared button--bold"
                   @click="cancelRequest()"
                 >
@@ -25,6 +27,16 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- Options Locked -->
+      <div ref="ticket-options-locked">
+        <div class="content">
+          <modals-common-locked
+            :content="`This request is locked, you can't alter it anymore. Please contact support if you need anything.`"
+            :action="close"
+          />
         </div>
       </div>
     </div>
@@ -36,11 +48,13 @@ import ModalBody from '@/components/ModalBody'
 import InnerModalMixin from '@/mixins/InnerModalMixin'
 import cancelTicket from '@/graphql/mutations/cancelTicket'
 import NoticesService from '@/services/NoticesService'
+import ModalsCommonLocked from '@/components/Modals/Locked'
 
 export default {
   name: 'ModalsMoreOptions',
   components: {
-    ModalBody
+    ModalBody,
+    ModalsCommonLocked
   },
 
   mixins: [
@@ -60,6 +74,10 @@ export default {
   },
 
   methods: {
+    isLocked () {
+      return this.ticket.status === 'canceled' || this.ticket.status === 'completed'
+    },
+
     async cancelRequest () {
       try {
         const cancelTicketInput = { id: this.ticket.id }
@@ -74,13 +92,21 @@ export default {
     },
 
     onOpen () {
-      this.currentModal().setWithContentOf(this, 'ticket-options-window')
+      if (this.isLocked()) {
+        this.currentModal().setWithContentOf(this, 'ticket-options-locked')
+      } else {
+        this.currentModal().setWithContentOf(this, 'ticket-options-window')
+      }
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
+.ticket-options__locked {
+
+}
+
 .ticket-options__title {
   font-family: $font-alternative;
 }
