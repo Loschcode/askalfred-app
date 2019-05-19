@@ -1,0 +1,15 @@
+.modal__call-to-action {
+  position: absolute;
+  font-weight: bold;
+  @include absolute-center();
+  bottom: big-spacing(-1.1);
+}
+
+.modal__icon {
+  position: absolute;
+  @include absolute-center();
+  top: big-spacing(-2);
+  img {
+    width: spacing(17);
+  }
+}

@@ -4,7 +4,7 @@
     <div class="container-fluid content">
       <div class="row center-xs">
         <div class="col-xs-12">
-          <div class="modal-locked__icon">
+          <div class="modal__icon">
             <img src="/images/modals/locked.svg">
           </div>
           <h2 v-if="title">
@@ -13,7 +13,7 @@
           <p>
             {{ content }}
           </p>
-          <div class="modal-locked__call-to-action">
+          <div class="modal__call-to-action">
             <span
               class="button button__white-on-blue"
               @click="action()"
@@ -51,22 +51,6 @@ export default {
     margin: spacing(2);
     font-weight: 200;
     font-size: sizing(3);
-  }
-}
-
-.modal-locked__call-to-action {
-  position: absolute;
-  font-weight: bold;
-  @include absolute-center();
-  bottom: big-spacing(-1.3);
-}
-
-.modal-locked__icon {
-  position: absolute;
-  @include absolute-center();
-  top: big-spacing(-2);
-  img {
-    width: spacing(17);
   }
 }
 </style>
