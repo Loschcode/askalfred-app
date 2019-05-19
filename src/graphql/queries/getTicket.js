@@ -50,18 +50,27 @@ const skip = function () {
 
 // Subscription handling
 const document = gql`
-  subscription RefreshGetTicket {
-    refreshGetTicket {
-      success
+  subscription RefreshTicket($id: ID!) {
+    refreshTicket(id: $id) {
+      ticket {
+        id
+      }
     }
   }
 `
+// TODO : maybe turn into input so
+// we use the same variables than the query
+const subVariables = function () {
+  return {
+    id: this.ticketId
+  }
+}
 
 const updateQuery = function (
   previousResult,
   {
     subscriptionData: {
-      data: { refreshGetTicket }
+      data: { refreshTicket }
     }
   }
 ) {
@@ -70,7 +79,8 @@ const updateQuery = function (
 
 const subscribeToMore = {
   document,
-  updateQuery
+  updateQuery,
+  variables: subVariables
 }
 
 export default {

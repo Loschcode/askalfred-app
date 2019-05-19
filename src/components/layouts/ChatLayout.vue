@@ -52,7 +52,10 @@
                 </div>
               </div>
               <div class="col-xs-1 +no-padding">
-                <div class="header-submenu__more +pointer">
+                <div
+                  class="header-submenu__more +pointer"
+                  @click="ticketOptions()"
+                >
                   <img src="/images/header/submenu-more-button.svg">
                 </div>
               </div>
@@ -105,6 +108,11 @@
         </div>
       </div>
     </div>
+    <!-- Modals -->
+    <modals-ticket-options
+      ref="modals-ticket-options"
+      :ticket="ticket"
+    />
   </div>
 </template>
 
@@ -113,15 +121,19 @@ import ChatMixin from '@/mixins/ChatMixin'
 import CreditLeft from '@/components/Header/CreditLeft'
 import autosize from 'autosize'
 import router from '@/router'
+import ModalsTicketOptions from '@/components/Layouts/ChatLayout/Modals/TicketOptions'
+import OpenModalMixin from '@/mixins/OpenModalMixin'
 
 export default {
   name: 'ChatLayout',
   components: {
-    CreditLeft
+    CreditLeft,
+    ModalsTicketOptions
   },
 
   mixins: [
-    ChatMixin
+    ChatMixin,
+    OpenModalMixin
   ],
 
   props: {
@@ -169,6 +181,10 @@ export default {
   },
 
   methods: {
+    ticketOptions () {
+      this.openModal('modals-ticket-options')
+    },
+
     goBack () {
       router.go(-1) || router.push({ path: '/tickets/list' })
     }
@@ -199,7 +215,7 @@ export default {
   textarea {
     height: 3em;
     // to limit the autosize feature
-    max-height: 500px;
+    max-height: 400px;
     border-radius: 2px;
     font-size: 16px;
     padding: 0.8em;
