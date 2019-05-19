@@ -65,9 +65,11 @@ export default {
         const cancelTicketInput = { id: this.ticket.id }
         await cancelTicket(this, cancelTicketInput)
         this.currentModal().close()
+        this.notices.success('This ticket was canceled.')
         // this.currentModal().setWithContentOf(this, 'ticket')
       } catch (error) {
         this.notices.graphError(error)
+        this.currentModal().close()
       }
     },
 

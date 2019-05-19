@@ -25,7 +25,6 @@
 
 <script>
 import EnsureIdentityOperation from '@/operations/EnsureIdentityOperation'
-import NoticesService from '@/services/NoticesService'
 import LayoutMixin from '@/mixins/LayoutMixin'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 
@@ -63,7 +62,6 @@ export default {
   },
 
   async created () {
-    new NoticesService(this).watch()
     await EnsureIdentityOperation(this)
   },
 

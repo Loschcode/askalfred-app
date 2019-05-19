@@ -19,6 +19,7 @@
 import ConnectRouting from '@/components/ConnectRouting'
 import LayoutMixin from '@/mixins/LayoutMixin'
 import CustomNotifications from '@/components/CustomNotifications'
+import NoticesService from '@/services/NoticesService'
 
 export default {
 
@@ -41,6 +42,10 @@ export default {
     return {
 
     }
+  },
+
+  created () {
+    new NoticesService(this).watch()
   },
 
   methods: {
