@@ -136,6 +136,7 @@ import router from '@/router'
 import ModalsTicketOptions from '@/components/Layouts/ChatLayout/Modals/TicketOptions'
 import OpenModalMixin from '@/mixins/OpenModalMixin'
 import sendMessage from '@/graphql/mutations/sendMessage'
+import ScrollHelper from '@/helpers/ScrollHelper'
 
 export default {
   name: 'ChatLayout',
@@ -171,6 +172,13 @@ export default {
     ticket (newValue, oldValue) {
       if (newValue) {
         /**
+         * This is a system to go to bottom when new messages or events appear
+         */
+        this.$nextTick(() => {
+          ScrollHelper.toBottom()
+        })
+
+        /**
          * This is a very complicated system which should be refactored and abstracted
          * It checks when the autosize works and will adapt the style of
          * footerPlaceholder which will be sent to computedFooterPlaceholder
@@ -183,7 +191,7 @@ export default {
           select.addEventListener('autosize:resized', () => {
             const baseMargin = 70
             this.footerPlaceholder = document.querySelector('textarea').clientHeight + baseMargin
-            window.scrollTo(0, document.body.scrollHeight)
+            ScrollHelper.toBottom()
           })
         })
       }
