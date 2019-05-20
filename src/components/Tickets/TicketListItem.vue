@@ -43,7 +43,7 @@
       </div>
       <div class="col-xs-2 +no-padding">
         <div class="ticket__date">
-          1d ago
+          {{ postedOn() }}
         </div>
       </div>
     </div>
@@ -53,6 +53,7 @@
 <script>
 import router from '@/router'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
+import moment from 'moment'
 
 export default {
   name: 'TicketsConnection',
@@ -70,6 +71,11 @@ export default {
   },
 
   methods: {
+    postedOn () {
+      const date = this.ticket.createdAt
+      return moment(date).fromNow()
+    },
+
     goToItem (ticketId) {
       router.push({ path: `/tickets/chat/${ticketId}` })
     }

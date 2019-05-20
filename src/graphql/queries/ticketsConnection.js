@@ -18,6 +18,7 @@ query TicketsConnection(
       title
       subject
       status
+      createdAt
     }
   }
 }
