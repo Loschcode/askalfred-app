@@ -2,7 +2,7 @@
   <div id="app">
     <!-- Notify -->
     <custom-notifications />
-    <div class="tingle-content-wrapper">
+    <div class="blurry-wrapper">
       <component :is="currentLayout">
         <div v-if="isRawRoute()">
           <router-view />
