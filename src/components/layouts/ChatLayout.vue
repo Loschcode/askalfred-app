@@ -167,12 +167,22 @@ export default {
   },
 
   watch: {
+    /**
+     * when footer placeholder changes value
+     * it means we should go to the bottom
+     */
+    footerPlaceholder (newValue, oldValue) {
+      ScrollHelper.toBottom()
+    },
+
     // when we load the ticket we can
     // load manual selectors as well
     ticket (newValue, oldValue) {
       if (newValue) {
         /**
          * This is a system to go to bottom when new messages or events appear
+         * NOTE : if it's problematic for some event, we can compare number of message
+         * to avoid systematic scroll to bottom
          */
         this.$nextTick(() => {
           ScrollHelper.toBottom()
@@ -187,11 +197,11 @@ export default {
          */
         this.$nextTick(() => {
           const select = document.querySelector('textarea')
+          const baseMargin = 70
           autosize(select)
+
           select.addEventListener('autosize:resized', () => {
-            const baseMargin = 70
-            this.footerPlaceholder = document.querySelector('textarea').clientHeight + baseMargin
-            ScrollHelper.toBottom()
+            this.footerPlaceholder = select.clientHeight + baseMargin
           })
         })
       }
