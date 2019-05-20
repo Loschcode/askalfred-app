@@ -41,6 +41,11 @@ export default {
       return this.FromAlfred(this.messages).length >= 1
     },
 
+    lastAnswer () {
+      console.log(this.FromAlfred(this.messages).slice(-1)[0])
+      return this.FromAlfred(this.messages).slice(-1)[0]
+    },
+
     FromAlfred (events) {
       return events.filter(
         event => event.identity.id !== this.currentIdentity.id

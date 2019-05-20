@@ -12,6 +12,7 @@ query GetTicket($input: GetTicketInput!) {
       nodes {
         id
         type
+        createdAt
         identity {
           id
         }

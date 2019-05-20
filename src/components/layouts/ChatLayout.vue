@@ -44,7 +44,7 @@
                 </div>
                 <div class="header-submenu__subtitle">
                   <div v-if="wasAnswered()">
-                    Last answer 1 day ago
+                    Last answer {{ lastAnswerDate }}
                   </div>
                   <div v-else>
                     No answer yet
@@ -137,6 +137,7 @@ import ModalsTicketOptions from '@/components/Layouts/ChatLayout/Modals/TicketOp
 import OpenModalMixin from '@/mixins/OpenModalMixin'
 import sendMessage from '@/graphql/mutations/sendMessage'
 import ScrollHelper from '@/helpers/ScrollHelper'
+import moment from 'moment'
 
 export default {
   name: 'ChatLayout',
@@ -161,6 +162,11 @@ export default {
   },
 
   computed: {
+    lastAnswerDate () {
+      const date = this.lastAnswer().createdAt
+      return moment(date).fromNow()
+    },
+
     computedFooterPlaceholder () {
       return `${this.footerPlaceholder}px`
     }
