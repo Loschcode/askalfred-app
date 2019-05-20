@@ -89,10 +89,11 @@
 
               <div class="message-input__button">
                 <div v-if="currentMessage">
-                  <div class="message-input__button-send">
-                    <a href="#">
-                      Send
-                    </a>
+                  <div
+                    class="message-input__button-send +pointer"
+                    @click="sendMessage()"
+                  >
+                    Send
                   </div>
                 </div>
                 <div v-else>
@@ -123,6 +124,7 @@ import autosize from 'autosize'
 import router from '@/router'
 import ModalsTicketOptions from '@/components/Layouts/ChatLayout/Modals/TicketOptions'
 import OpenModalMixin from '@/mixins/OpenModalMixin'
+import sendMessage from '@/graphql/mutations/sendMessage'
 
 export default {
   name: 'ChatLayout',
@@ -181,6 +183,15 @@ export default {
   },
 
   methods: {
+    async sendMessage () {
+      try {
+        const sendMessageInput = { id: this.ticket.id, message: this.currentMessage }
+        await sendMessage(this, sendMessageInput)
+      } catch (error) {
+        this.notices.graphError(error)
+      }
+    },
+
     ticketOptions () {
       this.openModal('modals-ticket-options')
     },
