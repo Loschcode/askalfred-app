@@ -81,11 +81,20 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="message-input">
-              <textarea
-                v-model="currentMessage"
-                name="message"
-                placeholder="Write a reply..."
-              />
+              <div v-if="isLocked()">
+                <textarea
+                  name="message"
+                  placeholder="This request was closed"
+                  disabled
+                />
+              </div>
+              <div v-else>
+                <textarea
+                  v-model="currentMessage"
+                  name="message"
+                  placeholder="Write a reply..."
+                />
+              </div>
 
               <div class="message-input__button">
                 <div v-if="currentMessage">
@@ -183,10 +192,15 @@ export default {
   },
 
   methods: {
+    isLocked () {
+      return this.ticket.status === 'canceled' || this.ticket.status === 'completed'
+    },
+
     async sendMessage () {
       try {
         const sendMessageInput = { id: this.ticket.id, message: this.currentMessage }
         await sendMessage(this, sendMessageInput)
+        this.currentMessage = ''
       } catch (error) {
         this.notices.graphError(error)
       }
