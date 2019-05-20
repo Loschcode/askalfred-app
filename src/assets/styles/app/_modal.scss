@@ -1,8 +1,8 @@
 $tingle-breakpoint: 541px !default;
 
 .tingle-enabled .tingle-content-wrapper {
-  -webkit-filter: blur(2px);
   filter: blur(2px);
+  backdrop-filter: blur(2px);
 }
 .tingle-modal__close {
   text-align: center;
