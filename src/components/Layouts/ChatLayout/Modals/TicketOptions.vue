@@ -18,7 +18,7 @@
 
               <div class="ticket-options__buttons">
                 <div
-                  v-if="isLocked()"
+                  v-if="!isLocked()"
                   class="button button__white-on-red button--squared button--bold"
                   @click="cancelRequest()"
                 >

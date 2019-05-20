@@ -102,7 +102,9 @@
                     class="message-input__button-send +pointer"
                     @click="sendMessage()"
                   >
-                    Send
+                    <div class="+extend-clickable">
+                      Send
+                    </div>
                   </div>
                 </div>
                 <div v-else>
@@ -260,7 +262,7 @@ export default {
   position: absolute;
   width: 1.5em;
   top: 2em;
-  right: 2.8em;
+  right: 3em;
   text-transform: uppercase;
 }
 
