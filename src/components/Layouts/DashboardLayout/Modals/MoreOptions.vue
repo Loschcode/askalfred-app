@@ -23,16 +23,6 @@
                   Sign out
                 </div>
               </div>
-
-              <!-- Back -->
-              <div class="modal__call-to-action">
-                <span
-                  class="button button__white-on-blue"
-                  @click="close"
-                >
-                  Back
-                </span>
-              </div>
             </div>
           </div>
         </div>
