@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import NoticesService from '@/services/NoticesService'
-import ScrollHelper from '@/helpers/ScrollHelper'
 
 const query = gql`
 query GetTicket($input: GetTicketInput!) {
