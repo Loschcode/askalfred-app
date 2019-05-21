@@ -1,4 +1,9 @@
 // hack
+// .notification-wrapper {
+//   width: fit-content !important;
+//   display: inline-block !important;
+// }
+
 .notifications {
   @include absolute-center();
   width: unset !important;

@@ -96,7 +96,6 @@ class NoticesService {
   }
 
   onSuccessEvent (message) {
-    console.log('ON SUCCESS EVENT')
     this.vm.$notify({
       group: 'default',
       text: message,

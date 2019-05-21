@@ -187,13 +187,14 @@ export default {
       if (newValue) {
         /**
          * This is a system to go to bottom when new messages or events appear
-         * NOTE : if it's problematic for some event, we can compare number of message
-         * to avoid systematic scroll to bottom
          */
         this.$nextTick(() => {
           // we don't go down on page load
           if (oldValue !== null) {
-            ScrollHelper.toBottom()
+            // we don't go down if there's no event added / changed
+            if (newValue.eventsConnection.nodes.length !== oldValue.eventsConnection.nodes.length) {
+              ScrollHelper.toBottom()
+            }
           }
         })
 
