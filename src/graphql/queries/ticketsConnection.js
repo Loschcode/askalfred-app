@@ -36,7 +36,7 @@ const variables = function () {
   }
 }
 
-const fetchPolicy = 'network-only'
+const fetchPolicy = 'cache-and-network'
 
 const result = function ({ data }) {
   return {
