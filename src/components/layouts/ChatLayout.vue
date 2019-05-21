@@ -191,7 +191,10 @@ export default {
          * to avoid systematic scroll to bottom
          */
         this.$nextTick(() => {
-          ScrollHelper.toBottom()
+          // we don't go down on page load
+          if (oldValue !== null) {
+            ScrollHelper.toBottom()
+          }
         })
 
         /**
