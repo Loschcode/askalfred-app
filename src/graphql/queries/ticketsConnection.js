@@ -20,6 +20,7 @@ query TicketsConnection(
       status
       createdAt
       lastMessageFromAlfred {
+        createdAt
         id
         body
         event {

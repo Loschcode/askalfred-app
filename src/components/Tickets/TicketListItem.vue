@@ -43,10 +43,10 @@
       </div>
       <div class="col-xs-2 +no-padding">
         <div
-          v-if="wasSeenAt()"
+          v-if="wasSeenAt() || !wasAnswered()"
           class="ticket__date"
         >
-          {{ postedOn() }}
+          {{ wasAnsweredAt() || postedOn() }}
         </div>
         <div
           v-else
@@ -80,13 +80,14 @@ export default {
   },
 
   methods: {
+    // TODO  this seem to be in double in the logic, check it out
+    wasAnswered () {
+      return this.ticket.lastMessageFromAlfred !== null
+    },
+
     wasSeenAt () {
-      if (this.ticket.lastMessageFromAlfred) {
+      if (this.wasAnswered()) {
         return this.ticket.lastMessageFromAlfred.event.seenAt
-      } else {
-        // if there's no last message from Alfred
-        // then there's nothing to see
-        return true
       }
     },
 
@@ -96,6 +97,13 @@ export default {
       }
 
       return this.ticket.subject
+    },
+
+    wasAnsweredAt () {
+      if (this.wasAnswered()) {
+        const date = this.ticket.lastMessageFromAlfred.createdAt
+        return moment(date).fromNow()
+      }
     },
 
     postedOn () {
