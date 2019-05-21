@@ -2,8 +2,8 @@ import gql from 'graphql-tag'
 import NoticesService from '@/services/NoticesService'
 
 const query = gql`
-query GetTicket($input: GetTicketInput!) {
-  getTicket(input: $input) {
+query GetFullTicket($input: GetFullTicketInput!) {
+  getFullTicket(input: $input) {
     id
     title
     subject
@@ -34,7 +34,7 @@ const variables = function () {
 }
 
 const result = function ({ data }) {
-  this.ticket = data.getTicket
+  this.ticket = data.getFullTicket
   return {
     data
   }
@@ -74,7 +74,7 @@ const updateQuery = function (
     }
   }
 ) {
-  this.$apollo.queries.getTicket.refetch()
+  this.$apollo.queries.getFullTicket.refetch()
 }
 
 const subscribeToMore = {

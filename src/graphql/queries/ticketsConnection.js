@@ -19,6 +19,13 @@ query TicketsConnection(
       subject
       status
       createdAt
+      lastMessageFromAlfred {
+        id
+        body
+        event {
+          seenAt
+        }
+      }
     }
   }
 }
@@ -28,6 +35,8 @@ const variables = function () {
     ticketsFirst: this.ticketsFirst
   }
 }
+
+const fetchPolicy = 'network-only'
 
 const result = function ({ data }) {
   return {
@@ -71,6 +80,7 @@ const subscribeToMore = {
 export default {
   query,
   variables,
+  fetchPolicy,
   result,
   error,
   skip,

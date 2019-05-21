@@ -1,5 +1,5 @@
 <script>
-import getTicket from '@/graphql/queries/getTicket'
+import getFullTicket from '@/graphql/queries/getFullTicket'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 
 export default {
@@ -33,7 +33,7 @@ export default {
   },
 
   apollo: {
-    getTicket
+    getFullTicket
   },
 
   methods: {

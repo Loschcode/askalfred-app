@@ -26,7 +26,7 @@
                 Waiting list
               </span>
               <span v-else-if="ticket.status === 'processing'">
-                Working
+                I'm on it!
               </span>
               <span v-else-if="ticket.status === 'completed'">
                 Thanks!
@@ -37,13 +37,22 @@
             </span>
           </div>
           <div class="ticket__title-excerpt">
-            {{ ticket.subject }}
+            {{ excerpt() }}
           </div>
         </div>
       </div>
       <div class="col-xs-2 +no-padding">
-        <div class="ticket__date">
+        <div
+          v-if="wasSeenAt()"
+          class="ticket__date"
+        >
           {{ postedOn() }}
+        </div>
+        <div
+          v-else
+          class="ticket__notif"
+        >
+          <img src="/images/tickets/list/was_seen.svg">
         </div>
       </div>
     </div>
@@ -71,6 +80,24 @@ export default {
   },
 
   methods: {
+    wasSeenAt () {
+      if (this.ticket.lastMessageFromAlfred) {
+        return this.ticket.lastMessageFromAlfred.event.seenAt
+      } else {
+        // if there's no last message from Alfred
+        // then there's nothing to see
+        return true
+      }
+    },
+
+    excerpt () {
+      if (this.ticket.lastMessageFromAlfred) {
+        return this.ticket.lastMessageFromAlfred.body
+      }
+
+      return this.ticket.subject
+    },
+
     postedOn () {
       const date = this.ticket.createdAt
       return moment(date).fromNow()
@@ -140,6 +167,14 @@ export default {
 .ticket__date {
   color: $color-dark-grey;
   font-size: 15px;
+  text-align: center;
+}
+
+.ticket__notif {
+  text-align: center;
+  img {
+    height: 40px;
+  }
 }
 
 .ticket {

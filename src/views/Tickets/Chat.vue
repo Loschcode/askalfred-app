@@ -50,7 +50,7 @@
 
 <script>
 import ChatMixin from '@/mixins/ChatMixin'
-import getTicket from '@/graphql/queries/getTicket'
+import getFullTicket from '@/graphql/queries/getFullTicket'
 import ChatNotice from '@/components/Tickets/Chat/Notice'
 import ChatSubject from '@/components/Tickets/Chat/Subject'
 import ChatEventsMessage from '@/components/Tickets/Chat/Events/Message'
@@ -81,7 +81,7 @@ export default {
   },
 
   apollo: {
-    getTicket
+    getFullTicket
   }
 }
 </script>
