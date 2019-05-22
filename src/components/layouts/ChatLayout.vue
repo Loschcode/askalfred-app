@@ -151,7 +151,6 @@
       :ticket="ticket"
     />
   </div>
-  </div></div></div></div></div></div></div>
 </template>
 
 <script>
@@ -281,12 +280,12 @@ export default {
       const worked = this.creditSpent
       let format = null
 
-      if (worked <= 60) {
+      if (worked <= 59) {
         format = 'ss\\s\\e\\c'
-      } else if (worked <= 60 * 60) {
-        format = 'mm\\m ss\\s\\e\\c'
-      } else if (worked <= 60 * 60 * 24) {
-        format = 'HH\\h mm\\m ss\\s\\e\\c'
+      } else if (worked <= 59 * 60) {
+        format = 'mm\\m\\i\\n ss\\s\\e\\c'
+      } else if (worked <= 59 * 60 * 24) {
+        format = 'HH\\h mm\\m\\i\\n ss\\s\\e\\c'
       } else {
         format = 'D\\d HH\\h mm\\m ss\\s\\e\\c'
       }
