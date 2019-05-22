@@ -11,7 +11,7 @@
       <div class="col-xs-12">
         <div class="credit-left__content">
           <span class="credit-left__content-text">
-            Less than 1 hour
+            {{ shownCredit() }}
           </span>
           <span class="credit-left__content-arrow">
             <img src="/images/header/right-arrow.svg">
@@ -23,9 +23,35 @@
 </template>
 
 <script>
+import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
+
 export default {
   name: 'CreditLeft',
+  mixins: [
+    CurrentIdentityMixin
+  ],
+
   props: {
+  },
+
+  computed: {
+    creditSum () {
+      const add = (a, b) => a + b
+      return this.currentIdentity.credits.map((credit) => credit.time).reduce(add)
+    }
+  },
+
+  methods: {
+    shownCredit () {
+      const inMinutes = this.creditSum / 60
+      if (inMinutes <= 5) return 'Less than 5 minutes'
+      if (inMinutes <= 10) return 'Less than 10 minutes'
+      if (inMinutes <= 15) return 'Less than 15 minutes'
+      if (inMinutes <= 20) return 'Less than 20 minutes'
+      if (inMinutes <= 30) return 'Less than 30 minutes'
+      if (inMinutes <= 60) return 'Less than 1 hour'
+      if (inMinutes > 60) return 'More than 1 hour'
+    }
   }
 }
 </script>
