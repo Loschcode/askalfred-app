@@ -7,7 +7,12 @@
             <div class="row middle-xs">
               <div class="col-xs-6 col-md-4 col-md-offset-2">
                 <div class="header-menu__title">
-                  <h1>AskAlfred</h1>
+                  <h1
+                    class="+pointer"
+                    @click="clickTitle()"
+                  >
+                    AskAlfred
+                  </h1>
                 </div>
               </div>
               <div class="col-xs-6 col-md-4">
@@ -50,6 +55,7 @@
 import CreditLeft from '@/components/Header/CreditLeft'
 import OpenModalMixin from '@/mixins/OpenModalMixin'
 import ModalsMoreOptions from '@/components/Layouts/DashboardLayout/Modals/MoreOptions'
+import PageHelper from '@/helpers/PageHelper'
 
 export default {
   name: 'DashboardLayout',
@@ -64,6 +70,10 @@ export default {
   },
 
   methods: {
+    clickTitle () {
+      PageHelper.hardRedirectTo('/')
+    },
+
     moreOptions () {
       this.openModal('modals-more-options')
     }

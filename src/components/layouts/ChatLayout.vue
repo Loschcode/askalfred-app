@@ -10,7 +10,7 @@
                   I already worked ...
                 </div>
                 <div class="header-menu__time">
-                  10 hours 00 sec
+                  {{ timeWorked() }}
                 </div>
               </div>
               <div class="col-xs-6 col-md-4">
@@ -245,6 +245,10 @@ export default {
   },
 
   methods: {
+    timeWorked () {
+      return '10 hours 00 sec'
+    },
+
     isLocked () {
       return this.ticket.status === 'canceled' || this.ticket.status === 'completed'
     },
