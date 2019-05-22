@@ -3,10 +3,11 @@
     <div class="row center-xs">
       <div class="col-xs-11 col-md-8">
         <chat-notice :status="`up`">
+          <p>Your file has been sent successfullly.</p>
           <a
             target="_blank"
             :href="file.filePath"
-          >Your file</a> has been sent successfullly
+          >Click here to download it</a>
         </chat-notice>
       </div>
     </div>
@@ -66,6 +67,11 @@ export default {
 .ticket-file {
   margin: 1em;
   margin-bottom: 0.5em;
+
+  p {
+    font-size: 14px;
+    padding-bottom: 0.5em;
+  }
 
   a {
     color: $color-blue;
