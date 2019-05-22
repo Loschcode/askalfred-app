@@ -111,15 +111,18 @@
                   <div
                     class="message-input__button-join-file +pointer"
                   >
-                    <div class="+extend-clickable">
-                      <input
-                        id="file"
-                        ref="file"
-                        type="file"
-                        @change="sendFile()"
-                      >
-                      <img src="/images/tickets/chat/join-file.svg">
-                    </div>
+                    <label for="file">
+                      <div class="+extend-clickable +pointer">
+                        <input
+                          id="file"
+                          ref="file"
+                          class="+hidden"
+                          type="file"
+                          @change="sendFile()"
+                        >
+                        <img src="/images/tickets/chat/join-file.svg">
+                      </div>
+                    </label>
                   </div>
                 </div>
               </div>
