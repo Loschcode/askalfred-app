@@ -14,7 +14,8 @@ import moment from 'moment'
 
 // Apollo
 import { ApolloClient } from 'apollo-client'
-import { HttpLink } from 'apollo-link-http'
+import { createUploadLink } from 'apollo-upload-client'
+// import { HttpLink } from 'apollo-link-http'
 import { concat, split } from 'apollo-link'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import VueApollo from 'vue-apollo'
@@ -40,7 +41,12 @@ Vue.component('default-error', DefaultError)
 Vue.config.productionTip = false
 
 // HTTP link
-const httpLink = new HttpLink({
+// NOTE : we removed this because we use the createUploadLink instead to upload files
+// const httpLink = new HttpLink({
+//   uri: process.env.VUE_APP_GRAPHQL_HTTP
+// })
+
+const httpLink = createUploadLink({
   uri: process.env.VUE_APP_GRAPHQL_HTTP
 })
 
@@ -82,7 +88,7 @@ const apolloClient = new ApolloClient({
 Vue.use(VueApollo)
 
 // Custom date format
-moment.locale('en', {
+moment.updateLocale('en', {
   relativeTime: {
     future: 'in %s',
     past: '%s',

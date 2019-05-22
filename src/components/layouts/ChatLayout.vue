@@ -108,8 +108,16 @@
                   </div>
                 </div>
                 <div v-else>
-                  <div class="message-input__button-join-file">
-                    <div class="+pointer">
+                  <div
+                    class="message-input__button-join-file +pointer"
+                  >
+                    <div class="+extend-clickable">
+                      <input
+                        id="file"
+                        ref="file"
+                        type="file"
+                        @change="sendFile()"
+                      >
                       <img src="/images/tickets/chat/join-file.svg">
                     </div>
                   </div>
@@ -136,6 +144,7 @@ import router from '@/router'
 import ModalsTicketOptions from '@/components/Layouts/ChatLayout/Modals/TicketOptions'
 import OpenModalMixin from '@/mixins/OpenModalMixin'
 import sendMessage from '@/graphql/mutations/sendMessage'
+import sendFile from '@/graphql/mutations/sendFile'
 import ScrollHelper from '@/helpers/ScrollHelper'
 import moment from 'moment'
 
@@ -224,6 +233,17 @@ export default {
   methods: {
     isLocked () {
       return this.ticket.status === 'canceled' || this.ticket.status === 'completed'
+    },
+
+    async sendFile () {
+      try {
+        const selectedFile = this.$refs.file.files[0]
+        const sendFileInput = { id: this.ticket.id, file: selectedFile }
+        await sendFile(this, sendFileInput)
+        this.currentMessage = ''
+      } catch (error) {
+        this.notices.graphError(error)
+      }
     },
 
     async sendMessage () {
