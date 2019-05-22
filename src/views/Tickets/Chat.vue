@@ -1,5 +1,5 @@
 <template>
-  <div class="tickets-show">
+  <div class="tickets-chat">
     <!-- Subject -->
     <chat-subject>
       {{ ticket.subject }}
@@ -23,28 +23,30 @@
     </div>
 
     <!--  Notice -->
-    <div v-if="ticket.status === 'opened'">
-      <chat-notice :status="`opened`">
-        Thanks Laurent, I will get back to you as soon as possible.
-      </chat-notice>
-    </div>
+    <div class="tickets-chat__notice">
+      <div v-if="ticket.status === 'opened'">
+        <chat-notice :status="`opened`">
+          Thanks Laurent, I will get back to you as soon as possible.
+        </chat-notice>
+      </div>
 
-    <div v-if="ticket.status === 'processing' && !wasAnswered()">
-      <chat-notice :status="`processing`">
-        I'm currently processing your request. I will get back to you very soon.
-      </chat-notice>
-    </div>
+      <div v-if="ticket.status === 'processing' && !wasAnswered()">
+        <chat-notice :status="`processing`">
+          I'm currently processing your request. I will get back to you very soon.
+        </chat-notice>
+      </div>
 
-    <div v-if="ticket.status === 'canceled'">
-      <chat-notice :status="`canceled`">
-        Your request has been canceled. If you encountered a problem, let me know.
-      </chat-notice>
-    </div>
+      <div v-if="ticket.status === 'canceled'">
+        <chat-notice :status="`canceled`">
+          Your request has been canceled. If you encountered a problem, let me know.
+        </chat-notice>
+      </div>
 
-    <div v-if="ticket.status === 'completed'">
-      <chat-notice :status="`completed`">
-        Your request has been solved. Thanks for choosing me to help you out.
-      </chat-notice>
+      <div v-if="ticket.status === 'completed'">
+        <chat-notice :status="`completed`">
+          Your request has been solved. Thanks for choosing me to help you out.
+        </chat-notice>
+      </div>
     </div>
 
     <!--  Notice action done -->
@@ -95,4 +97,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.tickets-chat {
+}
+
+.tickets-chat__notice {
+  margin-top: 2em;
+}
 </style>

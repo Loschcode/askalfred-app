@@ -66,7 +66,6 @@ export default {
 <style scoped lang="scss">
 .ticket-file {
   margin: 1em;
-  margin-bottom: 0.5em;
 
   p {
     font-size: 14px;
