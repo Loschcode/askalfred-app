@@ -151,6 +151,8 @@ import sendMessage from '@/graphql/mutations/sendMessage'
 import sendFile from '@/graphql/mutations/sendFile'
 import ScrollHelper from '@/helpers/ScrollHelper'
 import moment from 'moment'
+import { required } from 'vuelidate/lib/validators'
+import NoticesService from '@/services/NoticesService'
 
 export default {
   name: 'ChatLayout',
@@ -165,6 +167,10 @@ export default {
   ],
 
   props: {
+  },
+
+  validations: {
+    currentMessage: { required }
   },
 
   data () {
@@ -234,6 +240,10 @@ export default {
   mounted () {
   },
 
+  created () {
+    this.notices = new NoticesService(this)
+  },
+
   methods: {
     isLocked () {
       return this.ticket.status === 'canceled' || this.ticket.status === 'completed'
@@ -251,6 +261,9 @@ export default {
     },
 
     async sendMessage () {
+      this.$v.currentMessage.$touch()
+      if (this.$v.currentMessage.$error) return
+
       try {
         const sendMessageInput = { id: this.ticket.id, message: this.currentMessage }
         await sendMessage(this, sendMessageInput)
