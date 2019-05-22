@@ -15,7 +15,10 @@
         />
       </div>
       <div v-else-if="event.type === 'EventFile'">
-        FILE TO MANAGE HERE
+        <chat-events-file
+          :file="event.eventable"
+          :event="event"
+        />
       </div>
     </div>
 
@@ -57,6 +60,7 @@ import getFullTicket from '@/graphql/queries/getFullTicket'
 import ChatNotice from '@/components/Tickets/Chat/Notice'
 import ChatSubject from '@/components/Tickets/Chat/Subject'
 import ChatEventsMessage from '@/components/Tickets/Chat/Events/Message'
+import ChatEventsFile from '@/components/Tickets/Chat/Events/File'
 
 export default {
   name: 'TicketChat',
@@ -64,7 +68,8 @@ export default {
   components: {
     ChatNotice,
     ChatSubject,
-    ChatEventsMessage
+    ChatEventsMessage,
+    ChatEventsFile
   },
 
   mixins: [
