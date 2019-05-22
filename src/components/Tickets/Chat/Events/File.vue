@@ -3,7 +3,12 @@
     <div class="row center-xs">
       <div class="col-xs-11 col-md-8">
         <chat-notice :status="`up`">
-          <p>Your file has been sent successfullly.</p>
+          <p v-if="event.seenAt">
+            I've seen your file.
+          </p>
+          <p v-else>
+            I received your file and will review it soon.
+          </p>
           <a
             target="_blank"
             :href="file.filePath"
