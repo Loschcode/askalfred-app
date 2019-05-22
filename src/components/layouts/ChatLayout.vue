@@ -114,6 +114,7 @@
                     <label for="file">
                       <div class="+extend-clickable +pointer">
                         <input
+                          v-if="!isLocked()"
                           id="file"
                           ref="file"
                           class="+hidden"
