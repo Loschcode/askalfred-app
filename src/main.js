@@ -17,12 +17,16 @@ import { ApolloClient } from 'apollo-client'
 import { createUploadLink } from 'apollo-upload-client'
 // import { HttpLink } from 'apollo-link-http'
 import { concat, split } from 'apollo-link'
-import { InMemoryCache } from 'apollo-cache-inmemory'
+import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory'
 import VueApollo from 'vue-apollo'
 import { setContext } from 'apollo-link-context'
 
 import ActionCable from 'actioncable'
 import ActionCableLink from 'graphql-ruby-client/subscriptions/ActionCableLink'
+
+// FragmentMatcher
+// stored above `src/`
+import introspectionQueryResultData from './../fragmentTypes.json'
 
 // Layouts
 import ChatLayout from './components/Layouts/ChatLayout'
@@ -77,7 +81,11 @@ const authMiddleware = setContext((_, { headers }) => ({
 // Concat links (cable / http) with authentication
 const link = concat(authMiddleware, endLink)
 
-const cache = new InMemoryCache()
+const fragmentMatcher = new IntrospectionFragmentMatcher({
+  introspectionQueryResultData
+})
+
+const cache = new InMemoryCache({ fragmentMatcher })
 
 const apolloClient = new ApolloClient({
   cache,

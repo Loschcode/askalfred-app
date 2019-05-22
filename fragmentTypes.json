@@ -1,0 +1,18 @@
+{
+  "__schema": {
+    "types": [
+      {
+        "kind": "UNION",
+        "name": "Eventable",
+        "possibleTypes": [
+          {
+            "name": "EventMessage"
+          },
+          {
+            "name": "EventFile"
+          }
+        ]
+      }
+    ]
+  }
+}

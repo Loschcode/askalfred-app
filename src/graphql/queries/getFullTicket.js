@@ -17,8 +17,12 @@ query GetFullTicket($input: GetFullTicketInput!) {
           id
         }
         eventable {
-          id
-          ... on EventMessage { body }
+          ... on EventMessage {
+            body
+          }
+          ... on EventFile {
+            filePath
+          }
         }
       }
     }

@@ -1,29 +1,9 @@
-# askalfred-app
+# HOW TO ?
 
-## Project setup
-```
-yarn install
-```
+## Fragment issues
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+The front-end isn't that smart and sometimes Apollo client throws bullshit fragment errors because of unions and interfaces, you have to run this if the schema isn't up to date:
 
-### Compiles and minifies for production
 ```
-yarn run build
+npm run generate
 ```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

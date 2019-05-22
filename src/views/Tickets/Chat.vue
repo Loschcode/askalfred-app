@@ -14,6 +14,9 @@
           :event="event"
         />
       </div>
+      <div v-else-if="event.type === 'EventFile'">
+        FILE TO MANAGE HERE
+      </div>
     </div>
 
     <!--  Notice -->
