@@ -18,7 +18,7 @@
               class="button button__white-on-blue"
               @click="action()"
             >
-              Back
+              {{ buttonLabel }}
             </span>
           </div>
         </div>
@@ -29,8 +29,9 @@
 
 <script>
 export default {
-  name: 'ModalsCommonSuccess',
+  name: 'ModalsCommonLocked',
   props: {
+    buttonLabel: { type: String, default: 'Back' },
     title: { type: String, default: '' },
     content: { type: String, default: '' },
     action: { type: Function, default: () => {} }

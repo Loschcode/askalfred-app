@@ -16,7 +16,7 @@
               class="button button__white-on-blue"
               @click="action()"
             >
-              Continue
+              {{ buttonLabel }}
             </span>
           </div>
         </div>
@@ -29,6 +29,7 @@
 export default {
   name: 'ModalsCommonSuccess',
   props: {
+    buttonLabel: { type: String, default: 'Continue' },
     title: { type: String, default: '' },
     content: { type: String, default: '' },
     action: { type: Function, default: () => {} }

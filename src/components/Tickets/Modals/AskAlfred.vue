@@ -48,6 +48,18 @@
           />
         </div>
       </div>
+
+      <!-- Error topup -->
+      <div ref="please-topup">
+        <div class="content">
+          <modals-common-locked
+            :title="`Oops`"
+            :content="`You don't have much  time left with Alfred, to make new requests, please add some credit!`"
+            :button-label="`Top up now`"
+            :action="topUpNow"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -56,16 +68,19 @@
 import ModalBody from '@/components/ModalBody'
 import InnerModalMixin from '@/mixins/InnerModalMixin'
 import ModalsCommonSuccess from '@/components/Modals/Success'
+import ModalsCommonLocked from '@/components/Modals/Locked'
 import autosize from 'autosize'
 import createTicket from '@/graphql/mutations/createTicket'
 import NoticesService from '@/services/NoticesService'
 import { required } from 'vuelidate/lib/validators'
+import ErrorsHelper from '@/helpers/ErrorsHelper'
 
 export default {
   name: 'ModalsAskAlfred',
   components: {
     ModalBody,
-    ModalsCommonSuccess
+    ModalsCommonSuccess,
+    ModalsCommonLocked
   },
   mixins: [
     InnerModalMixin
@@ -103,6 +118,10 @@ export default {
       this.$refs.request.focus()
     },
 
+    topUpNow () {
+      console.log('YO YOU HAVE TO MAKE IT')
+    },
+
     async askNow () {
       this.$v.createTicketInput.$touch()
       if (this.$v.createTicketInput.$error) return
@@ -112,6 +131,10 @@ export default {
         this.currentModal().setWithContentOf(this, 'no-worry')
         this.createTicketInput.message = ''
       } catch (error) {
+        if (ErrorsHelper.fromType(error, 'credits_issue')) {
+          return this.currentModal().setWithContentOf(this, 'please-topup')
+        }
+
         this.notices.graphError(error)
       }
     }
