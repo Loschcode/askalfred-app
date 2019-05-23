@@ -166,6 +166,7 @@ import ScrollHelper from '@/helpers/ScrollHelper'
 import moment from 'moment'
 import { required } from 'vuelidate/lib/validators'
 import NoticesService from '@/services/NoticesService'
+import getFullCredits from '@/graphql/queries/getFullCredits'
 
 export default {
   name: 'ChatLayout',
@@ -179,6 +180,10 @@ export default {
     OpenModalMixin
   ],
 
+  apollo: {
+    getFullCredits
+  },
+
   props: {
   },
 
@@ -188,6 +193,7 @@ export default {
 
   data () {
     return {
+      credits: null,
       currentMessage: '',
       footerPlaceholder: 100
     }
@@ -195,7 +201,7 @@ export default {
 
   computed: {
     ticketCredits () {
-      return this.currentIdentity.credits.filter((credit) => credit.ticketId === this.ticket.id)
+      return this.credits.filter((credit) => credit.ticketId === this.ticket.id)
     },
 
     totalCredits () {

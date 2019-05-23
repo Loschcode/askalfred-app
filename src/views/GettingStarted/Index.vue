@@ -42,7 +42,7 @@ export default {
         return 'thank-you'
       }
 
-      if (this.currentIdentity.credits.length === 0) {
+      if (this.currentIdentity.creditsCount === 0) {
         return 'surprise'
       }
 

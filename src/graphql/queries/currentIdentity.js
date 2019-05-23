@@ -16,9 +16,7 @@ const query = gql`
       confirmationToken
       recoverySentAt
       recoveryToken
-      credits {
-        time
-      }
+      creditsCount
     }
   }
 `
