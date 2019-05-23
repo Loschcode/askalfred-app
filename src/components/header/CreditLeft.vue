@@ -1,38 +1,53 @@
 <template>
-  <div
-    v-if="credits"
-    class="credit-left +pointer"
-  >
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="credit-left__title">
-          Credit left
+  <div>
+    <div
+      v-if="credits"
+      class="credit-left +pointer"
+      @click="topUp()"
+    >
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="credit-left__title">
+            Credit left
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="credit-left__content">
+            <span class="credit-left__content-text">
+              {{ shownCredit() }}
+            </span>
+            <span class="credit-left__content-arrow">
+              <img src="/images/header/right-arrow.svg">
+            </span>
+          </div>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="credit-left__content">
-          <span class="credit-left__content-text">
-            {{ shownCredit() }}
-          </span>
-          <span class="credit-left__content-arrow">
-            <img src="/images/header/right-arrow.svg">
-          </span>
-        </div>
-      </div>
-    </div>
+    <!-- Modals -->
+    <modals-top-up
+      ref="modals-top-up"
+    />
   </div>
 </template>
 
 <script>
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import getFullCredits from '@/graphql/queries/getFullCredits'
+import ModalsTopUp from '@/components/Modals/TopUp'
+import OpenModalMixin from '@/mixins/OpenModalMixin'
 
 export default {
   name: 'CreditLeft',
+
+  components: {
+    ModalsTopUp
+  },
+
   mixins: [
-    CurrentIdentityMixin
+    CurrentIdentityMixin,
+    OpenModalMixin
   ],
 
   props: {
@@ -56,6 +71,10 @@ export default {
   },
 
   methods: {
+    topUp () {
+      this.openModal('modals-top-up')
+    },
+
     shownCredit () {
       const inMinutes = this.creditSum / 60
       if (inMinutes < 5) return 'Less than 5 minutes'

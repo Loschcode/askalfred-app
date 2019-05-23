@@ -33,7 +33,7 @@
       <!-- Options Locked -->
       <div ref="ticket-options-locked">
         <div class="content">
-          <modals-common-locked
+          <modals-contents-locked
             :content="`This request is locked, you can't alter it anymore. Please contact support if you need anything.`"
             :action="close"
           />
@@ -48,13 +48,13 @@ import ModalBody from '@/components/ModalBody'
 import InnerModalMixin from '@/mixins/InnerModalMixin'
 import cancelTicket from '@/graphql/mutations/cancelTicket'
 import NoticesService from '@/services/NoticesService'
-import ModalsCommonLocked from '@/components/Modals/Locked'
+import ModalsContentsLocked from '@/components/Modals/Contents/Locked'
 
 export default {
   name: 'ModalsMoreOptions',
   components: {
     ModalBody,
-    ModalsCommonLocked
+    ModalsContentsLocked
   },
 
   mixins: [

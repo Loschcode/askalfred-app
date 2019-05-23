@@ -1,13 +1,15 @@
 
 <template>
-  <div class="modal-success">
+  <div class="modal-locked">
     <div class="container-fluid content">
       <div class="row center-xs">
         <div class="col-xs-12">
           <div class="modal__icon">
-            <img src="/images/modals/success.svg">
+            <img src="/images/modals/locked.svg">
           </div>
-          <h2>{{ title }}</h2>
+          <h2 v-if="title">
+            {{ title }}
+          </h2>
           <p>
             {{ content }}
           </p>
@@ -27,9 +29,9 @@
 
 <script>
 export default {
-  name: 'ModalsCommonSuccess',
+  name: 'ModalsContentsLocked',
   props: {
-    buttonLabel: { type: String, default: 'Continue' },
+    buttonLabel: { type: String, default: 'Back' },
     title: { type: String, default: '' },
     content: { type: String, default: '' },
     action: { type: Function, default: () => {} }
@@ -38,12 +40,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.modal-success {
+.modal-locked {
   position: relative;
   margin-top: spacing(7);
 
   h2 {
-    color: $color-green;
+    color: $color-blue-purple;
     font-weight: 400;
   }
   p {

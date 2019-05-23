@@ -41,7 +41,7 @@
       <!-- Success -->
       <div ref="no-worry">
         <div class="content">
-          <modals-common-success
+          <modals-contents-success
             :title="`No worry!`"
             :content="`Alfred will take care of this`"
             :action="close"
@@ -52,7 +52,7 @@
       <!-- Error topup -->
       <div ref="please-topup">
         <div class="content">
-          <modals-common-locked
+          <modals-contents-locked
             :title="`Oops`"
             :content="`You don't have much  time left with Alfred, to make new requests, please add some credit!`"
             :button-label="`Top up now`"
@@ -67,8 +67,8 @@
 <script>
 import ModalBody from '@/components/ModalBody'
 import InnerModalMixin from '@/mixins/InnerModalMixin'
-import ModalsCommonSuccess from '@/components/Modals/Success'
-import ModalsCommonLocked from '@/components/Modals/Locked'
+import ModalsContentsSuccess from '@/components/Modals/Contents/Success'
+import ModalsContentsLocked from '@/components/Modals/Contents/Locked'
 import autosize from 'autosize'
 import createTicket from '@/graphql/mutations/createTicket'
 import NoticesService from '@/services/NoticesService'
@@ -79,8 +79,8 @@ export default {
   name: 'ModalsAskAlfred',
   components: {
     ModalBody,
-    ModalsCommonSuccess,
-    ModalsCommonLocked
+    ModalsContentsSuccess,
+    ModalsContentsLocked
   },
   mixins: [
     InnerModalMixin
