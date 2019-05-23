@@ -60,9 +60,7 @@ const document = gql`
         confirmationToken
         recoverySentAt
         recoveryToken
-        credits {
-          time
-        }
+        creditsCount
       }
     }
   }
