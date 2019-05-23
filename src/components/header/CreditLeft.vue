@@ -1,5 +1,8 @@
 <template>
-  <div class="credit-left +pointer">
+  <div
+    v-if="credits"
+    class="credit-left +pointer"
+  >
     <div class="row">
       <div class="col-xs-12">
         <div class="credit-left__title">
@@ -24,6 +27,7 @@
 
 <script>
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
+import getFullCredits from '@/graphql/queries/getFullCredits'
 
 export default {
   name: 'CreditLeft',
@@ -34,22 +38,32 @@ export default {
   props: {
   },
 
+  data () {
+    return {
+      credits: null
+    }
+  },
+
+  apollo: {
+    getFullCredits
+  },
+
   computed: {
     creditSum () {
       const add = (a, b) => a + b
-      return this.currentIdentity.credits.map((credit) => credit.time).reduce(add)
+      return this.credits.map((credit) => credit.time).reduce(add)
     }
   },
 
   methods: {
     shownCredit () {
       const inMinutes = this.creditSum / 60
-      if (inMinutes <= 5) return 'Less than 5 minutes'
-      if (inMinutes <= 10) return 'Less than 10 minutes'
-      if (inMinutes <= 15) return 'Less than 15 minutes'
-      if (inMinutes <= 20) return 'Less than 20 minutes'
-      if (inMinutes <= 30) return 'Less than 30 minutes'
-      if (inMinutes <= 60) return 'Less than 1 hour'
+      if (inMinutes < 5) return 'Less than 5 minutes'
+      if (inMinutes < 10) return 'Less than 10 minutes'
+      if (inMinutes < 15) return 'Less than 15 minutes'
+      if (inMinutes < 20) return 'Less than 20 minutes'
+      if (inMinutes < 30) return 'Less than 30 minutes'
+      if (inMinutes < 60) return 'Less than 1 hour'
       if (inMinutes > 60) return 'More than 1 hour'
     }
   }
