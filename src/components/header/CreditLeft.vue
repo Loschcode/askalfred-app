@@ -16,7 +16,7 @@
         <div class="col-xs-12">
           <div class="credit-left__content">
             <span class="credit-left__content-text">
-              {{ shownCredit() }}
+              {{ approxCredit() }}
             </span>
             <span class="credit-left__content-arrow">
               <img src="/images/header/right-arrow.svg">
@@ -37,6 +37,7 @@ import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import getFullCredits from '@/graphql/queries/getFullCredits'
 import ModalsTopUp from '@/components/Modals/TopUp'
 import OpenModalMixin from '@/mixins/OpenModalMixin'
+import TimeHelper from '@/helpers/TimeHelper'
 
 export default {
   name: 'CreditLeft',
@@ -75,7 +76,11 @@ export default {
       this.openModal('modals-top-up')
     },
 
-    shownCredit () {
+    exactCredit () {
+      return TimeHelper.exactDisplay(this.creditSum)
+    },
+
+    approxCredit () {
       const inMinutes = this.creditSum / 60
       if (inMinutes < 5) return 'Less than 5 minutes'
       if (inMinutes < 10) return 'Less than 10 minutes'

@@ -9,9 +9,6 @@ import Vuelidate from 'vuelidate'
 // Notification
 import Notifications from 'vue-notification'
 
-// Moment
-import moment from 'moment'
-
 // Apollo
 import { ApolloClient } from 'apollo-client'
 import { createUploadLink } from 'apollo-upload-client'
@@ -36,6 +33,7 @@ import DefaultError from './components/Errors/DefaultError'
 
 // Used in startup
 import TokenHelper from './helpers/TokenHelper'
+import TimeHelper from './helpers/TimeHelper'
 
 Vue.component('chat-layout', ChatLayout)
 Vue.component('dashboard-layout', DashboardLayout)
@@ -95,25 +93,7 @@ const apolloClient = new ApolloClient({
 
 Vue.use(VueApollo)
 
-// Custom date format
-moment.updateLocale('en', {
-  relativeTime: {
-    future: 'in %s',
-    past: '%s',
-    s: 'right now',
-    ss: '%ss ago',
-    m: '1m ago',
-    mm: '%dm ago',
-    h: '1h ago',
-    hh: '%dh ago',
-    d: '1d ago',
-    dd: '%dd ago',
-    M: '1M ago',
-    MM: '%dM ago',
-    y: '1Y ago',
-    yy: '%dY ago'
-  }
-})
+TimeHelper.setLocales()
 
 const apolloProvider = new VueApollo({
   defaultClient: apolloClient,

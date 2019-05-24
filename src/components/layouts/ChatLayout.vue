@@ -163,10 +163,10 @@ import OpenModalMixin from '@/mixins/OpenModalMixin'
 import sendMessage from '@/graphql/mutations/sendMessage'
 import sendFile from '@/graphql/mutations/sendFile'
 import ScrollHelper from '@/helpers/ScrollHelper'
-import moment from 'moment'
 import { required } from 'vuelidate/lib/validators'
 import NoticesService from '@/services/NoticesService'
 import getFullCredits from '@/graphql/queries/getFullCredits'
+import TimeHelper from '@/helpers/TimeHelper'
 
 export default {
   name: 'ChatLayout',
@@ -215,8 +215,7 @@ export default {
     },
 
     lastAnswerDate () {
-      const date = this.lastAnswer().createdAt
-      return moment(date).fromNow()
+      return TimeHelper.ago(this.lastAnswer().createdAt)
     },
 
     computedFooterPlaceholder () {
@@ -283,22 +282,7 @@ export default {
     },
 
     displayTimeWorked () {
-      const worked = this.creditSpent
-      let format = null
-
-      if (worked <= 59) {
-        format = 'ss\\s\\e\\c'
-      } else if (worked <= 59 * 60) {
-        format = 'mm\\m\\i\\n ss\\s\\e\\c'
-      } else if (worked <= 59 * 60 * 24) {
-        format = 'HH\\h mm\\m\\i\\n ss\\s\\e\\c'
-      } else {
-        format = 'D\\d HH\\h mm\\m ss\\s\\e\\c'
-      }
-
-      const endWorked = worked * 1000
-
-      return moment.utc(moment.duration(endWorked).asMilliseconds()).format(format)
+      return TimeHelper.exactTime(this.creditSpent)
     },
 
     isLocked () {

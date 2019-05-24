@@ -62,7 +62,7 @@
 <script>
 import router from '@/router'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
-import moment from 'moment'
+import TimeHelper from '@/helpers/TimeHelper'
 
 export default {
   name: 'TicketsConnection',
@@ -101,14 +101,12 @@ export default {
 
     wasAnsweredAt () {
       if (this.wasAnswered()) {
-        const date = this.ticket.lastMessageFromAlfred.createdAt
-        return moment(date).fromNow()
+        return TimeHelper.ago(this.ticket.lastMessageFromAlfred.createdAt)
       }
     },
 
     postedOn () {
-      const date = this.ticket.createdAt
-      return moment(date).fromNow()
+      return TimeHelper.ago(this.ticket.createdAt)
     },
 
     goToItem (ticketId) {
