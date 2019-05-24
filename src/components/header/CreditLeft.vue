@@ -16,7 +16,7 @@
         <div class="col-xs-12">
           <div class="credit-left__content">
             <span class="credit-left__content-text">
-              {{ approxCredit() }}
+              {{ displayedTime() }}
             </span>
             <span class="credit-left__content-arrow">
               <img src="/images/header/right-arrow.svg">
@@ -56,12 +56,9 @@ export default {
 
   data () {
     return {
-      credits: null
+      credits: null,
+      exactTime: false
     }
-  },
-
-  apollo: {
-    getFullCredits
   },
 
   computed: {
@@ -71,9 +68,33 @@ export default {
     }
   },
 
+  watch: {
+    credits (newValue, oldValue) {
+      // first time it gets set
+      if (oldValue === null) {
+        const timeSwitch = 30 * 1000
+        setInterval(() => {
+          this.exactTime = !this.exactTime
+        }, timeSwitch)
+      }
+    }
+  },
+
+  apollo: {
+    getFullCredits
+  },
+
   methods: {
     topUp () {
       this.openModal('modals-top-up')
+    },
+
+    displayedTime () {
+      if (this.exactTime) {
+        return this.exactCredit()
+      } else {
+        return this.approxCredit()
+      }
     },
 
     exactCredit () {
@@ -81,14 +102,7 @@ export default {
     },
 
     approxCredit () {
-      const inMinutes = this.creditSum / 60
-      if (inMinutes < 5) return 'Less than 5 minutes'
-      if (inMinutes < 10) return 'Less than 10 minutes'
-      if (inMinutes < 15) return 'Less than 15 minutes'
-      if (inMinutes < 20) return 'Less than 20 minutes'
-      if (inMinutes < 30) return 'Less than 30 minutes'
-      if (inMinutes < 60) return 'Less than 1 hour'
-      if (inMinutes > 60) return 'More than 1 hour'
+      return TimeHelper.approxDisplay(this.creditSum)
     }
   }
 }

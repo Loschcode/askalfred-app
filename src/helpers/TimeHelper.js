@@ -5,20 +5,31 @@ class TimeHelper {
     return moment(date).fromNow()
   }
 
-  exactDisplay (worked) {
+  approxDisplay (timeSpent) {
+    const inMinutes = timeSpent / 60
+    if (inMinutes < 5) return 'Less than 5 minutes'
+    if (inMinutes < 10) return 'Less than 10 minutes'
+    if (inMinutes < 15) return 'Less than 15 minutes'
+    if (inMinutes < 20) return 'Less than 20 minutes'
+    if (inMinutes < 30) return 'Less than 30 minutes'
+    if (inMinutes < 60) return 'Less than 1 hour'
+    if (inMinutes > 60) return 'More than 1 hour'
+  }
+
+  exactDisplay (timeSpent) {
     let format = null
 
-    if (worked <= 59) {
+    if (timeSpent <= 59) {
       format = 'ss\\s\\e\\c'
-    } else if (worked <= 59 * 60) {
+    } else if (timeSpent <= 59 * 60) {
       format = 'mm\\m\\i\\n ss\\s\\e\\c'
-    } else if (worked <= 59 * 60 * 24) {
+    } else if (timeSpent <= 59 * 60 * 24) {
       format = 'HH\\h mm\\m\\i\\n ss\\s\\e\\c'
     } else {
       format = 'D\\d HH\\h mm\\m ss\\s\\e\\c'
     }
 
-    const endWorked = worked * 1000
+    const endWorked = timeSpent * 1000
 
     return moment.utc(moment.duration(endWorked).asMilliseconds()).format(format)
   }
