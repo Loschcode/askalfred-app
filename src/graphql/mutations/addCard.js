@@ -20,6 +20,7 @@ export default async (vm, input) => {
       }
     })
     .then(({ data: { addCard } }) => {
+      debugger
       return addCard
     })
   return response

@@ -47,8 +47,8 @@ const skip = function () {
 
 // Subscription handling
 const document = gql`
-  subscription SubscribeToIdentity {
-    subscribeToCurrentIdentity {
+  subscription RefreshIdentity {
+    refreshCurrentIdentity {
       currentIdentity {
         id
         role
@@ -63,6 +63,8 @@ const document = gql`
         recoverySentAt
         recoveryToken
         creditsCount
+        stripeCustomerId
+        stripeCardId
       }
     }
   }
@@ -73,7 +75,7 @@ const updateQuery = function (
   {
     subscriptionData: {
       data: {
-        subscribeToCurrentIdentity: { currentIdentity }
+        refreshCurrentIdentity: { currentIdentity }
       }
     }
   }

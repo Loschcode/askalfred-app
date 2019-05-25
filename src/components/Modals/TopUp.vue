@@ -266,6 +266,7 @@ export default {
     color: $color-grey;
   }
   input {
+    letter-spacing: 0.5px;
     width: 100%;
     font-size: 24px;
     padding-bottom: 0.5em;
