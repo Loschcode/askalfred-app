@@ -18,49 +18,49 @@
           <div class="top-up-window__buttons">
             <div class="row center-xs">
               <div
-                class="col-xs-4 top-up-window__button-container +pointer"
+                class="col-xs-5 top-up-window__button-container +pointer"
                 @click="setAmount(5)"
               >
                 <div
                   class="top-up-window__button"
                   :class="{ 'top-up-window__button--selected': selectedAmount === 5 }"
                 >
-                  $5.00
+                  5.00 €
                 </div>
               </div>
               <div
-                class="col-xs-4 top-up-window__button-container +pointer"
+                class="col-xs-5 top-up-window__button-container +pointer"
                 @click="setAmount(10)"
               >
                 <div
                   class="top-up-window__button"
                   :class="{ 'top-up-window__button--selected': selectedAmount === 10 }"
                 >
-                  $10.00
+                  10.00 €
                 </div>
               </div>
             </div>
             <div class="row center-xs">
               <div
-                class="col-xs-4 top-up-window__button-container +pointer"
+                class="col-xs-5 top-up-window__button-container +pointer"
                 @click="setAmount(15)"
               >
                 <div
                   class="top-up-window__button"
                   :class="{ 'top-up-window__button--selected': selectedAmount === 15 }"
                 >
-                  $15.00
+                  15.00 €
                 </div>
               </div>
               <div
-                class="col-xs-4 top-up-window__button-container +pointer"
+                class="col-xs-5 top-up-window__button-container +pointer"
                 @click="setAmount(20)"
               >
                 <div
                   class="top-up-window__button"
                   :class="{ 'top-up-window__button--selected': selectedAmount === 20 }"
                 >
-                  $20.00
+                  20.00 €
                 </div>
               </div>
             </div>
@@ -320,7 +320,7 @@ export default {
 }
 
 .top-up-window__button {
-  font-size: 20px;
+  font-size: 24px;
   margin-bottom: 0em;
   padding: 1.2em;
   @include button-radius('small');

@@ -12,8 +12,11 @@ class TimeHelper {
     if (inMinutes < 15) return 'Less than 15 minutes'
     if (inMinutes < 20) return 'Less than 20 minutes'
     if (inMinutes < 30) return 'Less than 30 minutes'
+    if (inMinutes < 45) return 'Less than 45 minutes'
     if (inMinutes < 60) return 'Less than 1 hour'
-    if (inMinutes > 60) return 'More than 1 hour'
+    if (inMinutes < 120) return 'Less than 2 hours'
+    if (inMinutes < 180) return 'Less than 3 hours'
+    if (inMinutes >= 180) return 'More than 3 hours'
   }
 
   exactDisplay (timeSpent) {
