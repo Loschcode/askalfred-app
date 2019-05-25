@@ -68,7 +68,7 @@
               <div class="col-xs-12">
                 <div
                   class="top-up-window__call-to-action +pointer"
-                  @click="tryToChargeNow()"
+                  @click="tryToChargeNow({})"
                 >
                   <div class="button button__blue-on-white button--large button--bold">
                     Top up
@@ -150,10 +150,9 @@
       <div ref="payment-success-window">
         <div class="content">
           <modals-contents-success
-            :title="`No worry!`"
-            :content="`Alfred will take care of this`"
+            :title="`Payment successful!`"
+            :content="`Thanks for choosing Alfred`"
             :action="close"
-            :button-label="`Continue`"
           />
         </div>
       </div>
@@ -167,6 +166,7 @@ import InnerModalMixin from '@/mixins/InnerModalMixin'
 import NoticesService from '@/services/NoticesService'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import addCard from '@/graphql/mutations/addCard'
+import chargeCustomer from '@/graphql/mutations/chargeCustomer'
 import ModalsContentsSuccess from '@/components/Modals/Contents/Success'
 
 export default {
@@ -212,19 +212,23 @@ export default {
           securityCode: this.securityCode
         }
         await addCard(this, addCardInput)
-        // await this.tryToChargeNow()
+        await this.tryToChargeNow({ skipValidation: true })
       } catch (error) {
         this.notices.graphError(error)
       }
     },
 
-    async tryToChargeNow () {
-      if (!this.currentIdentity.stripeCardId) return this.goToAddCard()
+    async tryToChargeNow ({ skipValidation }) {
+      if (!skipValidation) {
+        if (!this.currentIdentity.stripeCardId) return this.goToAddCard()
+      }
 
       try {
-        // TODO make the logic when the guy already has a card
-        // const chargeCustomerInput = { amount: this.selectedAmount }
-        // await chargeCustomer(this, chargeCustomerInput)
+        const chargeCustomerInput = {
+          amount: this.selectedAmount
+        }
+        await chargeCustomer(this, chargeCustomerInput)
+        this.currentModal().setWithContentOf(this, 'payment-success-window')
       } catch (error) {
         this.notices.graphError(error)
       }
