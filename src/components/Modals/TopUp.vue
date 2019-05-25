@@ -66,7 +66,10 @@
             </div>
             <div class="row center-xs">
               <div class="col-xs-12">
-                <div class="top-up-window__call-to-action">
+                <div
+                  class="top-up-window__call-to-action +pointer"
+                  @click="tryToChargeNow()"
+                >
                   <div class="button button__blue-on-white button--large button--bold">
                     Top up
                   </div>
@@ -78,9 +81,68 @@
       </div>
 
       <!-- Options Locked -->
-      <div ref="top-up-locked">
-        <div class="content">
-          USE MODALS CONTENTS HERE
+      <div ref="add-card-window">
+        <div class="container content add-card-window">
+          <div class="row left-xs bottom-xs">
+            <div class="col-xs-9">
+              <div class="add-card-window__field">
+                <h3>Card Number</h3>
+                <input
+                  ref="cardNumber"
+                  v-model="cardNumber"
+                  v-mask="`#### #### #### ####`"
+                  type="text"
+                  maxlength="19"
+                  placeholder="12** *** **** 3456"
+                >
+              </div>
+            </div>
+            <div class="col-xs-3">
+              <img src="/images/topup/card-symbol.svg">
+            </div>
+          </div>
+          <div class="row left-xs bottom-xs">
+            <div class="col-xs-6">
+              <div class="add-card-window__field">
+                <h3>Expiration Date</h3>
+                <input
+                  v-model="expirationDate"
+                  v-mask="`##/##`"
+                  type="text"
+                  maxlength="8"
+                  placeholder="**/**"
+                >
+              </div>
+            </div>
+            <div class="col-xs-3">
+              <div class="add-card-window__field">
+                <h3>SVV/SVC</h3>
+                <input
+                  v-model="securityCode"
+                  v-mask="`###`"
+                  type="text"
+                  maxlength="3"
+                  placeholder="***"
+                >
+              </div>
+            </div>
+            <div class="col-xs-3">
+              <img src="/images/topup/card-secret-symbol.svg">
+            </div>
+          </div>
+
+          <div class="row center-xs">
+            <div class="col-xs-12">
+              <div
+                class="add-card-window__call-to-action +pointer"
+                @click="addCardNow()"
+              >
+                <div class="button button__blue-on-white button--large button--bold">
+                  Confirm card
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -91,6 +153,7 @@
 import ModalBody from '@/components/ModalBody'
 import InnerModalMixin from '@/mixins/InnerModalMixin'
 import NoticesService from '@/services/NoticesService'
+import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 
 export default {
   name: 'ModalsMoreOptions',
@@ -99,7 +162,8 @@ export default {
   },
 
   mixins: [
-    InnerModalMixin
+    InnerModalMixin,
+    CurrentIdentityMixin
   ],
 
   props: {
@@ -107,7 +171,10 @@ export default {
 
   data () {
     return {
-      selectedAmount: 10
+      selectedAmount: 10,
+      cardNumber: '',
+      expirationDate: '',
+      securityCode: ''
     }
   },
 
@@ -122,6 +189,29 @@ export default {
   },
 
   methods: {
+    async addCardNow () {
+      // TODO MAKE LOGIC HERE
+    },
+
+    async tryToChargeNow () {
+      if (!this.currentIdentity.hasValidCard) return this.goToAddCard()
+
+      try {
+        // TODO make the logic when the guy already has a card
+        // const chargeCustomerInput = { amount: this.selectedAmount }
+        // await chargeCustomer(this, chargeCustomerInput)
+      } catch (error) {
+        this.notices.graphError(error)
+      }
+    },
+
+    goToAddCard () {
+      this.currentModal().setWithContentOf(this, 'add-card-window')
+      this.$nextTick(() => {
+        this.$refs.cardNumber.focus()
+      })
+    },
+
     setAmount (newAmount) {
       this.selectedAmount = newAmount
     },
@@ -134,6 +224,46 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.add-card-window {
+  margin: 0.5em;
+  font-family: $font-alternative;
+  img {
+    margin-bottom: 0.7em;
+    max-width: 80%;
+  }
+  h3  {
+    font-size:  18px;
+    font-weight: 200;
+    color: $color-grey;
+  }
+  input {
+    width: 100%;
+    font-size: 24px;
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
+    border: none;
+    border-bottom: 1px solid $color-grey;
+    &::placeholder {
+      color: $color-grey;
+    }
+  }
+}
+
+.add-card-window__call-to-action {
+    position: absolute;
+    font-weight: bold;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin: auto;
+    bottom: -4em;
+}
+
+.add-card-window__field {
+  padding-top: 0.6em;
+  padding-bottom: 0.6em;
+}
+
 .top-up-window {
   p {
     font-size: 22px;

@@ -17,6 +17,7 @@ const query = gql`
       recoverySentAt
       recoveryToken
       creditsCount
+      hasValidCard
     }
   }
 `

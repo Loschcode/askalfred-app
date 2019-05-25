@@ -5,6 +5,7 @@ import store from './store'
 
 // Validation
 import Vuelidate from 'vuelidate'
+import VueMask from 'v-mask'
 
 // Notification
 import Notifications from 'vue-notification'
@@ -103,6 +104,7 @@ const apolloProvider = new VueApollo({
 })
 
 Vue.use(Vuelidate)
+Vue.use(VueMask)
 Vue.use(Notifications)
 
 new Vue({
