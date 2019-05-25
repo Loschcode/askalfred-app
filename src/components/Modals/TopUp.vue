@@ -138,7 +138,7 @@
                 @click="addCardNow()"
               >
                 <div class="button button__blue-on-white button--large button--bold">
-                  Confirm card
+                  Get {{ timeEstimated }} minutes with Alfred now
                 </div>
               </div>
             </div>
@@ -154,6 +154,7 @@ import ModalBody from '@/components/ModalBody'
 import InnerModalMixin from '@/mixins/InnerModalMixin'
 import NoticesService from '@/services/NoticesService'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
+import addCard from '@/graphql/mutations/addCard'
 
 export default {
   name: 'ModalsMoreOptions',
@@ -190,11 +191,20 @@ export default {
 
   methods: {
     async addCardNow () {
-      // TODO MAKE LOGIC HERE
+      try {
+        const addCardInput = {
+          cardNumber: this.cardNumber,
+          expirationDate: this.expirationDate,
+          securityCode: this.securityCode
+        }
+        await addCard(this, addCardInput)
+      } catch (error) {
+        this.notices.graphError(error)
+      }
     },
 
     async tryToChargeNow () {
-      if (!this.currentIdentity.hasValidCard) return this.goToAddCard()
+      if (!this.currentIdentity.stripeCardId) return this.goToAddCard()
 
       try {
         // TODO make the logic when the guy already has a card

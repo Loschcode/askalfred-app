@@ -17,7 +17,8 @@ const query = gql`
       recoverySentAt
       recoveryToken
       creditsCount
-      hasValidCard
+      stripeCustomerId
+      stripeCardId
     }
   }
 `
