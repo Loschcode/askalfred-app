@@ -89,7 +89,7 @@
                 <h3>Card Number</h3>
                 <input
                   ref="cardNumber"
-                  v-model="cardNumber"
+                  v-model="addCardInput.cardNumber"
                   v-mask="`#### #### #### ####`"
                   type="text"
                   maxlength="19"
@@ -106,7 +106,7 @@
               <div class="add-card-window__field">
                 <h3>Expiration Date</h3>
                 <input
-                  v-model="expirationDate"
+                  v-model="addCardInput.expirationDate"
                   v-mask="`##/##`"
                   type="text"
                   maxlength="8"
@@ -118,7 +118,7 @@
               <div class="add-card-window__field">
                 <h3>SVV/SVC</h3>
                 <input
-                  v-model="securityCode"
+                  v-model="addCardInput.securityCode"
                   v-mask="`###`"
                   type="text"
                   maxlength="3"
@@ -168,6 +168,7 @@ import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import addCard from '@/graphql/mutations/addCard'
 import chargeCustomer from '@/graphql/mutations/chargeCustomer'
 import ModalsContentsSuccess from '@/components/Modals/Contents/Success'
+import { required } from 'vuelidate/lib/validators'
 
 export default {
   name: 'ModalsMoreOptions',
@@ -181,15 +182,25 @@ export default {
     CurrentIdentityMixin
   ],
 
+  validations: {
+    addCardInput: {
+      cardNumber: { required },
+      expirationDate: { required },
+      securityCode: { required }
+    }
+  },
+
   props: {
   },
 
   data () {
     return {
       selectedAmount: 10,
-      cardNumber: '',
-      expirationDate: '',
-      securityCode: ''
+      addCardInput: {
+        cardNumber: '',
+        expirationDate: '',
+        securityCode: ''
+      }
     }
   },
 
@@ -205,13 +216,11 @@ export default {
 
   methods: {
     async addCardNow () {
+      this.$v.addCardInput.$touch()
+      if (this.$v.addCardInput.$error) return
+
       try {
-        const addCardInput = {
-          cardNumber: this.cardNumber,
-          expirationDate: this.expirationDate,
-          securityCode: this.securityCode
-        }
-        await addCard(this, addCardInput)
+        await addCard(this, this.addCardInput)
         await this.tryToChargeNow({ skipValidation: true })
       } catch (error) {
         this.notices.graphError(error)
