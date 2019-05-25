@@ -42,7 +42,6 @@ export default {
     },
 
     lastAnswer () {
-      console.log(this.FromAlfred(this.messages).slice(-1)[0])
       return this.FromAlfred(this.messages).slice(-1)[0]
     },
 

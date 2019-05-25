@@ -145,6 +145,18 @@
           </div>
         </div>
       </div>
+
+      <!-- Success -->
+      <div ref="payment-success-window">
+        <div class="content">
+          <modals-contents-success
+            :title="`No worry!`"
+            :content="`Alfred will take care of this`"
+            :action="close"
+            :button-label="`Continue`"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -155,11 +167,13 @@ import InnerModalMixin from '@/mixins/InnerModalMixin'
 import NoticesService from '@/services/NoticesService'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import addCard from '@/graphql/mutations/addCard'
+import ModalsContentsSuccess from '@/components/Modals/Contents/Success'
 
 export default {
   name: 'ModalsMoreOptions',
   components: {
-    ModalBody
+    ModalBody,
+    ModalsContentsSuccess
   },
 
   mixins: [
@@ -198,6 +212,7 @@ export default {
           securityCode: this.securityCode
         }
         await addCard(this, addCardInput)
+        // await this.tryToChargeNow()
       } catch (error) {
         this.notices.graphError(error)
       }
