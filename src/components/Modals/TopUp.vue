@@ -67,7 +67,7 @@
             <div class="row center-xs">
               <div class="col-xs-12">
                 <div
-                  class="top-up-window__call-to-action +pointer"
+                  class="top-up-window__call-to-action +pointer +extend-clickable"
                   @click="tryToChargeNow({})"
                 >
                   <div class="button button__blue-on-white button--large button--bold">
@@ -134,7 +134,7 @@
           <div class="row center-xs">
             <div class="col-xs-12">
               <div
-                class="add-card-window__call-to-action +pointer"
+                class="add-card-window__call-to-action +pointer +extend-clickable"
                 @click="addCardNow()"
               >
                 <div class="button button__blue-on-white button--large button--bold">
@@ -286,7 +286,7 @@ export default {
     right: 0;
     text-align: center;
     margin: auto;
-    bottom: -4em;
+    bottom: -5em;
 }
 
 .add-card-window__field {
@@ -309,7 +309,7 @@ export default {
     right: 0;
     text-align: center;
     margin: auto;
-    bottom: -4em;
+    bottom: -5em;
 }
 
 .top-up-window__buttons {
