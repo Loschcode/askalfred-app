@@ -7,6 +7,11 @@
   margin-bottom: spacing(1);
   word-wrap: break-word;
   border-radius: 2px;
+  a {
+    color: $color-blue;
+    padding-bottom: 0.2em;
+    border-bottom: 1px solid $color-blue;
+  }
 }
 
 .message__subject {
