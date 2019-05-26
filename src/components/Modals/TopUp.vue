@@ -94,6 +94,7 @@
                   type="text"
                   maxlength="19"
                   placeholder="12** *** **** 3456"
+                  @keyup.enter="addCardNow()"
                 >
               </div>
             </div>
@@ -111,6 +112,7 @@
                   type="text"
                   maxlength="8"
                   placeholder="**/**"
+                  @keyup.enter="addCardNow()"
                 >
               </div>
             </div>
@@ -123,6 +125,7 @@
                   type="text"
                   maxlength="3"
                   placeholder="***"
+                  @keyup.enter="addCardNow()"
                 >
               </div>
             </div>
