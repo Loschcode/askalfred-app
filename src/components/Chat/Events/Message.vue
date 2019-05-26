@@ -5,7 +5,7 @@
         <div class="col-xs-11 col-md-8 ticket-message">
           <div class="message message__myself">
             <div class="message__myself-arrow" />
-            {{ message.body }}
+            <div v-html="displayedMessage()" />
           </div>
         </div>
       </div>
@@ -15,7 +15,7 @@
         <div class="col-xs-11 col-md-8 ticket-message">
           <div class="message message__yourself">
             <div class="message__yourself-arrow" />
-            {{ message.body }}
+            <div v-html="displayedMessage()" />
           </div>
         </div>
       </div>
@@ -25,6 +25,7 @@
 
 <script>
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
+import MarkDownHelper from '@/helpers/MarkDownHelper'
 
 export default {
   name: 'ChatMessage',
@@ -55,6 +56,14 @@ export default {
   },
 
   methods: {
+    withMarkDown (string) {
+      return MarkDownHelper.fullConversionOf(string)
+    },
+
+    displayedMessage () {
+      return this.withMarkDown(this.message.body)
+    },
+
     isMyself () {
       return this.from === 'myself'
     },

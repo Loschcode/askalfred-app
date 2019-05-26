@@ -21,7 +21,7 @@
 
 <script>
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
-import ChatNotice from '@/components/Tickets/Chat/Notice'
+import ChatNotice from '@/components/Chat/Notice'
 
 // NOTE : file.filePath is present and usable.
 export default {

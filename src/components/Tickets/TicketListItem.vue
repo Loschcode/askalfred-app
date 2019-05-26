@@ -37,7 +37,7 @@
             </span>
           </div>
           <div class="ticket__title-excerpt">
-            {{ excerpt() }}
+            <div v-html="withMarkDown(excerpt())" />
           </div>
         </div>
       </div>
@@ -63,6 +63,7 @@
 import router from '@/router'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import TimeHelper from '@/helpers/TimeHelper'
+import MarkDownHelper from '@/helpers/MarkDownHelper'
 
 export default {
   name: 'TicketsConnection',
@@ -80,7 +81,10 @@ export default {
   },
 
   methods: {
-    // TODO  this seem to be in double in the logic, check it out
+    withMarkDown (string) {
+      return MarkDownHelper.abstractOf(string)
+    },
+
     wasAnswered () {
       return this.ticket.lastMessageFromAlfred !== null
     },

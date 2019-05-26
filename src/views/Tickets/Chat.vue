@@ -2,7 +2,7 @@
   <div class="tickets-chat">
     <!-- Subject -->
     <chat-subject>
-      {{ ticket.subject }}
+      <p v-html="withMarkDown(ticket.subject)" />
     </chat-subject>
     <div
       v-for="event in events"
@@ -59,10 +59,11 @@
 <script>
 import ChatMixin from '@/mixins/ChatMixin'
 import getFullTicket from '@/graphql/queries/getFullTicket'
-import ChatNotice from '@/components/Tickets/Chat/Notice'
-import ChatSubject from '@/components/Tickets/Chat/Subject'
-import ChatEventsMessage from '@/components/Tickets/Chat/Events/Message'
-import ChatEventsFile from '@/components/Tickets/Chat/Events/File'
+import ChatNotice from '@/components/Chat/Notice'
+import ChatSubject from '@/components/Chat/Subject'
+import ChatEventsMessage from '@/components/Chat/Events/Message'
+import ChatEventsFile from '@/components/Chat/Events/File'
+import MarkDownHelper from '@/helpers/MarkDownHelper'
 
 export default {
   name: 'TicketChat',
@@ -87,6 +88,12 @@ export default {
   computed: {
     ticketId () {
       return this.$route.params.id
+    }
+  },
+
+  methods: {
+    withMarkDown (string) {
+      return MarkDownHelper.fullConversionOf(string)
     }
   },
 
