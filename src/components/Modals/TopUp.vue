@@ -12,7 +12,7 @@
         <div class="container content top-up-window">
           <div class="row center-xs">
             <div class="col-xs-8">
-              <p>Top up {{ timeEstimated }} minutes of time for only ${{ selectedAmount }}.00</p>
+              <p>Top up {{ timeEstimated }} minutes of time for only {{ selectedAmount }}.00 €</p>
             </div>
           </div>
           <div class="top-up-window__buttons">
@@ -90,7 +90,7 @@
                 <input
                   ref="cardNumber"
                   v-model="addCardInput.cardNumber"
-                  v-mask="`#### #### #### ####`"
+                  v-mask="cardType.mask"
                   type="text"
                   maxlength="19"
                   placeholder="12** *** **** 3456"
@@ -98,7 +98,7 @@
               </div>
             </div>
             <div class="col-xs-3">
-              <img src="/images/topup/card-symbol.svg">
+              <img :src="`/images/topup/card-symbol-${cardType.type}.svg`">
             </div>
           </div>
           <div class="row left-xs bottom-xs">
@@ -169,6 +169,7 @@ import addCard from '@/graphql/mutations/addCard'
 import chargeCustomer from '@/graphql/mutations/chargeCustomer'
 import ModalsContentsSuccess from '@/components/Modals/Contents/Success'
 import { required } from 'vuelidate/lib/validators'
+import CardsHelper from '@/helpers/CardsHelper'
 
 export default {
   name: 'ModalsMoreOptions',
@@ -207,6 +208,10 @@ export default {
   computed: {
     timeEstimated () {
       return 4 * this.selectedAmount
+    },
+
+    cardType () {
+      return CardsHelper.cardTypeFrom(this.addCardInput.cardNumber)
     }
   },
 
