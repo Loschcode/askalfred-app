@@ -227,12 +227,30 @@ export default {
       this.$v.addCardInput.$touch()
       if (this.$v.addCardInput.$error) return
 
-      try {
-        await addCard(this, this.addCardInput)
-        await this.tryToChargeNow({ skipValidation: true })
-      } catch (error) {
-        this.notices.graphError(error)
-      }
+      window.Stripe.setPublishableKey(process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY)
+
+      const number = this.addCardInput.cardNumber.replace(/\s/g, '')
+      const cvc = this.addCardInput.securityCode
+      const expMonth = this.addCardInput.expirationDate.split('/')[0]
+      const expYear = this.addCardInput.expirationDate.split('/')[1]
+
+      window.Stripe.card.createToken({
+        number: number,
+        cvc: cvc,
+        exp_month: expMonth,
+        exp_year: expYear
+      }, async (status, response) => {
+        if (response.error) return this.notices.error('Your card does not seem to be valid. Please try again.')
+
+        const addCardInput = { cardToken: response.id }
+
+        try {
+          await addCard(this, addCardInput)
+          await this.tryToChargeNow({ skipValidation: true })
+        } catch (error) {
+          this.notices.graphError(error)
+        }
+      })
     },
 
     async tryToChargeNow ({ skipValidation }) {

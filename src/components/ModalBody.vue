@@ -30,6 +30,10 @@ export default {
   created () {
   },
 
+  beforeDestroy () {
+    this.modal.destroy()
+  },
+
   mounted () {
     this.setupModal()
   },
@@ -44,7 +48,13 @@ export default {
     },
 
     setupModal () {
+      // const elements = document.getElementsByClassName('tingle-modal')
+      // for (let element of elements) {
+      //   if (element.parentNode) element.parentNode.removeChild(element)
+      // }
+
       var vm = this
+
       // eslint-disable-next-line new-cap
       this.modal = new Tingle.modal({
         closeMethods: ['overlay', 'button', 'escape'],
