@@ -37,7 +37,10 @@
             </span>
           </div>
           <div class="ticket__title-excerpt">
-            <div v-html="withMarkDown(excerpt())" />
+            <div
+              class="markdown__sanitize"
+              v-html="withMarkDown(excerpt())"
+            />
           </div>
         </div>
       </div>

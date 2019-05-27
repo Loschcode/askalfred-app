@@ -1,0 +1,24 @@
+.markdown__sanitize {
+  h1, h2, h3, h4, h5 {
+    font-weight: 400; font-size: 14px !important;
+  }
+}
+
+.markdown__improve {
+  h1, h2, h3, h4, h5 {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+
+  pre, blockquote {
+    padding: 0.5em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    background-color: $color-white;
+    border: 1px dashed $color-grey;
+  }
+
+  code {
+    color: $color-almost-dark;
+  }
+}

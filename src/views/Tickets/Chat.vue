@@ -2,7 +2,10 @@
   <div class="tickets-chat">
     <!-- Subject -->
     <chat-subject>
-      <p v-html="withMarkDown(ticket.subject)" />
+      <div
+        class="markdown__improve"
+        v-html="withMarkDown(ticket.subject)"
+      />
     </chat-subject>
     <div
       v-for="event in events"

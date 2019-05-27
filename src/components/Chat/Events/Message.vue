@@ -5,7 +5,10 @@
         <div class="col-xs-11 col-md-8 ticket-message">
           <div class="message message__myself">
             <div class="message__myself-arrow" />
-            <div v-html="displayedMessage()" />
+            <div
+              class="markdown__improve"
+              v-html="displayedMessage()"
+            />
           </div>
         </div>
       </div>

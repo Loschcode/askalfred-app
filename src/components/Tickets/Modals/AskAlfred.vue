@@ -151,7 +151,9 @@ export default {
 }
 .request {
   position: relative;
+  max-height: 70vh;
   textarea {
+    max-height: 70vh;
     height: 10em;
     border-radius: 2px;
     font-size: 18px;

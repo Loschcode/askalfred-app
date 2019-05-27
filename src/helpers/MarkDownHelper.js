@@ -26,7 +26,9 @@ class MarkDownHelper {
       simpleLineBreaks: true,
       openLinksInNewWindow: true,
       simplifiedAutoLink: true,
-      headerLevelStart: 2
+      headerLevelStart: 2,
+      strikethrough: true,
+      underline: true
       // tasklists: true
     })
   }
@@ -37,7 +39,6 @@ class MarkDownHelper {
       simpleLineBreaks: false,
       simplifiedAutoLink: false,
       headerLevelStart: 2
-      // tasklists: true
     })
   }
 }
