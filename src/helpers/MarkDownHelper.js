@@ -1,45 +1,42 @@
 import showdown from 'showdown'
 
 class MarkDownHelper {
-  setup () {
-    window.markdown = new showdown.Converter({
-      emoji: true,
-      simpleLineBreaks: true,
-      openLinksInNewWindow: true,
-      simplifiedAutoLink: true,
-      headerLevelStart: 2
-      // tasklists: true
-    })
+  fullOf (string) {
+    return this.fullInstance().makeHtml(string)
   }
 
   abstractOf (string) {
     return this.abstractInstance().makeHtml(string)
   }
 
-  fullConversionOf (string) {
-    return this.fullInstance().makeHtml(string)
-  }
-
   fullInstance () {
-    return new showdown.Converter({
-      emoji: true,
-      simpleLineBreaks: true,
-      openLinksInNewWindow: true,
-      simplifiedAutoLink: true,
-      headerLevelStart: 2,
-      strikethrough: true,
-      underline: true
+    if (!this.memFull) {
+      this.memFull = new showdown.Converter({
+        emoji: true,
+        simpleLineBreaks: true,
+        openLinksInNewWindow: true,
+        simplifiedAutoLink: true,
+        headerLevelStart: 2,
+        strikethrough: true,
+        underline: true
       // tasklists: true
-    })
+      })
+    }
+
+    return this.memFull
   }
 
   abstractInstance () {
-    return new showdown.Converter({
-      emoji: true,
-      simpleLineBreaks: false,
-      simplifiedAutoLink: false,
-      headerLevelStart: 2
-    })
+    if (!this.memAbstract) {
+      this.memAbstract = new showdown.Converter({
+        emoji: true,
+        simpleLineBreaks: false,
+        simplifiedAutoLink: false,
+        headerLevelStart: 2
+      })
+    }
+
+    return this.memAbstract
   }
 }
 

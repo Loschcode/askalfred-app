@@ -60,7 +60,7 @@ export default {
 
   methods: {
     withMarkDown (string) {
-      return MarkDownHelper.fullConversionOf(string)
+      return MarkDownHelper.fullOf(string)
     },
 
     displayedMessage () {
