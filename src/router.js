@@ -32,6 +32,9 @@ import TicketsIndex from './views/Tickets/Index.vue'
 import TicketsConnection from './views/Tickets/List.vue'
 import TicketChat from './views/Tickets/Chat.vue'
 
+// Errors
+import NotFound from './views/Errors/NotFound.vue'
+
 Vue.use(Router)
 
 const router = new Router({
@@ -149,6 +152,18 @@ const router = new Router({
       path: '/tickets/chat/:id',
       meta: { layout: 'chat' },
       component: TicketChat
+    },
+    /**
+     * Not Found
+     */
+    {
+      path: '/errors/not-found',
+      meta: { layout: 'default' },
+      component: NotFound
+    },
+    {
+      path: '*',
+      redirect: '/errors/not-found'
     }
   ]
 })
