@@ -93,8 +93,9 @@
           Legal mentions
         </router-link> |
         <router-link :to="{ path: '/pages/privacy-policy'}">
-          Privacy policy
+          Privacy policy |
         </router-link>
+        <a href="mailto:support@askalfred.app">Contact</a>
       </div>
     </div>
   </div>

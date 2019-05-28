@@ -64,9 +64,15 @@ import { required } from 'vuelidate/lib/validators'
 import NoticesService from '@/services/NoticesService'
 import sendRecoveryEmail from '@/graphql/mutations/sendRecoveryEmail'
 import router from '@/router'
+import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 
 export default {
   name: 'ForgotYourPassword',
+
+  mixins: [
+    CurrentIdentityMixin
+  ],
+
   props: {
   },
 
@@ -82,6 +88,10 @@ export default {
 
   created () {
     this.notices = new NoticesService(this)
+
+    if (this.currentIdentity.role === 'customer') {
+      this.notices.reboot('You were logged-in.')
+    }
   },
 
   methods: {
