@@ -81,6 +81,12 @@ export default {
     }
   },
 
+  mounted () {
+    this.$nextTick(() => {
+      this.$refs.password.focus()
+    })
+  },
+
   validations: {
     currentIdentityInput: {
       password: { required }

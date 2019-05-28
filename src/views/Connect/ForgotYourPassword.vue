@@ -94,6 +94,12 @@ export default {
     }
   },
 
+  mounted () {
+    this.$nextTick(() => {
+      this.$refs.email.focus()
+    })
+  },
+
   methods: {
     goBack () {
       router.go(-1) || router.push({ path: '/connect/sign-in' })
