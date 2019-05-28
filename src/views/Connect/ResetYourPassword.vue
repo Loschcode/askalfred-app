@@ -104,10 +104,10 @@ export default {
 
       try {
         await storeIdentityPassword(this, this.currentIdentityInput)
-        new NoticesService(this).success(`Welcome back to your dashboard ${this.currentIdentity.firstName}`)
+        this.notices.success(`Welcome back to your dashboard ${this.currentIdentity.firstName}`)
         router.push({ path: '/connect/sign-in' })
       } catch (error) {
-        new NoticesService(this).graphError(error)
+        this.notices.graphError(error)
       }
     }
   }

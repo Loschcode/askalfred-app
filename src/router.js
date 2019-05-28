@@ -24,6 +24,9 @@ import DoNotForget from './views/GettingStarted/DoNotForget.vue'
 import LegalMentions from './views/Pages/LegalMentions.vue'
 import PrivacyPolicy from './views/Pages/PrivacyPolicy.vue'
 
+// Emails
+import EmailsUnsubscribe from './views/Emails/Unsubscribe.vue'
+
 // Tickets
 import TicketsIndex from './views/Tickets/Index.vue'
 import TicketsConnection from './views/Tickets/List.vue'
@@ -120,6 +123,14 @@ const router = new Router({
       path: '/pages/privacy-policy',
       meta: { layout: 'default' },
       component: PrivacyPolicy
+    },
+    /**
+     * Emails
+     */
+    {
+      path: '/emails/unsubscribe',
+      meta: { layout: 'default' },
+      component: EmailsUnsubscribe
     },
     /**
      * Tickets
