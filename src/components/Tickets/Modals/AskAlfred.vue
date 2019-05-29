@@ -129,7 +129,7 @@ export default {
       try {
         await createTicket(this, this.createTicketInput)
         this.currentModal().setWithContentOf(this, 'no-worry')
-        this.createTicketInput.message = ''
+        this.createTicketInput.subject = ''
       } catch (error) {
         if (ErrorsHelper.fromType(error, 'credits_issue')) {
           return this.currentModal().setWithContentOf(this, 'please-topup')

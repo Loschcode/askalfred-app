@@ -23,7 +23,12 @@
                 >
                   <!-- Fallback if no time was spent yet -->
                   <!-- it is a replica from the normal logo -->
-                  <h1>AskAlfred</h1>
+                  <h1
+                    class="+pointer"
+                    @click="clickTitle()"
+                  >
+                    AskAlfred
+                  </h1>
                 </div>
               </div>
               <div class="col-xs-6 col-md-4">
@@ -167,6 +172,7 @@ import { required } from 'vuelidate/lib/validators'
 import NoticesService from '@/services/NoticesService'
 import getFullCredits from '@/graphql/queries/getFullCredits'
 import TimeHelper from '@/helpers/TimeHelper'
+import PageHelper from '@/helpers/PageHelper'
 
 export default {
   name: 'ChatLayout',
@@ -277,6 +283,10 @@ export default {
   },
 
   methods: {
+    clickTitle () {
+      PageHelper.hardRedirectTo('/')
+    },
+
     wasStarted () {
       return this.creditSpent > 0
     },

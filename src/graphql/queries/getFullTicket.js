@@ -37,6 +37,8 @@ const variables = function () {
   }
 }
 
+const fetchPolicy = 'cache-and-network'
+
 const result = function ({ data }) {
   this.ticket = data.getFullTicket
   return {
@@ -90,6 +92,7 @@ const subscribeToMore = {
 export default {
   query,
   variables,
+  fetchPolicy,
   result,
   error,
   skip,

@@ -36,7 +36,6 @@ export default async (vm, input) => {
         input
       },
       update: (store, { data: { createTicket } }) => {
-        // store.ticketsConnection = store.ticketsConnection.concat(createTicket.ticketsConnection.nodes)
       }
     })
     .then(({ data: { createTicket } }) => {
