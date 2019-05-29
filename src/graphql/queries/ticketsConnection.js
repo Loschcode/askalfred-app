@@ -55,8 +55,8 @@ const skip = function () {
 
 // Subscription handling
 const document = gql`
-  subscription RefreshTicketsConnection {
-    refreshTicketsConnection {
+  subscription RefreshTicketsList {
+    refreshTicketsList {
       success
     }
   }
@@ -66,7 +66,7 @@ const updateQuery = function (
   previousResult,
   {
     subscriptionData: {
-      data: { refreshTicketsConnection }
+      data: { refreshTicketsList }
     }
   }
 ) {
