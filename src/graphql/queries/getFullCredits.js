@@ -6,6 +6,9 @@ query GetFullCredits {
   getFullCredits {
     id
     time
+    ticket {
+      id
+    }
   }
 }
 `

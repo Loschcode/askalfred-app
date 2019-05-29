@@ -1,5 +1,8 @@
 <template>
-  <div class="tickets-chat">
+  <div
+    v-if="ticket"
+    class="tickets-chat"
+  >
     <!-- Subject -->
     <chat-subject>
       <div

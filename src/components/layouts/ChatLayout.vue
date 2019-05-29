@@ -207,7 +207,8 @@ export default {
 
   computed: {
     ticketCredits () {
-      return this.credits.filter((credit) => credit.ticketId === this.ticket.id)
+      return this.credits.filter((credit) => credit.ticket !== null)
+        .filter((credit) => credit.ticket.id === this.ticket.id)
     },
 
     totalCredits () {
@@ -292,7 +293,7 @@ export default {
     },
 
     displayTimeWorked () {
-      return TimeHelper.exactTime(this.creditSpent)
+      return TimeHelper.exactDisplay(this.creditSpent)
     },
 
     isLocked () {

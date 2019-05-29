@@ -40,7 +40,9 @@ const variables = function () {
 const fetchPolicy = 'cache-and-network'
 
 const result = function ({ data }) {
-  this.ticket = data.getFullTicket
+  // sometimes result is null
+  // because the cache is on
+  if (data) this.ticket = data.getFullTicket
   return {
     data
   }
