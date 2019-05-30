@@ -2,7 +2,7 @@
   <div class="confirm-email">
     <div>
       <div class="connect__loading">
-        <loading />
+        <loading-page :color="`white`" />
       </div>
     </div>
   </div>

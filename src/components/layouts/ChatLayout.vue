@@ -170,7 +170,7 @@
     </div>
     <div v-else>
       <div class="connect__loading">
-        <loading :color="`blue`" />
+        <loading-page :color="`blue`" />
       </div>
     </div>
   </div>
@@ -191,14 +191,14 @@ import NoticesService from '@/services/NoticesService'
 import getFullCredits from '@/graphql/queries/getFullCredits'
 import TimeHelper from '@/helpers/TimeHelper'
 import PageHelper from '@/helpers/PageHelper'
-import Loading from '@/components/Loading'
+import LoadingPage from '@/components/Loading/Page'
 
 export default {
   name: 'ChatLayout',
   components: {
     CreditLeft,
     ModalsTicketOptions,
-    Loading
+    LoadingPage
   },
 
   mixins: [

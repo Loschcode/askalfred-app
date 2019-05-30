@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="connect__loading">
-      <loading />
+      <loading-page :color="`white`" />
     </div>
   </div>
 </template>

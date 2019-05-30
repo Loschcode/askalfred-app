@@ -55,7 +55,7 @@
     </div>
     <div v-else>
       <div class="connect__loading">
-        <loading :color="`blue`" />
+        <loading-page :color="`blue`" />
       </div>
     </div>
   </div>
@@ -69,7 +69,7 @@ import TicketListItem from '@/components/Tickets/TicketListItem'
 import CustomerOnlyGuardMixin from '@/mixins/CustomerOnlyGuardMixin'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import ticketsConnection from '@/graphql/queries/ticketsConnection'
-import Loading from '@/components/Loading'
+import LoadingPage from '@/components/Loading/Page'
 
 export default {
   name: 'TicketsConnection',
@@ -77,7 +77,7 @@ export default {
   components: {
     FirstTicket,
     TicketListItem,
-    Loading,
+    LoadingPage,
     ModalsAskAlfred
   },
 

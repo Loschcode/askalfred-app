@@ -9,14 +9,14 @@
     </div>
 
     <div v-else>
-      <!-- Loading -->
+      <!-- LoadingPage -->
       <div v-if="appReady()">
         <!-- Load the correct page -->
         <router-view />
       </div>
       <div v-else>
         <div class="connect__loading">
-          <loading :color="loadingColor" />
+          <loading-page :color="loadingColor" />
         </div>
       </div>
     </div>
@@ -28,11 +28,11 @@ import EnsureIdentityOperation from '@/operations/EnsureIdentityOperation'
 import LayoutMixin from '@/mixins/LayoutMixin'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 
-import Loading from '@/components/Loading'
+import LoadingPage from '@/components/Loading/Page'
 
 export default {
   components: {
-    Loading
+    LoadingPage
   },
 
   mixins: [

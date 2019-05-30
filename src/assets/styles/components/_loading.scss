@@ -1,38 +1,38 @@
-.loading {
-  margin-left: 48%;
-  fill: transparent;
-  stroke-width: 3;
-  animation: dash 1.8s ease infinite, rotate 1.8s linear infinite;
-}
+// .loading {
+//   margin-left: 48%;
+//   fill: transparent;
+//   stroke-width: 3;
+//   animation: dash 1.8s ease infinite, rotate 1.8s linear infinite;
+// }
 
-.loading__white {
-  stroke: $color-white;
-}
+// .loading__white {
+//   stroke: $color-white;
+// }
 
-.loading__blue {
-  stroke: $color-blue;
-}
+// .loading__blue {
+//   stroke: $color-blue;
+// }
 
-@keyframes dash {
-  0% {
-    stroke-dasharray: 1, 95;
-    stroke-dashoffset: 0;
-  }
-  50% {
-    stroke-dasharray: 85, 95;
-    stroke-dashoffset: -25;
-  }
-  100% {
-    stroke-dasharray: 85, 95;
-    stroke-dashoffset: -93;
-  }
-}
+// @keyframes dash {
+//   0% {
+//     stroke-dasharray: 1, 95;
+//     stroke-dashoffset: 0;
+//   }
+//   50% {
+//     stroke-dasharray: 85, 95;
+//     stroke-dashoffset: -25;
+//   }
+//   100% {
+//     stroke-dasharray: 85, 95;
+//     stroke-dashoffset: -93;
+//   }
+// }
 
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
+// @keyframes rotate {
+//   0% {
+//     transform: rotate(0deg);
+//   }
+//   100% {
+//     transform: rotate(360deg);
+//   }
+// }

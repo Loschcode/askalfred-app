@@ -17,6 +17,7 @@
     "apollo-link-http": "^1.5.5",
     "apollo-upload-client": "^10.0.1",
     "autosize": "^4.0.2",
+    "epic-spinners": "^1.1.0",
     "flexboxgrid": "^6.3.1",
     "graphql": "^14.1",
     "graphql-ruby-client": "^1.6.3",
