@@ -1,11 +1,15 @@
 <template>
   <div v-if="ticket">
-    <div class="wrapper chat-layout">
+    <!-- no wrapper class because we don't need it with this footer -->
+    <div class="chat-layout">
       <div class="wrap-without-limit container-fluid header-menu">
         <div class="row">
           <div class="col-xs-12 +no-padding">
             <div class="row middle-xs">
-              <div class="col-xs-6 col-md-4 col-md-offset-2">
+              <div
+                v-if="credits"
+                class="col-xs-6 col-md-4 col-md-offset-2"
+              >
                 <div class="header-menu__text">
                   <span v-if="wasStarted()">
                     I already worked ...
@@ -244,24 +248,13 @@ export default {
     ticket (newValue, oldValue) {
       if (newValue) {
         /**
-         * This is a system to go to bottom when new messages or events appear
-         */
-        this.$nextTick(() => {
-          // we don't go down on page load
-          if (oldValue !== null) {
-            // we don't go down if there's no event added / changed
-            if (newValue.eventsConnection.nodes.length !== oldValue.eventsConnection.nodes.length) {
-              ScrollHelper.toBottom()
-            }
-          }
-        })
-
-        /**
          * This is a very complicated system which should be refactored and abstracted
          * It checks when the autosize works and will adapt the style of
          * footerPlaceholder which will be sent to computedFooterPlaceholder
          * Which will change the computed vue styling automatically
          * Then it also goes to the bottom by scrolling to make it clean.
+         * Why ? Because the scroll down stick to the page
+         * so we need to re-adapt how down it should go for margin a nd shit
          */
         this.$nextTick(() => {
           const select = document.querySelector('textarea')
@@ -274,9 +267,6 @@ export default {
         })
       }
     }
-  },
-
-  mounted () {
   },
 
   created () {

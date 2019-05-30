@@ -70,6 +70,7 @@ import ChatSubject from '@/components/Chat/Subject'
 import ChatEventsMessage from '@/components/Chat/Events/Message'
 import ChatEventsFile from '@/components/Chat/Events/File'
 import MarkDownHelper from '@/helpers/MarkDownHelper'
+import ScrollHelper from '@/helpers/ScrollHelper'
 
 export default {
   name: 'TicketChat',
@@ -95,6 +96,27 @@ export default {
     ticketId () {
       return this.$route.params.id
     }
+  },
+
+  watch: {
+    ticket (newValue, oldValue) {
+      const wasJustLoaded = oldValue === null
+
+      this.$nextTick(() => {
+        if (wasJustLoaded) {
+          ScrollHelper.toBottom()
+        } else {
+          const hasNewEvents = newValue.eventsConnection.nodes.length !== oldValue.eventsConnection.nodes.length
+          // go down the window if
+          // there are new messages / events appearing
+          if (hasNewEvents) ScrollHelper.toBottom()
+        }
+      })
+    }
+  },
+
+  mounted () {
+    ScrollHelper.toBottom()
   },
 
   methods: {
