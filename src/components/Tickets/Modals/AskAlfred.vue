@@ -71,6 +71,10 @@
         </div>
       </div>
     </div>
+    <!-- Modals -->
+    <modals-top-up
+      ref="modals-top-up"
+    />
   </div>
 </template>
 
@@ -85,6 +89,8 @@ import NoticesService from '@/services/NoticesService'
 import { required } from 'vuelidate/lib/validators'
 import ErrorsHelper from '@/helpers/ErrorsHelper'
 import LoadingButton from '@/components/Loading/Button'
+import OpenModalMixin from '@/mixins/OpenModalMixin'
+import ModalsTopUp from '@/components/Modals/TopUp'
 
 export default {
   name: 'ModalsAskAlfred',
@@ -92,10 +98,12 @@ export default {
     ModalBody,
     ModalsContentsSuccess,
     ModalsContentsLocked,
-    LoadingButton
+    LoadingButton,
+    ModalsTopUp
   },
   mixins: [
-    InnerModalMixin
+    InnerModalMixin,
+    OpenModalMixin
   ],
 
   props: {
@@ -132,7 +140,10 @@ export default {
     },
 
     topUpNow () {
-      console.log('YO YOU HAVE TO MAKE IT')
+      // we don't close the current modal we just hide it
+      // if this makes issues on the system we should change it
+      this.currentModal().hide()
+      this.openModal('modals-top-up')
     },
 
     async askNow () {
@@ -148,6 +159,7 @@ export default {
         this.createTicketInput.subject = ''
       } catch (error) {
         if (ErrorsHelper.fromType(error, 'credits_issue')) {
+          this.isAskingNow = false
           return this.currentModal().setWithContentOf(this, 'please-topup')
         }
         this.notices.graphError(error)

@@ -47,6 +47,17 @@ export default {
       this.unloadModal()
     },
 
+    hide () {
+      // we destroy the physical modal
+      // but the container will still be there.
+      // this can be very useful when opening a modal within a modal
+      // so we hide the first modaland destroy the display
+      // to show the second modal (it can be recursive
+      this.modal.destroy()
+      // we re-set it up after to enable same actions
+      this.setupModal()
+    },
+
     setupModal () {
       // const elements = document.getElementsByClassName('tingle-modal')
       // for (let element of elements) {

@@ -63,6 +63,7 @@ export default {
 
   computed: {
     creditSum () {
+      if (this.credits.length === 0) return 0
       const add = (a, b) => a + b
       return this.credits.map((credit) => credit.time).reduce(add)
     }
