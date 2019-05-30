@@ -70,8 +70,18 @@
                   class="top-up-window__call-to-action +pointer +extend-clickable"
                   @click="tryToChargeNow({})"
                 >
-                  <div class="button button__blue-on-white button--large button--bold">
-                    Top up
+                  <div v-if="isChargingNow">
+                    <div class="button button__blue-on-white button--bold">
+                      <loading-button
+                        :color="`white`"
+                        :size="30"
+                      />
+                    </div>
+                  </div>
+                  <div v-else>
+                    <div class="button button__blue-on-white button--large button--bold">
+                      Top up
+                    </div>
                   </div>
                 </div>
               </div>
@@ -173,12 +183,14 @@ import chargeCustomer from '@/graphql/mutations/chargeCustomer'
 import ModalsContentsSuccess from '@/components/Modals/Contents/Success'
 import { required } from 'vuelidate/lib/validators'
 import CardsHelper from '@/helpers/CardsHelper'
+import LoadingButton from '@/components/Loading/Button'
 
 export default {
   name: 'ModalsMoreOptions',
   components: {
     ModalBody,
-    ModalsContentsSuccess
+    ModalsContentsSuccess,
+    LoadingButton
   },
 
   mixins: [
@@ -200,6 +212,7 @@ export default {
   data () {
     return {
       selectedAmount: 10,
+      isChargingNow: false,
       addCardInput: {
         cardNumber: '',
         expirationDate: '',
@@ -258,12 +271,16 @@ export default {
         if (!this.currentIdentity.stripeCardId) return this.goToAddCard()
       }
 
+      if (this.isChargingNow) return
+
       try {
+        this.isChargingNow = true
         const chargeCustomerInput = {
           amount: this.selectedAmount
         }
         await chargeCustomer(this, chargeCustomerInput)
         this.currentModal().setWithContentOf(this, 'payment-success-window')
+        this.isChargingNow = false
       } catch (error) {
         this.notices.graphError(error)
       }
