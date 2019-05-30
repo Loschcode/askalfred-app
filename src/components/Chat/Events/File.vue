@@ -1,19 +1,51 @@
 <template>
-  <div class="ticket-file">
-    <div class="row center-xs">
-      <div class="col-xs-11 col-md-8">
-        <chat-notice :status="`up`">
-          <p v-if="event.seenAt">
-            I've seen your file.
-          </p>
-          <p v-else>
-            I received your file and will review it soon.
-          </p>
-          <a
-            target="_blank"
-            :href="file.filePath"
-          >Click here to download it</a>
-        </chat-notice>
+  <div class="chat-message">
+    <div v-if="isMyself()">
+      <div class="row end-xs">
+        <div class="col-xs-11 col-md-8 ticket-file">
+          <div
+            class="message message__myself +no-padding-bottom +pointer"
+            @click="downloadFile()"
+          >
+            <div class="message__myself-arrow" />
+            <div class="row center-xs">
+              <div class="col-xs-12">
+                <div class="message__image">
+                  <img src="/images/tickets/chat/illustrations/upload.svg">
+                </div>
+              </div>
+              <div class="col-xs-12 +no-padding">
+                <div class="message__bottom-details">
+                  Your file was uploaded
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div v-else-if="isYourself()">
+      <div class="row start-xs">
+        <div class="col-xs-11 col-md-8 ticket-file">
+          <div
+            class="message message__yourself +no-padding-bottom +pointer"
+            @click="downloadFile()"
+          >
+            <div class="message__yourself-arrow" />
+            <div class="row center-xs">
+              <div class="col-xs-12">
+                <div class="message__image">
+                  <img src="/images/tickets/chat/illustrations/upload.svg">
+                </div>
+              </div>
+              <div class="col-xs-12 +no-padding">
+                <div class="message__bottom-details">
+                  Click to download this file
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -21,14 +53,12 @@
 
 <script>
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
-import ChatNotice from '@/components/Chat/Notice'
 
 // NOTE : file.filePath is present and usable.
 export default {
   name: 'ChatFile',
 
   components: {
-    ChatNotice
   },
 
   mixins: [
@@ -57,6 +87,12 @@ export default {
   },
 
   methods: {
+    // NOTE this could be improved to enforce download better
+    downloadFile () {
+      // TODO : put into helper
+      window.open(this.file.filePath, '_blank')
+    },
+
     isMyself () {
       return this.from === 'myself'
     },
@@ -71,16 +107,8 @@ export default {
 <style scoped lang="scss">
 .ticket-file {
   margin: 1em;
-
-  p {
-    font-size: 14px;
-    padding-bottom: 0.5em;
-  }
-
-  a {
-    color: $color-blue;
-    padding-bottom: 0.2em;
-    border-bottom: 1px solid $color-blue;
-  }
+  margin-bottom: 0.5em;
+  padding-right: 1em;
+  padding-left: 1em;
 }
 </style>

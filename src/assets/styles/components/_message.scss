@@ -75,3 +75,14 @@
     left: 0px;
   }
 }
+
+.message__image {
+  padding: 0.5em;
+}
+
+.message__bottom-details {
+  font-family: $font-alternative;
+  padding: 1em;
+  color: $color-white;
+  background-color: $color-blue;
+}
