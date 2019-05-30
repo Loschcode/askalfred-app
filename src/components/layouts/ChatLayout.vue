@@ -110,6 +110,13 @@
                   disabled
                 />
               </div>
+              <div v-else-if="isUploadingFile()">
+                <textarea
+                  name="message"
+                  placeholder="Your file is being uploaded ..."
+                  disabled
+                />
+              </div>
               <div v-else>
                 <textarea
                   v-model="currentMessage"
@@ -205,7 +212,8 @@ export default {
     return {
       credits: null,
       currentMessage: '',
-      footerPlaceholder: 100
+      footerPlaceholder: 100,
+      sendingFile: false
     }
   },
 
@@ -290,11 +298,17 @@ export default {
       return this.ticket.status === 'canceled' || this.ticket.status === 'completed'
     },
 
+    isUploadingFile () {
+      return this.sendingFile
+    },
+
     async sendFile () {
       try {
+        this.sendingFile = true
         const selectedFile = this.$refs.file.files[0]
         const sendFileInput = { id: this.ticket.id, file: selectedFile }
         await sendFile(this, sendFileInput)
+        this.sendingFile = false
         this.currentMessage = ''
       } catch (error) {
         this.notices.graphError(error)
