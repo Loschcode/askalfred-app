@@ -31,6 +31,11 @@
   }
 }
 
+.button__white-on-blue-loader {
+  padding-top: 0.625em !important;
+  padding-bottom: 0.625em;
+}
+
 .button__white-on-red {
   background-color: $background-red;
   color: $color-white;

@@ -26,8 +26,18 @@
                       class="col-xs-12 +extend-clickable +pointer"
                       @click="askNow()"
                     >
-                      <div class="button button__blue-on-white button--large button--bold">
-                        Ask alfred
+                      <div v-if="isAskingNow">
+                        <div class="button button__blue-on-white button--bold">
+                          <loading-button
+                            :color="`white`"
+                            :size="28"
+                          />
+                        </div>
+                      </div>
+                      <div v-else>
+                        <div class="button button__blue-on-white button--large button--bold">
+                          Ask alfred
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -54,7 +64,7 @@
         <div class="content">
           <modals-contents-locked
             :title="`Oops`"
-            :content="`You don't have much  time left with Alfred, to make new requests, please add some credit!`"
+            :content="`You don't have much time left with Alfred, to make new requests, please add some credit!`"
             :button-label="`Top up now`"
             :action="topUpNow"
           />
@@ -74,13 +84,15 @@ import createTicket from '@/graphql/mutations/createTicket'
 import NoticesService from '@/services/NoticesService'
 import { required } from 'vuelidate/lib/validators'
 import ErrorsHelper from '@/helpers/ErrorsHelper'
+import LoadingButton from '@/components/Loading/Button'
 
 export default {
   name: 'ModalsAskAlfred',
   components: {
     ModalBody,
     ModalsContentsSuccess,
-    ModalsContentsLocked
+    ModalsContentsLocked,
+    LoadingButton
   },
   mixins: [
     InnerModalMixin
@@ -97,6 +109,7 @@ export default {
 
   data () {
     return {
+      isAskingNow: false,
       createTicketInput: {
         subject: ''
       },
@@ -125,6 +138,9 @@ export default {
     async askNow () {
       this.$v.createTicketInput.$touch()
       if (this.$v.createTicketInput.$error) return
+      if (this.isAskingNow) return
+
+      this.isAskingNow = true
 
       try {
         await createTicket(this, this.createTicketInput)
@@ -134,9 +150,9 @@ export default {
         if (ErrorsHelper.fromType(error, 'credits_issue')) {
           return this.currentModal().setWithContentOf(this, 'please-topup')
         }
-
         this.notices.graphError(error)
       }
+      this.isAskingNow = false
     }
   }
 }

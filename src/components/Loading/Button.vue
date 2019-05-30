@@ -27,7 +27,7 @@ export default {
     },
 
     size: {
-      default: 60,
+      default: 28,
       type: Number,
       required: false
     }
@@ -37,6 +37,7 @@ export default {
     displayedColor () {
       if (this.color === 'white') return '#ffffff'
       if (this.color === 'blue') return '#5f8ae4'
+      return ''
     }
   }
 }

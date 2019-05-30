@@ -74,7 +74,7 @@
                     <div class="button button__blue-on-white button--bold">
                       <loading-button
                         :color="`white`"
-                        :size="30"
+                        :size="28"
                       />
                     </div>
                   </div>
@@ -150,8 +150,18 @@
                 class="add-card-window__call-to-action +pointer +extend-clickable"
                 @click="addCardNow()"
               >
-                <div class="button button__blue-on-white button--large button--bold">
-                  Get {{ timeEstimated }} minutes with Alfred now
+                <div v-if="isAddingCardNow">
+                  <div class="button button__blue-on-white button--bold">
+                    <loading-button
+                      :color="`white`"
+                      :size="28"
+                    />
+                  </div>
+                </div>
+                <div v-else>
+                  <div class="button button__blue-on-white button--large button--bold">
+                    Get {{ timeEstimated }} minutes with Alfred now
+                  </div>
                 </div>
               </div>
             </div>
@@ -213,6 +223,7 @@ export default {
     return {
       selectedAmount: 10,
       isChargingNow: false,
+      isAddingCardNow: false,
       addCardInput: {
         cardNumber: '',
         expirationDate: '',
@@ -239,7 +250,9 @@ export default {
     async addCardNow () {
       this.$v.addCardInput.$touch()
       if (this.$v.addCardInput.$error) return
+      if (this.isAddingCardNow) return
 
+      this.isAddingCardNow = true
       window.Stripe.setPublishableKey(process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY)
 
       const number = this.addCardInput.cardNumber.replace(/\s/g, '')
@@ -253,7 +266,10 @@ export default {
         exp_month: expMonth,
         exp_year: expYear
       }, async (status, response) => {
-        if (response.error) return this.notices.error('Your card does not seem to be valid. Please try again.')
+        if (response.error) {
+          this.isAddingCardNow = false
+          return this.notices.error('Your card does not seem to be valid. Please try again.')
+        }
 
         const addCardInput = { cardToken: response.id }
 
@@ -263,6 +279,7 @@ export default {
         } catch (error) {
           this.notices.graphError(error)
         }
+        this.isAddingCardNow = false
       })
     },
 
@@ -280,10 +297,10 @@ export default {
         }
         await chargeCustomer(this, chargeCustomerInput)
         this.currentModal().setWithContentOf(this, 'payment-success-window')
-        this.isChargingNow = false
       } catch (error) {
         this.notices.graphError(error)
       }
+      this.isChargingNow = false
     },
 
     goToAddCard () {

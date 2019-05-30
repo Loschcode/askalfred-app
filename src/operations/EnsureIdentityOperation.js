@@ -4,7 +4,7 @@ import TokenHelper from '@/helpers/TokenHelper'
 import IdentityHelper from '@/helpers/IdentityHelper'
 
 export default vm => {
-  const events = new NoticesService(vm)
+  const notices = new NoticesService(vm)
 
   const perform = async () => {
     if (TokenHelper.getCurrentToken() === null) await connectGuest()
@@ -17,7 +17,8 @@ export default vm => {
       const response = await createGuest(vm)
       IdentityHelper.setIdentityWith(response.token)
     } catch (error) {
-      events.crash('We were unable to create a guest user')
+      notices.graphError(error)
+      notices.crash('We were unable to create a guest user')
     }
   }
 

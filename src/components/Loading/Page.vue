@@ -37,6 +37,7 @@ export default {
     displayedColor () {
       if (this.color === 'white') return '#ffffff'
       if (this.color === 'blue') return '#5f8ae4'
+      return ''
     }
   }
 }
