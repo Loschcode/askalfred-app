@@ -120,8 +120,4 @@ export default {
 .confirm {
   padding-top: 3em;
 }
-
-.connect__loading {
-  padding-top: 45vh;
-}
 </style>

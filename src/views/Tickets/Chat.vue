@@ -54,11 +54,6 @@
         </chat-notice>
       </div>
     </div>
-
-    <!--  Notice action done -->
-    <!-- <chat-notice :status="`up`">
-      Your identity card has been sent successfully
-    </chat-notice> -->
   </div>
 </template>
 

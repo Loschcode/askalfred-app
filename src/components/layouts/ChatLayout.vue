@@ -1,158 +1,160 @@
 <template>
-  <div v-if="ticket">
-    <!-- no wrapper class because we don't need it with this footer -->
-    <div class="chat-layout">
-      <div class="wrap-without-limit container-fluid header-menu">
-        <div class="row">
-          <div class="col-xs-12 +no-padding">
-            <div class="row middle-xs">
-              <div
-                v-if="credits"
-                class="col-xs-6 col-md-4 col-md-offset-2"
-              >
-                <div class="header-menu__text">
-                  <span v-if="wasStarted()">
-                    I already worked ...
-                  </span>
-                </div>
+  <div>
+    <div v-if="ticket">
+      <!-- no wrapper class because we don't need it with this footer -->
+      <div class="chat-layout">
+        <div class="wrap-without-limit container-fluid header-menu">
+          <div class="row">
+            <div class="col-xs-12 +no-padding">
+              <div class="row middle-xs">
                 <div
-                  v-if="wasStarted()"
-                  class="header-menu__time"
+                  v-if="credits"
+                  class="col-xs-6 col-md-4 col-md-offset-2"
                 >
-                  {{ displayTimeWorked() }}
-                </div>
-                <div
-                  v-else
-                  class="header-menu__title"
-                >
-                  <!-- Fallback if no time was spent yet -->
-                  <!-- it is a replica from the normal logo -->
-                  <h1
-                    class="+pointer"
-                    @click="clickTitle()"
+                  <div class="header-menu__text">
+                    <span v-if="wasStarted()">
+                      I already worked ...
+                    </span>
+                  </div>
+                  <div
+                    v-if="wasStarted()"
+                    class="header-menu__time"
                   >
-                    AskAlfred
-                  </h1>
+                    {{ displayTimeWorked() }}
+                  </div>
+                  <div
+                    v-else
+                    class="header-menu__title"
+                  >
+                    <!-- Fallback if no time was spent yet -->
+                    <!-- it is a replica from the normal logo -->
+                    <h1
+                      class="+pointer"
+                      @click="clickTitle()"
+                    >
+                      AskAlfred
+                    </h1>
+                  </div>
                 </div>
-              </div>
-              <div class="col-xs-6 col-md-4">
-                <credit-left />
+                <div class="col-xs-6 col-md-4">
+                  <credit-left />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="wrap-without-limit container-fluid header-submenu">
-        <div class="row between-xs around-md">
-          <div class="col-xs-4 col-md-4 +no-padding">
-            <div
-              class="header-submenu__text-button +pointer"
-              @click="goBack()"
-            >
-              Back
+        <div class="wrap-without-limit container-fluid header-submenu">
+          <div class="row between-xs around-md">
+            <div class="col-xs-4 col-md-4 +no-padding">
+              <div
+                class="header-submenu__text-button +pointer"
+                @click="goBack()"
+              >
+                Back
+              </div>
             </div>
-          </div>
 
-          <div class="col-xs-8 col-md-4">
-            <div class="row end-xs middle-xs">
-              <div class="col-xs-10">
-                <div class="header-submenu__title">
-                  <div v-if="ticket.title">
-                    {{ ticket.title }}
+            <div class="col-xs-8 col-md-4">
+              <div class="row end-xs middle-xs">
+                <div class="col-xs-10">
+                  <div class="header-submenu__title">
+                    <div v-if="ticket.title">
+                      {{ ticket.title }}
+                    </div>
+                    <div v-else>
+                      New request
+                    </div>
                   </div>
-                  <div v-else>
-                    New request
+                  <div class="header-submenu__subtitle">
+                    <div v-if="wasAnswered()">
+                      Last answer {{ lastAnswerDate }}
+                    </div>
+                    <div v-else>
+                      No answer yet
+                    </div>
                   </div>
                 </div>
-                <div class="header-submenu__subtitle">
-                  <div v-if="wasAnswered()">
-                    Last answer {{ lastAnswerDate }}
+                <div class="col-xs-1 +no-padding">
+                  <div
+                    class="header-submenu__more +pointer"
+                    @click="ticketOptions()"
+                  >
+                    <img src="/images/header/submenu-more-button.svg">
                   </div>
-                  <div v-else>
-                    No answer yet
-                  </div>
-                </div>
-              </div>
-              <div class="col-xs-1 +no-padding">
-                <div
-                  class="header-submenu__more +pointer"
-                  @click="ticketOptions()"
-                >
-                  <img src="/images/header/submenu-more-button.svg">
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="wrap container">
-        <slot />
-      </div>
-      <!--
+        <div class="wrap container">
+          <slot />
+        </div>
+        <!--
         This is a  computed footer placeholder linked to the autosize system
         It allows us to make space in between the textarea and the real bottom
         of the Chat
       -->
-      <div
-        :style="{ 'margin-top': computedFooterPlaceholder }"
-      />
-    </div>
+        <div
+          :style="{ 'margin-top': computedFooterPlaceholder }"
+        />
+      </div>
 
-    <div class="footer">
-      <div class="wrap container">
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="message-input">
-              <div v-if="isLocked()">
-                <textarea
-                  name="message"
-                  placeholder="This request was closed"
-                  disabled
-                />
-              </div>
-              <div v-else-if="isUploadingFile()">
-                <textarea
-                  name="message"
-                  placeholder="Your file is being uploaded ..."
-                  disabled
-                />
-              </div>
-              <div v-else>
-                <textarea
-                  v-model="currentMessage"
-                  name="message"
-                  placeholder="Write a reply..."
-                />
-              </div>
-
-              <div class="message-input__button">
-                <div v-if="currentMessage">
-                  <div
-                    class="message-input__button-send +pointer"
-                    @click="sendMessage()"
-                  >
-                    <div class="+extend-clickable">
-                      Send
-                    </div>
-                  </div>
+      <div class="footer">
+        <div class="wrap container">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="message-input">
+                <div v-if="isLocked()">
+                  <textarea
+                    name="message"
+                    placeholder="This request was closed"
+                    disabled
+                  />
+                </div>
+                <div v-else-if="isUploadingFile()">
+                  <textarea
+                    name="message"
+                    placeholder="Your file is being uploaded ..."
+                    disabled
+                  />
                 </div>
                 <div v-else>
-                  <div
-                    class="message-input__button-join-file +pointer"
-                  >
-                    <label for="file">
-                      <div class="+extend-clickable +pointer">
-                        <input
-                          v-if="!isLocked()"
-                          id="file"
-                          ref="file"
-                          class="+hidden"
-                          type="file"
-                          @change="sendFile()"
-                        >
-                        <img src="/images/tickets/chat/join-file.svg">
+                  <textarea
+                    v-model="currentMessage"
+                    name="message"
+                    placeholder="Write a reply..."
+                  />
+                </div>
+
+                <div class="message-input__button">
+                  <div v-if="currentMessage">
+                    <div
+                      class="message-input__button-send +pointer"
+                      @click="sendMessage()"
+                    >
+                      <div class="+extend-clickable">
+                        Send
                       </div>
-                    </label>
+                    </div>
+                  </div>
+                  <div v-else>
+                    <div
+                      class="message-input__button-join-file +pointer"
+                    >
+                      <label for="file">
+                        <div class="+extend-clickable +pointer">
+                          <input
+                            v-if="!isLocked()"
+                            id="file"
+                            ref="file"
+                            class="+hidden"
+                            type="file"
+                            @change="sendFile()"
+                          >
+                          <img src="/images/tickets/chat/join-file.svg">
+                        </div>
+                      </label>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -160,12 +162,17 @@
           </div>
         </div>
       </div>
+      <!-- Modals -->
+      <modals-ticket-options
+        ref="modals-ticket-options"
+        :ticket="ticket"
+      />
     </div>
-    <!-- Modals -->
-    <modals-ticket-options
-      ref="modals-ticket-options"
-      :ticket="ticket"
-    />
+    <div v-else>
+      <div class="connect__loading">
+        <loading :color="`blue`" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -184,12 +191,14 @@ import NoticesService from '@/services/NoticesService'
 import getFullCredits from '@/graphql/queries/getFullCredits'
 import TimeHelper from '@/helpers/TimeHelper'
 import PageHelper from '@/helpers/PageHelper'
+import Loading from '@/components/Loading'
 
 export default {
   name: 'ChatLayout',
   components: {
     CreditLeft,
-    ModalsTicketOptions
+    ModalsTicketOptions,
+    Loading
   },
 
   mixins: [
