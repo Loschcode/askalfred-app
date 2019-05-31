@@ -118,6 +118,13 @@
                     disabled
                   />
                 </div>
+                <div v-else-if="isSendingMessage()">
+                  <textarea
+                    name="message"
+                    placeholder="Your message is being sent ..."
+                    disabled
+                  />
+                </div>
                 <div v-else>
                   <textarea
                     v-model="currentMessage"
@@ -192,6 +199,7 @@ import getFullCredits from '@/graphql/queries/getFullCredits'
 import TimeHelper from '@/helpers/TimeHelper'
 import PageHelper from '@/helpers/PageHelper'
 import LoadingPage from '@/components/Loading/Page'
+import TextareaHelper from '@/helpers/TextareaHelper'
 
 export default {
   name: 'ChatLayout',
@@ -222,7 +230,8 @@ export default {
       credits: null,
       currentMessage: '',
       footerPlaceholder: 100,
-      sendingFile: false
+      sendingFile: false,
+      sendingMessage: false
     }
   },
 
@@ -311,30 +320,37 @@ export default {
       return this.sendingFile
     },
 
+    isSendingMessage () {
+      return this.sendingMessage
+    },
+
     async sendFile () {
+      this.sendingFile = true
       try {
-        this.sendingFile = true
         const selectedFile = this.$refs.file.files[0]
         const sendFileInput = { id: this.ticket.id, file: selectedFile }
         await sendFile(this, sendFileInput)
-        this.sendingFile = false
         this.currentMessage = ''
       } catch (error) {
         this.notices.graphError(error)
       }
+      this.sendingFile = false
     },
 
     async sendMessage () {
       this.$v.currentMessage.$touch()
       if (this.$v.currentMessage.$error) return
 
+      this.sendingMessage = true
       try {
         const sendMessageInput = { id: this.ticket.id, message: this.currentMessage }
         await sendMessage(this, sendMessageInput)
         this.currentMessage = ''
+        TextareaHelper.reset()
       } catch (error) {
         this.notices.graphError(error)
       }
+      this.sendingMessage = false
     },
 
     ticketOptions () {
