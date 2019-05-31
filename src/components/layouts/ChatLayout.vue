@@ -186,7 +186,6 @@
 <script>
 import ChatMixin from '@/mixins/ChatMixin'
 import CreditLeft from '@/components/Header/CreditLeft'
-import autosize from 'autosize'
 import router from '@/router'
 import ModalsTicketOptions from '@/components/Layouts/ChatLayout/Modals/TicketOptions'
 import OpenModalMixin from '@/mixins/OpenModalMixin'
@@ -273,22 +272,18 @@ export default {
     // load manual selectors as well
     ticket (newValue, oldValue) {
       if (newValue) {
-        /**
-         * This is a very complicated system which should be refactored and abstracted
-         * It checks when the autosize works and will adapt the style of
-         * footerPlaceholder which will be sent to computedFooterPlaceholder
-         * Which will change the computed vue styling automatically
-         * Then it also goes to the bottom by scrolling to make it clean.
-         * Why ? Because the scroll down stick to the page
-         * so we need to re-adapt how down it should go for margin a nd shit
-         */
         this.$nextTick(() => {
-          const select = document.querySelector('textarea')
-          const baseMargin = 70
-          autosize(select)
-
-          select.addEventListener('autosize:resized', () => {
-            this.footerPlaceholder = select.clientHeight + baseMargin
+          /**
+           * This is a very complicated system which checks when the autosize works and will adapt the style of
+           * footerPlaceholder which will be sent to computedFooterPlaceholder
+           * Which will change the computed vue styling automatically
+           * Then it also goes to the bottom by scrolling to make it clean.
+           * Why ? Because the scroll down stick to the page
+           * so we need to re-adapt how down it should go for margin a nd shit
+           */
+          TextareaHelper.autosize()
+          TextareaHelper.adaptPlaceholder((height) => {
+            this.footerPlaceholder = height
           })
         })
       }

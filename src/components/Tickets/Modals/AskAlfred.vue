@@ -83,7 +83,7 @@ import ModalBody from '@/components/ModalBody'
 import InnerModalMixin from '@/mixins/InnerModalMixin'
 import ModalsContentsSuccess from '@/components/Modals/Contents/Success'
 import ModalsContentsLocked from '@/components/Modals/Contents/Locked'
-import autosize from 'autosize'
+import TextareaHelper from '@/helpers/TextareaHelper'
 import createTicket from '@/graphql/mutations/createTicket'
 import NoticesService from '@/services/NoticesService'
 import { required } from 'vuelidate/lib/validators'
@@ -132,7 +132,7 @@ export default {
   methods: {
     onOpen () {
       this.currentModal().setWithContentOf(this, 'ask-alfred-window')
-      autosize(document.querySelectorAll('textarea'))
+      TextareaHelper.autosize()
     },
 
     afterOpen () {

@@ -38,7 +38,7 @@
 
 <script>
 import router from '@/router'
-import autosize from 'autosize'
+import TextareaHelper from '@/helpers/TextareaHelper'
 import removeEmail from '@/graphql/mutations/removeEmail'
 import NoticesService from '@/services/NoticesService'
 
@@ -58,7 +58,7 @@ export default {
   },
 
   mounted () {
-    autosize(document.querySelectorAll('textarea'))
+    TextareaHelper.autosize()
   },
 
   methods: {
