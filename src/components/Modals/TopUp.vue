@@ -70,19 +70,9 @@
                   class="top-up-window__call-to-action +pointer +extend-clickable"
                   @click="tryToChargeNow({})"
                 >
-                  <div v-if="isChargingNow">
-                    <div class="button button__blue-on-white button--bold">
-                      <loading-button
-                        :color="`white`"
-                        :size="28"
-                      />
-                    </div>
-                  </div>
-                  <div v-else>
-                    <div class="button button__blue-on-white button--large button--bold">
-                      Top up
-                    </div>
-                  </div>
+                  <loading-button-blue :is-loading="isChargingNow">
+                    Top up
+                  </loading-button-blue>
                 </div>
               </div>
             </div>
@@ -150,19 +140,9 @@
                 class="add-card-window__call-to-action +pointer +extend-clickable"
                 @click="addCardNow()"
               >
-                <div v-if="isAddingCardNow">
-                  <div class="button button__blue-on-white button--bold">
-                    <loading-button
-                      :color="`white`"
-                      :size="28"
-                    />
-                  </div>
-                </div>
-                <div v-else>
-                  <div class="button button__blue-on-white button--large button--bold">
-                    Get {{ timeEstimated }} minutes with Alfred now
-                  </div>
-                </div>
+                <loading-button-blue :is-loading="isAddingCardNow">
+                  Get {{ timeEstimated }} minutes with Alfred now
+                </loading-button-blue>
               </div>
             </div>
           </div>
@@ -193,14 +173,14 @@ import chargeCustomer from '@/graphql/mutations/chargeCustomer'
 import ModalsContentsSuccess from '@/components/Modals/Contents/Success'
 import { required } from 'vuelidate/lib/validators'
 import CardsHelper from '@/helpers/CardsHelper'
-import LoadingButton from '@/components/Loading/Button'
+import LoadingButtonBlue from '@/components/Loading/Button/Blue'
 
 export default {
   name: 'ModalsMoreOptions',
   components: {
     ModalBody,
     ModalsContentsSuccess,
-    LoadingButton
+    LoadingButtonBlue
   },
 
   mixins: [

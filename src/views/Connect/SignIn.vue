@@ -37,20 +37,13 @@
               @keyup.enter="connectNow()"
             >
           </div>
-          <div class="connect__confirm">
-            <div v-if="isSignInNow">
-              <div class="button button--half-squared button__white-on-blue button__white-on-blue--soft button__white-on-blue-loader">
-                <loading-button
-                  :color="`blue`"
-                  :size="20"
-                />
-              </div>
-            </div>
-            <div v-else>
-              <div class="button button--half-squared button__white-on-blue button__white-on-blue--soft">
-                <a @click="connectNow()">Sign in</a>
-              </div>
-            </div>
+          <div
+            class="connect__confirm +pointer"
+            @click="connectNow()"
+          >
+            <loading-button-white :is-loading="isSignInNow">
+              Sign in
+            </loading-button-white>
           </div>
           <div class="connect__forgot">
             <router-link :to="{ path: '/connect/forgot-your-password'}">
@@ -118,12 +111,12 @@ import signIn from '@/graphql/mutations/signIn'
 import { required } from 'vuelidate/lib/validators'
 import NoticesService from '@/services/NoticesService'
 import IdentityHelper from '@/helpers/IdentityHelper'
-import LoadingButton from '@/components/Loading/Button'
+import LoadingButtonWhite from '@/components/Loading/Button/White'
 
 export default {
   name: 'SignIn',
   components: {
-    LoadingButton
+    LoadingButtonWhite
   },
 
   mixins: [
