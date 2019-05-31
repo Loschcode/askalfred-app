@@ -43,13 +43,13 @@
     <!-- Call To Action -->
     <div class="row center-xs">
       <div class="col-xs-8 col-md-4">
-        <div class="confirm">
-          <div class="button button--half-squared button__white-on-blue button__white-on-blue--soft">
-            <a
-              class="+pointer"
-              @click="storePassword()"
-            >I'm all set</a>
-          </div>
+        <div
+          class="confirm"
+          @click="storePassword()"
+        >
+          <loading-button-white :is-loading="isStoringPassword">
+            I'm all set
+          </loading-button-white>
         </div>
         <div class="confirm__back">
           <router-link :to="{ path: '/connect/sign-in'}">
@@ -69,9 +69,14 @@ import convertGuestToCustomer from '@/graphql/mutations/convertGuestToCustomer'
 import { required } from 'vuelidate/lib/validators'
 import NoticesService from '@/services/NoticesService'
 import GuestOnlyGuardMixin from '@/mixins/GuestOnlyGuardMixin'
+import LoadingButtonWhite from '@/components/Loading/Button/White'
 
 export default {
   name: 'DoNotForget',
+
+  components: {
+    LoadingButtonWhite
+  },
 
   mixins: [
     CurrentIdentityMixin,
@@ -83,6 +88,7 @@ export default {
 
   data () {
     return {
+      isStoringPassword: false,
       currentIdentityInput: {
         password: null
       }
@@ -116,7 +122,9 @@ export default {
     async storePassword () {
       this.$v.currentIdentityInput.$touch()
       if (this.$v.currentIdentityInput.$error) return
+      if (this.isStoringPassword) return
 
+      this.isStoringPassword = true
       try {
         await storeIdentityPassword(this, this.currentIdentityInput)
         await convertGuestToCustomer(this)
@@ -125,6 +133,7 @@ export default {
       } catch (error) {
         this.notices.graphError(error)
       }
+      this.isStoringPassword = false
     }
   }
 }

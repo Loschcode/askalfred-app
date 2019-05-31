@@ -33,10 +33,13 @@
     <!-- Call To Action -->
     <div class="row center-xs">
       <div class="col-xs-9 col-md-4">
-        <div class="confirm">
-          <div class="button button--half-squared button__white-on-blue button__white-on-blue--soft">
-            <a @click="getCreditForFree()">Get 20 minutes for free</a>
-          </div>
+        <div
+          class="confirm"
+          @click="getCreditForFree()"
+        >
+          <loading-button-white :is-loading="isGettingCredit">
+            Get 20 minutes for free
+          </loading-button-white>
         </div>
       </div>
     </div>
@@ -49,16 +52,24 @@ import getCreditForFree from '@/graphql/mutations/getCreditForFree'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import NoticesService from '@/services/NoticesService'
 import GuestOnlyGuardMixin from '@/mixins/GuestOnlyGuardMixin'
+import LoadingButtonWhite from '@/components/Loading/Button/White'
 
 export default {
   name: 'Surprise',
+
+  components: {
+    LoadingButtonWhite
+  },
 
   mixins: [
     CurrentIdentityMixin,
     GuestOnlyGuardMixin
   ],
 
-  props: {
+  data () {
+    return {
+      isGettingCredit: false
+    }
   },
 
   created () {
@@ -70,11 +81,13 @@ export default {
   methods: {
     wrongStep () {
       if (!this.currentIdentity.confirmedAt) return true
-
       return false
     },
 
     async getCreditForFree () {
+      if (this.isGettingCredit) return
+      this.isGettingCredit = true
+
       try {
         await getCreditForFree(this)
         this.notices.success('Your credit has been added to your account. Enjoy your 20 minutes!')
@@ -82,6 +95,7 @@ export default {
       } catch (error) {
         this.notices.graphError(error)
       }
+      this.isGettingCredit = false
     }
   }
 }

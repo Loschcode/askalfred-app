@@ -58,13 +58,13 @@
     <!-- Call To Action -->
     <div class="row center-xs">
       <div class="col-xs-8 col-md-4">
-        <div class="confirm">
-          <div class="button button--half-squared button__white-on-blue button__white-on-blue--soft">
-            <a
-              class="+pointer"
-              @click="storeName()"
-            >Nice to meet you</a>
-          </div>
+        <div
+          class="confirm"
+          @click="storeName()"
+        >
+          <loading-button-white :is-loading="isStoringName">
+            Nice to meet you
+          </loading-button-white>
           <div class="confirm__back">
             <router-link :to="{ path: '/connect/sign-in'}">
               Already have an account?
@@ -83,9 +83,14 @@ import storeIdentityName from '@/graphql/mutations/storeIdentityName'
 import { required } from 'vuelidate/lib/validators'
 import NoticesService from '@/services/NoticesService'
 import GuestOnlyGuardMixin from '@/mixins/GuestOnlyGuardMixin'
+import LoadingButtonWhite from '@/components/Loading/Button/White'
 
 export default {
   name: 'WhatIsYourName',
+
+  components: {
+    LoadingButtonWhite
+  },
 
   mixins: [
     CurrentIdentityMixin,
@@ -94,6 +99,7 @@ export default {
 
   data () {
     return {
+      isStoringName: false,
       currentIdentityInput: {
         firstName: null,
         lastName: null
@@ -126,13 +132,16 @@ export default {
     async storeName () {
       this.$v.currentIdentityInput.$touch()
       if (this.$v.currentIdentityInput.$error) return
+      if (this.isStoringName) return
 
+      this.isStoringName = true
       try {
         await storeIdentityName(this, this.currentIdentityInput)
         router.push({ path: '/getting-started/can-i-get-your-email' })
       } catch (error) {
         this.notices.graphError(error)
       }
+      this.isStoringName = false
     }
   }
 }

@@ -32,13 +32,13 @@
     <!-- Call To Action -->
     <div class="row center-xs">
       <div class="col-xs-9 col-md-4">
-        <div class="confirm">
-          <div class="button button--half-squared button__white-on-blue button__white-on-blue--soft">
-            <a
-              class="+pointer"
-              @click="sendConfirmEmail()"
-            >Nothing? Send it again</a>
-          </div>
+        <div
+          class="confirm"
+          @click="sendConfirmEmail()"
+        >
+          <loading-button-white :is-loading="isSendingConfirmEmail">
+            Nothing? Send it again
+          </loading-button-white>
           <div class="confirm__back">
             <router-link :to="{ path: '/connect/sign-in'}">
               Already have an account?
@@ -56,9 +56,15 @@ import NoticesService from '@/services/NoticesService'
 import sendConfirmEmail from '@/graphql/mutations/sendConfirmEmail'
 import router from '@/router'
 import GuestOnlyGuardMixin from '@/mixins/GuestOnlyGuardMixin'
+import LoadingButtonWhite from '@/components/Loading/Button/White'
 
 export default {
   name: 'ThankYou',
+
+  components: {
+    LoadingButtonWhite
+  },
+
   mixins: [
     CurrentIdentityMixin,
     GuestOnlyGuardMixin
@@ -77,6 +83,10 @@ export default {
 
   methods: {
     async sendConfirmEmail () {
+      if (this.isSendingConfirmEmail) return
+
+      this.isSendingConfirmEmail = true
+
       try {
         const identity = await sendConfirmEmail(this, this.notices)
         this.notices.success(`An email with a surprise has been sent to ${identity.email}`)
@@ -84,6 +94,8 @@ export default {
         router.push({ path: '/' })
         this.notices.graphError(error)
       }
+
+      this.isSendingConfirmEmail = false
     }
   }
 }
