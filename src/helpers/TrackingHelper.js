@@ -1,4 +1,11 @@
 class TrackingHelper {
+  clickedToIntroduce (vm) {
+    this.track(vm, {
+      category: 'Getting started',
+      action: 'Clicked to introduce'
+    })
+  }
+
   sharedName (vm) {
     this.track(vm, {
       category: 'Getting started',
@@ -96,6 +103,7 @@ class TrackingHelper {
   }
 
   track (vm, { category, action, label, value }) {
+    console.log('tracking something')
     vm.$ga.event({
       eventCategory: category || '',
       eventAction: action || '',

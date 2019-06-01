@@ -80,9 +80,9 @@
       <div class="col-xs-8 col-md-4">
         <div class="register">
           <div class="button button--half-squared button__white-on-blue button__white-on-blue--soft">
-            <router-link :to="{ path: '/getting-started/'}">
+            <a @click="goIntroduce()">
               Introduce yourself
-            </router-link>
+            </a>
           </div>
         </div>
       </div>
@@ -169,6 +169,11 @@ export default {
   },
 
   methods: {
+    goIntroduce () {
+      TrackingHelper.clickedToIntroduce(this)
+      router.push({ path: '/getting-started/' })
+    },
+
     async connectNow () {
       this.$v.currentIdentityInput.$touch()
       if (this.$v.currentIdentityInput.$error) return
