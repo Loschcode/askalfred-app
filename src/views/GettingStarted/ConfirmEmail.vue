@@ -14,6 +14,7 @@ import DeleteCurrentGuestOperation from '@/operations/DeleteCurrentGuestOperatio
 import router from '@/router'
 import NoticesService from '@/services/NoticesService'
 import IdentityHelper from '@/helpers/IdentityHelper'
+import TrackingHelper from '@/helpers/TrackingHelper'
 
 export default {
   name: 'ConfirmEmail',
@@ -25,6 +26,7 @@ export default {
     try {
       const token = await confirmEmail(this, { confirmationToken })
       await DeleteCurrentGuestOperation(this, token)
+      TrackingHelper.confirmedEmail(this)
       IdentityHelper.setIdentityWith(token, { path: '/getting-started/surprise' })
     } catch (error) {
       router.push({ path: '/' })

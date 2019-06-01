@@ -10,6 +10,9 @@ import VueMask from 'v-mask'
 // Notification
 import Notifications from 'vue-notification'
 
+// Trackings
+import VueAnalytics from 'vue-analytics'
+
 // Apollo
 import { ApolloClient } from 'apollo-client'
 import { createUploadLink } from 'apollo-upload-client'
@@ -106,6 +109,12 @@ const apolloProvider = new VueApollo({
 Vue.use(Vuelidate)
 Vue.use(VueMask)
 Vue.use(Notifications)
+Vue.use(VueAnalytics, {
+  id: process.env.VUE_APP_GOOGLE_ANALYTICS,
+  autoTracking: {
+    screenview: true
+  }
+})
 
 new Vue({
   router,

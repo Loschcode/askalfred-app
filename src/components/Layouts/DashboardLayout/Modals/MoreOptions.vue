@@ -36,6 +36,7 @@ import ModalBody from '@/components/ModalBody'
 import TokenHelper from '@/helpers/TokenHelper'
 import PageHelper from '@/helpers/PageHelper'
 import InnerModalMixin from '@/mixins/InnerModalMixin'
+import TrackingHelper from '@/helpers/TrackingHelper'
 
 export default {
   name: 'ModalsMoreOptions',
@@ -49,6 +50,7 @@ export default {
 
   methods: {
     signOut () {
+      TrackingHelper.signedOutManually(this)
       TokenHelper.eraseToken()
       PageHelper.hardRedirectTo({ path: '/' })
     },

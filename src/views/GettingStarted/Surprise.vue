@@ -33,13 +33,12 @@
     <!-- Call To Action -->
     <div class="row center-xs">
       <div class="col-xs-9 col-md-4">
-        <div
-          class="confirm"
-          @click="getCreditForFree()"
-        >
-          <loading-button-white :is-loading="isGettingCredit">
-            Get 20 minutes for free
-          </loading-button-white>
+        <div class="confirm">
+          <div @click="getCreditForFree()">
+            <loading-button-white :is-loading="isGettingCredit">
+              Get 20 minutes for free
+            </loading-button-white>
+          </div>
         </div>
       </div>
     </div>
@@ -53,6 +52,7 @@ import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import NoticesService from '@/services/NoticesService'
 import GuestOnlyGuardMixin from '@/mixins/GuestOnlyGuardMixin'
 import LoadingButtonWhite from '@/components/Loading/Button/White'
+import TrackingHelper from '@/helpers/TrackingHelper'
 
 export default {
   name: 'Surprise',
@@ -91,6 +91,7 @@ export default {
       try {
         await getCreditForFree(this)
         this.notices.success('Your credit has been added to your account. Enjoy your 20 minutes!')
+        TrackingHelper.gotFreeTime(this)
         router.push({ path: '/getting-started/do-not-forget' })
       } catch (error) {
         this.notices.graphError(error)

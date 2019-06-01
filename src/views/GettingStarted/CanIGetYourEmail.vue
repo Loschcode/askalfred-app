@@ -40,13 +40,12 @@
     <!-- Call To Action -->
     <div class="row center-xs">
       <div class="col-xs-8 col-md-4">
-        <div
-          class="confirm"
-          @click="storeEmail()"
-        >
-          <loading-button-white :is-loading="isStoringEmail">
-            Alright, here it is
-          </loading-button-white>
+        <div class="confirm">
+          <div @click="storeEmail()">
+            <loading-button-white :is-loading="isStoringEmail">
+              Alright, here it is
+            </loading-button-white>
+          </div>
           <div class="confirm__back">
             <router-link :to="{ path: '/connect/sign-in'}">
               Already have an account?
@@ -66,6 +65,7 @@ import { required } from 'vuelidate/lib/validators'
 import NoticesService from '@/services/NoticesService'
 import GuestOnlyGuardMixin from '@/mixins/GuestOnlyGuardMixin'
 import LoadingButtonWhite from '@/components/Loading/Button/White'
+import TrackingHelper from '@/helpers/TrackingHelper'
 
 export default {
   name: 'CanIGetYourEmail',
@@ -122,6 +122,7 @@ export default {
       this.isStoringEmail = true
       try {
         await storeIdentityEmail(this, this.currentIdentityInput)
+        TrackingHelper.sharedEmail(this)
         router.push({ path: '/getting-started/thank-you' })
       } catch (error) {
         new NoticesService(this).graphError(error)

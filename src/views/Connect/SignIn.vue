@@ -112,6 +112,7 @@ import { required } from 'vuelidate/lib/validators'
 import NoticesService from '@/services/NoticesService'
 import IdentityHelper from '@/helpers/IdentityHelper'
 import LoadingButtonWhite from '@/components/Loading/Button/White'
+import TrackingHelper from '@/helpers/TrackingHelper'
 
 export default {
   name: 'SignIn',
@@ -177,6 +178,7 @@ export default {
 
       try {
         const token = await signIn(this, this.currentIdentityInput)
+        TrackingHelper.signedInManually(this)
         // this will then redirect
         // to the correct section if successful
         IdentityHelper.setIdentityWith(token, { path: '/connect/sign-in' })

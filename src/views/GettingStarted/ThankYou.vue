@@ -32,13 +32,12 @@
     <!-- Call To Action -->
     <div class="row center-xs">
       <div class="col-xs-9 col-md-4">
-        <div
-          class="confirm"
-          @click="sendConfirmEmail()"
-        >
-          <loading-button-white :is-loading="isSendingConfirmEmail">
-            Nothing? Send it again
-          </loading-button-white>
+        <div class="confirm">
+          <div @click="sendConfirmEmail()">
+            <loading-button-white :is-loading="isSendingConfirmEmail">
+              Nothing? Send it again
+            </loading-button-white>
+          </div>
           <div class="confirm__back">
             <router-link :to="{ path: '/connect/sign-in'}">
               Already have an account?
@@ -71,6 +70,12 @@ export default {
   ],
 
   props: {
+  },
+
+  data () {
+    return {
+      isSendingConfirmEmail: false
+    }
   },
 
   created () {

@@ -91,6 +91,7 @@ import ErrorsHelper from '@/helpers/ErrorsHelper'
 import LoadingButton from '@/components/Loading/Button'
 import OpenModalMixin from '@/mixins/OpenModalMixin'
 import ModalsTopUp from '@/components/Modals/TopUp'
+import TrackingHelper from '@/helpers/TrackingHelper'
 
 export default {
   name: 'ModalsAskAlfred',
@@ -155,6 +156,7 @@ export default {
 
       try {
         await createTicket(this, this.createTicketInput)
+        TrackingHelper.sentFirstRequest(this)
         this.currentModal().setWithContentOf(this, 'no-worry')
         this.createTicketInput.subject = ''
       } catch (error) {

@@ -34,6 +34,7 @@
 <script>
 import ModalsAskAlfred from '@/components/Tickets/Modals/AskAlfred'
 import OpenModalMixin from '@/mixins/OpenModalMixin'
+import TrackingHelper from '@/helpers/TrackingHelper'
 
 export default {
   name: 'FirstTicket',
@@ -48,6 +49,7 @@ export default {
 
   methods: {
     askAlfred () {
+      TrackingHelper.clickedToMakeFirstRequest(this)
       this.openModal('modals-ask-alfred')
     }
   }

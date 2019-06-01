@@ -29,6 +29,7 @@ import LayoutMixin from '@/mixins/LayoutMixin'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 
 import LoadingPage from '@/components/Loading/Page'
+import TrackingHelper from '@/helpers/TrackingHelper'
 
 export default {
   components: {
@@ -58,6 +59,12 @@ export default {
       } else {
         return 'blue'
       }
+    }
+  },
+
+  watch: {
+    currentIdentity (newValue, oldValue) {
+      if (newValue) TrackingHelper.identify(this, newValue)
     }
   },
 

@@ -43,18 +43,17 @@
     <!-- Call To Action -->
     <div class="row center-xs">
       <div class="col-xs-8 col-md-4">
-        <div
-          class="confirm"
-          @click="storePassword()"
-        >
-          <loading-button-white :is-loading="isStoringPassword">
-            I'm all set
-          </loading-button-white>
-        </div>
-        <div class="confirm__back">
-          <router-link :to="{ path: '/connect/sign-in'}">
-            I've already done it
-          </router-link>
+        <div class="confirm">
+          <div @click="storePassword()">
+            <loading-button-white :is-loading="isStoringPassword">
+              I'm all set
+            </loading-button-white>
+          </div>
+          <div class="confirm__back">
+            <router-link :to="{ path: '/connect/sign-in'}">
+              I've already done it
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -70,6 +69,7 @@ import { required } from 'vuelidate/lib/validators'
 import NoticesService from '@/services/NoticesService'
 import GuestOnlyGuardMixin from '@/mixins/GuestOnlyGuardMixin'
 import LoadingButtonWhite from '@/components/Loading/Button/White'
+import TrackingHelper from '@/helpers/TrackingHelper'
 
 export default {
   name: 'DoNotForget',
@@ -128,6 +128,7 @@ export default {
       try {
         await storeIdentityPassword(this, this.currentIdentityInput)
         await convertGuestToCustomer(this)
+        TrackingHelper.fullySignedUp(this)
         this.notices.success(`Welcome to your dashboard ${this.currentIdentity.firstName}`)
         router.push({ path: '/connect/sign-in' })
       } catch (error) {

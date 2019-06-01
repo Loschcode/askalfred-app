@@ -58,13 +58,12 @@
     <!-- Call To Action -->
     <div class="row center-xs">
       <div class="col-xs-8 col-md-4">
-        <div
-          class="confirm"
-          @click="storeName()"
-        >
-          <loading-button-white :is-loading="isStoringName">
-            Nice to meet you
-          </loading-button-white>
+        <div class="confirm">
+          <div @click="storeName()">
+            <loading-button-white :is-loading="isStoringName">
+              Nice to meet you
+            </loading-button-white>
+          </div>
           <div class="confirm__back">
             <router-link :to="{ path: '/connect/sign-in'}">
               Already have an account?
@@ -84,6 +83,7 @@ import { required } from 'vuelidate/lib/validators'
 import NoticesService from '@/services/NoticesService'
 import GuestOnlyGuardMixin from '@/mixins/GuestOnlyGuardMixin'
 import LoadingButtonWhite from '@/components/Loading/Button/White'
+import TrackingHelper from '@/helpers/TrackingHelper'
 
 export default {
   name: 'WhatIsYourName',
@@ -137,6 +137,7 @@ export default {
       this.isStoringName = true
       try {
         await storeIdentityName(this, this.currentIdentityInput)
+        TrackingHelper.sharedName(this)
         router.push({ path: '/getting-started/can-i-get-your-email' })
       } catch (error) {
         this.notices.graphError(error)

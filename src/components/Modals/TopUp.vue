@@ -174,6 +174,7 @@ import ModalsContentsSuccess from '@/components/Modals/Contents/Success'
 import { required } from 'vuelidate/lib/validators'
 import CardsHelper from '@/helpers/CardsHelper'
 import LoadingButtonBlue from '@/components/Loading/Button/Blue'
+import TrackingHelper from '@/helpers/TrackingHelper'
 
 export default {
   name: 'ModalsMoreOptions',
@@ -256,6 +257,7 @@ export default {
         try {
           await addCard(this, addCardInput)
           await this.tryToChargeNow({ skipValidation: true })
+          TrackingHelper.addedCard(this)
         } catch (error) {
           this.notices.graphError(error)
         }
@@ -264,6 +266,8 @@ export default {
     },
 
     async tryToChargeNow ({ skipValidation }) {
+      TrackingHelper.clickedToPay(this, this.selectedAmount)
+
       if (!skipValidation) {
         if (!this.currentIdentity.stripeCardId) return this.goToAddCard()
       }
@@ -276,6 +280,7 @@ export default {
           amount: this.selectedAmount
         }
         await chargeCustomer(this, chargeCustomerInput)
+        TrackingHelper.paidFully(this, this.selectedAmount)
         this.currentModal().setWithContentOf(this, 'payment-success-window')
       } catch (error) {
         this.notices.graphError(error)
@@ -291,6 +296,7 @@ export default {
     },
 
     setAmount (newAmount) {
+      TrackingHelper.selectedPayment(this, newAmount)
       this.selectedAmount = newAmount
     },
 
