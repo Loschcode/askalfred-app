@@ -7,6 +7,7 @@ import Sitemap from './views/Sitemap'
 
 // Connect
 import SignIn from './views/Connect/SignIn.vue'
+import SignOut from './views/Connect/SignOut.vue'
 import ForgotYourPassword from './views/Connect/ForgotYourPassword.vue'
 import RecoveryEmail from './views/Connect/RecoveryEmail.vue'
 import ResetYourPassword from './views/Connect/ResetYourPassword.vue'
@@ -60,6 +61,11 @@ const router = new Router({
       path: '/connect/sign-in',
       meta: { layout: 'default' },
       component: SignIn
+    },
+    {
+      path: '/connect/sign-out',
+      meta: { layout: 'default' },
+      component: SignOut
     },
     {
       path: '/connect/forgot-your-password',

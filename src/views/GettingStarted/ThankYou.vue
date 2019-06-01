@@ -46,6 +46,16 @@
         </div>
       </div>
     </div>
+
+    <!-- Stuck footer -->
+    <div class="row center-xs">
+      <div class="footer-placeholder" />
+      <div class="footer">
+        <router-link :to="{ path: '/connect/sign-out'}">
+          Are you stuck? Start all over again
+        </router-link>
+      </div>
+    </div>
   </div>
 </template>
 
