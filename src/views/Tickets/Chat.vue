@@ -1,57 +1,64 @@
 <template>
-  <div
-    v-if="ticket"
-    class="tickets-chat"
-  >
-    <!-- Subject -->
-    <chat-subject>
-      <div
-        class="markdown__improve"
-        v-html="withMarkDown(ticket.subject)"
-      />
-    </chat-subject>
+  <div>
     <div
-      v-for="event in events"
-      :key="event.id"
+      v-if="ticket"
+      class="tickets-chat"
     >
-      <div v-if="event.type === 'EventMessage'">
-        <chat-events-message
-          :message="event.eventable"
-          :event="event"
+      <!-- Subject -->
+      <chat-subject>
+        <div
+          class="markdown__improve"
+          v-html="withMarkDown(ticket.subject)"
         />
+      </chat-subject>
+      <div
+        v-for="event in events"
+        :key="event.id"
+      >
+        <div v-if="event.type === 'EventMessage'">
+          <chat-events-message
+            :message="event.eventable"
+            :event="event"
+          />
+        </div>
+        <div v-else-if="event.type === 'EventFile'">
+          <chat-events-file
+            :file="event.eventable"
+            :event="event"
+          />
+        </div>
       </div>
-      <div v-else-if="event.type === 'EventFile'">
-        <chat-events-file
-          :file="event.eventable"
-          :event="event"
-        />
+
+      <!--  Notice -->
+      <div class="tickets-chat__notice">
+        <div v-if="ticket.status === 'opened'">
+          <chat-notice :status="`opened`">
+            Thanks Laurent, I will get back to you as soon as possible.
+          </chat-notice>
+        </div>
+
+        <div v-if="ticket.status === 'processing' && !wasAnswered()">
+          <chat-notice :status="`processing`">
+            I'm currently processing your request. I will get back to you very soon.
+          </chat-notice>
+        </div>
+
+        <div v-if="ticket.status === 'canceled'">
+          <chat-notice :status="`canceled`">
+            Your request has been canceled. If you encountered a problem, let me know.
+          </chat-notice>
+        </div>
+
+        <div v-if="ticket.status === 'completed'">
+          <chat-notice :status="`completed`">
+            Your request has been solved. Thanks for choosing me to help you out.
+          </chat-notice>
+        </div>
       </div>
     </div>
-
-    <!--  Notice -->
-    <div class="tickets-chat__notice">
-      <div v-if="ticket.status === 'opened'">
-        <chat-notice :status="`opened`">
-          Thanks Laurent, I will get back to you as soon as possible.
-        </chat-notice>
-      </div>
-
-      <div v-if="ticket.status === 'processing' && !wasAnswered()">
-        <chat-notice :status="`processing`">
-          I'm currently processing your request. I will get back to you very soon.
-        </chat-notice>
-      </div>
-
-      <div v-if="ticket.status === 'canceled'">
-        <chat-notice :status="`canceled`">
-          Your request has been canceled. If you encountered a problem, let me know.
-        </chat-notice>
-      </div>
-
-      <div v-if="ticket.status === 'completed'">
-        <chat-notice :status="`completed`">
-          Your request has been solved. Thanks for choosing me to help you out.
-        </chat-notice>
+    <div v-else>
+      <div class="connect__loading">
+        <loading-page :color="`white`" />
       </div>
     </div>
   </div>
@@ -66,6 +73,7 @@ import ChatEventsMessage from '@/components/Chat/Events/Message'
 import ChatEventsFile from '@/components/Chat/Events/File'
 import MarkDownHelper from '@/helpers/MarkDownHelper'
 import ScrollHelper from '@/helpers/ScrollHelper'
+import LoadingPage from '@/components/Loading/Page'
 
 export default {
   name: 'TicketChat',
@@ -74,7 +82,8 @@ export default {
     ChatNotice,
     ChatSubject,
     ChatEventsMessage,
-    ChatEventsFile
+    ChatEventsFile,
+    LoadingPage
   },
 
   mixins: [
