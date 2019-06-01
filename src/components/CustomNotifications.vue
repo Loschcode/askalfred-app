@@ -45,6 +45,8 @@
 
 <script>
 export default {
+  name: 'CustomNotifications',
+
   data () {
     return {
     }

@@ -8,7 +8,7 @@
 import Tingle from 'tingle.js'
 
 export default {
-  name: 'Modal',
+  name: 'ModalBody',
   props: {
   },
 

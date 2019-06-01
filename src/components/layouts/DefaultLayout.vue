@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: 'Default',
+  name: 'DefaultLayout',
   props: {
   }
 }

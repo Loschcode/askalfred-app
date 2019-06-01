@@ -72,7 +72,7 @@ import ticketsConnection from '@/graphql/queries/ticketsConnection'
 import LoadingPage from '@/components/Loading/Page'
 
 export default {
-  name: 'TicketsConnection',
+  name: 'TicketsList',
 
   components: {
     FirstTicket,

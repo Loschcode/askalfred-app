@@ -31,7 +31,7 @@ import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import MarkDownHelper from '@/helpers/MarkDownHelper'
 
 export default {
-  name: 'ChatMessage',
+  name: 'ChatEventsMessage',
 
   mixins: [
     CurrentIdentityMixin

@@ -43,7 +43,7 @@ import removeEmail from '@/graphql/mutations/removeEmail'
 import NoticesService from '@/services/NoticesService'
 
 export default {
-  name: 'LegalMentions',
+  name: 'EmailsUnsubscribe',
   props: {
   },
 

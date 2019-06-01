@@ -51,7 +51,7 @@ import NoticesService from '@/services/NoticesService'
 import ModalsContentsLocked from '@/components/Modals/Contents/Locked'
 
 export default {
-  name: 'ModalsMoreOptions',
+  name: 'ChatLayoutModalsTicketOptions',
   components: {
     ModalBody,
     ModalsContentsLocked

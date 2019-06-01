@@ -40,7 +40,7 @@ import OpenModalMixin from '@/mixins/OpenModalMixin'
 import TimeHelper from '@/helpers/TimeHelper'
 
 export default {
-  name: 'CreditLeft',
+  name: 'HeaderCreditLeft',
 
   components: {
     ModalsTopUp

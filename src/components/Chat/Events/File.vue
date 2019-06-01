@@ -56,7 +56,7 @@ import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 
 // NOTE : file.filePath is present and usable.
 export default {
-  name: 'ChatFile',
+  name: 'ChatEventsFile',
 
   components: {
   },

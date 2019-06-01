@@ -32,6 +32,8 @@ import LoadingPage from '@/components/Loading/Page'
 import TrackingHelper from '@/helpers/TrackingHelper'
 
 export default {
+  name: 'ConnectRouting',
+
   components: {
     LoadingPage
   },

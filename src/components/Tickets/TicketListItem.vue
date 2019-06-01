@@ -69,7 +69,7 @@ import TimeHelper from '@/helpers/TimeHelper'
 import MarkDownHelper from '@/helpers/MarkDownHelper'
 
 export default {
-  name: 'TicketsConnection',
+  name: 'TicketsListItem',
   components: {
   },
 

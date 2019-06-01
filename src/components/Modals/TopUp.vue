@@ -177,7 +177,7 @@ import LoadingButtonBlue from '@/components/Loading/Button/Blue'
 import TrackingHelper from '@/helpers/TrackingHelper'
 
 export default {
-  name: 'ModalsMoreOptions',
+  name: 'ModalsTopUp',
   components: {
     ModalBody,
     ModalsContentsSuccess,

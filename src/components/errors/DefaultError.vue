@@ -43,7 +43,7 @@
 import PageHelper from '@/helpers/PageHelper'
 
 export default {
-  name: 'ErrorDefault',
+  name: 'ErrorsDefaultError',
   props: {
     error: {
       value: {},

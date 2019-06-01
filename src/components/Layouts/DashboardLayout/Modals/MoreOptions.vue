@@ -39,7 +39,7 @@ import InnerModalMixin from '@/mixins/InnerModalMixin'
 import TrackingHelper from '@/helpers/TrackingHelper'
 
 export default {
-  name: 'ModalsMoreOptions',
+  name: 'DashboardLayoutModalsMoreOptions',
   components: {
     ModalBody
   },
