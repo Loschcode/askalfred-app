@@ -73,6 +73,20 @@
   margin: auto;
 }
 
+@mixin unselectable() {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+
+@mixin selectable() {
+  -webkit-user-select: text; /* Safari */
+  -moz-user-select: text; /* Firefox */
+  -ms-user-select: text; /* IE10+/Edge */
+  user-select: text; /* Standard */
+}
+
 @mixin inner-top-shadow() {
   -webkit-box-shadow: inset 0px 5px 5px -5px rgba(0,0,0,0.50);
   -moz-box-shadow: inset 0px 5px 5px -5px rgba(0,0,0,0.50);

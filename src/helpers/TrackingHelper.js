@@ -103,7 +103,6 @@ class TrackingHelper {
   }
 
   track (vm, { category, action, label, value }) {
-    console.log('tracking something')
     vm.$ga.event({
       eventCategory: category || '',
       eventAction: action || '',
