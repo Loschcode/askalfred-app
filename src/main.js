@@ -7,6 +7,10 @@ import store from './store'
 import Vuelidate from 'vuelidate'
 import VueMask from 'v-mask'
 
+// Errors
+import * as Sentry from '@sentry/browser'
+import * as Integrations from '@sentry/integrations'
+
 // Notification
 import Notifications from 'vue-notification'
 
@@ -114,6 +118,11 @@ Vue.use(VueAnalytics, {
   autoTracking: {
     screenview: true
   }
+})
+
+Sentry.init({
+  dsn: process.env.VUE_APP_SENTRY_DSN,
+  integrations: [new Integrations.Vue({ Vue, attachProps: true })]
 })
 
 new Vue({
