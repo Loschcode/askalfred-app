@@ -3,7 +3,6 @@ import Router from 'vue-router'
 
 // Root
 import Index from './views/Index.vue'
-import Sitemap from './views/Sitemap'
 
 // Connect
 import SignIn from './views/Connect/SignIn.vue'
@@ -22,7 +21,8 @@ import Surprise from './views/GettingStarted/Surprise.vue'
 import DoNotForget from './views/GettingStarted/DoNotForget.vue'
 
 // Pages
-import LegalMentions from './views/Pages/LegalMentions.vue'
+import LegalNotice from './views/Pages/LegalNotice.vue'
+import TermsOfUse from './views/Pages/TermsOfUse.vue'
 import PrivacyPolicy from './views/Pages/PrivacyPolicy.vue'
 
 // Emails
@@ -48,11 +48,6 @@ const router = new Router({
       path: '/',
       meta: { layout: 'default' },
       component: Index
-    },
-    {
-      path: '/sitemap',
-      meta: { layout: 'default' },
-      component: Sitemap
     },
     /**
      * Connect
@@ -124,13 +119,18 @@ const router = new Router({
      * Pages
      */
     {
-      path: '/pages/legal-mentions',
-      meta: { layout: 'default' },
-      component: LegalMentions
+      path: '/pages/legal-notice',
+      meta: { layout: 'pages' },
+      component: LegalNotice
+    },
+    {
+      path: '/pages/terms-of-use',
+      meta: { layout: 'pages' },
+      component: TermsOfUse
     },
     {
       path: '/pages/privacy-policy',
-      meta: { layout: 'default' },
+      meta: { layout: 'pages' },
       component: PrivacyPolicy
     },
     /**

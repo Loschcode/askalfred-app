@@ -37,6 +37,7 @@ import introspectionQueryResultData from './../fragmentTypes.json'
 import ChatLayout from './components/Layouts/ChatLayout'
 import DashboardLayout from './components/Layouts/DashboardLayout'
 import DefaultLayout from './components/Layouts/DefaultLayout'
+import PagesLayout from './components/Layouts/PagesLayout'
 import DefaultError from './components/Errors/DefaultError'
 
 // Used in startup
@@ -46,6 +47,7 @@ import TimeHelper from './helpers/TimeHelper'
 Vue.component('chat-layout', ChatLayout)
 Vue.component('dashboard-layout', DashboardLayout)
 Vue.component('default-layout', DefaultLayout)
+Vue.component('pages-layout', PagesLayout)
 Vue.component('default-error', DefaultError)
 
 Vue.config.productionTip = false

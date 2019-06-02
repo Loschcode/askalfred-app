@@ -1,10 +1,10 @@
 <template>
-  <div class="legal-mentions">
+  <div class="legal-notice">
     <!-- Title -->
     <div class="row center-xs">
       <div class="col-xs-10">
         <div class="title">
-          <h1>Legal mentions</h1>
+          <h1>Terms of use</h1>
         </div>
       </div>
     </div>
@@ -14,8 +14,7 @@
       <div class="col-xs-10 col-md-5">
         <div class="form">
           <div class="page">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            TODO
           </div>
         </div>
       </div>
@@ -35,7 +34,7 @@
 import router from '@/router'
 
 export default {
-  name: 'LegalMentions',
+  name: 'TermsOfUse',
   props: {
   },
 
