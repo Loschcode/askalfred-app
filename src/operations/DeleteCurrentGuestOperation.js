@@ -3,7 +3,7 @@ import NoticesService from '@/services/NoticesService'
 import TokenHelper from '@/helpers/TokenHelper'
 
 export default (vm, newToken) => {
-  const events = new NoticesService(vm)
+  const notices = new NoticesService(vm)
 
   const perform = async () => {
     const token = TokenHelper.getCurrentToken()
@@ -16,7 +16,7 @@ export default (vm, newToken) => {
     try {
       await deleteGuest(vm, { token })
     } catch (error) {
-      events.crash('We were unable to delete a guest user')
+      notices.crash('We were unable to delete a guest user')
     }
   }
 
