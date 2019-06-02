@@ -50,8 +50,15 @@ class TrackingHelper {
 
   signedOutManually (vm) {
     this.track(vm, {
-      category: 'Getting started',
+      category: 'Connect',
       action: 'Signed out manually'
+    })
+  }
+
+  gotStuck (vm) {
+    this.track(vm, {
+      category: 'Getting started',
+      action: 'Got stuck and reset the process'
     })
   }
 

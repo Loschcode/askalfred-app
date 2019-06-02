@@ -19,9 +19,6 @@ export default {
 
   created () {
     this.notices = new NoticesService(this)
-    // When we disconnect as a guest
-    // we also remove it entirely
-    if (this.currentIdentity.role === 'guest') this.removeGuest()
     this.signOut()
   },
 
@@ -34,8 +31,17 @@ export default {
         this.notices.crash('We were unable to delete a guest user')
       }
     },
+
     signOut () {
-      TrackingHelper.signedOutManually(this)
+      if (this.currentIdentity.role === 'guest') {
+        // if it's a guest we have to remove it entirely
+        // as it likely is a stuck event
+        this.removeGuest()
+        TrackingHelper.gotStuck(this)
+      } else {
+        TrackingHelper.signedOutManually(this)
+      }
+
       TokenHelper.eraseToken()
 
       // if it's a guest we want to restart the getting started

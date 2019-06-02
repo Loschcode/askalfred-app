@@ -33,10 +33,8 @@
 
 <script>
 import ModalBody from '@/components/ModalBody'
-import TokenHelper from '@/helpers/TokenHelper'
-import PageHelper from '@/helpers/PageHelper'
 import InnerModalMixin from '@/mixins/InnerModalMixin'
-import TrackingHelper from '@/helpers/TrackingHelper'
+import router from '@/router'
 
 export default {
   name: 'DashboardLayoutModalsMoreOptions',
@@ -50,9 +48,7 @@ export default {
 
   methods: {
     signOut () {
-      TrackingHelper.signedOutManually(this)
-      TokenHelper.eraseToken()
-      PageHelper.hardRedirectTo({ path: '/' })
+      router.push({ path: '/connect/sign-out' })
     },
 
     onOpen () {
