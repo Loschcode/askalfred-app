@@ -6,7 +6,9 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "generate": "graphql-codegen"
+    "generate": "graphql-codegen",
+    "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run build",
+    "start": "node server.js"
   },
   "dependencies": {
     "@sentry/browser": "^5.4.0",
