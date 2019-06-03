@@ -11,7 +11,7 @@
 
     <!-- Can I get your email? -->
     <div class="row center-xs">
-      <div class="col-xs-10 col-md-6">
+      <div class="col-xs-10 col-md-8">
         <div class="form">
           <div class="page">
             <h3>1. Legal information</h3>

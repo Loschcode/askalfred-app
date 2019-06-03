@@ -92,15 +92,15 @@
     <div class="row center-xs">
       <div class="footer-placeholder" />
       <div class="footer">
-        <router-link :to="{ path: '/pages/legal-notice'}">
-          Legal notice
-        </router-link> |
         <router-link :to="{ path: '/pages/terms-of-use'}">
           Terms of use |
         </router-link>
         <router-link :to="{ path: '/pages/privacy-policy'}">
           Privacy policy |
         </router-link>
+        <router-link :to="{ path: '/pages/legal-notice'}">
+          Legal notice
+        </router-link> |
         <a href="mailto:support@askalfred.app">Contact</a>
       </div>
     </div>

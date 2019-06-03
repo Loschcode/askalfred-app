@@ -39,6 +39,16 @@
               Get 20 minutes for free
             </loading-button-white>
           </div>
+          <div class="confirm__back">
+            You hereby accept our <a
+              href="/pages/terms-of-use"
+              target="_blank"
+            >Terms of Use</a> as well as our
+            <a
+              href="/pages/privacy-policy"
+              target="_blank"
+            >Privacy Policy</a> by going further.
+          </div>
         </div>
       </div>
     </div>
@@ -134,5 +144,16 @@ export default {
 
 .confirm {
   padding-top: 3em;
+}
+
+.confirm__back {
+  margin-top: 0.7em;
+  a {
+    color: $color-white;
+    padding-bottom: 0.2em;
+    line-height: 25px;
+    line-height: 15px;
+    font-weight: bold;
+  }
 }
 </style>
