@@ -8,7 +8,7 @@
     "lint": "vue-cli-service lint",
     "generate": "graphql-codegen",
     "start": "node server.js",
-    "deploy": "git add --all && git commit -m \"version to deploy\" && yarn build && git push dokku"
+    "deploy": "yarn build && git add --all && git commit -m \"version to deploy\" && git push dokku"
   },
   "dependencies": {
     "@sentry/browser": "^5.4.0",
