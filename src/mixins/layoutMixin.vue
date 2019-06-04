@@ -1,5 +1,6 @@
 <script>
 export default {
+  name: 'LayoutMixin',
   computed: {
     currentLayout () {
       return (this.rawLayout || 'default') + '-layout'

@@ -2,6 +2,7 @@
 import currentIdentity from '@/graphql/queries/currentIdentity'
 
 export default {
+  name: 'CurrentIdentityMixin',
   data () {
     return {
       currentIdentity: null,
