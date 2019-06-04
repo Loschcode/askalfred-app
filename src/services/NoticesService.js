@@ -1,6 +1,7 @@
 import EventBus from '@/misc/EventBus'
 import PageHelper from '@/helpers/PageHelper'
 import TokenHelper from '@/helpers/TokenHelper'
+import * as Sentry from '@sentry/browser'
 
 class NoticesService {
   constructor (vm) {
@@ -27,10 +28,12 @@ class NoticesService {
   }
 
   error (error) {
+    Sentry.captureException(error)
     EventBus.$emit('errorEvent', error)
   }
 
   graphError (error) {
+    Sentry.captureException(error)
     const serialized = error.graphQLErrors.map(error => error.message).join(', ') || 'An error occurred. Please try again.'
     this.error(serialized)
   }

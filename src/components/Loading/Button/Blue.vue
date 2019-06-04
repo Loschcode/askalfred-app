@@ -3,7 +3,7 @@
     <div v-if="isLoading">
       <div class="button button__blue-on-white button--bold">
         <loading-button
-          :color="`white`"
+          :color="`blue`"
           :size="28"
         />
       </div>
