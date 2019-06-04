@@ -1,4 +1,5 @@
 module.exports = {
+  publicPath: '/',
   css: {
     loaderOptions: {
       sass: {
@@ -7,4 +8,4 @@ module.exports = {
     }
   },
   pluginOptions: {}
-};
+}
