@@ -10,7 +10,8 @@
 
 <script>
 export default {
-  name: 'DefaultLayout',
+  name: 'PagesLayout',
+
   props: {
   }
 }

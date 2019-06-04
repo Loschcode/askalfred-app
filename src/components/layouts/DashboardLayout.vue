@@ -59,6 +59,7 @@ import PageHelper from '@/helpers/PageHelper'
 
 export default {
   name: 'DashboardLayout',
+
   components: {
     CreditLeft,
     ModalsMoreOptions

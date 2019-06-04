@@ -202,6 +202,7 @@ import TextareaHelper from '@/helpers/TextareaHelper'
 
 export default {
   name: 'ChatLayout',
+
   components: {
     CreditLeft,
     ModalsTicketOptions,

@@ -46,7 +46,7 @@ const router = new Router({
      */
     {
       path: '/',
-      meta: { layout: 'default' },
+      meta: { layout: 'Default' },
       component: Index
     },
     /**
@@ -54,27 +54,27 @@ const router = new Router({
      */
     {
       path: '/connect/sign-in',
-      meta: { layout: 'default' },
+      meta: { layout: 'Default' },
       component: SignIn
     },
     {
       path: '/connect/sign-out',
-      meta: { layout: 'default' },
+      meta: { layout: 'Default' },
       component: SignOut
     },
     {
       path: '/connect/forgot-your-password',
-      meta: { layout: 'default' },
+      meta: { layout: 'Default' },
       component: ForgotYourPassword
     },
     {
       path: '/connect/recovery-email',
-      meta: { layout: 'default' },
+      meta: { layout: 'Default' },
       component: RecoveryEmail
     },
     {
       path: '/connect/reset-your-password',
-      meta: { layout: 'default' },
+      meta: { layout: 'Default' },
       component: ResetYourPassword
     },
     /**
@@ -82,37 +82,37 @@ const router = new Router({
      */
     {
       path: '/getting-started',
-      meta: { layout: 'default' },
+      meta: { layout: 'Default' },
       component: GettingStartedIndex
     },
     {
       path: '/getting-started/what-is-your-name',
-      meta: { layout: 'default' },
+      meta: { layout: 'Default' },
       component: WhatIsYourName
     },
     {
       path: '/getting-started/can-i-get-your-email',
-      meta: { layout: 'default' },
+      meta: { layout: 'Default' },
       component: CanIGetYourEmail
     },
     {
       path: '/getting-started/thank-you',
-      meta: { layout: 'default' },
+      meta: { layout: 'Default' },
       component: ThankYou
     },
     {
       path: '/getting-started/confirm-email',
-      meta: { layout: 'default' },
+      meta: { layout: 'Default' },
       component: ConfirmEmail
     },
     {
       path: '/getting-started/surprise',
-      meta: { layout: 'default' },
+      meta: { layout: 'Default' },
       component: Surprise
     },
     {
       path: '/getting-started/do-not-forget',
-      meta: { layout: 'default' },
+      meta: { layout: 'Default' },
       component: DoNotForget
     },
     /**
@@ -120,17 +120,17 @@ const router = new Router({
      */
     {
       path: '/pages/legal-notice',
-      meta: { layout: 'pages' },
+      meta: { layout: 'Pages' },
       component: LegalNotice
     },
     {
       path: '/pages/terms-of-use',
-      meta: { layout: 'pages' },
+      meta: { layout: 'Pages' },
       component: TermsOfUse
     },
     {
       path: '/pages/privacy-policy',
-      meta: { layout: 'pages' },
+      meta: { layout: 'Pages' },
       component: PrivacyPolicy
     },
     /**
@@ -138,7 +138,7 @@ const router = new Router({
      */
     {
       path: '/emails/unsubscribe',
-      meta: { layout: 'default' },
+      meta: { layout: 'Default' },
       component: EmailsUnsubscribe
     },
     /**
@@ -146,17 +146,17 @@ const router = new Router({
      */
     {
       path: '/tickets',
-      meta: { layout: 'default' },
+      meta: { layout: 'Default' },
       component: TicketsIndex
     },
     {
       path: '/tickets/list',
-      meta: { layout: 'dashboard' },
+      meta: { layout: 'Dashboard' },
       component: TicketsConnection
     },
     {
       path: '/tickets/chat/:id',
-      meta: { layout: 'chat' },
+      meta: { layout: 'Chat' },
       component: TicketChat
     },
     /**
@@ -164,7 +164,7 @@ const router = new Router({
      */
     {
       path: '/errors/not-found',
-      meta: { layout: 'default' },
+      meta: { layout: 'Default' },
       component: NotFound
     },
     {
