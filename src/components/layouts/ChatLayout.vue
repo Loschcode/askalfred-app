@@ -405,6 +405,7 @@ export default {
   top: 2em;
   right: 3em;
   text-transform: uppercase;
+  color: $color-grey;
 }
 
 .message-input__button-join-file {
