@@ -3,9 +3,10 @@ const path = require('path')
 module.exports = {
   publicPath: '/',
   configureWebpack: {
-    extensions: ['.js', '.vue'],
     resolve: {
+      extensions: ['.js', '.vue'],
       alias: {
+        'vue$': 'vue/dist/vue.runtime.min.js',
         '@': path.resolve(__dirname, 'src/')
       }
     }
