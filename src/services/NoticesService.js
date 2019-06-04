@@ -28,12 +28,12 @@ class NoticesService {
   }
 
   error (error) {
-    Sentry.captureException(error)
+    if (process.env.NODE_ENV === 'production') Sentry.captureException(error)
     EventBus.$emit('errorEvent', error)
   }
 
   graphError (error) {
-    Sentry.captureException(error)
+    if (process.env.NODE_ENV === 'production') Sentry.captureException(error)
     const serialized = error.graphQLErrors.map(error => error.message).join(', ') || 'An error occurred. Please try again.'
     this.error(serialized)
   }

@@ -127,6 +127,7 @@ Vue.use(VueAnalytics, {
 
 Sentry.init({
   dsn: process.env.VUE_APP_SENTRY_DSN,
+  environment: process.env.NODE_ENV,
   integrations: [new Integrations.Vue({ Vue, attachProps: true })]
 })
 
