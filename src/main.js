@@ -34,15 +34,15 @@ import ActionCableLink from 'graphql-ruby-client/subscriptions/ActionCableLink'
 import introspectionQueryResultData from './../fragmentTypes.json'
 
 // Layouts
-import ChatLayout from './components/Layouts/ChatLayout'
-import DashboardLayout from './components/Layouts/DashboardLayout'
-import DefaultLayout from './components/Layouts/DefaultLayout'
-import PagesLayout from './components/Layouts/PagesLayout'
-import DefaultError from './components/Errors/DefaultError'
+import ChatLayout from '@/components/Layouts/ChatLayout'
+import DashboardLayout from '@/components/Layouts/DashboardLayout'
+import DefaultLayout from '@/components/Layouts/DefaultLayout'
+import PagesLayout from '@/components/Layouts/PagesLayout'
+import DefaultError from '@/components/Errors/DefaultError'
 
 // Used in startup
-import TokenHelper from './helpers/TokenHelper'
-import TimeHelper from './helpers/TimeHelper'
+import TokenHelper from '@/helpers/TokenHelper'
+import TimeHelper from '@/helpers/TimeHelper'
 
 Vue.component('chat-layout', ChatLayout)
 Vue.component('dashboard-layout', DashboardLayout)
