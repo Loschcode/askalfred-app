@@ -50,7 +50,10 @@ Vue.component('default-layout', DefaultLayout)
 Vue.component('pages-layout', PagesLayout)
 Vue.component('default-error', DefaultError)
 
-Vue.config.productionTip = false
+const isProd = process.env.NODE_ENV === 'production'
+
+Vue.config.productionTip = isProd
+Vue.config.devtools = !isProd
 
 // HTTP link
 // NOTE : we removed this because we use the createUploadLink instead to upload files
