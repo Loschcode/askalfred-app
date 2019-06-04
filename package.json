@@ -7,7 +7,6 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "generate": "graphql-codegen",
-    "postinstall": "npm run build",
     "start": "node server.js"
   },
   "dependencies": {
