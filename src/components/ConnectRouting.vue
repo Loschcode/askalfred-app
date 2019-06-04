@@ -56,7 +56,7 @@ export default {
     },
 
     loadingColor () {
-      if (this.rawLayout === 'default') {
+      if (this.rawLayout === 'Default') {
         return 'white'
       } else {
         return 'blue'
