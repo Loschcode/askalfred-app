@@ -39,7 +39,7 @@
             </loading-button-white>
           </div>
           <div class="confirm__back">
-            Please check your <strong>junk or spam folder</strong>. Sometimes it gets stucks there...
+            Please check your <strong>junk or spam folder</strong>. Sometimes it gets stuck there...
           </div>
         </div>
       </div>
