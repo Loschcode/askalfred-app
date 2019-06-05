@@ -39,9 +39,7 @@
             </loading-button-white>
           </div>
           <div class="confirm__back">
-            <router-link :to="{ path: '/connect/sign-in'}">
-              Already have an account?
-            </router-link>
+            Please check your <strong>junk or spam folder</strong>. Sometimes it gets stucks there...
           </div>
         </div>
       </div>
@@ -149,6 +147,7 @@ export default {
 
 .confirm__back {
   margin-top: 0.7em;
+  line-height: 20px;
   a {
     color: $color-white;
   }

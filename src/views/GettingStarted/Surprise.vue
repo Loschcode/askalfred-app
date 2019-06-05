@@ -148,10 +148,10 @@ export default {
 
 .confirm__back {
   margin-top: 0.7em;
+  line-height: 20px;
   a {
     color: $color-white;
     padding-bottom: 0.2em;
-    line-height: 25px;
     line-height: 15px;
     font-weight: bold;
   }
