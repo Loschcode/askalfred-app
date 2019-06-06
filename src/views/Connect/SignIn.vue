@@ -101,7 +101,7 @@
         <router-link :to="{ path: '/pages/legal-notice'}">
           Legal notice
         </router-link> |
-        <a href="mailto:support@askalfred.app">Contact</a>
+        <a href="mailto:support@askalfred.to">Contact</a>
       </div>
     </div>
   </div>

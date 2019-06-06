@@ -32,7 +32,7 @@
 
             <p>Information supplied by AskAlfred is only a guideline and does not give user any additional personalised analysis.</p>
 
-            <p>AskAlfred does not guarantee that the information disseminated through its Website askalfred.app is accurate, complete and up to date.</p>
+            <p>AskAlfred does not guarantee that the information disseminated through its Website app.askalfred.to is accurate, complete and up to date.</p>
 
             <p>Consequently, user acknowledges that he/she is exclusively responsible for the use of this information.</p>
 
@@ -48,7 +48,7 @@
 
             <h3>4. Cookies</h3>
 
-            <p>User is notified that when he/she visits the Website askalfred.app and askalfred.to, a cookie may install itself automatically on his/her browser software.</p>
+            <p>User is notified that when he/she visits the Website app.askalfred.to and askalfred.to, a cookie may install itself automatically on his/her browser software.</p>
 
             <p>A cookie is a block of data that does not allow identification of users but which enables the saving of information concerning users' browsing on the Website.</p>
 

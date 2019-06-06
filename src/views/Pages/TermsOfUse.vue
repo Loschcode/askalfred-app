@@ -16,11 +16,11 @@
           <div class="page">
             <h3>Definitions</h3>
 
-            <p>The french company 753-806-413-00013 (“ASKALFRED,” “we,” or “us”, "The Company") operating the site askalfred.app (the "Website").</p>
+            <p>The french company 753-806-413-00013 (“ASKALFRED,” “we,” or “us”, "The Company") operating the site app.askalfred.to (the "Website").</p>
 
             <p>"You" or "User": any regular or occasional user of the AskAlfred Service, as a Visitor of the AskAlfred Website, a Client or a Participant.</p>
 
-            <p>"Website": all of the content and pages to which the User has access at the address askalfred.app.</p>
+            <p>"Website": all of the content and pages to which the User has access at the address app.askalfred.to.</p>
 
             <p>"AskAlfred Service": all of the services, functionalities and applications accessible via the Website and provided by ASKALFRED. The AskAlfred solution is a simpler and more intelligent task and service assistant.</p>
 
@@ -56,7 +56,7 @@
 
             <p>ASKALFRED only grants the User a limited, non-exclusive and non-transferable licence to access and use the AskAlfred Service and its content. This licence is subject to compliance with the rules provided by these General Conditions.</p>
 
-            <p>To access the AskAlfred Service, the User must create an account on <a href="https://askalfred.app/getting-started">https://askalfred.app/getting-started</a>.</p>
+            <p>To access the AskAlfred Service, the User must create an account on <a href="https://app.askalfred.to/getting-started">https://app.askalfred.to/getting-started</a>.</p>
 
             <p>ASKALFRED is free at any time to interrupt or suspend access to all or part of the AskAlfred Service, of the Website or services, particularly for operational or maintenance reasons, to modify, suspend, delete the site and to terminate its publication on the internet, without users having any claim to compensation.</p>
 
@@ -290,7 +290,7 @@
             <ul>
               <li>via their personal space;</li>
               <li>via a contact form;</li>
-              <li>by email to <a href="mailto:support@askalfred.app">support@askalfred.app</a>;</li>
+              <li>by email to <a href="mailto:support@askalfred.to">support@askalfred.to</a>;</li>
             </ul>
 
             <p>ASKALFRED undertakes to guarantee the existence of adequate protection levels in keeping with the applicable legal and regulatory requirements. However, since no mechanism that can offer absolute security exists, there is an element of risk whenever the internet is used to transmit Data.</p>

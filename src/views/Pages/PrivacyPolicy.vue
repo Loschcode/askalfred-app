@@ -85,7 +85,7 @@
               <li>It is necessary for compliance with our legal obligations.</li>
             </ul>
 
-            <p>If you have consented to our use of your information you may withdraw that consent at any time. Depending on the situation you can either withdraw your consent by emailing <a href="mailto:support@askalfred.app">support@askalfred.app</a>, or through your account settings page. Where we are using your information because of a legitimate interest to do so, you have the right to object to that use. However, if you do so it may mean that it is not possible for you to continue using the Services.</p>
+            <p>If you have consented to our use of your information you may withdraw that consent at any time. Depending on the situation you can either withdraw your consent by emailing <a href="mailto:support@askalfred.to">support@askalfred.to</a>, or through your account settings page. Where we are using your information because of a legitimate interest to do so, you have the right to object to that use. However, if you do so it may mean that it is not possible for you to continue using the Services.</p>
 
             <h3>Sharing your information</h3>
 
@@ -144,7 +144,7 @@
 
             <h3>You control your account information and settings</h3>
 
-            <p>You may update your account information by logging into your account and changing your profile settings. You can also stop receiving promotional email communications from us by clicking on the “unsubscribe link” provided in such communications. We make every effort to promptly process all unsubscribe requests. You may not opt out of Service-related communications (e.g., account verification, purchase and billing confirmations and reminders, changes/updates to features of the Service, technical and security notices). If you have any questions about reviewing or modifying your account information, you can contact us directly at <a href="mailto:support@askalfred.app">support@askalfred.app</a></p>
+            <p>You may update your account information by logging into your account and changing your profile settings. You can also stop receiving promotional email communications from us by clicking on the “unsubscribe link” provided in such communications. We make every effort to promptly process all unsubscribe requests. You may not opt out of Service-related communications (e.g., account verification, purchase and billing confirmations and reminders, changes/updates to features of the Service, technical and security notices). If you have any questions about reviewing or modifying your account information, you can contact us directly at <a href="mailto:support@askalfred.to">support@askalfred.to</a></p>
 
             <h3>Opting out of collection of your information for Tracking / Advertising</h3>
 
@@ -152,7 +152,7 @@
               Please refer to your mobile device or browser’s technical information for instructions on how to delete and disable cookies, and other tracking/recording tools. Depending on your type of device, it may not be possible to delete or disable tracking mechanisms on your mobile device. Note that disabling cookies and/or other tracking tools prevents AskAlfred or its business partners from tracking your browser’s activities in relation to the Service, and for use in targeted advertising activities by third parties. However,
               doing so may disable many of the features available through the Service. If you have any questions about opting out of the collection of cookies and other
               tracking/recording tools, you can contact us directly at
-              <a href="mailto:support@askalfred.app">support@askalfred.app</a>
+              <a href="mailto:support@askalfred.to">support@askalfred.to</a>
             </p>
 
             <h3>How long we keep your Identity Content</h3>
@@ -161,7 +161,7 @@
 
             <h3>Children’s privacy</h3>
 
-            <p>Canva does not knowingly collect or solicit personal information from children under the age of 18 and the Service and its content are not directed at children under the age of 18. In the event that we learn that we have collected personal information from a child under age 18 without verification of parental consent, we will delete that information as quickly as possible. If you believe that we might have any information from or about a child under 18, please contact us at <a href="mailto:support@askalfred.app">support@askalfred.app</a></p>
+            <p>Canva does not knowingly collect or solicit personal information from children under the age of 18 and the Service and its content are not directed at children under the age of 18. In the event that we learn that we have collected personal information from a child under age 18 without verification of parental consent, we will delete that information as quickly as possible. If you believe that we might have any information from or about a child under 18, please contact us at <a href="mailto:support@askalfred.to">support@askalfred.to</a></p>
 
             <h3>Links to other websites and services</h3>
 
@@ -171,7 +171,7 @@
 
             <p>
               If you have any questions about this Privacy Policy or the Service, please contact us at
-              <a href="mailto:support@askalfred.app">support@askalfred.app</a>
+              <a href="mailto:support@askalfred.to">support@askalfred.to</a>
             </p>
           </div>
         </div>
