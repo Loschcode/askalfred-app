@@ -26,9 +26,10 @@
                 >
                   <div
                     v-if="ticketsConnection.pageInfo.hasNextPage"
-                    class="button button__black-on-white button--half-squared"
                   >
-                    See more requests
+                    <loading-button-white :is-loading="isLoadingSeeMore">
+                      See more requests
+                    </loading-button-white>
                   </div>
                 </div>
               </div>
@@ -70,6 +71,7 @@ import CustomerOnlyGuardMixin from '@/mixins/CustomerOnlyGuardMixin'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import ticketsConnection from '@/graphql/queries/ticketsConnection'
 import LoadingPage from '@/components/Loading/Page'
+import LoadingButtonWhite from '@/components/Loading/Button/White'
 
 export default {
   name: 'TicketsList',
@@ -78,7 +80,8 @@ export default {
     FirstTicket,
     TicketListItem,
     LoadingPage,
-    ModalsAskAlfred
+    ModalsAskAlfred,
+    LoadingButtonWhite
   },
 
   mixins: [
@@ -89,7 +92,8 @@ export default {
 
   data () {
     return {
-      ticketsFirst: 5
+      ticketsFirst: 5,
+      isLoadingSeeMore: false
     }
   },
 
@@ -99,7 +103,11 @@ export default {
     },
 
     seeMore () {
+      this.isLoadingSeeMore = true
       this.ticketsFirst += 5
+      this.$nextTick(() => {
+        this.isLoadingSeeMore = false
+      })
     }
   },
 
