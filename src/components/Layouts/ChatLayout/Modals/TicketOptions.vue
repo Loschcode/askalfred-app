@@ -19,10 +19,11 @@
               <div class="ticket-options__buttons">
                 <div
                   v-if="!isLocked()"
-                  class="button button__white-on-red button--squared button--bold"
                   @click="cancelRequest()"
                 >
-                  Cancel request
+                  <loading-button-red :is-loading="isCancelingRequest">
+                    Cancel request
+                  </loading-button-red>
                 </div>
               </div>
             </div>
@@ -49,12 +50,14 @@ import InnerModalMixin from '@/mixins/InnerModalMixin'
 import cancelTicket from '@/graphql/mutations/cancelTicket'
 import NoticesService from '@/services/NoticesService'
 import ModalsContentsLocked from '@/components/Modals/Contents/Locked'
+import LoadingButtonRed from '@/components/Loading/Button/Red'
 
 export default {
   name: 'ChatLayoutModalsTicketOptions',
   components: {
     ModalBody,
-    ModalsContentsLocked
+    ModalsContentsLocked,
+    LoadingButtonRed
   },
 
   mixins: [
@@ -69,6 +72,12 @@ export default {
     }
   },
 
+  data () {
+    return {
+      isCancelingRequest: false
+    }
+  },
+
   created () {
     this.notices = new NoticesService(this)
   },
@@ -79,16 +88,19 @@ export default {
     },
 
     async cancelRequest () {
+      if (this.isCancelingRequest) return
+      this.isCancelingRequest = true
+
       try {
         const cancelTicketInput = { id: this.ticket.id }
         await cancelTicket(this, cancelTicketInput)
         this.currentModal().close()
         this.notices.success('This ticket was canceled.')
-        // this.currentModal().setWithContentOf(this, 'ticket')
       } catch (error) {
         this.notices.graphError(error)
         this.currentModal().close()
       }
+      this.isCancelingRequest = false
     },
 
     onOpen () {
