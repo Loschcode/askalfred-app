@@ -336,6 +336,7 @@ export default {
     async sendMessage () {
       this.$v.currentMessage.$touch()
       if (this.$v.currentMessage.$error) return
+      if (this.sendingMessage) return
 
       this.sendingMessage = true
       try {
