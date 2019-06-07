@@ -1,7 +1,7 @@
 import EventBus from '@/misc/EventBus'
 import PageHelper from '@/helpers/PageHelper'
 import TokenHelper from '@/helpers/TokenHelper'
-import * as Sentry from '@sentry/browser'
+import ErrorsHelper from '@/helpers/ErrorsHelper'
 
 class NoticesService {
   constructor (vm) {
@@ -24,21 +24,23 @@ class NoticesService {
   }
 
   reboot (error) {
+    ErrorsHelper.transmit('reboot', error)
     EventBus.$emit('rebootEvent', error)
   }
 
   error (error) {
-    if (process.env.NODE_ENV === 'production') Sentry.captureException(error)
+    ErrorsHelper.transmit('notice', error)
     EventBus.$emit('errorEvent', error)
   }
 
   graphError (error) {
-    if (process.env.NODE_ENV === 'production') Sentry.captureException(error)
     const serialized = error.graphQLErrors.map(error => error.message).join(', ') || 'An error occurred. Please try again.'
+    ErrorsHelper.transmit('notice', serialized)
     this.error(serialized)
   }
 
   crash (error) {
+    ErrorsHelper.transmit('crash', error)
     EventBus.$emit('crashEvent', error)
   }
 
@@ -88,7 +90,7 @@ class NoticesService {
 
   /**
    * We put a listener to the errorEvent
-   * This kind of errors is minor and dispatch an error message
+   * This kind of errors is minor and transmit an error message
    */
   onErrorEvent (error) {
     this.vm.$notify({

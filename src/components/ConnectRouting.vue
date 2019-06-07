@@ -30,6 +30,8 @@ import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 
 import LoadingPage from '@/components/Loading/Page'
 import TrackingHelper from '@/helpers/TrackingHelper'
+import NoticesService from '@/services/NoticesService'
+import ErrorsHelper from '@/helpers/ErrorsHelper'
 
 export default {
   name: 'ConnectRouting',
@@ -66,11 +68,17 @@ export default {
 
   watch: {
     currentIdentity (newValue, oldValue) {
-      if (newValue) TrackingHelper.identify(this, newValue)
+      if (newValue) {
+        TrackingHelper.identify(this, newValue)
+        ErrorsHelper.setContext({ identity: newValue })
+      }
     }
   },
 
   async created () {
+    this.notices = new NoticesService(this)
+
+    this.notices.watch()
     await EnsureIdentityOperation(this)
   },
 

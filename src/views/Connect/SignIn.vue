@@ -161,6 +161,10 @@ export default {
   created () {
     this.notices = new NoticesService(this)
 
+    new NoticesService(this).crash(
+      'We were unable to retrieve the current identity'
+    )
+
     if (!this.isGuest()) return router.push({ path: '/tickets' })
     localStorage.setItem('sign-in-is-known', true)
   },
