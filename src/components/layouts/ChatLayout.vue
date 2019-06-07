@@ -95,7 +95,7 @@
         of the Chat
       -->
         <div
-          :style="{ 'margin-top': computedFooterPlaceholder }"
+          :style="{ 'margin-bottom': computedFooterPlaceholder }"
         />
       </div>
 
@@ -284,7 +284,14 @@ export default {
            */
           TextareaHelper.autosize()
           TextareaHelper.adaptPlaceholder((height) => {
-            this.footerPlaceholder = height
+            /**
+             * This short timeout is present because for some reason the event of resizing the placeholder
+             * at the exact same time than the textarea auto resize will crash the selector within the textarea
+             * i don't explain it. but this does the trick.
+             */
+            setTimeout(() => {
+              this.footerPlaceholder = height
+            }, 10)
           })
           // We need this as well because sometimes on load it fucks up
           this.footerPlaceholder = TextareaHelper.currentHeight()
