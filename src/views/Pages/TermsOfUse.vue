@@ -290,7 +290,12 @@
             <ul>
               <li>via their personal space;</li>
               <li>via a contact form;</li>
-              <li>by email to <a href="mailto:support@askalfred.to">support@askalfred.to</a>;</li>
+              <li>
+                by email to <a
+                  href="mailto:support@askalfred.to"
+                  target="_blank"
+                >support@askalfred.to</a>;
+              </li>
             </ul>
 
             <p>ASKALFRED undertakes to guarantee the existence of adequate protection levels in keeping with the applicable legal and regulatory requirements. However, since no mechanism that can offer absolute security exists, there is an element of risk whenever the internet is used to transmit Data.</p>
