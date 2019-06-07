@@ -44,11 +44,13 @@
     <div class="row center-xs">
       <div class="col-xs-8 col-md-4">
         <div class="confirm">
-          <div class="button button--half-squared button__white-on-blue button__white-on-blue--soft">
-            <a
-              class="+pointer"
-              @click="resetPassword()"
-            >I'm all set</a>
+          <div
+            class="+pointer"
+            @click="resetPassword()"
+          >
+            <loading-button-white :is-loading="isResettingPassword">
+              I'm all set
+            </loading-button-white>
           </div>
         </div>
       </div>
@@ -62,9 +64,14 @@ import storeIdentityPassword from '@/graphql/mutations/storeIdentityPassword'
 import { required } from 'vuelidate/lib/validators'
 import NoticesService from '@/services/NoticesService'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
+import LoadingButtonWhite from '@/components/Loading/Button/White'
 
 export default {
   name: 'ResetYourPassword',
+
+  components: {
+    LoadingButtonWhite
+  },
 
   mixins: [
     CurrentIdentityMixin
@@ -75,6 +82,7 @@ export default {
 
   data () {
     return {
+      isResettingPassword: false,
       currentIdentityInput: {
         password: null
       }
@@ -101,6 +109,9 @@ export default {
     async resetPassword () {
       this.$v.currentIdentityInput.$touch()
       if (this.$v.currentIdentityInput.$error) return
+      if (this.isResettingPassword) return
+
+      this.isResettingPassword = true
 
       try {
         await storeIdentityPassword(this, this.currentIdentityInput)
@@ -109,6 +120,8 @@ export default {
       } catch (error) {
         this.notices.graphError(error)
       }
+
+      this.isResettingPassword = false
     }
   }
 }
