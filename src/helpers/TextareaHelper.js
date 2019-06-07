@@ -10,11 +10,15 @@ class TextareaHelper {
   }
 
   adaptPlaceholder (callback) {
-    const baseMargin = 70
     this.selector().addEventListener('autosize:resized', () => {
-      const height = this.selector().clientHeight + baseMargin
+      const height = this.currentHeight()
       callback(height)
     })
+  }
+
+  currentHeight () {
+    const baseMargin = 70
+    return this.selector().clientHeight + baseMargin
   }
 
   autosize () {

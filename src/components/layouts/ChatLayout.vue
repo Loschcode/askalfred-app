@@ -286,6 +286,8 @@ export default {
           TextareaHelper.adaptPlaceholder((height) => {
             this.footerPlaceholder = height
           })
+          // We need this as well because sometimes on load it fucks up
+          this.footerPlaceholder = TextareaHelper.currentHeight()
         })
       }
     }
