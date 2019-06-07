@@ -44,11 +44,13 @@
     <div class="row center-xs">
       <div class="col-xs-8 col-md-4">
         <div class="confirm">
-          <div class="button button--half-squared button__white-on-blue button__white-on-blue--soft">
-            <a
-              class="+pointer"
-              @click="resetPassword()"
-            >Confirm email</a>
+          <div
+            class="+pointer"
+            @click="resetPassword()"
+          >
+            <loading-button-white :is-loading="isConfirmingEmail">
+              Confirm email
+            </loading-button-white>
           </div>
           <div class="confirm__back">
             <a @click="goBack()">Back</a>
@@ -65,9 +67,14 @@ import NoticesService from '@/services/NoticesService'
 import sendRecoveryEmail from '@/graphql/mutations/sendRecoveryEmail'
 import router from '@/router'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
+import LoadingButtonWhite from '@/components/Loading/Button/White'
 
 export default {
   name: 'ForgotYourPassword',
+
+  components: {
+    LoadingButtonWhite
+  },
 
   mixins: [
     CurrentIdentityMixin
@@ -78,7 +85,8 @@ export default {
 
   data () {
     return {
-      email: null
+      email: null,
+      isConfirmingEmail: false
     }
   },
 
@@ -108,6 +116,8 @@ export default {
     async resetPassword () {
       this.$v.email.$touch()
       if (this.$v.email.$error) return
+      if (this.isConfirmingEmail) return
+      this.isConfirmingEmail = true
 
       try {
         const email = this.email
@@ -117,6 +127,7 @@ export default {
       } catch (error) {
         this.notices.graphError(error)
       }
+      this.isConfirmingEmail = false
     }
   }
 }
