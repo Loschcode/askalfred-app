@@ -21,7 +21,6 @@ import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import LoadingPage from '@/components/Loading/Page'
 import TrackingHelper from '@/helpers/TrackingHelper'
 import ErrorsHelper from '@/helpers/ErrorsHelper'
-import NoticesService from '@/services/NoticesService'
 
 export default {
   name: 'ConnectRouting',

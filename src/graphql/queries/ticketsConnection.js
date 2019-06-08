@@ -37,8 +37,6 @@ const variables = function () {
   }
 }
 
-const fetchPolicy = 'cache-and-network'
-
 const result = function ({ data }) {
   return {
     data
@@ -81,7 +79,6 @@ const subscribeToMore = {
 export default {
   query,
   variables,
-  fetchPolicy,
   result,
   error,
   skip,
