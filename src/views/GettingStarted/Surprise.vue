@@ -15,7 +15,7 @@
         <div class="form">
           <div class="form__question">
             <p>I’m glad you confirmed your email {{ currentIdentity.firstName }}.</p>
-            <p>I’ll offer you 20 minutes of my time to try everything by yourself for free.</p>
+            <p>I'll offer you some of my time to try everything by yourself for free.</p>
             <p>Ask me anything.</p>
           </div>
         </div>
@@ -127,7 +127,7 @@ export default {
 .form__question {
   p {
     font-weight: 300;
-    font-size: sizing(4);
+    font-size: sizing(3.1);
     margin-bottom: 1em;
   }
 }
