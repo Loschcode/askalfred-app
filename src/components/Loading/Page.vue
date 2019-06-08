@@ -1,6 +1,6 @@
 <template>
   <div class="row middle-xs center-xs">
-    <div class="col-xs-1">
+    <div class="col-xs-12">
       <half-circle-spinner
         :animation-duration="1000"
         :size="size"
