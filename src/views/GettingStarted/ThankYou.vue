@@ -116,7 +116,7 @@ export default {
 
 <style scoped lang="scss">
 .title {
-  margin-top: 4em;
+  margin-top: 3em;
   margin-bottom: 2em;
 }
 

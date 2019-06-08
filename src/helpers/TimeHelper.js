@@ -38,7 +38,9 @@ class TimeHelper {
   setLocales () {
     moment.updateLocale('en', {
       relativeTime: {
-        future: 'in %s',
+        // we removed furure `in %s` to avoid issues regarding a bug on mobile
+        // we could fix it up at some point if we need future stuff
+        future: '%s',
         past: '%s',
         s: 'right now',
         ss: '%ss ago',
