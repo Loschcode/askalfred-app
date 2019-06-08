@@ -1,23 +1,13 @@
 <template>
   <div class="connect-routing">
-    <!-- Crash error -->
-    <div v-if="error">
-      <component
-        :is="errorComponent"
-        :error="error"
-      />
+    <!-- LoadingPage -->
+    <div v-if="appReady()">
+      <!-- Load the correct page -->
+      <router-view />
     </div>
-
     <div v-else>
-      <!-- LoadingPage -->
-      <div v-if="appReady()">
-        <!-- Load the correct page -->
-        <router-view />
-      </div>
-      <div v-else>
-        <div class="connect__loading">
-          <loading-page :color="loadingColor" />
-        </div>
+      <div class="connect__loading">
+        <loading-page :color="loadingColor" />
       </div>
     </div>
   </div>
@@ -30,8 +20,8 @@ import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 
 import LoadingPage from '@/components/Loading/Page'
 import TrackingHelper from '@/helpers/TrackingHelper'
-import NoticesService from '@/services/NoticesService'
 import ErrorsHelper from '@/helpers/ErrorsHelper'
+import NoticesService from '@/services/NoticesService'
 
 export default {
   name: 'ConnectRouting',
@@ -47,22 +37,14 @@ export default {
 
   data () {
     return {
-      error: '',
       ready: false
     }
   },
 
   computed: {
-    errorComponent () {
-      return 'default-error'
-    },
-
     loadingColor () {
-      if (this.rawLayout === 'Default') {
-        return 'white'
-      } else {
-        return 'blue'
-      }
+      if (this.rawLayout === 'Default') return 'white'
+      return 'blue'
     }
   },
 
@@ -76,9 +58,6 @@ export default {
   },
 
   async created () {
-    this.notices = new NoticesService(this)
-
-    this.notices.watch()
     await EnsureIdentityOperation(this)
   },
 

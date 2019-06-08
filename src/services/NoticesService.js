@@ -117,6 +117,7 @@ class NoticesService {
   }
 
   addDefaultCrash (rawError) {
+    console.log('crash received')
     this.vm.error = {
       message:
         "We can't communicate with the server right now, please refresh the page.",
