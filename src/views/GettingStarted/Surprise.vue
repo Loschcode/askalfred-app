@@ -15,8 +15,7 @@
         <div class="form">
           <div class="form__question">
             <p>I’m glad you confirmed your email {{ currentIdentity.firstName }}.</p>
-            <p>I'll offer you some of my time to try everything by yourself for free.</p>
-            <p>Ask me anything.</p>
+            <p>I'll offer you some of my time to try everything by yourself for free. Ask me anything.</p>
           </div>
         </div>
       </div>
