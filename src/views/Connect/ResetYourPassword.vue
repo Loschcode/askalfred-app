@@ -25,7 +25,7 @@
               v-model="currentIdentityInput.password"
               type="password"
               placeholder="Password"
-              @keyup.enter="resetPassword()"
+              @keyup.enter="resetPasswordNow()"
             >
           </div>
         </div>
@@ -60,7 +60,7 @@
 
 <script>
 import router from '@/router'
-import storeIdentityPassword from '@/graphql/mutations/storeIdentityPassword'
+import resetPassword from '@/graphql/mutations/resetPassword'
 import { required } from 'vuelidate/lib/validators'
 import NoticesService from '@/services/NoticesService'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
@@ -106,7 +106,7 @@ export default {
   },
 
   methods: {
-    async resetPassword () {
+    async resetPasswordNow () {
       this.$v.currentIdentityInput.$touch()
       if (this.$v.currentIdentityInput.$error) return
       if (this.isResettingPassword) return
@@ -114,7 +114,7 @@ export default {
       this.isResettingPassword = true
 
       try {
-        await storeIdentityPassword(this, this.currentIdentityInput)
+        await resetPassword(this, this.currentIdentityInput)
         this.notices.success(`Welcome back to your dashboard ${this.currentIdentity.firstName}`)
         router.push({ path: '/connect/sign-in' })
       } catch (error) {
