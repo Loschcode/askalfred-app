@@ -128,13 +128,15 @@
                 <div v-else>
                   <textarea
                     v-model="currentMessage"
-                    name="message"
                     placeholder="Write a reply..."
+                    name="message"
+                    @blur="hasFocusOnChat = false"
+                    @focus="hasFocusOnChat = true"
                   />
                 </div>
 
                 <div class="message-input__button">
-                  <div v-if="currentMessage">
+                  <div v-if="showButtonSend()">
                     <div
                       class="message-input__button-send +pointer"
                       @click="sendMessage()"
@@ -231,7 +233,8 @@ export default {
       currentMessage: '',
       footerPlaceholder: 100,
       sendingFile: false,
-      sendingMessage: false
+      sendingMessage: false,
+      hasFocusOnChat: false
     }
   },
 
@@ -305,6 +308,11 @@ export default {
   },
 
   methods: {
+    showButtonSend () {
+      if (this.currentMessage) return true
+      return this.hasFocusOnChat
+    },
+
     clickTitle () {
       PageHelper.hardRedirectTo('/')
     },

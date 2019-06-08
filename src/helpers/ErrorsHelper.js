@@ -6,27 +6,27 @@ class ErrorsHelper {
   }
 
   transmit (level, error) {
-    if (process.env.NODE_ENV === 'production') {
-      Sentry.configureScope((scope) => {
-        scope.setExtra('level', level)
-        if (typeof error === 'string') {
-          Sentry.captureMessage(error)
-        } else {
-          Sentry.captureException(error)
-        }
-      })
-    }
+    if (process.env.NODE_ENV !== 'production') return false
+
+    Sentry.configureScope((scope) => {
+      scope.setExtra('level', level)
+      if (typeof error === 'string') {
+        Sentry.captureMessage(error)
+      } else {
+        Sentry.captureException(error)
+      }
+    })
   }
 
   setContext ({ identity }) {
-    if (process.env.NODE_ENV === 'production') {
-      Sentry.configureScope((scope) => {
-        scope.setUser({
-          id: identity.id,
-          email: identity.email
-        })
+    if (process.env.NODE_ENV !== 'production') return false
+
+    Sentry.configureScope((scope) => {
+      scope.setUser({
+        id: identity.id,
+        email: identity.email
       })
-    }
+    })
   }
 }
 
