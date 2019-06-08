@@ -1,9 +1,7 @@
 $tingle-breakpoint: 541px !default;
 
 .tingle-enabled .blurry-wrapper {
-  // filter: blur(2px);
-  // -webkit-filter: blur(2px);
-  // backdrop-filter: blur(2px);
+  // we don't blur anymore
 }
 .tingle-modal__close {
   text-align: center;
@@ -37,6 +35,11 @@ $tingle-breakpoint: 541px !default;
 }
 
 .tingle-modal {
+  filter: blur(0px) !important;
+  -webkit-filter: blur(0px) !important;
+  backdrop-filter: blur(0px) !important;
+  -webkit-backdrop-filter: blur(0px) !important;
+
   background-color: rgba(0, 0, 0, 0.65);
   user-select: none;
   -webkit-user-select: none;
