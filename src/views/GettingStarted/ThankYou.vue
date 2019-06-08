@@ -129,7 +129,7 @@ export default {
 .form__question {
   p {
     font-weight: 300;
-    font-size: sizing(4);
+    font-size: sizing(3.8);
     margin-bottom: 1em;
   }
 }
