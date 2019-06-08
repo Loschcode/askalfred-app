@@ -41,6 +41,10 @@ button:focus {
   outline: 0;
 }
 
+input {
+  font-family: $font-default;
+}
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
@@ -49,6 +53,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 textarea {
   resize: none;
+  font-family: $font-default;
 }
 
 textarea:focus,
