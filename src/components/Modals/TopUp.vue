@@ -146,6 +146,18 @@
               </div>
             </div>
           </div>
+          <div class="row center-xs">
+            <div class="col-xs-2">
+              <div class="add-card-window__back">
+                <div
+                  class="button button__white-on-blue button__white-on-blue--soft"
+                  @click="goBackFromCreditCard()"
+                >
+                  Back
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -228,6 +240,10 @@ export default {
   },
 
   methods: {
+    goBackFromCreditCard () {
+      this.currentModal().setWithContentOf(this, 'top-up-window')
+    },
+
     async addCardNow () {
       this.$v.addCardInput.$touch()
       if (this.$v.addCardInput.$error) return
@@ -342,6 +358,17 @@ export default {
     text-align: center;
     margin: auto;
     bottom: -5em;
+}
+
+.add-card-window__back {
+    position: absolute;
+    font-weight: bold;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin: auto;
+    bottom: -7em;
+    max-width: 10em;
 }
 
 .add-card-window__field {
