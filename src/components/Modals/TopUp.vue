@@ -227,7 +227,7 @@ export default {
 
   computed: {
     timeEstimated () {
-      return 4 * this.selectedAmount
+      return 3 * this.selectedAmount
     },
 
     cardType () {
