@@ -12,7 +12,19 @@
         <div class="container content top-up-window">
           <div class="row center-xs">
             <div class="col-xs-8">
-              <p>Top up {{ timeEstimated }} minutes of time for only {{ selectedAmount }}.00 €</p>
+              <p class="top-up-window__top-up-for">
+                Top up {{ timeEstimated }} minutes of time for only {{ selectedAmount }}.00 €
+              </p>
+            </div>
+          </div>
+          <div class="row center-xs">
+            <div class="col-xs-10">
+              <p
+                v-if="requestsEstimated > 5"
+                class="top-up-window__requests-on-average"
+              >
+                It's more than {{ requestsEstimated }} requests on average!
+              </p>
             </div>
           </div>
           <div class="top-up-window__buttons">
@@ -226,6 +238,10 @@ export default {
   },
 
   computed: {
+    requestsEstimated () {
+      return this.timeEstimated / 7.5
+    },
+
     timeEstimated () {
       return 3 * this.selectedAmount
     },
@@ -378,7 +394,6 @@ export default {
 
 .top-up-window {
   p {
-    font-size: 22px;
     color: $color-soft-grey;
     font-family: $font-alternative;
   }
@@ -400,6 +415,16 @@ export default {
 
 .top-up-window__button-container {
   padding: 0.4em;
+}
+
+.top-up-window__top-up-for {
+  font-size: 22px;
+}
+
+.top-up-window__requests-on-average {
+  font-weight: 600;
+  font-size: 18px;
+  padding-top: 0.5em;
 }
 
 .top-up-window__button {
