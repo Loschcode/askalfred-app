@@ -239,7 +239,7 @@ export default {
 
   computed: {
     requestsEstimated () {
-      return this.timeEstimated / 7.5
+      return this.timeEstimated / 5.0 // 7.5
     },
 
     timeEstimated () {
