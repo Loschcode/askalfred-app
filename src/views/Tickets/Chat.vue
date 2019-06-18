@@ -33,7 +33,7 @@
       <div class="tickets-chat__notice">
         <div v-if="ticket.status === 'opened'">
           <chat-notice :status="`opened`">
-            Thanks Laurent, I will get back to you as soon as possible.
+            Thanks {{ currentIdentity.firstName }}, I will get back to you as soon as possible.
           </chat-notice>
         </div>
 
