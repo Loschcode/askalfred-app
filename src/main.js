@@ -125,11 +125,13 @@ Vue.use(VueAnalytics, {
   }
 })
 
-Sentry.init({
-  dsn: process.env.VUE_APP_SENTRY_DSN,
-  environment: process.env.NODE_ENV,
-  integrations: [new Integrations.Vue({ Vue, attachProps: true })]
-})
+if (process.env.NODE_ENV !== 'development') {
+  Sentry.init({
+    dsn: process.env.VUE_APP_SENTRY_DSN,
+    environment: process.env.NODE_ENV,
+    integrations: [new Integrations.Vue({ Vue, attachProps: true })]
+  })
+}
 
 new Vue({
   router,

@@ -20,6 +20,11 @@ query GetFullTicket($input: GetFullTicketInput!) {
           ... on EventMessage {
             body
           }
+          ... on EventCallToAction {
+            link
+            label
+            body
+          }
           ... on EventFile {
             filePath
           }

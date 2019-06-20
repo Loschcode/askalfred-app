@@ -53,6 +53,7 @@
 
 <script>
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
+import PageHelper from '@/helpers/PageHelper'
 
 // NOTE : file.filePath is present and usable.
 export default {
@@ -89,8 +90,7 @@ export default {
   methods: {
     // NOTE this could be improved to enforce download better
     downloadFile () {
-      // TODO : put into helper
-      window.open(this.file.filePath, '_blank')
+      PageHelper.openBlank(this.file.filePath)
     },
 
     isMyself () {

@@ -1,7 +1,7 @@
 .message {
   line-height: 1.2em;
   position: relative;
-  padding: spacing(3);
+  padding: 0.75em;
   display: flex;
   margin-top: spacing(1);
   margin-bottom: spacing(1);
@@ -17,7 +17,7 @@
 }
 
 .message__subject {
-  color: $color-soft-grey;
+  color: $color-dark-grey-blueish;
   background-color: $background-message-general-color;
   border: 1px solid $border-message-myself-color;
   text-align: left;
@@ -37,7 +37,7 @@
 }
 
 .message__myself {
-  color: $color-soft-grey;
+  color: $color-dark-grey-blueish;
   background-color: $background-message-myself-color;
   border: 1px solid $border-message-myself-color;
   text-align: right;
@@ -58,7 +58,7 @@
 }
 
 .message__yourself {
-  color: $color-soft-grey;
+  color: $color-dark-grey-blueish;
   background-color: $background-message-yourself-color;
   border: 1px solid $border-message-yourself-color;
   text-align: left;
@@ -82,9 +82,20 @@
   padding: 0.5em;
 }
 
+.message__call-to-action--body {
+  text-align: left;
+  padding: 0.75em;
+  padding-bottom: 1em;
+}
+
 .message__bottom-details {
   font-family: $font-alternative;
-  padding: 1em;
+  padding: 0.75em;
+  padding-left: 0em;
+  padding-right: 0em;
+  margin-left: 0.2em;
+  margin-right: 0.2em;
+  font-size: 20px;
   color: $color-white;
   background-color: $color-blue;
 }

@@ -21,6 +21,12 @@
             :event="event"
           />
         </div>
+        <div v-else-if="event.type === 'EventCallToAction'">
+          <chat-events-call-to-action
+            :call-to-action="event.eventable"
+            :event="event"
+          />
+        </div>
         <div v-else-if="event.type === 'EventFile'">
           <chat-events-file
             :file="event.eventable"
@@ -70,6 +76,7 @@ import getFullTicket from '@/graphql/queries/getFullTicket'
 import ChatNotice from '@/components/Chat/Notice'
 import ChatSubject from '@/components/Chat/Subject'
 import ChatEventsMessage from '@/components/Chat/Events/Message'
+import ChatEventsCallToAction from '@/components/Chat/Events/CallToAction'
 import ChatEventsFile from '@/components/Chat/Events/File'
 import MarkDownHelper from '@/helpers/MarkDownHelper'
 import ScrollHelper from '@/helpers/ScrollHelper'
@@ -82,6 +89,7 @@ export default {
     ChatNotice,
     ChatSubject,
     ChatEventsMessage,
+    ChatEventsCallToAction,
     ChatEventsFile,
     LoadingPage
   },
