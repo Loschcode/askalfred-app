@@ -6,10 +6,7 @@
     <div v-else-if="isYourself()">
       <div class="row start-xs">
         <div class="col-xs-11 col-md-8 ticket-action">
-          <div
-            class="message message__yourself +no-padding-bottom +pointer"
-            @click="downloadFile()"
-          >
+          <div class="message message__yourself +no-padding-bottom">
             <div class="message__yourself-arrow" />
             <div class="row center-xs">
               <div class="col-xs-12">
@@ -19,7 +16,7 @@
                 />
               </div>
               <div
-                class="col-xs-12 +no-padding"
+                class="col-xs-12 +no-padding +pointer"
                 @click="clickButton()"
               >
                 <div
