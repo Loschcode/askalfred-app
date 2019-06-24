@@ -62,18 +62,29 @@
         </div>
       </div>
     </div>
+    <!-- Modals -->
+    <modals-add-card
+      ref="modals-add-card"
+    />
   </div>
 </template>
 
 <script>
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import MarkDownHelper from '@/helpers/MarkDownHelper'
+import ModalsAddCard from '@/components/Modals/AddCard'
+import OpenModalMixin from '@/mixins/OpenModalMixin'
 
 export default {
   name: 'ChatEventsPaymentAuthorization',
 
+  components: {
+    ModalsAddCard
+  },
+
   mixins: [
-    CurrentIdentityMixin
+    CurrentIdentityMixin,
+    OpenModalMixin
   ],
 
   props: {
@@ -107,7 +118,19 @@ export default {
     },
 
     clickButton () {
-      // TODO : make the logic of payment
+      if (this.currentIdentity.stripeCardId) {
+        this.allowExpense()
+      } else {
+        this.addCard()
+      }
+    },
+
+    allowExpense () {
+      // TODO : this part with an async allowExpense and stuff
+    },
+
+    addCard () {
+      this.openModal('modals-add-card')
     },
 
     displayedTotal () {
