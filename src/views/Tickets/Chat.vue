@@ -27,6 +27,12 @@
             :event="event"
           />
         </div>
+        <div v-else-if="event.type === 'EventPaymentAuthorization'">
+          <chat-events-payment-authorization
+            :payment-authorization="event.eventable"
+            :event="event"
+          />
+        </div>
         <div v-else-if="event.type === 'EventFile'">
           <chat-events-file
             :file="event.eventable"
@@ -77,6 +83,7 @@ import ChatNotice from '@/components/Chat/Notice'
 import ChatSubject from '@/components/Chat/Subject'
 import ChatEventsMessage from '@/components/Chat/Events/Message'
 import ChatEventsCallToAction from '@/components/Chat/Events/CallToAction'
+import ChatEventsPaymentAuthorization from '@/components/Chat/Events/PaymentAuthorization'
 import ChatEventsFile from '@/components/Chat/Events/File'
 import MarkDownHelper from '@/helpers/MarkDownHelper'
 import ScrollHelper from '@/helpers/ScrollHelper'
@@ -90,6 +97,7 @@ export default {
     ChatSubject,
     ChatEventsMessage,
     ChatEventsCallToAction,
+    ChatEventsPaymentAuthorization,
     ChatEventsFile,
     LoadingPage
   },

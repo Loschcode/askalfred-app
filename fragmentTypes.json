@@ -10,6 +10,9 @@
           },
           {
             "name": "EventFile"
+          },
+          {
+            "name": "EventCallToAction"
           }
         ]
       }

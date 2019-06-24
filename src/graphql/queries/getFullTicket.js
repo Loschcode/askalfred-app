@@ -25,6 +25,14 @@ query GetFullTicket($input: GetFullTicketInput!) {
             label
             body
           }
+          ... on EventPaymentAuthorization {
+            body
+            lineItem
+            amountInCents
+            feesInCents
+            authorizedAt
+            stripeChargeId
+          }
           ... on EventFile {
             filePath
           }
