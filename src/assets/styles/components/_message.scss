@@ -16,6 +16,10 @@
   @include selectable();
 }
 
+.message__comment {
+  font-size: 14px;
+}
+
 .message__subject {
   color: $color-dark-grey-blueish;
   background-color: $background-message-general-color;

@@ -56,7 +56,7 @@
               </div>
             </div>
           </div>
-          <div class="comment">
+          <div class="message__comment">
             * My payment processor (Stripe) charges me a fee for using your credit card
           </div>
         </div>
