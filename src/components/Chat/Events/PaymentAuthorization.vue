@@ -68,7 +68,6 @@
 <script>
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import MarkDownHelper from '@/helpers/MarkDownHelper'
-import PageHelper from '@/helpers/PageHelper'
 
 export default {
   name: 'ChatEventsPaymentAuthorization',
@@ -108,7 +107,7 @@ export default {
     },
 
     clickButton () {
-      PageHelper.openBlank(this.paymentAuthorization.link)
+      // TODO : make the logic of payment
     },
 
     displayedTotal () {
