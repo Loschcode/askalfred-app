@@ -46,19 +46,35 @@
                   </div>
                 </div>
               </div>
+              <div 
+              v-if="paymentAuthorization.authorizedAt"
+              class="col-xs-12 +no-padding"
+              >
+              <div class="message__bottom-approved">
+                You approved <strong>{{ displayedTotal() }} €</strong>
+              </div>
+              </div>
               <div
+                v-else
                 class="col-xs-12 +no-padding +pointer"
                 @click="clickButton()"
+
               >
-                <div class="message__bottom-details">
-                  Allow expense of <strong>{{ displayedTotal() }} €</strong>
+                <div class="message__bottom-cta">
+                  <loading-button-lambda :is-loading="isAllowingExpense">
+                    Allow expense of <strong>{{ displayedTotal() }} €</strong>
+                  </loading-button-lambda>
                 </div>
               </div>
+
+
             </div>
           </div>
-          <div class="message__comment">
-            * My payment processor (Stripe) charges me a fee for using your credit card
-          </div>
+        </div>
+          <div class="col-xs-11 col-md-8">
+            <div class="message__comment">
+              * My payment processor (Stripe) charges me a fee for using your credit card
+            </div>
         </div>
       </div>
     </div>
@@ -74,12 +90,16 @@ import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import MarkDownHelper from '@/helpers/MarkDownHelper'
 import ModalsAddCard from '@/components/Modals/AddCard'
 import OpenModalMixin from '@/mixins/OpenModalMixin'
+import allowExpense from '@/graphql/mutations/allowExpense'
+import NoticesService from '@/services/NoticesService'
+import LoadingButtonLambda from '@/components/Loading/Button/Lambda'
 
 export default {
   name: 'ChatEventsPaymentAuthorization',
 
   components: {
-    ModalsAddCard
+    ModalsAddCard,
+    LoadingButtonLambda
   },
 
   mixins: [
@@ -98,6 +118,12 @@ export default {
     }
   },
 
+  data () {
+    return {
+      isAllowingExpense: false
+    }
+  },
+
   computed: {
     from () {
       if (this.event.identity.id === this.currentIdentity.id) {
@@ -110,6 +136,10 @@ export default {
     totalAmount () {
       return this.paymentAuthorization.amountInCents + this.paymentAuthorization.feesInCents
     }
+  },
+
+  created () {
+    this.notices = new NoticesService(this)
   },
 
   methods: {
@@ -125,8 +155,20 @@ export default {
       }
     },
 
-    allowExpense () {
-      // TODO : this part with an async allowExpense and stuff
+    async allowExpense () {
+      if (this.isAllowingExpense) return
+      this.isAllowingExpense = true
+
+      try {
+        const allowExpenseInput = { eventId: this.event.id }
+        await allowExpense(this, allowExpenseInput)
+        this.notices.success('This expense was allowed.')
+        // NOTE : we don't isAllowingExpense = false because
+        // it'll hot reload the button entirely in this specific case
+      } catch (error) {
+        this.notices.graphError(error)
+        this.isAllowingExpense = false
+      }
     },
 
     addCard () {

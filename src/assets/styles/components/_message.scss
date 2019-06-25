@@ -17,6 +17,7 @@
 }
 
 .message__comment {
+  padding-left: 1.5em;
   font-size: 14px;
   color: $color-light-grey-blueish;
 }
@@ -93,7 +94,7 @@
   padding-bottom: 1em;
 }
 
-.message__bottom-details {
+.message__bottom-cta {
   font-family: $font-alternative;
   padding: 0.75em;
   padding-left: 0em;
@@ -103,4 +104,17 @@
   font-size: 20px;
   color: $color-white;
   background-color: $color-blue;
+}
+
+.message__bottom-approved {
+  font-family: $font-alternative;
+  border-top: 1px solid $color-light-grey;
+  padding: 0.75em;
+  padding-left: 0em;
+  padding-right: 0em;
+  margin-left: 0.2em;
+  margin-right: 0.2em;
+  font-size: 20px;
+  color: $color-blue;
+  background-color: $color-light-grey-buttonish;
 }

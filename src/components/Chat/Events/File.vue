@@ -15,7 +15,7 @@
                 </div>
               </div>
               <div class="col-xs-12 +no-padding">
-                <div class="message__bottom-details">
+                <div class="message__bottom-cta">
                   Your file was uploaded
                 </div>
               </div>
@@ -39,7 +39,7 @@
                 </div>
               </div>
               <div class="col-xs-12 +no-padding">
-                <div class="message__bottom-details">
+                <div class="message__bottom-cta">
                   Click to download this file
                 </div>
               </div>

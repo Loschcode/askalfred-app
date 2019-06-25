@@ -20,7 +20,7 @@
                 @click="clickButton()"
               >
                 <div
-                  class="message__bottom-details"
+                  class="message__bottom-cta"
                   v-html="displayedLabel()"
                 />
               </div>
