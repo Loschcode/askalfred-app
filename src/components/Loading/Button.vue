@@ -1,6 +1,6 @@
 <template>
   <div class="row middle-xs center-xs">
-    <div class="col-xs-12">
+    <div class="col-xs-12 enlarge-area-spinner">
       <half-circle-spinner
         :animation-duration="1000"
         :size="size"
@@ -44,4 +44,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.enlarge-area-spinner {
+  // this is to counter-balance the fixed size of the spinner
+  // if the buttons are buggy on click we need
+  // to stretch them artificially on top of the col-* system
+  width: 200px;
+}
 </style>
