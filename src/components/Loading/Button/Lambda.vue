@@ -1,15 +1,18 @@
 <template>
-  <span>
-    <span v-if="isLoading">
+  <div>
+    <div
+      v-if="isLoading"
+      class="lambda"
+    >
       <loading-button
         :color="`white`"
         :size="28"
       />
-    </span>
-    <span v-else>
+    </div>
+    <div v-else>
       <slot />
-    </span>
-  </span>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -37,4 +40,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.lambda {
+  width: 100%;
+}
 </style>

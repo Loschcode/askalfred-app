@@ -5,7 +5,7 @@
     </div>
     <div v-else-if="isYourself()">
       <div class="row start-xs">
-        <div class="col-xs-11 col-md-8 ticket-action">
+        <div class="col-xs-11 col-md-6 ticket-action">
           <div class="message message__yourself +no-padding-bottom">
             <div class="message__yourself-arrow" />
             <div class="row center-xs">
@@ -217,7 +217,7 @@ export default {
   margin: 1em;
   margin-bottom: 1em;
   margin-top: 0.5em;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .line-item__price {
