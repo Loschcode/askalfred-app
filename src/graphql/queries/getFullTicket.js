@@ -27,7 +27,10 @@ query GetFullTicket($input: GetFullTicketInput!) {
           }
           ... on EventPaymentAuthorization {
             body
-            lineItem
+            lineItems {
+              label
+              amountInCents
+            }
             amountInCents
             feesInCents
             authorizedAt

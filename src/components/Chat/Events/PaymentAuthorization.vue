@@ -16,21 +16,23 @@
                 />
               </div>
               <div class="col-xs-12">
-                <div class="row start-xs line-item">
-                  <div class="col-xs-8 line-item__label">
-                    Ticket
-                  </div>
-                  <div class="col-xs-4 line-item__price">
-                    <div class="row end-xs">
-                      <div class="col-xs-12">
-                        {{ displayedAmount() }} €
+                <div v-for="lineItem in paymentAuthorization.lineItems">
+                  <div class="row start-xs line-item">
+                    <div class="col-xs-8 line-item__label">
+                      {{ lineItem.label }}
+                    </div>
+                    <div class="col-xs-4 line-item__price">
+                      <div class="row end-xs">
+                        <div class="col-xs-12">
+                          {{ lineItem.amountInCents / 100 }} €
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col-xs-12 +no-padding">
-                    <hr class="line-item__delimiter">
+                  <div class="row">
+                    <div class="col-xs-12 +no-padding">
+                      <hr class="line-item__delimiter">
+                    </div>
                   </div>
                 </div>
                 <div class="row start-xs line-item">
@@ -46,19 +48,18 @@
                   </div>
                 </div>
               </div>
-              <div 
-              v-if="paymentAuthorization.authorizedAt"
-              class="col-xs-12 +no-padding"
+              <div
+                v-if="paymentAuthorization.authorizedAt"
+                class="col-xs-12 +no-padding"
               >
-              <div class="message__bottom-approved">
-                You approved <strong>{{ displayedTotal() }} €</strong>
-              </div>
+                <div class="message__bottom-approved">
+                  You approved <strong>{{ displayedTotal() }} €</strong>
+                </div>
               </div>
               <div
                 v-else
                 class="col-xs-12 +no-padding +pointer"
                 @click="clickButton()"
-
               >
                 <div class="message__bottom-cta">
                   <loading-button-lambda :is-loading="isAllowingExpense">
@@ -66,15 +67,13 @@
                   </loading-button-lambda>
                 </div>
               </div>
-
-
             </div>
           </div>
         </div>
-          <div class="col-xs-11 col-md-8">
-            <div class="message__comment">
-              * My payment processor (Stripe) charges me a fee for using your credit card
-            </div>
+        <div class="col-xs-11 col-md-8">
+          <div class="message__comment">
+            * My payment processor (Stripe) charges me a fee for using your credit card
+          </div>
         </div>
       </div>
     </div>
