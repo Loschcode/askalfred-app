@@ -16,7 +16,10 @@
                 />
               </div>
               <div class="col-xs-12">
-                <div v-for="lineItem in paymentAuthorization.lineItems">
+                <div
+                  v-for="lineItem in paymentAuthorization.lineItems"
+                  :key="lineItem.id"
+                >
                   <div class="row start-xs line-item">
                     <div class="col-xs-8 line-item__label">
                       {{ lineItem.label }}
