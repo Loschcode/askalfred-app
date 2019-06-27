@@ -36,6 +36,15 @@ query GetFullTicket($input: GetFullTicketInput!) {
             authorizedAt
             stripeChargeId
           }
+          ... on EventDataCollectionForm {
+            body
+            lineItems {
+              label
+              slug
+              value
+            }
+            sentAt
+          }
           ... on EventFile {
             filePath
           }
