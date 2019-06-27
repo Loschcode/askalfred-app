@@ -38,9 +38,10 @@ query GetFullTicket($input: GetFullTicketInput!) {
           }
           ... on EventDataCollectionForm {
             body
-            lineItems {
+            dataCollections {
               label
               slug
+              scope
               value
             }
             sentAt
