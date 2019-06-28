@@ -137,11 +137,7 @@ export default {
     },
 
     clickButton () {
-      if (this.currentIdentity.stripeCardId) {
-        this.sendDataCollection()
-      } else {
-        this.addCard()
-      }
+      this.sendDataCollection()
     },
 
     async sendDataCollection () {
@@ -150,7 +146,7 @@ export default {
 
       try {
         const sendDataCollectionInput = { eventId: this.event.id }
-        // await sendDataCollection(this, sendDataCollectionInput)
+        await sendDataCollection(this, sendDataCollectionInput)
         this.notices.success('Your informations were transmitted.')
         // NOTE : we don't isSendingDataCollection = false because
         // it'll hot reload the button entirely in this specific case
@@ -218,7 +214,6 @@ export default {
     border-bottom: 1px solid $color-light-grey;
     padding: 0.2em;
     color: $color-blue;
-    font-weight: bold;
     font-size: 18px;
     width: 100%;
   }

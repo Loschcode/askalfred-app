@@ -199,6 +199,7 @@ import { required } from 'vuelidate/lib/validators'
 import CardsHelper from '@/helpers/CardsHelper'
 import LoadingButtonBlue from '@/components/Loading/Button/Blue'
 import TrackingHelper from '@/helpers/TrackingHelper'
+import StripeHelper from '@/helpers/StripeHelper'
 
 export default {
   name: 'ModalsTopUp',
@@ -266,25 +267,14 @@ export default {
       if (this.isAddingCardNow) return
 
       this.isAddingCardNow = true
-      window.Stripe.setPublishableKey(process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY)
 
-      const number = this.addCardInput.cardNumber.replace(/\s/g, '')
-      const cvc = this.addCardInput.securityCode
-      const expMonth = this.addCardInput.expirationDate.split('/')[0]
-      const expYear = this.addCardInput.expirationDate.split('/')[1]
-
-      window.Stripe.card.createToken({
-        number: number,
-        cvc: cvc,
-        exp_month: expMonth,
-        exp_year: expYear
-      }, async (status, response) => {
-        if (response.error) {
+      StripeHelper.addCard(this.addCardInput, async (cardToken) => {
+        if (!cardToken) {
           this.isAddingCardNow = false
           return this.notices.error('Your card does not seem to be valid. Please try again.')
         }
 
-        const addCardInput = { cardToken: response.id }
+        const addCardInput = { cardToken }
 
         try {
           await addCard(this, addCardInput)
