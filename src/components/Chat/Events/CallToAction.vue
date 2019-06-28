@@ -1,9 +1,9 @@
 <template>
   <div class="chat-message">
-    <div v-if="isMyself()">
+    <div v-if="isMe()">
       <!-- You aren't supposed to be able to do it -->
     </div>
-    <div v-else-if="isYourself()">
+    <div v-else-if="isAlfred()">
       <div class="row start-xs">
         <div class="col-xs-11 col-md-8 ticket-action">
           <div class="message message__yourself +no-padding-bottom">
@@ -56,13 +56,6 @@ export default {
   },
 
   computed: {
-    from () {
-      if (this.event.identity.id === this.currentIdentity.id) {
-        return 'myself'
-      } else {
-        return 'yourself'
-      }
-    }
   },
 
   methods: {
@@ -82,12 +75,12 @@ export default {
       return this.withMarkDown(this.callToAction.body)
     },
 
-    isMyself () {
-      return this.from === 'myself'
+    isMe () {
+      return this.event.identity.id === this.currentIdentity.id
     },
 
-    isYourself () {
-      return this.from === 'yourself'
+    isAlfred () {
+      return !this.isMe()
     }
   }
 }

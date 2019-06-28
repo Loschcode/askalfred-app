@@ -1,6 +1,6 @@
 <template>
   <div class="chat-message">
-    <div v-if="isMyself()">
+    <div v-if="isMe()">
       <div class="row end-xs">
         <div class="col-xs-11 col-md-8 ticket-message">
           <div class="message message__myself">
@@ -13,7 +13,7 @@
         </div>
       </div>
     </div>
-    <div v-else-if="isYourself()">
+    <div v-else-if="isAlfred()">
       <div class="row start-xs">
         <div class="col-xs-11 col-md-8 ticket-message">
           <div class="message message__yourself">
@@ -67,11 +67,11 @@ export default {
       return this.withMarkDown(this.message.body)
     },
 
-    isMyself () {
+    isMe () {
       return this.from === 'myself'
     },
 
-    isYourself () {
+    isAlfred () {
       return this.from === 'yourself'
     }
   }

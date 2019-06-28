@@ -1,9 +1,9 @@
 <template>
   <div class="chat-message">
-    <div v-if="isMyself()">
+    <div v-if="isMe()">
       <!-- You aren't supposed to be able to do it -->
     </div>
-    <div v-else-if="isYourself()">
+    <div v-else-if="isAlfred()">
       <div class="row start-xs">
         <div class="col-xs-11 col-md-6 ticket-action">
           <div class="message message__yourself +no-padding-bottom">
@@ -193,11 +193,11 @@ export default {
       return this.withMarkDown(this.paymentAuthorization.body)
     },
 
-    isMyself () {
+    isMe () {
       return this.from === 'myself'
     },
 
-    isYourself () {
+    isAlfred () {
       return this.from === 'yourself'
     }
   }
