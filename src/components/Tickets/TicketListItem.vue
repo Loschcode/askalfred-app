@@ -89,18 +89,22 @@ export default {
     },
 
     wasAnswered () {
-      return this.ticket.lastMessageFromAlfred !== null
+      return this.ticket.lastEventFromAlfred !== null
     },
 
     wasSeenAt () {
       if (this.wasAnswered()) {
-        return this.ticket.lastMessageFromAlfred.event.seenAt
+        return this.ticket.lastEventFromAlfred.event.seenAt
       }
     },
 
     excerpt () {
-      if (this.ticket.lastMessageFromAlfred) {
-        return this.ticket.lastMessageFromAlfred.body
+      if (this.ticket.lastEventFromAlfred) {
+        if (this.ticket.lastEventFromAlfred.body) {
+          return this.ticket.lastEventFromAlfred.body
+        } else {
+          return 'No preview available for this answer.'
+        }
       }
 
       return this.ticket.subject
@@ -108,7 +112,7 @@ export default {
 
     wasAnsweredAt () {
       if (this.wasAnswered()) {
-        return TimeHelper.ago(this.ticket.lastMessageFromAlfred.createdAt)
+        return TimeHelper.ago(this.ticket.lastEventFromAlfred.createdAt)
       }
     },
 

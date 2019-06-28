@@ -19,7 +19,7 @@ query TicketsConnection(
       subject
       status
       createdAt
-      lastMessageFromAlfred {
+      lastEventFromAlfred {
         createdAt
         id
         body

@@ -38,15 +38,15 @@ export default {
 
   methods: {
     wasAnswered () {
-      return this.FromAlfred(this.messages).length >= 1
+      return this.eventsFromAlfred().length >= 1
     },
 
     lastAnswer () {
-      return this.FromAlfred(this.messages).slice(-1)[0]
+      return this.eventsFromAlfred().slice(-1)[0]
     },
 
-    FromAlfred (events) {
-      return events.filter(
+    eventsFromAlfred (events) {
+      return this.events.filter(
         event => event.identity.id !== this.currentIdentity.id
       )
     }
