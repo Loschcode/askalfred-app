@@ -94,20 +94,22 @@ export default {
 
     wasSeenAt () {
       if (this.wasAnswered()) {
-        return this.ticket.lastEventFromAlfred.event.seenAt
+        return this.ticket.lastEventFromAlfred.seenAt
       }
     },
 
     excerpt () {
+      // what a piece of crap condition chain
+      // I know, no time, you know.
       if (this.ticket.lastEventFromAlfred) {
-        if (this.ticket.lastEventFromAlfred.body) {
-          return this.ticket.lastEventFromAlfred.body
-        } else {
-          return 'No preview available for this answer.'
+        if (this.ticket.lastEventFromAlfred.eventable) {
+          if (this.ticket.lastEventFromAlfred.eventable.body) {
+            return this.ticket.lastEventFromAlfred.eventable.body
+          }
         }
       }
 
-      return this.ticket.subject
+      if (this.ticket.subject) return this.ticket.subject
     },
 
     wasAnsweredAt () {

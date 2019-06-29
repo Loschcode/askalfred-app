@@ -18,14 +18,17 @@ query GetFullTicket($input: GetFullTicketInput!) {
         }
         eventable {
           ... on EventMessage {
+            id
             body
           }
           ... on EventCallToAction {
+            id
             link
             label
             body
           }
           ... on EventPaymentAuthorization {
+            id
             body
             lineItems {
               label
@@ -37,8 +40,10 @@ query GetFullTicket($input: GetFullTicketInput!) {
             stripeChargeId
           }
           ... on EventDataCollectionForm {
+            id
             body
             dataCollections {
+              id
               label
               slug
               scope
@@ -47,6 +52,7 @@ query GetFullTicket($input: GetFullTicketInput!) {
             sentAt
           }
           ... on EventFile {
+            id
             filePath
           }
         }
@@ -62,6 +68,8 @@ const variables = function () {
     }
   }
 }
+
+const fetchPolicy = 'cache-and-network'
 
 const result = function ({ data }) {
   // sometimes result is null
@@ -118,6 +126,7 @@ const subscribeToMore = {
 export default {
   query,
   variables,
+  fetchPolicy,
   result,
   error,
   skip,

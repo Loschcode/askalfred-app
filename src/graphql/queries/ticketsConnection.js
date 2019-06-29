@@ -20,11 +20,25 @@ query TicketsConnection(
       status
       createdAt
       lastEventFromAlfred {
-        createdAt
         id
-        body
-        event {
-          seenAt
+        seenAt
+        eventable {
+          ... on EventMessage {
+            id
+            body
+          }
+          ... on EventCallToAction {
+            id
+            body
+          }
+          ... on EventPaymentAuthorization {
+            id
+            body
+          }
+          ... on EventDataCollectionForm {
+            id
+            body
+          }
         }
       }
     }
@@ -36,6 +50,8 @@ const variables = function () {
     ticketsFirst: this.ticketsFirst
   }
 }
+
+const fetchPolicy = 'cache-and-network'
 
 const result = function ({ data }) {
   return {
@@ -79,6 +95,7 @@ const subscribeToMore = {
 export default {
   query,
   variables,
+  fetchPolicy,
   result,
   error,
   skip,
