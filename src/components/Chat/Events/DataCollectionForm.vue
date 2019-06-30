@@ -30,7 +30,8 @@
                         <span class="data-collection__input">
                           <input
                             type="text"
-                            :value="dataCollection.value"
+                            v-model="dataCollection.value"
+                            :disabled="!canEdit()"
                           >
                         </span>
                       </div>
@@ -39,11 +40,11 @@
                 </div>
               </div>
               <div
-                v-if="dataCollectionForm.authorizedAt"
+                v-if="dataCollectionForm.sentAt"
                 class="col-xs-12 +no-padding"
               >
                 <div class="message__bottom-approved">
-                  You approved <strong>{{ displayedTotal() }} €</strong>
+                  Your informations were sent
                 </div>
               </div>
               <div
@@ -79,7 +80,7 @@ import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import MarkDownHelper from '@/helpers/MarkDownHelper'
 import ModalsAddCard from '@/components/Modals/AddCard'
 import OpenModalMixin from '@/mixins/OpenModalMixin'
-// import sendDataCollection from '@/graphql/mutations/sendDataCollection'
+import sendDataCollectionForm from '@/graphql/mutations/sendDataCollectionForm'
 import NoticesService from '@/services/NoticesService'
 import LoadingButtonLambda from '@/components/Loading/Button/Lambda'
 
@@ -109,7 +110,8 @@ export default {
 
   data () {
     return {
-      isSendingDataCollection: false
+      isSendingDataCollection: false,
+      dataCollectionIpnut: []
     }
   },
 
@@ -132,21 +134,37 @@ export default {
   },
 
   methods: {
+    canEdit () {
+      return !this.dataCollectionForm.sentAt
+    },
+
     withMarkDown (string) {
       return MarkDownHelper.fullOf(string)
     },
 
     clickButton () {
-      this.sendDataCollection()
+      this.sendDataCollectionForm()
     },
 
-    async sendDataCollection () {
+    async sendDataCollectionForm () {
       if (this.isSendingDataCollection) return
       this.isSendingDataCollection = true
 
       try {
-        const sendDataCollectionInput = { eventId: this.event.id }
-        await sendDataCollection(this, sendDataCollectionInput)
+        const eventId = this.event.id
+        const dataCollections = this.dataCollectionForm.dataCollections.map((dataCollection) => {
+          return {
+            id: dataCollection.id,
+            value: dataCollection.value
+          }
+        })
+
+        const sendDataCollectionFormInput = {
+          eventId,
+          dataCollections
+        }
+
+        await sendDataCollectionForm(this, sendDataCollectionFormInput)
         this.notices.success('Your informations were transmitted.')
         // NOTE : we don't isSendingDataCollection = false because
         // it'll hot reload the button entirely in this specific case
@@ -154,22 +172,6 @@ export default {
         this.notices.graphError(error)
         this.isSendingDataCollection = false
       }
-    },
-
-    addCard () {
-      this.openModal('modals-add-card')
-    },
-
-    displayedTotal () {
-      return this.totalAmount / 100
-    },
-
-    displayedAmount () {
-      return this.dataCollectionForm.amountInCents / 100
-    },
-
-    displayedFees () {
-      return this.dataCollectionForm.feesInCents / 100
     },
 
     displayedBody () {
@@ -216,6 +218,9 @@ export default {
     color: $color-blue;
     font-size: 18px;
     width: 100%;
+    &:disabled {
+      border-bottom: none;
+    }
   }
 }
 
