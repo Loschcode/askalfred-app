@@ -29,8 +29,8 @@
 
                         <span class="data-collection__input">
                           <input
-                            type="text"
                             v-model="dataCollection.value"
+                            type="text"
                             :disabled="!canEdit()"
                           >
                         </span>
