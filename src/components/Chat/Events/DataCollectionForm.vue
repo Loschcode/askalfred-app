@@ -32,7 +32,7 @@
                             v-model="dataCollection.value"
                             type="text"
                             :disabled="!canEdit()"
-                            :class="{ 'data-collection-input__error': dataCollection.value.length === 0 }"
+                            :class="{ 'data-collection-input__error': dataCollection.value && dataCollection.value.length === 0 }"
                             @keyup.enter="clickButton()"
                           >
                         </span>
