@@ -32,6 +32,8 @@
                             v-model="dataCollection.value"
                             type="text"
                             :disabled="!canEdit()"
+                            :class="{ 'data-collection-input__error': dataCollection.value.length === 0 }"
+                            @keyup.enter="clickButton()"
                           >
                         </span>
                       </div>
@@ -83,6 +85,7 @@ import OpenModalMixin from '@/mixins/OpenModalMixin'
 import sendDataCollectionForm from '@/graphql/mutations/sendDataCollectionForm'
 import NoticesService from '@/services/NoticesService'
 import LoadingButtonLambda from '@/components/Loading/Button/Lambda'
+import { required, minLength } from 'vuelidate/lib/validators'
 
 export default {
   name: 'ChatEventsDataCollectionForm',
@@ -115,6 +118,20 @@ export default {
     }
   },
 
+  validations () {
+    return {
+      dataCollectionForm: {
+        dataCollections: {
+          required,
+          minLength: minLength(this.dataCollectionForm.dataCollections.length),
+          $each: {
+            value: { required }
+          }
+        }
+      }
+    }
+  },
+
   computed: {
     from () {
       if (this.event.identity.id === this.currentIdentity.id) {
@@ -122,10 +139,6 @@ export default {
       } else {
         return 'yourself'
       }
-    },
-
-    totalAmount () {
-      return this.dataCollectionForm.amountInCents + this.dataCollectionForm.feesInCents
     }
   },
 
@@ -143,6 +156,9 @@ export default {
     },
 
     clickButton () {
+      this.$v.dataCollectionForm.$touch()
+      if (this.$v.dataCollectionForm.$error) return
+
       this.sendDataCollectionForm()
     },
 

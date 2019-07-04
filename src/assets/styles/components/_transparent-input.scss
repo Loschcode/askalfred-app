@@ -3,3 +3,7 @@
     border-bottom: 3px solid $color-light-red !important;
   }
 }
+
+.data-collection-input__error {
+  border-bottom: 1px solid $color-red !important;
+}
