@@ -95,19 +95,16 @@
       <!-- Options Locked -->
       <div ref="add-card-window">
         <div class="container content add-card-window">
+          <div id="stripe-card-element" />
+
           <div class="row left-xs bottom-xs">
             <div class="col-xs-9">
               <div class="add-card-window__field">
                 <h3>Card Number</h3>
-                <input
-                  ref="cardNumber"
-                  v-model="addCardInput.cardNumber"
-                  v-mask="cardType.mask"
-                  type="text"
-                  maxlength="19"
-                  placeholder="12** *** **** 3456"
-                  @keyup.enter="addCardNow()"
-                >
+                <div
+                  id="card-number"
+                  class="add-card-window__element-container"
+                />
               </div>
             </div>
             <div class="col-xs-3">
@@ -118,27 +115,19 @@
             <div class="col-xs-6">
               <div class="add-card-window__field">
                 <h3>Expiration Date</h3>
-                <input
-                  v-model="addCardInput.expirationDate"
-                  v-mask="`##/##`"
-                  type="text"
-                  maxlength="8"
-                  placeholder="**/**"
-                  @keyup.enter="addCardNow()"
-                >
+                <div
+                  id="card-expiry"
+                  class="add-card-window__element-container"
+                />
               </div>
             </div>
             <div class="col-xs-3">
               <div class="add-card-window__field">
                 <h3>SVV/SVC</h3>
-                <input
-                  v-model="addCardInput.securityCode"
-                  v-mask="`###`"
-                  type="text"
-                  maxlength="3"
-                  placeholder="***"
-                  @keyup.enter="addCardNow()"
-                >
+                <div
+                  id="card-cvc"
+                  class="add-card-window__element-container"
+                />
               </div>
             </div>
             <div class="col-xs-3">
@@ -194,9 +183,8 @@ import NoticesService from '@/services/NoticesService'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
 import addCard from '@/graphql/mutations/addCard'
 import chargeCustomer from '@/graphql/mutations/chargeCustomer'
+import setPaymentIntent from '@/graphql/mutations/setPaymentIntent'
 import ModalsContentsSuccess from '@/components/Modals/Contents/Success'
-import { required } from 'vuelidate/lib/validators'
-import CardsHelper from '@/helpers/CardsHelper'
 import LoadingButtonBlue from '@/components/Loading/Button/Blue'
 import TrackingHelper from '@/helpers/TrackingHelper'
 import StripeHelper from '@/helpers/StripeHelper'
@@ -214,14 +202,6 @@ export default {
     CurrentIdentityMixin
   ],
 
-  validations: {
-    addCardInput: {
-      cardNumber: { required },
-      expirationDate: { required },
-      securityCode: { required }
-    }
-  },
-
   props: {
   },
 
@@ -230,11 +210,12 @@ export default {
       selectedAmount: 10,
       isChargingNow: false,
       isAddingCardNow: false,
-      addCardInput: {
-        cardNumber: '',
-        expirationDate: '',
-        securityCode: ''
-      }
+      cardElements: {
+        cardNumber: null,
+        cardExpiry: null,
+        cardCvc: null
+      },
+      stripePaymentIntentId: null
     }
   },
 
@@ -248,7 +229,10 @@ export default {
     },
 
     cardType () {
-      return CardsHelper.cardTypeFrom(this.addCardInput.cardNumber)
+      return {
+        type: 'unknown'
+      }
+      // return CardsHelper.cardTypeFrom(this.cardElements.cardNumber)
     }
   },
 
@@ -262,13 +246,13 @@ export default {
     },
 
     async addCardNow () {
-      this.$v.addCardInput.$touch()
-      if (this.$v.addCardInput.$error) return
+      // this.$v.cardElements.$touch()
+      // if (this.$v.cardElements.$error) return
       if (this.isAddingCardNow) return
 
       this.isAddingCardNow = true
 
-      StripeHelper.addCard(this.addCardInput, async (cardToken) => {
+      StripeHelper.addCard(this.cardElements, async (cardToken) => {
         if (!cardToken) {
           this.isAddingCardNow = false
           return this.notices.error('Your card does not seem to be valid. Please try again.')
@@ -313,13 +297,31 @@ export default {
     goToAddCard () {
       this.currentModal().setWithContentOf(this, 'add-card-window')
       this.$nextTick(() => {
-        this.$refs.cardNumber.focus()
+        StripeHelper.addElements(({ cardNumber, cardExpiry, cardCvc }) => {
+          this.cardElements = { cardNumber, cardExpiry, cardCvc }
+        })
       })
     },
 
-    setAmount (newAmount) {
+    async setAmount (newAmount) {
       TrackingHelper.selectedPayment(this, newAmount)
       this.selectedAmount = newAmount
+
+      await this.setPaymentIntentWith(newAmount)
+    },
+
+    async setPaymentIntentWith (amount) {
+      try {
+        const setPaymentIntentInput = {
+          amount,
+          stripePaymentIntentId: this.stripePaymentIntentId
+        }
+
+        const payload = await setPaymentIntent(this, setPaymentIntentInput)
+        this.stripePaymentIntentId = payload.stripePaymentIntentId
+      } catch (error) {
+        this.notices.graphError(error)
+      }
     },
 
     onOpen () {
@@ -342,18 +344,13 @@ export default {
     font-weight: 200;
     color: $color-grey;
   }
-  input {
-    letter-spacing: 0.5px;
-    width: 100%;
-    font-size: 24px;
-    padding-bottom: 0.5em;
-    padding-top: 0.5em;
-    border: none;
-    border-bottom: 1px solid $color-grey;
-    &::placeholder {
-      color: $color-grey;
-    }
-  }
+}
+
+.add-card-window__element-container {
+  border-bottom: 1px solid $color-light-grey;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  letter-spacing: 0.5px;
 }
 
 .add-card-window__call-to-action {

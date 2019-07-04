@@ -1,25 +1,74 @@
 class StripeHelper {
-  addCard ({ cardNumber, expirationDate, securityCode }, callback) {
-    if (!this.setKey()) callback(null)
+  addElements (callback) {
+    const stripe = this.setStripe()
+    if (!stripe) return
 
-    const number = cardNumber.replace(/\s/g, '')
-    const cvc = securityCode
-    const expMonth = expirationDate.split('/')[0]
-    const expYear = expirationDate.split('/')[1]
+    const elements = stripe.elements()
 
-    window.Stripe.card.createToken({ number, cvc, expMonth, expYear }, async (status, response) => {
+    const style = {
+      base: {
+        color: 'black',
+        fontWeight: 300,
+        fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue',
+        fontSize: '24px',
+        fontSmoothing: 'antialiased',
+        letterSpacing: '0.5px',
+        width: '100%',
+        border: 'none',
+        borderBottom: '1px solid #90a4ae',
+
+        '::placeholder': {
+          color: 'grey'
+        }
+      },
+      invalid: {
+        color: '#d75a4a',
+
+        '::placeholder': {
+          color: '#d75a4a'
+        }
+      }
+    }
+
+    const classes = {
+      focus: 'focused',
+      empty: 'empty',
+      invalid: 'invalid'
+    }
+
+    const cardNumber = elements.create('cardNumber', { style, classes })
+    cardNumber.mount('#card-number')
+
+    const cardExpiry = elements.create('cardExpiry', { style, classes })
+    cardExpiry.mount('#card-expiry')
+
+    const cardCvc = elements.create('cardCvc', { style, classes })
+    cardCvc.mount('#card-cvc')
+
+    callback({ cardNumber, cardExpiry, cardCvc }) // eslint-disable-line standard/no-callback-literal
+  }
+
+  addCard ({ cardNumber }, callback) {
+    const stripe = this.setStripe()
+    if (!stripe) return
+
+    stripe.createToken(cardNumber).then((response) => {
       if (response.error) {
         callback(null)
       } else {
-        callback(response.id)
+        callback(response.token.id)
       }
     })
   }
 
-  setKey () {
+  setStripe () {
     try {
-      window.Stripe.setPublishableKey(process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY)
-      return true
+      // singleton as we don't want to reinstantiate
+      // a different stripe on the same page
+      // this would crash the Stripe API.
+      if (this.stripe) return this.stripe
+      this.stripe = window.Stripe(process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY)
+      return this.stripe
     } catch (error) {
       return false
     }
