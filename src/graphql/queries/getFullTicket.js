@@ -37,7 +37,7 @@ query GetFullTicket($input: GetFullTicketInput!) {
             amountInCents
             feesInCents
             authorizedAt
-            stripeChargeId
+            stripeIntentId
           }
           ... on EventDataCollectionForm {
             id

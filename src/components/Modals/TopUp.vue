@@ -80,7 +80,7 @@
               <div class="col-xs-12">
                 <div
                   class="top-up-window__call-to-action +pointer +extend-clickable"
-                  @click="tryToChargeNow({})"
+                  @click="chargeExistingCard({})"
                 >
                   <loading-button-blue :is-loading="isChargingNow">
                     Top up
@@ -139,7 +139,7 @@
             <div class="col-xs-12">
               <div
                 class="add-card-window__call-to-action +pointer +extend-clickable"
-                @click="addCardNow()"
+                @click="addCardAndPay()"
               >
                 <loading-button-blue :is-loading="isAddingCardNow">
                   Get {{ timeEstimated }} minutes with Alfred now
@@ -167,7 +167,7 @@
         <div class="content">
           <modals-contents-success
             :title="`Payment successful!`"
-            :content="`Thanks for choosing Alfred`"
+            :content="`Your credit will be added shortly. Thanks for choosing Alfred`"
             :action="close"
           />
         </div>
@@ -215,7 +215,10 @@ export default {
         cardExpiry: null,
         cardCvc: null
       },
-      stripePaymentIntentId: null
+      paymentIntent: {
+        id: null,
+        clientSecret: null
+      }
     }
   },
 
@@ -236,6 +239,18 @@ export default {
     }
   },
 
+  watch: {
+    isOpen (newValue, oldValue) {
+      if (newValue === false) return
+
+      this.paymentIntent = {
+        id: null,
+        clientSecret: null
+      }
+      this.setAmount(10)
+    }
+  },
+
   created () {
     this.notices = new NoticesService(this)
   },
@@ -245,53 +260,65 @@ export default {
       this.currentModal().setWithContentOf(this, 'top-up-window')
     },
 
-    async addCardNow () {
+    async addCardAndPay () {
       // this.$v.cardElements.$touch()
       // if (this.$v.cardElements.$error) return
       if (this.isAddingCardNow) return
 
       this.isAddingCardNow = true
 
-      StripeHelper.addCard(this.cardElements, async (cardToken) => {
-        if (!cardToken) {
+      const input = {
+        clientSecret: this.paymentIntent.clientSecret,
+        cardNumber: this.cardElements.cardNumber,
+        currentIdentity: this.currentIdentity
+      }
+
+      StripeHelper.addCardAndPay(input, async (response) => {
+        if (!response) {
           this.isAddingCardNow = false
           return this.notices.error('Your card does not seem to be valid. Please try again.')
         }
 
-        const addCardInput = { cardToken }
+        TrackingHelper.addedCard(this)
 
-        try {
-          await addCard(this, addCardInput)
-          await this.tryToChargeNow({ skipValidation: true })
-          TrackingHelper.addedCard(this)
-        } catch (error) {
-          this.notices.graphError(error)
-        }
+        // TODO : we should check what charging
+        // with 3D secure will do here
+        // and improvise depending on that
+
+        TrackingHelper.paidFully(this, this.selectedAmount)
+        this.currentModal().setWithContentOf(this, 'payment-success-window')
         this.isAddingCardNow = false
       })
     },
 
-    async tryToChargeNow ({ skipValidation }) {
+    async chargeExistingCard () {
       TrackingHelper.clickedToPay(this, this.selectedAmount)
-
-      if (!skipValidation) {
-        if (!this.currentIdentity.stripeCardId) return this.goToAddCard()
-      }
-
+      if (!this.currentIdentity.stripePaymentMethodId) return this.goToAddCard()
       if (this.isChargingNow) return
 
-      try {
-        this.isChargingNow = true
-        const chargeCustomerInput = {
-          amount: this.selectedAmount
-        }
-        await chargeCustomer(this, chargeCustomerInput)
-        TrackingHelper.paidFully(this, this.selectedAmount)
-        this.currentModal().setWithContentOf(this, 'payment-success-window')
-      } catch (error) {
-        this.notices.graphError(error)
+      // TODO make a payment with a card the user already have
+      // as seen here: https://stripe.com/docs/payments/cards/charging-saved-cards
+      const addPaymentInput = {
+        paymentIntentId: this.paymentIntent.id,
+        cardElement: null,
+        currentIdentity: this.currentIdentity
       }
-      this.isChargingNow = false
+      await StripeHelper.addPayment(addPaymentInput, (success) => {
+
+      })
+
+      // try {
+      //   this.isChargingNow = true
+      //   const chargeCustomerInput = {
+      //     amount: this.selectedAmount
+      //   }
+      //   await chargeCustomer(this, chargeCustomerInput)
+      //   TrackingHelper.paidFully(this, this.selectedAmount)
+      //   this.currentModal().setWithContentOf(this, 'payment-success-window')
+      // } catch (error) {
+      //   this.notices.graphError(error)
+      // }
+      // this.isChargingNow = false
     },
 
     goToAddCard () {
@@ -314,11 +341,11 @@ export default {
       try {
         const setPaymentIntentInput = {
           amount,
-          stripePaymentIntentId: this.stripePaymentIntentId
+          stripePaymentIntentId: this.paymentIntent.id
         }
 
         const payload = await setPaymentIntent(this, setPaymentIntentInput)
-        this.stripePaymentIntentId = payload.stripePaymentIntentId
+        this.paymentIntent = payload
       } catch (error) {
         this.notices.graphError(error)
       }

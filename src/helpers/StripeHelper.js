@@ -48,15 +48,36 @@ class StripeHelper {
     callback({ cardNumber, cardExpiry, cardCvc }) // eslint-disable-line standard/no-callback-literal
   }
 
-  addCard ({ cardNumber }, callback) {
+  // addCard ({ cardNumber }, callback) {
+  //   const stripe = this.setStripe()
+  //   if (!stripe) return
+
+  //   stripe.createToken(cardNumber).then((response) => {
+  //     if (response.error) {
+  //       callback(null)
+  //     } else {
+  //       callback(response.token.id)
+  //     }
+  //   })
+  // }
+
+  async addCardAndPay ({ clientSecret, cardNumber, currentIdentity }, callback) {
     const stripe = this.setStripe()
     if (!stripe) return
 
-    stripe.createToken(cardNumber).then((response) => {
-      if (response.error) {
-        callback(null)
+    const name = `${currentIdentity.firstName} ${currentIdentity.lastName}`
+
+    stripe.handleCardPayment(
+      clientSecret, cardNumber, {
+        payment_method_data: {
+          billing_details: { name }
+        }
+      }
+    ).then(function (result) {
+      if (result.error) {
+        callback(false) // eslint-disable-line standard/no-callback-literal
       } else {
-        callback(response.token.id)
+        callback(result)
       }
     })
   }

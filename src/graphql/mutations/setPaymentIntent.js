@@ -3,7 +3,8 @@ import gql from 'graphql-tag'
 const mutation = gql`
   mutation SetPaymentIntent($input: SetPaymentIntentInput!) {
     setPaymentIntent (input: $input) {
-      stripePaymentIntentId
+      id
+      clientSecret
     }
   }
 `

@@ -150,7 +150,7 @@ export default {
     },
 
     clickButton () {
-      if (this.currentIdentity.stripeCardId) {
+      if (this.currentIdentity.stripePaymentMethodId) {
         this.allowExpense()
       } else {
         this.addCard()

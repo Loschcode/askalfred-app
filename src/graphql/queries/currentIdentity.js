@@ -18,7 +18,7 @@ const query = gql`
       recoveryToken
       creditsCount
       stripeCustomerId
-      stripeCardId
+      stripePaymentMethodId
     }
   }
 `
@@ -64,7 +64,7 @@ const document = gql`
         recoveryToken
         creditsCount
         stripeCustomerId
-        stripeCardId
+        stripePaymentMethodId
       }
     }
   }

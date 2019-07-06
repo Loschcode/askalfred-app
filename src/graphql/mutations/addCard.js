@@ -4,7 +4,7 @@ const mutation = gql`
   mutation AddCard($input: AddCardInput!) {
     addCard (input: $input) {
       stripeCustomerId
-      stripeCardId
+      stripePaymentMethodId
     }
   }
 `

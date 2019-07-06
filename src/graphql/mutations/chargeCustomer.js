@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 const mutation = gql`
   mutation ChargeCustomer($input: ChargeCustomerInput!) {
     chargeCustomer (input: $input) {
-      stripeChargeId
+      stripeIntentId
     }
   }
 `
