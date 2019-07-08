@@ -80,7 +80,7 @@
               <div class="col-xs-12">
                 <div
                   class="top-up-window__call-to-action +pointer +extend-clickable"
-                  @click="chargeExistingCard({})"
+                  @click="chargeExistingCard()"
                 >
                   <loading-button-blue :is-loading="isChargingNow">
                     Top up
@@ -181,8 +181,8 @@ import ModalBody from '@/components/ModalBody'
 import InnerModalMixin from '@/mixins/InnerModalMixin'
 import NoticesService from '@/services/NoticesService'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
-import addCard from '@/graphql/mutations/addCard'
-import chargeCustomer from '@/graphql/mutations/chargeCustomer'
+// import addCard from '@/graphql/mutations/addCard'
+// import chargeCustomer from '@/graphql/mutations/chargeCustomer'
 import setPaymentIntent from '@/graphql/mutations/setPaymentIntent'
 import ModalsContentsSuccess from '@/components/Modals/Contents/Success'
 import LoadingButtonBlue from '@/components/Loading/Button/Blue'
@@ -242,20 +242,18 @@ export default {
   watch: {
     isOpen (newValue, oldValue) {
       if (newValue === false) return
-
-      this.paymentIntent = {
-        id: null,
-        clientSecret: null
-      }
       this.setAmount(10)
     }
   },
 
-  created () {
-    this.notices = new NoticesService(this)
-  },
-
   methods: {
+    clearPaymentIntent () {
+      this.paymentIntent = {
+        id: null,
+        clientSecret: null
+      }
+    },
+
     goBackFromCreditCard () {
       this.currentModal().setWithContentOf(this, 'top-up-window')
     },
@@ -266,6 +264,10 @@ export default {
       if (this.isAddingCardNow) return
 
       this.isAddingCardNow = true
+
+      if (!this.paymentIntent.clientSecret) {
+        await this.setPaymentIntentWith(this.selectedAmount)
+      }
 
       const input = {
         clientSecret: this.paymentIntent.clientSecret,
@@ -285,6 +287,7 @@ export default {
         // with 3D secure will do here
         // and improvise depending on that
 
+        this.clearPaymentIntent()
         TrackingHelper.paidFully(this, this.selectedAmount)
         this.currentModal().setWithContentOf(this, 'payment-success-window')
         this.isAddingCardNow = false
@@ -296,29 +299,26 @@ export default {
       if (!this.currentIdentity.stripePaymentMethodId) return this.goToAddCard()
       if (this.isChargingNow) return
 
-      // TODO make a payment with a card the user already have
-      // as seen here: https://stripe.com/docs/payments/cards/charging-saved-cards
-      const addPaymentInput = {
-        paymentIntentId: this.paymentIntent.id,
-        cardElement: null,
-        currentIdentity: this.currentIdentity
+      this.isChargingNow = true
+
+      if (!this.paymentIntent.clientSecret) {
+        await this.setPaymentIntentWith(this.selectedAmount)
       }
-      await StripeHelper.addPayment(addPaymentInput, (success) => {
 
+      const addPaymentInput = {
+        clientSecret: this.paymentIntent.clientSecret
+      }
+      await StripeHelper.addPayment(addPaymentInput, (response) => {
+        if (!response) {
+          this.isChargingNow = false
+          return this.notices.error('The payment was unsuccessful. Please try again.')
+        }
+
+        this.clearPaymentIntent()
+        TrackingHelper.paidFully(this, this.selectedAmount)
+        this.currentModal().setWithContentOf(this, 'payment-success-window')
+        this.isChargingNow = false
       })
-
-      // try {
-      //   this.isChargingNow = true
-      //   const chargeCustomerInput = {
-      //     amount: this.selectedAmount
-      //   }
-      //   await chargeCustomer(this, chargeCustomerInput)
-      //   TrackingHelper.paidFully(this, this.selectedAmount)
-      //   this.currentModal().setWithContentOf(this, 'payment-success-window')
-      // } catch (error) {
-      //   this.notices.graphError(error)
-      // }
-      // this.isChargingNow = false
     },
 
     goToAddCard () {
