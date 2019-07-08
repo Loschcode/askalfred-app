@@ -185,6 +185,7 @@ import ModalsContentsSuccess from '@/components/Modals/Contents/Success'
 import LoadingButtonBlue from '@/components/Loading/Button/Blue'
 import TrackingHelper from '@/helpers/TrackingHelper'
 import StripeHelper from '@/helpers/StripeHelper'
+import NoticesService from '@/services/NoticesService'
 
 export default {
   name: 'ModalsTopUp',
@@ -217,6 +218,10 @@ export default {
         clientSecret: null
       }
     }
+  },
+
+  created () {
+    this.notices = new NoticesService(this)
   },
 
   computed: {
@@ -256,8 +261,6 @@ export default {
     },
 
     async addCardAndPay () {
-      // this.$v.cardElements.$touch()
-      // if (this.$v.cardElements.$error) return
       if (this.isAddingCardNow) return
 
       this.isAddingCardNow = true

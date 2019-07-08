@@ -84,7 +84,7 @@ import ModalBody from '@/components/ModalBody'
 import InnerModalMixin from '@/mixins/InnerModalMixin'
 import NoticesService from '@/services/NoticesService'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
-import addCard from '@/graphql/mutations/addCard'
+// import addCard from '@/graphql/mutations/addCard'
 import { required } from 'vuelidate/lib/validators'
 import CardsHelper from '@/helpers/CardsHelper'
 import LoadingButtonBlue from '@/components/Loading/Button/Blue'
@@ -162,7 +162,7 @@ export default {
         const addCardInput = { cardToken }
 
         try {
-          await addCard(this, addCardInput)
+          // await addCard(this, addCardInput)
           TrackingHelper.addedCard(this)
           this.currentModal().close()
           this.notices.success('Your card has been added. You can now allow new expenses and top-up your account.')
