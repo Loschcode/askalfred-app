@@ -179,10 +179,7 @@
 <script>
 import ModalBody from '@/components/ModalBody'
 import InnerModalMixin from '@/mixins/InnerModalMixin'
-import NoticesService from '@/services/NoticesService'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
-// import addCard from '@/graphql/mutations/addCard'
-// import chargeCustomer from '@/graphql/mutations/chargeCustomer'
 import setPaymentIntent from '@/graphql/mutations/setPaymentIntent'
 import ModalsContentsSuccess from '@/components/Modals/Contents/Success'
 import LoadingButtonBlue from '@/components/Loading/Button/Blue'
