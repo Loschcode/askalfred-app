@@ -220,10 +220,6 @@ export default {
     }
   },
 
-  created () {
-    this.notices = new NoticesService(this)
-  },
-
   computed: {
     requestsEstimated () {
       return this.timeEstimated / 5.0 // 7.5
@@ -248,6 +244,10 @@ export default {
     }
   },
 
+  created () {
+    this.notices = new NoticesService(this)
+  },
+
   methods: {
     clearPaymentIntent () {
       this.paymentIntent = {
@@ -266,7 +266,8 @@ export default {
       this.isAddingCardNow = true
 
       if (!this.paymentIntent.clientSecret) {
-        await this.setPaymentIntentWith(this.selectedAmount)
+        const result = await this.setPaymentIntentWith(this.selectedAmount)
+        if (!result) return
       }
 
       const input = {
@@ -282,10 +283,6 @@ export default {
         }
 
         TrackingHelper.addedCard(this)
-
-        // TODO : we should check what charging
-        // with 3D secure will do here
-        // and improvise depending on that
 
         this.clearPaymentIntent()
         TrackingHelper.paidFully(this, this.selectedAmount)
@@ -346,8 +343,11 @@ export default {
 
         const payload = await setPaymentIntent(this, setPaymentIntentInput)
         this.paymentIntent = payload
+        return true
       } catch (error) {
+        this.isAddingCardNow = false
         this.notices.graphError(error)
+        return false
       }
     },
 

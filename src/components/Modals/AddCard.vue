@@ -10,19 +10,16 @@
       <!-- Options Locked -->
       <div ref="add-card-window">
         <div class="container content add-card-window">
+          <div id="stripe-card-element" />
+
           <div class="row left-xs bottom-xs">
             <div class="col-xs-9">
               <div class="add-card-window__field">
                 <h3>Card Number</h3>
-                <input
-                  ref="cardNumber"
-                  v-model="addCardInput.cardNumber"
-                  v-mask="cardType.mask"
-                  type="text"
-                  maxlength="19"
-                  placeholder="12** *** **** 3456"
-                  @keyup.enter="addCardNow()"
-                >
+                <div
+                  id="card-number"
+                  class="add-card-window__element-container"
+                />
               </div>
             </div>
             <div class="col-xs-3">
@@ -33,27 +30,19 @@
             <div class="col-xs-6">
               <div class="add-card-window__field">
                 <h3>Expiration Date</h3>
-                <input
-                  v-model="addCardInput.expirationDate"
-                  v-mask="`##/##`"
-                  type="text"
-                  maxlength="8"
-                  placeholder="**/**"
-                  @keyup.enter="addCardNow()"
-                >
+                <div
+                  id="card-expiry"
+                  class="add-card-window__element-container"
+                />
               </div>
             </div>
             <div class="col-xs-3">
               <div class="add-card-window__field">
                 <h3>SVV/SVC</h3>
-                <input
-                  v-model="addCardInput.securityCode"
-                  v-mask="`###`"
-                  type="text"
-                  maxlength="3"
-                  placeholder="***"
-                  @keyup.enter="addCardNow()"
-                >
+                <div
+                  id="card-cvc"
+                  class="add-card-window__element-container"
+                />
               </div>
             </div>
             <div class="col-xs-3">
@@ -73,6 +62,18 @@
               </div>
             </div>
           </div>
+          <div class="row center-xs">
+            <div class="col-xs-2">
+              <div class="add-card-window__back">
+                <div
+                  class="button button__white-on-blue button__white-on-blue--soft"
+                  @click="goBackFromCreditCard()"
+                >
+                  Back
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -84,9 +85,7 @@ import ModalBody from '@/components/ModalBody'
 import InnerModalMixin from '@/mixins/InnerModalMixin'
 import NoticesService from '@/services/NoticesService'
 import CurrentIdentityMixin from '@/mixins/CurrentIdentityMixin'
-// import addCard from '@/graphql/mutations/addCard'
-import { required } from 'vuelidate/lib/validators'
-import CardsHelper from '@/helpers/CardsHelper'
+import setSetupIntent from '@/graphql/mutations/setSetupIntent'
 import LoadingButtonBlue from '@/components/Loading/Button/Blue'
 import TrackingHelper from '@/helpers/TrackingHelper'
 import StripeHelper from '@/helpers/StripeHelper'
@@ -103,14 +102,6 @@ export default {
     CurrentIdentityMixin
   ],
 
-  validations: {
-    addCardInput: {
-      cardNumber: { required },
-      expirationDate: { required },
-      securityCode: { required }
-    }
-  },
-
   props: {
   },
 
@@ -119,10 +110,14 @@ export default {
       selectedAmount: 10,
       isChargingNow: false,
       isAddingCardNow: false,
-      addCardInput: {
-        cardNumber: '',
-        expirationDate: '',
-        securityCode: ''
+      cardElements: {
+        cardNumber: null,
+        cardExpiry: null,
+        cardCvc: null
+      },
+      setupIntent: {
+        id: null,
+        clientSecret: null
       }
     }
   },
@@ -137,7 +132,10 @@ export default {
     },
 
     cardType () {
-      return CardsHelper.cardTypeFrom(this.addCardInput.cardNumber)
+      return {
+        type: 'unknown'
+      }
+      // return CardsHelper.cardTypeFrom(this.addCardInput.cardNumber)
     }
   },
 
@@ -146,37 +144,74 @@ export default {
   },
 
   methods: {
+    clearSetupIntent () {
+      this.setupIntent = {
+        id: null,
+        clientSecret: null
+      }
+    },
+
+    async setSetupIntentWith (amount) {
+      try {
+        const setSetupIntentInput = {
+          amount,
+          stripeSetupIntentId: this.paymentIntent.id
+        }
+
+        const payload = await setSetupIntent(this, setSetupIntentInput)
+        this.paymentIntent = payload
+      } catch (error) {
+        this.notices.graphError(error)
+      }
+    },
     async addCardNow () {
-      this.$v.addCardInput.$touch()
-      if (this.$v.addCardInput.$error) return
       if (this.isAddingCardNow) return
 
       this.isAddingCardNow = true
 
-      StripeHelper.addCard(this.addCardInput, async (cardToken) => {
-        if (!cardToken) {
+      if (!this.setupIntent.clientSecret) {
+        const result = await this.setSetupIntent()
+        if (!result) return
+      }
+
+      const input = {
+        clientSecret: this.setupIntent.clientSecret,
+        cardNumber: this.cardElements.cardNumber,
+        currentIdentity: this.currentIdentity
+      }
+
+      StripeHelper.addCard(input, async (response) => {
+        if (!response) {
           this.isAddingCardNow = false
           return this.notices.error('Your card does not seem to be valid. Please try again.')
         }
 
-        const addCardInput = { cardToken }
-
-        try {
-          // await addCard(this, addCardInput)
-          TrackingHelper.addedCard(this)
-          this.currentModal().close()
-          this.notices.success('Your card has been added. You can now allow new expenses and top-up your account.')
-        } catch (error) {
-          this.notices.graphError(error)
-        }
+        TrackingHelper.addedCard(this)
+        this.clearSetupIntent()
+        this.currentModal().close()
+        this.notices.success('Your card has been added. You can now allow new expenses and top-up your account.')
         this.isAddingCardNow = false
       })
+    },
+
+    async setSetupIntent () {
+      try {
+        const payload = await setSetupIntent(this)
+        this.setupIntent = payload
+        return true
+      } catch (error) {
+        this.isAddingCardNow = false
+        this.notices.graphError(error)
+        return false
+      }
     },
 
     onOpen () {
       this.currentModal().setWithContentOf(this, 'add-card-window')
       this.$nextTick(() => {
-        this.$refs.cardNumber.focus()
+        StripeHelper.addElements(({ cardNumber, cardExpiry, cardCvc }) => {
+          this.cardElements = { cardNumber, cardExpiry, cardCvc }
+        })
       })
     }
   }
@@ -208,6 +243,13 @@ export default {
       color: $color-grey;
     }
   }
+}
+
+.add-card-window__element-container {
+  border-bottom: 1px solid $color-light-grey;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  letter-spacing: 0.5px;
 }
 
 .add-card-window__call-to-action {

@@ -69,6 +69,26 @@ class StripeHelper {
     })
   }
 
+  async addCard ({ clientSecret, cardNumber, currentIdentity }, callback) {
+    const stripe = this.setStripe()
+    if (!stripe) return
+
+    const name = `${currentIdentity.firstName} ${currentIdentity.lastName}`
+
+    stripe.handleCardSetup(
+      clientSecret, cardNumber, {
+        payment_method_data: {
+          billing_details: { name }
+        }
+      }
+    ).then(function (result) {
+      if (result.error) {
+        callback(false) // eslint-disable-line standard/no-callback-literal
+      } else {
+        callback(result)
+      }
+    })
+  }
   async addPayment ({ clientSecret }, callback) {
     const stripe = this.setStripe()
     if (!stripe) return
