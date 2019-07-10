@@ -2,7 +2,8 @@ import showdown from 'showdown'
 
 class MarkDownHelper {
   fullOf (string) {
-    return this.fullInstance().makeHtml(string)
+    const withNewLines = string.replace(/\r\n/g, '<br/>')
+    return this.fullInstance().makeHtml(withNewLines)
   }
 
   abstractOf (string) {
