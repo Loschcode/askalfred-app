@@ -15,6 +15,8 @@ export default vm => {
   const connectGuest = async () => {
     try {
       console.log('connect guest ...')
+      addToOrigin()
+
       const input = {
         origin: getOrigin()
       }
@@ -32,6 +34,16 @@ export default vm => {
     const cookieOrigin = CookiesHelper.getCookie(vm, 'origin')
     if (cookieOrigin) return cookieOrigin
     return {}
+  }
+
+  // add data to origin if there's something present
+  // in the get variables, but without
+  // overwriting the previously existing ones
+  const addToOrigin = () => {
+    const rootOrigin = CookiesHelper.getCookie(vm, 'origin')
+    const newOrigin = vm.$route.query
+    const endValue = Object.assign({}, newOrigin, rootOrigin)
+    CookiesHelper.setCookie(vm, 'origin', endValue)
   }
 
   return perform()
