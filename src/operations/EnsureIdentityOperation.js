@@ -41,7 +41,11 @@ export default vm => {
   // overwriting the previously existing ones
   const addToOrigin = () => {
     const rootOrigin = CookiesHelper.getCookie(vm, 'origin')
-    const newOrigin = vm.$route.query
+
+    const getVariables = vm.$route.query
+    const httpReferrer = { referrer: document.referrer }
+    const newOrigin = Object.assign({}, getVariables, httpReferrer)
+
     const endValue = Object.assign({}, newOrigin, rootOrigin)
 
     CookiesHelper.setCookie(vm, 'origin', endValue)
