@@ -14,6 +14,9 @@ import * as Integrations from '@sentry/integrations'
 // Notification
 import Notifications from 'vue-notification'
 
+// Cookies
+import VueCookies from 'vue-cookies'
+
 // Trackings
 import VueAnalytics from 'vue-analytics'
 
@@ -44,6 +47,9 @@ import DefaultError from '@/components/Errors/DefaultError'
 import TokenHelper from '@/helpers/TokenHelper'
 import TimeHelper from '@/helpers/TimeHelper'
 
+// Cookies
+Vue.use(VueCookies)
+
 Vue.component('ChatLayout', ChatLayout)
 Vue.component('DashboardLayout', DashboardLayout)
 Vue.component('DefaultLayout', DefaultLayout)
@@ -54,6 +60,9 @@ const isProd = process.env.NODE_ENV === 'production'
 
 Vue.config.productionTip = isProd
 Vue.config.devtools = !isProd
+
+// Cookies configuration
+VueCookies.config(-1, '/')
 
 // HTTP link
 // NOTE : we removed this because we use the createUploadLink instead to upload files

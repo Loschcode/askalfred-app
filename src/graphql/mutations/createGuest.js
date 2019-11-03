@@ -1,18 +1,20 @@
 import gql from 'graphql-tag'
 
 const mutation = gql`
-  mutation CreateGuest {
-    createGuest {
+  mutation CreateGuest($input: CreateGuestInput!) {
+    createGuest(input: $input) {
       token
     }
   }
 `
 
-export default async vm => {
+export default async (vm, input) => {
   const response = await vm.$apollo
     .mutate({
       mutation,
-      variables: {},
+      variables: {
+        input
+      },
       update: (store, { data: { createGuest } }) => {
         vm.createGuest = createGuest
       }
