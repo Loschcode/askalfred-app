@@ -43,6 +43,7 @@ export default vm => {
     const rootOrigin = CookiesHelper.getCookie(vm, 'origin')
     const newOrigin = vm.$route.query
     const endValue = Object.assign({}, newOrigin, rootOrigin)
+
     CookiesHelper.setCookie(vm, 'origin', endValue)
   }
 
