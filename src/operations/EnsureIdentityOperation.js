@@ -43,7 +43,7 @@ export default vm => {
     const rootOrigin = CookiesHelper.getCookie(vm, 'origin')
 
     const getVariables = vm.$route.query
-    const httpReferrer = { referrer: document.referrer }
+    const httpReferrer = getHttpReferrer()
     // referrer overwrite the variables
     // as it cannot be faked via URL gets
     const newOrigin = Object.assign({}, getVariables, httpReferrer)
@@ -51,6 +51,10 @@ export default vm => {
     const endValue = Object.assign({}, newOrigin, rootOrigin)
 
     CookiesHelper.setCookie(vm, 'origin', endValue)
+  }
+  const getHttpReferrer = () => {
+    if ((!document.referrer) || (document.referrer === '')) return {}
+    return { referrer: document.referrer }
   }
 
   return perform()
