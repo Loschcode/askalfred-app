@@ -44,6 +44,8 @@ export default vm => {
 
     const getVariables = vm.$route.query
     const httpReferrer = { referrer: document.referrer }
+    // referrer overwrite the variables
+    // as it cannot be faked via URL gets
     const newOrigin = Object.assign({}, getVariables, httpReferrer)
 
     const endValue = Object.assign({}, newOrigin, rootOrigin)
