@@ -28,7 +28,6 @@
     "graphql": "^14.1",
     "graphql-ruby-client": "^1.6.3",
     "lowdb": "^1.0.0",
-    "mixpanel": "^0.10.3",
     "mkdirp": "^0.5.1",
     "moment": "^2.24.0",
     "shortid": "^2.2.8",
