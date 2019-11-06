@@ -32,6 +32,7 @@ import ConnectRouting from '@/components/ConnectRouting'
 import LayoutMixin from '@/mixins/LayoutMixin'
 import CustomNotifications from '@/components/CustomNotifications'
 import NoticesService from '@/services/NoticesService'
+import ScriptsHelper from '@/helpers/ScriptsHelper'
 
 export default {
   name: 'App',
@@ -59,6 +60,10 @@ export default {
   created () {
     this.notices = new NoticesService(this)
     this.notices.watch()
+  },
+
+  mounted () {
+    ScriptsHelper.loadMixPanel()
   },
 
   methods: {
