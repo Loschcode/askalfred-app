@@ -107,9 +107,16 @@ class TrackingHelper {
 
   identify (vm, userId) {
     vm.$ga.set({ userId })
+    vm.$mixpanel.identify(userId)
   }
 
   track (vm, { category, action, label, value }) {
+    vm.$mixpanel.track(action, {
+      category,
+      label,
+      value
+    })
+
     vm.$ga.event({
       eventCategory: category || '',
       eventAction: action || '',

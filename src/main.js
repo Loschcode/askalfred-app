@@ -47,6 +47,9 @@ import DefaultError from '@/components/Errors/DefaultError'
 import TokenHelper from '@/helpers/TokenHelper'
 import TimeHelper from '@/helpers/TimeHelper'
 
+// External scripts
+import VueMixpanel from 'vue-mixpanel'
+
 // Cookies
 Vue.use(VueCookies)
 
@@ -141,6 +144,10 @@ if (process.env.NODE_ENV !== 'development') {
     integrations: [new Integrations.Vue({ Vue, attachProps: true })]
   })
 }
+
+Vue.use(VueMixpanel, {
+  token: process.env.VUE_APP_MIXPANEL
+})
 
 new Vue({
   router,
