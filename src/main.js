@@ -146,7 +146,10 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 Vue.use(VueMixpanel, {
-  token: process.env.VUE_APP_MIXPANEL
+  token: process.env.VUE_APP_MIXPANEL,
+  config: {
+    debug: !isProd
+  }
 })
 
 new Vue({

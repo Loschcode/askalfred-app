@@ -11024,10 +11024,10 @@ vue-loader@^15.7.0:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
-vue-mixpanel@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/vue-mixpanel/-/vue-mixpanel-1.0.0.tgz#eccc848ec5c4f557af20a19b48e5c606fb18ccf4"
-  integrity sha512-p2k6iQOt49AeSZGHG0DloTXF+DuBBj3neDeTpmn76qvq5vVvy+Nllo++fwNsHGmbkExs35SLanh1gMaPDgVAxA==
+vue-mixpanel@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/vue-mixpanel/-/vue-mixpanel-1.0.1.tgz#d9ec9d10768bf07563898f220a754cac904ef2b3"
+  integrity sha512-RLgPxGMCS17QKqaoDQ5kZAFNXhl2uX8oY3wW/pFn8bzkVtSRemspatz+XmDb2gEUGOrx7vrbNX5yfIiCv2o+Yw==
   dependencies:
     mixpanel "^0.10.3"
 

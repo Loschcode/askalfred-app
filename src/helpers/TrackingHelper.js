@@ -105,9 +105,10 @@ class TrackingHelper {
     })
   }
 
-  identify (vm, userId) {
-    vm.$ga.set({ userId })
-    vm.$mixpanel.identify(userId)
+  identify (vm, { id, email }) {
+    vm.$ga.set({ id })
+    vm.$mixpanel.alias(id)
+    if (email) vm.$mixpanel.alias(id, email)
   }
 
   track (vm, { category, action, label, value }) {
