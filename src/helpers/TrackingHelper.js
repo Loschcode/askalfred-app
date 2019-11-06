@@ -108,7 +108,7 @@ class TrackingHelper {
   identify (vm, { id, email }) {
     vm.$ga.set({ id })
 
-    vm.$mixpanel.alias(id)
+    vm.$mixpanel.identify(id)
     if (email) vm.$mixpanel.alias(email, id)
   }
 
