@@ -10,7 +10,7 @@
       <!-- Notification area -->
 
       <div class="row center-xs">
-        <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
+        <div class="col-xs-12 col-sm-8 col-md-9 col-lg-8">
           <div
             class="custom-notifications"
             @click="props.close"

@@ -88,6 +88,7 @@ export default {
 
   created () {
     this.notices = new NoticesService(this)
+    this.notices.success(`An email has been sent to`)
 
     if (this.currentIdentity.confirmationSentAt === null) {
       this.sendConfirmEmail()
