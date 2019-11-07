@@ -9,7 +9,7 @@ class TrackingHelper {
   }
 
   sharedName (vm) {
-    this.track(vm, 'sharedname', {
+    this.track(vm, 'sharedName', {
       category: 'Getting started',
       action: 'Shared name'
     })
@@ -116,6 +116,7 @@ class TrackingHelper {
 
   async track (vm, method, { category, action, label, value }) {
     const event = { method, category, action, label, value }
+
     await trackAction(vm, { method, event })
 
     vm.$ga.event({

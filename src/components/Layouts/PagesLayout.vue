@@ -19,10 +19,18 @@ export default {
 
 <style scoped lang="scss">
 .default {
-  background-color: $color-blue;
+  background: $color-blue;
+  background-attachment: fixed;
+  position: fixed;
+  overflow: auto;
+  width: 100%;
   color: $color-white;
   a {
     color: $color-white;
   }
+}
+
+.wrap {
+  position: relative;
 }
 </style>
