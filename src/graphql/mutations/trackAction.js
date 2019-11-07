@@ -2,8 +2,8 @@ import gql from 'graphql-tag'
 
 const mutation = gql`
   mutation TrackAction($input: TrackActionInput!) {
-    signIn(input: $input) {
-      action
+    trackAction(input: $input) {
+      success
     }
   }
 `
@@ -15,11 +15,11 @@ export default async (vm, input) => {
       variables: {
         input
       },
-      update: (store, { data: { signIn } }) => {
-        vm.signIn = signIn
+      update: (store, { data: { trackAction } }) => {
+        vm.trackAction = trackAction
       }
     })
-    .then(({ data: { signIn } }) => {
+    .then(({ data: { trackAction } }) => {
     })
   return response
 }
