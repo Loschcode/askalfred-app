@@ -63,7 +63,10 @@ class TrackingHelper {
   }
 
   clickedToMakeFirstRequest (vm) {
-
+    this.track(vm, {
+      category: 'Clicked to make first request',
+      action: 'Clicked to make first request'
+    })
   }
 
   sentFirstRequest (vm) {
@@ -105,19 +108,13 @@ class TrackingHelper {
     })
   }
 
-  identify (vm, { id, email }) {
+  identify (vm, { id, email, firstName, lastName }) {
     vm.$ga.set({ id })
-
-    vm.$mixpanel.identify(id)
-    if (email) vm.$mixpanel.alias(email, id)
   }
 
   track (vm, { category, action, label, value }) {
-    vm.$mixpanel.track(action, {
-      category,
-      label,
-      value
-    })
+
+    // HERE YOU TRACK IT
 
     vm.$ga.event({
       eventCategory: category || '',
