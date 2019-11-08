@@ -11002,11 +11002,6 @@ vue-loader@^15.7.0:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
-vue-mixpanel@1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/vue-mixpanel/-/vue-mixpanel-1.0.3.tgz#e159b146f7ca8bfc7c58951f94be1ab8a2bd3bdb"
-  integrity sha512-rHoKAgodX9dAyFfo/WKTyGKZK/KPNFyDRMEe85iPa0duTLKCn7yGjvw4vagGW4ZjYFiUe11lqP8l7IHHJVN1FQ==
-
 vue-notification@^1.3.16:
   version "1.3.20"
   resolved "https://registry.yarnpkg.com/vue-notification/-/vue-notification-1.3.20.tgz#d85618127763b46f3e25b8962b857947d5a97cbe"
