@@ -6,9 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "generate": "graphql-codegen",
-    "start": "node server.js",
-    "deploy": "yarn build && git add --all && git commit -m \"version to deploy\" && git push dokku"
+    "generate": "graphql-codegen"
   },
   "dependencies": {
     "@sentry/browser": "^5.4.0",
