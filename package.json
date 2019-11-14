@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "generate": "graphql-codegen"
+    "generate": "graphql-codegen",
+    "deploy": "npm run build && git add --all && git commit -m 'build for deploy' && git push && git push dokku"
   },
   "dependencies": {
     "@sentry/browser": "^5.4.0",
