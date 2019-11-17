@@ -11,6 +11,8 @@ class TokenHelper {
   }
 
   eraseToken (vm) {
+    // we need to unset the cookie as well because the erase
+    // is used in case of emergency (crashes, non existing identities, etc.)
     CookiesHelper.unsetCookie(vm, 'token')
     localStorage.removeItem('identityToken')
   }
