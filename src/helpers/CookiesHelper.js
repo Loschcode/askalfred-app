@@ -5,6 +5,9 @@ class CookiesHelper {
   getCookie (vm, label) {
     return vm.$cookies.get(label, null, null, process.env.VUE_APP_COOKIES_ORIGIN)
   }
+  unsetCookie (vm, label) {
+    return vm.$cookies.remove(label, null, null, process.env.VUE_APP_COOKIES_ORIGIN)
+  }
 }
 
 export default new CookiesHelper()

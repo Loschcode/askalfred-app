@@ -10,7 +10,8 @@ class TokenHelper {
     return localStorage.getItem('identityToken')
   }
 
-  eraseToken () {
+  eraseToken (vm) {
+    CookiesHelper.unsetCookie(vm, 'token')
     localStorage.removeItem('identityToken')
   }
 

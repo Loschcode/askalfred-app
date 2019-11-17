@@ -69,7 +69,7 @@ class NoticesService {
   onRebootEvent (error) {
     if (error) {
       console.log(error)
-      TokenHelper.eraseToken()
+      TokenHelper.eraseToken(this.vm)
     }
     PageHelper.refreshPage()
   }
