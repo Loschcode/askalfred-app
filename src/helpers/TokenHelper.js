@@ -1,4 +1,5 @@
 import CookiesHelper from '@/helpers/CookiesHelper'
+import IdentityHelper from '@/helpers/IdentityHelper'
 
 class TokenHelper {
   setTokenAs (token) {
@@ -16,10 +17,14 @@ class TokenHelper {
   resetTokenFromCookie (vm) {
     // we do not do anything if there
     // is a token present already
-    if (this.getCurrentToken()) return
+    if (this.getCurrentToken()) return false
 
     const tokenFromCookie = CookiesHelper.getCookie(vm, 'token')
-    if (tokenFromCookie) this.setTokenAs(tokenFromCookie)
+    if (tokenFromCookie) {
+      IdentityHelper.setIdentityWith(tokenFromCookie)
+      return true
+    }
+    return false
   }
 }
 
