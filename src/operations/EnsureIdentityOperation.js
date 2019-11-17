@@ -8,6 +8,11 @@ export default vm => {
   const notices = new NoticesService(vm)
 
   const perform = async () => {
+    // if there's a cookie set with the token
+    // and we don't have any current token
+    // then we set the localStorage accordingly
+    TokenHelper.resetTokenFromCookie(vm)
+
     if (TokenHelper.getCurrentToken() === null) await connectGuest()
     return TokenHelper.getCurrentToken()
   }
