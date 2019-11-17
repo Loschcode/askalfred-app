@@ -192,7 +192,7 @@ export default {
         TrackingHelper.signedInManually(this)
         // this will then redirect
         // to the correct section if successful
-        IdentityHelper.setIdentityWith(token, { path: '/connect/sign-in' })
+        IdentityHelper.setIdentityWith(this, token, { path: '/connect/sign-in' })
       } catch (error) {
         this.notices.graphError(error)
       }

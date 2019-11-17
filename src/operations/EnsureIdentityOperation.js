@@ -27,7 +27,7 @@ export default vm => {
       }
 
       const response = await createGuest(vm, input)
-      IdentityHelper.setIdentityWith(response.token)
+      IdentityHelper.setIdentityWith(vm, response.token)
     } catch (error) {
       console.log(error)
       notices.graphError(error)

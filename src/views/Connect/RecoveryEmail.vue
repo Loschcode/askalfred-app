@@ -24,7 +24,7 @@ export default {
     try {
       const token = await unsetPassword(this, { recoveryToken })
       await DeleteCurrentGuestOperation(this, token)
-      IdentityHelper.setIdentityWith(token, { path: '/connect/reset-your-password' })
+      IdentityHelper.setIdentityWith(this, token, { path: '/connect/reset-your-password' })
     } catch (error) {
       router.push({ path: '/' })
       this.notices.graphError(error)

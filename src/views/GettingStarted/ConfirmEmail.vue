@@ -27,7 +27,7 @@ export default {
       const token = await confirmEmail(this, { confirmationToken })
       await DeleteCurrentGuestOperation(this, token)
       TrackingHelper.confirmedEmail(this)
-      IdentityHelper.setIdentityWith(token, { path: '/getting-started/surprise' })
+      IdentityHelper.setIdentityWith(this, token, { path: '/getting-started/surprise' })
     } catch (error) {
       router.push({ path: '/' })
       this.notices.graphError(error)

@@ -2,8 +2,8 @@ import PageHelper from '@/helpers/PageHelper'
 import TokenHelper from '@/helpers/TokenHelper'
 
 class IdentityHelper {
-  setIdentityWith (token, redirectPath) {
-    TokenHelper.setTokenAs(token)
+  setIdentityWith (vm, token, redirectPath) {
+    TokenHelper.setTokenAs(vm, token)
 
     if (redirectPath) {
       PageHelper.hardRedirectTo(redirectPath)

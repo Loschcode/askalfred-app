@@ -2,8 +2,9 @@ import CookiesHelper from '@/helpers/CookiesHelper'
 import IdentityHelper from '@/helpers/IdentityHelper'
 
 class TokenHelper {
-  setTokenAs (token) {
+  setTokenAs (vm, token) {
     localStorage.setItem('identityToken', token)
+    CookiesHelper.setCookie(vm, 'token', token)
   }
 
   getCurrentToken () {
@@ -26,7 +27,7 @@ class TokenHelper {
     const tokenFromCookie = CookiesHelper.getCookie(vm, 'token')
     if (tokenFromCookie) {
       CookiesHelper.setCookie(vm, 'token-transmitted', true)
-      IdentityHelper.setIdentityWith(tokenFromCookie)
+      IdentityHelper.setIdentityWith(vm, tokenFromCookie)
       return true
     }
     return false
