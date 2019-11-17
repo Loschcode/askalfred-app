@@ -21,9 +21,11 @@ class TokenHelper {
     // we do not do anything if there
     // is a token present already
     if (this.getCurrentToken()) return false
+    if (CookiesHelper.getCookie(vm, 'token-transmitted')) return false
 
     const tokenFromCookie = CookiesHelper.getCookie(vm, 'token')
     if (tokenFromCookie) {
+      CookiesHelper.setCookie(vm, 'token-transmitted', true)
       IdentityHelper.setIdentityWith(tokenFromCookie)
       return true
     }
